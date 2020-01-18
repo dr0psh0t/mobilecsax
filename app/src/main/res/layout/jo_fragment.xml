@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:id="@+id/scrollViewJO">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnNewJO"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="165dp"
+            android:layout_height="165dp"
+            android:background="@drawable/login_selector"
+            android:drawableTop="@drawable/ic_action_frag_person_add"
+            android:paddingBottom="2dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:paddingTop="30dp"
+            android:text="@string/init_jo_encoding"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/textView"
+            app:layout_constraintEnd_toStartOf="@+id/textView"
+            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btnJOQuotationList"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="165dp"
+            android:layout_height="165dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/login_selector"
+            android:drawableTop="@drawable/ic_action_assignment"
+            android:paddingTop="30dp"
+            android:text="@string/init_jo_list"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintStart_toStartOf="@+id/textView" />
+
+        <Button
+            android:id="@+id/btnSearchJO"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="165dp"
+            android:layout_height="165dp"
+            android:background="@drawable/login_selector"
+            android:drawableTop="@drawable/ic_action_frag_search"
+            android:paddingBottom="2dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:paddingTop="30dp"
+            android:text="Search Job Order"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/textView"
+            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnJOApproval" />
+
+        <Button
+            android:id="@+id/btnJOApproval"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="165dp"
+            android:layout_height="165dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/login_selector"
+            android:drawableTop="@drawable/ic_action_frag_acheck"
+            android:paddingTop="30dp"
+            android:text="@string/approval"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

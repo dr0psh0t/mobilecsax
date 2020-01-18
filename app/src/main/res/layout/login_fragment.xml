@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:layout_gravity="center">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ToolbarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarLogin"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="172dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:contentDescription="@string/photoofyou"
+        android:src="@drawable/new_wmdc_nav_bg"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayoutUser"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/editTextUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:digits="qwertyuiopasdfghjklzxcvbnm"
+            android:hint="@string/user"
+            android:inputType="text"
+            android:maxLength="32"
+            android:maxLines="1"
+            android:textColor="@color/black_54" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutUser"
+        app:passwordToggleEnabled="true"
+        tools:layout_editor_absoluteX="37dp">
+
+        <EditText
+            android:id="@+id/editTextPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/pass"
+            android:inputType="textPassword"
+            android:maxLength="32"
+            android:maxLines="1"
+            android:textColor="@color/black_54" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/buttonLogin"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textInputLayoutPass"
+        android:layout_alignStart="@+id/textInputLayoutPass"
+        android:layout_alignEnd="@+id/textInputLayoutPass"
+        android:layout_margin="20dp"
+        android:background="@drawable/login_selector"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPass"
+        tools:layout_editor_absoluteX="24dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

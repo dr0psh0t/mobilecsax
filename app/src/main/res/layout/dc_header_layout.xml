@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dcHeaderLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="1dp"
+    android:layout_marginStart="1dp"
+    android:background="@color/extjs6"
+    android:gravity="top"
+    android:orientation="horizontal"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <TextView
+        android:id="@+id/tvJOTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="JO Number"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="Customer ID"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="Customer"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:gravity="center"
+        android:text="CSA"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:gravity="center"
+        android:text="@string/p_n_m"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold|italic" />
+
+</LinearLayout>

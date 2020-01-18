@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:id="@+id/rowItemQCLinLay">
+
+    <TextView
+        android:id="@+id/tvJONumber"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.9"
+        android:ellipsize="end"
+        android:padding="5dp"
+        android:text="123123"
+        android:gravity="center_vertical"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/tvCustomerIDQC"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.9"
+        android:ellipsize="end"
+        android:padding="5dp"
+        android:maxEms="6"
+        android:maxLines="1"
+        android:text="22"
+        android:gravity="center_vertical"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvCustomerQC"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:paddingStart="25dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        android:gravity="center_vertical"
+        android:text="Parkmall"/>
+
+    <!--
+    <ImageView
+        android:id="@+id/ivQCStatus"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:padding="5dp"
+        android:src="@drawable/ic_action_slide_disabled" />
+        -->
+
+</LinearLayout>

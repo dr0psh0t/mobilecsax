@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/new_wmdc_nav_bg_test" />
+    </item>
+    <item android:left="-2dp" android:top="-2dp" android:right="-2dp">
+        <shape android:shape="rectangle" android:padding="10dp" >
+            <corners
+                android:bottomRightRadius="0dp"
+                android:bottomLeftRadius="0dp"
+                android:topLeftRadius="0dp"
+                android:topRightRadius="0dp" />
+            <stroke
+                android:width="2dp"
+                android:color="@color/dark_grey" />
+        </shape>
+    </item>
+</layer-list>

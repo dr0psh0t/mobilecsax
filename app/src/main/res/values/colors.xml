@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimaryDark">@color/fblighcolor</color>
+    <color name="colorPrimary">@color/fbcolor</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="fbcolor">#3b5998</color>
+    <color name="blue_500">#2196F3</color>
+    <color name="white">#ffffff</color>
+    <color name="fblighcolor">#496aaf</color>
+    <color name="dark_grey_for_menu">#6b6b6b</color>
+    <color name="black">#000000</color>
+    <color name="jo_card_color">#e4effa</color>
+    <color name="dark_grey">#bac5d1</color>
+    <color name="light_grey">#f6f6f6</color>
+    <color name="extjs6">#5fa2dd</color>
+    <color name="light_green">#5be754</color>
+    <color name="green_mid">#009900</color>
+    <color name="darkgrey">#A9A9A9</color>
+    <color name="cursor">#10abfa</color>
+    <color name="default_tint">#a1a1a1</color>
+    <color name="dark_drawable">#2E2E2E</color>
+    <color name="greylight">#c6c6c6</color>
+    <color name="black_54">#8A000000</color>
+    <color name="black_19">#191919</color>
+</resources>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainActivity"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:paddingRight="5dp"
+    android:paddingLeft="5dp">
+
+    <LinearLayout
+        android:id="@+id/dcTitleLL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="1dp"
+        android:layout_marginStart="1dp"
+        android:background="@color/fbcolor"
+        android:gravity="top"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvJOTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="JO Number"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:maxEms="10"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="5dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:maxEms="10"
+            android:text="Customer"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:padding="5dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:maxEms="10"
+            android:text="Serial"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold|italic" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewSearchJO"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dcTitleLL"
+        android:layout_marginEnd="1dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:scrollbars="vertical" />
+
+</RelativeLayout>

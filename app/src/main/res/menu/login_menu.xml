@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/plantSwitch"
+        android:title="Switch Plant"
+        android:icon="@drawable/ic_action_swap_horiz"
+        app:showAsAction="always"
+        android:orderInCategory="1" />
+    <item
+        android:id="@+id/action_settings"
+        app:showAsAction="never"
+        android:tooltipText="Settings"
+        android:title="Settings" />
+    <item
+        android:id="@+id/rememberCheckBox"
+        android:title="Remember"
+        app:showAsAction="never"
+        android:orderInCategory="5"
+        android:checkable="true" />
+</menu>

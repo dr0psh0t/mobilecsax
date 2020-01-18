@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:id="@+id/rootLinLayInd"
+    android:clickable="true"
+    android:focusable="true">
+
+    <ImageView
+        android:id="@+id/iconQCInfo"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:padding="5dp"
+        android:contentDescription="@string/qc_ico_img"
+        android:src="@drawable/ic_action_slide_disabled"/>
+
+    <TextView
+        android:id="@+id/tvKeyQCJO"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:gravity="center_vertical"
+        android:ellipsize="end"
+        android:padding="5dp"
+        android:text="@string/key"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvBlank"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.05"
+        android:gravity="center_vertical"
+        android:padding="5dp"
+        android:textStyle="bold"
+        android:text=":"/>
+
+    <TextView
+        android:id="@+id/tvValueQCJO"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:padding="5dp"
+        android:text="@string/value"
+        android:textStyle="italic" />
+
+</LinearLayout>

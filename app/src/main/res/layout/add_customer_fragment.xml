@@ -1,0 +1,906 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scrollViewCustomer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilLnameCust"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintBottom_toBottomOf="@id/tilFnameCust"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.66"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.008">
+
+            <EditText
+                android:id="@+id/etLnameCust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textLogin"
+                android:hint="@string/lname_req"
+                android:maxLength="32"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilFnameCust"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilLnameCust"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.66"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilLnameCust">
+
+            <EditText
+                android:id="@+id/etFnameCust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textLogin"
+                android:hint="@string/fname_req"
+                android:maxLength="32"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilMiCust"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilFnameCust"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilFnameCust">
+
+            <EditText
+                android:id="@+id/etMiCust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textLogin"
+                android:hint="@string/mi_req"
+                android:maxLength="1"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilAddrCust"
+            android:layout_width="0dp"
+            android:layout_height="62dp"
+            android:layout_below="@+id/tilMiCust"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.66"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilMiCust">
+
+            <EditText
+                android:id="@+id/etAddrCust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textLogin"
+                android:hint="@string/address_req"
+                android:maxLength="100"
+                android:maxLines="2"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilDateCust"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@+id/tilAddrCust"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.66"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilAddrCust">
+
+            <EditText
+                android:id="@+id/etDateCust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:focusable="false"
+                android:hint="@string/birthdate_req"
+                android:maxLength="64"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilIndCust"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilDateCust"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilDateCust">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:text="@string/select_industry"
+                android:textColor="@color/default_tint"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinIndCust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:spinnerMode="dialog"
+                android:textColor="@color/black"
+                app:backgroundTint="@color/default_tint" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPlantCust"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilIndCust"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilIndCust">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:text="@string/select_plant"
+                android:textColor="@color/default_tint"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinPlantCust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:spinnerMode="dialog"
+                app:backgroundTint="@color/default_tint" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilCityCust"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilPlantCust"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilPlantCust">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:text="@string/select_city"
+                android:textColor="@color/default_tint"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinCityCust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:spinnerMode="dialog"
+                app:backgroundTint="@color/default_tint" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilProvCust"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilCityCust"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilCityCust">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:text="@string/select_province"
+                android:textColor="@color/default_tint"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinProvCust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:spinnerMode="dialog"
+                app:backgroundTint="@color/default_tint" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilCountCust"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilProvCust"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilProvCust">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:text="@string/select_country"
+                android:textColor="@color/default_tint"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinCountCust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:spinnerMode="dialog"
+                app:backgroundTint="@color/default_tint" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilFaxCust"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilCountCust"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilCountCust">
+
+            <EditText
+                android:id="@+id/etFaxCust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:hint="@string/fax"
+                android:inputType="number"
+                android:maxLength="7"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilTeleCust"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilFaxCust"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilFaxCust">
+
+            <EditText
+                android:id="@+id/etTeleCust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:hint="@string/tele"
+                android:inputType="number"
+                android:maxLength="7"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilMobCust"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilTeleCust"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilTeleCust">
+
+            <EditText
+                android:id="@+id/etMobCust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:hint="@string/mob_req"
+                android:inputType="number"
+                android:maxLength="11"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEmailCust"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilMobCust"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.66"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilMobCust">
+
+            <EditText
+                android:id="@+id/etEmailCust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:maxLength="64"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilWebCust"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilEmailCust"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.66"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilEmailCust">
+
+            <EditText
+                android:id="@+id/etWebCust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:hint="@string/website"
+                android:inputType="textEmailAddress"
+                android:maxLength="64"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEmergCust"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilWebCust"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.66"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilWebCust">
+
+            <EditText
+                android:id="@+id/etEmergCust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:hint="@string/emergency"
+                android:maxLength="64"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilFaxCodeCust"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilEmergCust"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.66"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilEmergCust">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:text="@string/faxcode_req"
+                android:textColor="@color/default_tint"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinFaxCodeCust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:spinnerMode="dialog"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilFaxCountryCodeCust"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilFaxCodeCust"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.66"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilFaxCodeCust">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:text="@string/fax_country_code"
+                android:textColor="@color/default_tint"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinFaxCountCodeCust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:spinnerMode="dialog"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilAreaCodeCust"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilFaxCountryCodeCust"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.66"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilFaxCountryCodeCust">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:text="@string/area_code_req"
+                android:textColor="@color/default_tint"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinAreaCodeCust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:spinnerMode="dialog"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilCountryCodeCust"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilAreaCodeCust"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.66"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilAreaCodeCust">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:text="@string/country_code_req"
+                android:textColor="@color/default_tint"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinCountCodeCust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:spinnerMode="dialog"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilZipCust"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilCountryCodeCust"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilCountryCodeCust">
+
+            <EditText
+                android:id="@+id/etZipCust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:hint="@string/zip_code_req"
+                android:inputType="number"
+                android:maxLength="4"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilERLinearLayoutCust"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilProvCust"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilZipCust">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:text="@string/er"
+                android:textColor="@color/default_tint"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinErCust"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:spinnerMode="dialog"
+                app:backgroundTint="@color/default_tint" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilMFLinearLayoutCust"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilProvCust"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilERLinearLayoutCust">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:text="@string/mf"
+                android:textColor="@color/default_tint"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinMfCust"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:spinnerMode="dialog"
+                app:backgroundTint="@color/default_tint" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilCalibLinearLayoutCust"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilProvCust"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilMFLinearLayoutCust">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:text="@string/calib"
+                android:textColor="@color/default_tint"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinCalibCust"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:spinnerMode="dialog"
+                app:backgroundTint="@color/default_tint" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilSparePartsLinearLayoutCust"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tilProvCust"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilCalibLinearLayoutCust">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:text="@string/spare_parts"
+                android:textColor="@color/default_tint"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinSparePartsCust"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:spinnerMode="dialog"
+                app:backgroundTint="@color/default_tint" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/photoConstraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/greylight"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilSparePartsLinearLayoutCust">
+
+            <Button
+                android:id="@+id/btnPhoto"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:drawableTop="@drawable/ic_action_add_photo"
+                android:paddingTop="15dp"
+                android:text="@string/photo"
+                android:textColor="@color/dark_drawable"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/tvPhotoName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/add_photo_here"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/btnPhoto"
+                app:layout_constraintTop_toTopOf="@+id/btnPhoto" />
+
+            <TextView
+                android:id="@+id/tvPhotoSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="512 KB"
+                app:layout_constraintBottom_toBottomOf="@+id/btnPhoto"
+                app:layout_constraintStart_toEndOf="@+id/btnPhoto" />
+
+            <Button
+                android:id="@+id/btnPhotoPrev"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginBottom="1dp"
+                android:drawableTop="@drawable/ic_action_photo_preview"
+                android:paddingTop="8dp"
+                android:text="prev"
+                android:textColor="@color/dark_drawable"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/signConstraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/greylight"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/photoConstraintLayout">
+
+            <Button
+                android:id="@+id/btnSign"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:drawableTop="@drawable/ic_action_signature_drawable"
+                android:paddingTop="15dp"
+                android:text="@string/sign"
+                android:textColor="@color/dark_drawable"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/tvSignName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Add Signature Here"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/btnSign"
+                app:layout_constraintTop_toTopOf="@+id/btnSign" />
+
+            <Button
+                android:id="@+id/btnSignPrev"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginBottom="1dp"
+                android:drawableTop="@drawable/ic_action_photo_preview"
+                android:paddingTop="8dp"
+                android:text="prev"
+                android:textColor="@color/dark_drawable"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/btnSubmit"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/login_selector"
+            android:text="@string/submit"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/signConstraintLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

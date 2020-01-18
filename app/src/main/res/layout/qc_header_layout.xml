@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/qcHeaderLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/extjs6"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tvJOTitleQC"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="JO Number"
+        android:textSize="14sp"
+        android:padding="5dp"
+        android:textColor="@color/white"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="Customer ID"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:textStyle="bold|italic"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="Customer"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="CSA"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:textStyle="bold|italic" />
+
+</LinearLayout>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@android:drawable/ic_menu_search"
+        app:showAsAction="always"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        android:layout_width="match_parent"
+        android:visible="false"
+        android:title="Search"/>
+
+    <item
+        android:id="@+id/action_refresh"
+        android:icon="@drawable/ic_action_refresh"
+        android:orderInCategory="100"
+        android:title="Back"
+        android:visible="false"
+        app:showAsAction="always" />
+
+    <!--
+    <item
+        android:id="@+id/action_edit"
+        android:orderInCategory="100"
+        android:title="Edit Joborder"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_set_transferred"
+        android:orderInCategory="100"
+        android:title="Set Transferred"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_delete"
+        android:orderInCategory="200"
+        android:title="Delete Joborder"
+        android:visible="false"
+        app:showAsAction="never" />
+     -->
+
+    <item
+        android:id="@+id/action_back"
+        android:orderInCategory="300"
+        android:title="Back"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_back_nav"
+        android:icon="?attr/homeAsUpIndicator"
+        android:orderInCategory="400"
+        android:title="Back"
+        android:visible="true"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_edit"
+        android:icon="@drawable/ic_action_mode_edit"
+        android:orderInCategory="400"
+        android:title="Edit Joborder"
+        android:visible="false"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_transfer"
+        android:icon="@drawable/ic_action_transfer"
+        android:orderInCategory="400"
+        android:title="Set Transfer"
+        android:visible="false"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_http"
+        android:icon="@drawable/ic_action_http"
+        android:orderInCategory="400"
+        android:title="Delete Joborder"
+        android:visible="false"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_delete"
+        android:icon="@drawable/ic_action_delete"
+        android:orderInCategory="400"
+        android:title="Delete Joborder"
+        android:visible="false"
+        app:showAsAction="always" />
+
+</menu>

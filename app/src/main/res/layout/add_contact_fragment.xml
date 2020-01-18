@@ -1,0 +1,902 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:id="@+id/scrollViewContact">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutLastname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/editTextLastname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textLogin"
+                android:hint="@string/lname_req"
+                android:maxLength="32"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutFirstname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textInputLayoutLastname"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutLastname">
+
+            <EditText
+                android:id="@+id/editTextFirstname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textLogin"
+                android:hint="@string/fname_req"
+                android:maxLength="32"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutMI"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textInputLayoutFirstname"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutFirstname">
+
+            <EditText
+                android:id="@+id/editTextMI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textLogin"
+                android:hint="@string/mi_req"
+                android:maxLength="1"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutCompany"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textInputLayoutMI"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutMI">
+
+            <EditText
+                android:id="@+id/editTextCompany"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textLogin"
+                android:hint="@string/company"
+                android:maxLength="100"
+                android:maxLines="2"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutJobPos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textInputLayoutCompany"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutCompany">
+
+            <EditText
+                android:id="@+id/editTextJobPos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textLogin"
+                android:hint="@string/jobpos_req"
+                android:maxLength="32"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textInputLayoutJobPos"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutJobPos">
+
+            <EditText
+                android:id="@+id/editTextAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textLogin"
+                android:hint="@string/address_req"
+                android:maxLength="64"
+                android:maxLines="2"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textInputLayoutAddress"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutAddress">
+
+            <EditText
+                android:id="@+id/editTextDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:focusable="false"
+                android:hint="@string/date_req"
+                android:inputType="date"
+                android:maxLength="64"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutIndustry"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textInputLayoutDate"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDate">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:text="@string/industry_req"
+                android:textColor="@color/default_tint"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinnerIndustry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:spinnerMode="dialog"
+                android:textColor="@color/black"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutPlant"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textInputLayoutIndustry"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutIndustry">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:text="@string/plant_req"
+                android:textColor="@color/default_tint"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinnerPlant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:spinnerMode="dialog"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutCity"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textInputLayoutPlant"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPlant">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:text="@string/city_req"
+                android:textColor="@color/default_tint"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinnerCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:spinnerMode="dialog"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutProvince"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutCity">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:text="@string/prov_req"
+                android:textColor="@color/default_tint"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinnerProvince"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:spinnerMode="dialog"
+                app:backgroundTint="@color/default_tint" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutCountry"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textInputLayoutProvince"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutProvince">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:text="@string/select_country"
+                android:textColor="@color/default_tint"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinnerCountry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:spinnerMode="dialog"
+                app:backgroundTint="@color/default_tint" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutFax"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textInputLayoutCountry"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutCountry">
+
+            <EditText
+                android:id="@+id/editTextFax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:hint="@string/fax"
+                android:inputType="number"
+                android:maxLength="7"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutTelephone"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textInputLayoutFax"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutFax">
+
+            <EditText
+                android:id="@+id/editTextTelephone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:hint="@string/tele"
+                android:inputType="number"
+                android:maxLength="7"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutMobile"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textInputLayoutTelephone"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutTelephone">
+
+            <EditText
+                android:id="@+id/editTextMobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:hint="@string/mob_req"
+                android:inputType="number"
+                android:maxLength="11"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textInputLayoutMobile"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutMobile">
+
+            <EditText
+                android:id="@+id/editTextEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:maxLength="64"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutWebsite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmail">
+
+            <EditText
+                android:id="@+id/editTextWebsite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:hint="@string/website"
+                android:inputType="textEmailAddress"
+                android:maxLength="64"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutEmergencyContact"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutWebsite">
+
+            <EditText
+                android:id="@+id/editTextEmergencyContact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:hint="@string/emergency_contact_req"
+                android:inputType="number"
+                android:maxLength="11"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutEmergency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmergencyContact">
+
+            <EditText
+                android:id="@+id/editTextEmergency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:hint="@string/emergency"
+                android:maxLength="64"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutFaxCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmergency">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:text="@string/faxcode_req"
+                android:textColor="@color/default_tint"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinnerFaxCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:spinnerMode="dialog"
+                app:backgroundTint="@color/default_tint" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutAreaCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textInputLayoutFaxCode"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutFaxCode">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:text="@string/area_code"
+                android:textColor="@color/default_tint"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinnerAreaCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:spinnerMode="dialog"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutZip"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutAreaCode">
+
+            <EditText
+                android:id="@+id/editTextZip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:hint="@string/zip_code_req"
+                android:inputType="number"
+                android:maxLength="4"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:backgroundTint="@color/default_tint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilERLLContact"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutZip">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:text="@string/er"
+                android:textColor="@color/default_tint"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinnerER"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:spinnerMode="dialog"
+                app:backgroundTint="@color/default_tint" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilMFLLContact"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilERLLContact">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:text="@string/mf"
+                android:textColor="@color/default_tint"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinnerMF"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:spinnerMode="dialog"
+                app:backgroundTint="@color/default_tint" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilCalibLLContact"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilMFLLContact">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:text="@string/calib"
+                android:textColor="@color/default_tint"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinnerCalib"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:spinnerMode="dialog"
+                app:backgroundTint="@color/default_tint" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilSPLLContact"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilCalibLLContact">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:text="@string/spare_parts"
+                android:textColor="@color/default_tint"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinnerSpareParts"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:spinnerMode="dialog"
+                app:backgroundTint="@color/default_tint" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/photoConstraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/greylight"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilSPLLContact">
+
+            <Button
+                android:id="@+id/btnPhoto"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:drawableTop="@drawable/ic_action_add_photo"
+                android:paddingTop="15dp"
+                android:text="@string/photo"
+                android:textColor="@color/dark_drawable"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/tvPhotoName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/add_photo_here"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/btnPhoto"
+                app:layout_constraintTop_toTopOf="@+id/btnPhoto" />
+
+            <TextView
+                android:id="@+id/tvPhotoSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="512 KB"
+                app:layout_constraintBottom_toBottomOf="@+id/btnPhoto"
+                app:layout_constraintStart_toEndOf="@+id/btnPhoto" />
+
+            <Button
+                android:id="@+id/btnPhotoPrev"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginBottom="1dp"
+                android:drawableTop="@drawable/ic_action_photo_preview"
+                android:paddingTop="8dp"
+                android:text="prev"
+                android:textColor="@color/dark_drawable"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/signConstraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/greylight"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/photoConstraintLayout">
+
+            <Button
+                android:id="@+id/btnSign"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:drawableTop="@drawable/ic_action_signature_drawable"
+                android:paddingTop="15dp"
+                android:text="@string/sign"
+                android:textColor="@color/dark_drawable"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/tvSignName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="12sp"
+                android:text="Add Signature Here"
+                app:layout_constraintStart_toEndOf="@+id/btnSign"
+                app:layout_constraintTop_toTopOf="@+id/btnSign" />
+
+            <Button
+                android:id="@+id/btnSignPrev"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginBottom="1dp"
+                android:drawableTop="@drawable/ic_action_photo_preview"
+                android:paddingTop="8dp"
+                android:text="prev"
+                android:textColor="@color/dark_drawable"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/btnSubmit"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/login_selector"
+            android:text="@string/submit"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/signConstraintLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

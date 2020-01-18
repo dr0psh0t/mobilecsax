@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainActivity"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:paddingRight="5dp"
+    android:paddingLeft="5dp">
+
+    <LinearLayout
+        android:id="@+id/dcTitleLL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="1dp"
+        android:layout_marginStart="1dp"
+        android:background="@color/fbcolor"
+        android:gravity="top"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvJOTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="JO Number"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:maxEms="10"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:gravity="center"
+            android:padding="5dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:maxEms="10"
+            android:text="Customer ID"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:padding="5dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:maxEms="10"
+            android:text="Customer"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:text="CSA"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:text="@string/p_n_m"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold|italic" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDCData"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/dcTitleLL"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dcTitleLL" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

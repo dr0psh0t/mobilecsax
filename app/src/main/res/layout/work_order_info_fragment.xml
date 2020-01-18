@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:id="@+id/rootLayItemInfo">
+
+    <TextView
+        android:id="@+id/tvItemDC"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:maxEms="6"
+        android:maxLines="1"
+        android:textSize="16sp"
+        android:text="@string/slide_qc_msg" />
+
+    <ImageView
+        android:id="@+id/doneIcon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.3"
+        android:contentDescription="dciconimage"
+        android:src="@drawable/ic_action_slide_disabled"/>
+
+    <ImageView
+        android:id="@+id/iconItemDC"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.3"
+        android:contentDescription="dciconimage"
+        android:src="@drawable/ic_action_slide_disabled"/>
+
+    <ImageView
+        android:id="@+id/ivWorkPM"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.3"
+        android:contentDescription="dciconimage"
+        android:src="@drawable/ic_action_slide_disabled"/>
+
+</LinearLayout>
