@@ -1,7 +1,6 @@
 package android.wmdc.com.mobilecsa;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,11 +10,11 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 import android.wmdc.com.mobilecsa.model.GPSTracker;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -29,29 +28,29 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class LoginActivity extends AppCompatActivity {
-    private SharedPreferences sPrefs;
-    private GPSTracker gpsTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        gpsTracker = new GPSTracker(LoginActivity.this);
+        GPSTracker gpsTracker = new GPSTracker(LoginActivity.this);
         Log.d("lat", String.valueOf(gpsTracker.getLatitude()));
         Log.d("lng", String.valueOf(gpsTracker.getLongitude()));
 
-        sPrefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+        SharedPreferences sPrefs = PreferenceManager.getDefaultSharedPreferences(
+                LoginActivity.this);
 
-        /**
-         *
+        /*
         SharedPreferences.Editor editor = sPrefs.edit();
 
         editor.remove("northWifi");
@@ -90,10 +89,8 @@ public class LoginActivity extends AppCompatActivity {
             fragmentTransaction.replace(R.id.content_login, new LoginFragment());
             fragmentTransaction.commit();
         } else {
-            new SessionExpiryTask(Util.getProgressBar(LoginActivity.this)).execute(
-                    sPrefs.getString("user", null),
-                    sPrefs.getString("sessionId", null),
-                    sPrefs.getInt("csaId", 0)+"");
+            new SessionExpiryTask(this).execute(sPrefs.getString("user", null),
+                    sPrefs.getString("sessionId", null), String.valueOf(sPrefs.getInt("csaId", 0)));
         }
 
         //  CHECKING OF PERMISSION
@@ -109,7 +106,8 @@ public class LoginActivity extends AppCompatActivity {
                         READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
             ActivityCompat.requestPermissions(LoginActivity.this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                    new String[]{
+                            Manifest.permission.ACCESS_FINE_LOCATION,
                             Manifest.permission.ACCESS_COARSE_LOCATION,
                             Manifest.permission.CAMERA,
                             Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -122,8 +120,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                           int[] grantResults) {
+    public void onRequestPermissionsResult(
+            int requestCode, String[] permissions, @NonNull int[] grantResults) {
+
         for (int x = 0; x < permissions.length; ++x) {
             if (grantResults[x] == -1) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
@@ -145,25 +144,28 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private class SessionExpiryTask extends AsyncTask<String, String, String> {
-        private HttpURLConnection conn = null;
-        private URL url = null;
-        private Dialog dialog;
+    private static class SessionExpiryTask extends AsyncTask<String, String, String> {
 
-        public SessionExpiryTask(Dialog dialog) {
-            this.dialog = dialog;
+        private WeakReference<LoginActivity> activityWeakReference;
+
+        private HttpURLConnection conn = null;
+
+        private SharedPreferences sPrefs;
+
+        private SessionExpiryTask(LoginActivity context) {
+            activityWeakReference = new WeakReference<>(context);
+            sPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            this.dialog.show();
         }
 
         @Override
         protected String doInBackground(String[] args) {
             try {
-                url = new URL(sPrefs.getString("domain", null)+"checksessionexpiry");
+                URL url = new URL(sPrefs.getString("domain", null)+"checksessionexpiry");
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(5000);
                 conn.setConnectTimeout(5000);
@@ -189,7 +191,8 @@ public class LoginActivity extends AppCompatActivity {
                 String query = builder.build().getEncodedQuery();
 
                 OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(os, StandardCharsets.UTF_8));
 
                 writer.write(query);
                 writer.flush();
@@ -240,16 +243,24 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            this.dialog.dismiss();
+            LoginActivity loginActivity = activityWeakReference.get();
+
+            if (loginActivity == null || loginActivity.isFinishing()) {
+                return;
+            }
+
             try {
                 JSONObject responseJson = new JSONObject(result);
+
                 if (responseJson.getBoolean("success")) {
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                    Intent intent = new Intent(loginActivity, MainActivity.class);
+
+                    loginActivity.startActivity(intent);
+                    loginActivity.finish();
                 } else {
-                    FragmentTransaction fragmentTransaction =
-                            getSupportFragmentManager().beginTransaction();
+                    FragmentTransaction fragmentTransaction = loginActivity
+                            .getSupportFragmentManager().beginTransaction();
+
                     fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit,
                             R.anim.pop_enter, R.anim.pop_exit);
                     fragmentTransaction.replace(R.id.content_login, new LoginFragment());
@@ -258,7 +269,7 @@ public class LoginActivity extends AppCompatActivity {
             } catch (Exception e) {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "Exception", e.toString());
-                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                Util.longToast(loginActivity, e.getMessage());
             }
         }
     }

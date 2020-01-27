@@ -19,7 +19,9 @@ import android.wmdc.com.mobilecsa.utils.Variables;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -32,41 +34,44 @@ import java.net.URL;
 
 public class PhotoFragment extends Fragment {
 
-    private ImageView ivPhoto;
-    private SharedPreferences sharedPreferences;
-
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle instanceState) {
 
         View v = inflater.inflate(R.layout.photo_layout, container, false);
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences sPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-        ivPhoto = v.findViewById(R.id.ivPhoto);
+        ImageView ivPhoto = v.findViewById(R.id.ivPhoto);
         Bundle thisBundle = this.getArguments();
 
         if (thisBundle != null) {
-            String url = sharedPreferences.getString("domain", null)+thisBundle.getString("url");
-            new SetImageTask(ivPhoto).execute(url);
+            String url = sPrefs.getString("domain", null)+thisBundle.getString("url");
+            new SetImageTask(getActivity(), ivPhoto).execute(url);
         }
 
         return v;
     }
 
-    private class SetImageTask extends AsyncTask<String, String, Bitmap> {
-        private ImageView imageView;
-        private HttpURLConnection conn = null;
-        private URL myFileUrl;
+    private static class SetImageTask extends AsyncTask<String, String, Bitmap> {
 
-        public SetImageTask(ImageView imageView) {
-            this.imageView = imageView;
+        private WeakReference<ImageView> imageViewWeakReference;
+
+        private WeakReference<FragmentActivity> activityWeakReference;
+
+        private SharedPreferences taskPrefs;
+
+        private HttpURLConnection conn = null;
+
+        private SetImageTask(FragmentActivity activity, ImageView imageView) {
+            activityWeakReference = new WeakReference<>(activity);
+            imageViewWeakReference = new WeakReference<>(imageView);
+            taskPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
         }
 
         protected Bitmap doInBackground(String[] params) {
             try {
-                myFileUrl = new URL(params[0]);
+                URL myFileUrl = new URL(params[0]);
 
                 conn = (HttpURLConnection) myFileUrl.openConnection();
                 conn.setReadTimeout(Util.READ_TIMEOUT);
@@ -80,7 +85,7 @@ public class PhotoFragment extends Fragment {
                 conn.setRequestProperty("Content-Type",
                         "application/x-www-form-urlencoded; charset=utf-8");
                 conn.setRequestProperty("Cookie",
-                        "JSESSIONID="+sharedPreferences.getString("sessionId", null));
+                        "JSESSIONID="+taskPrefs.getString("sessionId", null));
                 conn.setRequestProperty("Host", "localhost:8080");
                 conn.setRequestProperty("Referer", "http://localhost:8080/mcsa/getcontactsphoto");
                 conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1: Win64; x64; " +
@@ -91,9 +96,8 @@ public class PhotoFragment extends Fragment {
                 conn.setDoOutput(true);
                 conn.connect();
 
-                Bitmap bmPic = BitmapFactory.decodeStream(conn.getInputStream());
+                return BitmapFactory.decodeStream(conn.getInputStream());
 
-                return bmPic;
             } catch (MalformedURLException | ConnectException | SocketTimeoutException e) {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "NetworkException", e.toString());
@@ -110,11 +114,18 @@ public class PhotoFragment extends Fragment {
         }
 
         protected void onPostExecute(Bitmap result) {
-            if (result == null) {
-                AlertDialog.Builder warningBox = new AlertDialog.Builder(getActivity());
+            final FragmentActivity mainActivity = activityWeakReference.get();
+            ImageView imageView = imageViewWeakReference.get();
 
-                TextView errMsg = new TextView(getActivity());
-                errMsg.setText("A problem has occured in displaying Photo.");
+            if (mainActivity == null || mainActivity.isFinishing()) {
+                return;
+            }
+
+            if (result == null) {
+                AlertDialog.Builder warningBox = new AlertDialog.Builder(mainActivity);
+
+                TextView errMsg = new TextView(mainActivity);
+                errMsg.setText(R.string.photo_prob);
                 errMsg.setTextSize(17);
                 errMsg.setPadding(20, 0, 10, 0);
                 errMsg.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -126,7 +137,7 @@ public class PhotoFragment extends Fragment {
                 warningBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
-                        getActivity().onBackPressed();
+                        mainActivity.onBackPressed();
                     }
                 });
 

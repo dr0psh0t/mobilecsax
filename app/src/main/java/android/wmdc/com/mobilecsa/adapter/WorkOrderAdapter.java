@@ -15,6 +15,7 @@ import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.model.SwipeButton;
 import android.wmdc.com.mobilecsa.model.WorkOrderModel;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -34,15 +35,17 @@ public class WorkOrderAdapter extends RecyclerView.Adapter<WorkOrderAdapter.Work
     }
 
     @Override
-    public WorkOrderViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context)
-                .inflate(R.layout.work_order_info_fragment, viewGroup, false);
+    @NonNull
+    public WorkOrderViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(context).inflate(R.layout.work_order_info_fragment,
+                viewGroup, false);
         return new WorkOrderViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(WorkOrderViewHolder workOrderViewHolder, int i) {
         workOrderViewHolder.index = i;
+
         if (i % 2 != 0) {
             workOrderViewHolder.rootLayItemInfo.setBackgroundResource(
                     R.drawable.custom_card_background_odd);
@@ -86,7 +89,7 @@ public class WorkOrderAdapter extends RecyclerView.Adapter<WorkOrderAdapter.Work
         private TextView tvItemDC;
         private int index;
 
-        public WorkOrderViewHolder(View itemView) {
+        private WorkOrderViewHolder(View itemView) {
             super(itemView);
             this.rootLayItemInfo = itemView.findViewById(R.id.rootLayItemInfo);
             this.doneIcon = itemView.findViewById(R.id.doneIcon);

@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 import android.wmdc.com.mobilecsa.asynchronousclasses.SearchJOTask;
 import android.wmdc.com.mobilecsa.model.EmojiExcludeFilter;
 import android.wmdc.com.mobilecsa.utils.Util;
@@ -28,16 +27,20 @@ public class SearchJOFragment extends Fragment {
     private EditText etSearchJO;
     private ProgressBar progressBarSearchJo;
     private SearchJOTask searchJOTask;
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences sPrefs;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle instanceState) {
         View v = inflater.inflate(R.layout.search_jo_fragment, container, false);
-        getActivity().setTitle("Search Job Order");
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+
+        if (getActivity() != null) {
+            getActivity().setTitle("Search Job Order");
+        } else {
+            Util.longToast(getContext(), "Activity is null. Cannot set title of the fragment.");
+        }
+
+        sPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         btnSearchJO = v.findViewById(R.id.btnSearchJO);
 
@@ -56,18 +59,16 @@ public class SearchJOFragment extends Fragment {
             }
         });
 
-        etSearchJO.setFilters(new InputFilter[] {
-                new EmojiExcludeFilter(),
-                new InputFilter.LengthFilter(16)
-        });
+        etSearchJO.setFilters(new InputFilter[] {new EmojiExcludeFilter(),
+                new InputFilter.LengthFilter(16)});
 
         btnSearchJO.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String query = etSearchJO.getText().toString();
-                String cid = String.valueOf(sharedPreferences.getInt("csaId", 0));
+                String cid = String.valueOf(sPrefs.getInt("csaId", 0));
 
                 if (query.length() < 3) {
-                    Toast.makeText(getActivity(), "Too short", Toast.LENGTH_LONG).show();
+                    Util.longToast(getActivity(), "Too short.");
                 } else {
                     progressBarSearchJo.setVisibility(View.VISIBLE);
                     searchJOTask = new SearchJOTask(getActivity(), progressBarSearchJo,

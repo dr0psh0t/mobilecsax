@@ -1,14 +1,11 @@
 package android.wmdc.com.mobilecsa;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -18,7 +15,6 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.wmdc.com.mobilecsa.asynchronousclasses.SearchContactTask;
@@ -27,7 +23,6 @@ import android.wmdc.com.mobilecsa.asynchronousclasses.SearchJONumberDCTask;
 import android.wmdc.com.mobilecsa.asynchronousclasses.SearchJONumberQCTask;
 import android.wmdc.com.mobilecsa.model.GPSTracker;
 import android.wmdc.com.mobilecsa.utils.Util;
-import android.wmdc.com.mobilecsa.utils.Variables;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -41,43 +36,25 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.ConnectException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
-import java.net.URL;
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private SharedPreferences sharedPreferences;
     private Toolbar toolbar;
-    private ProgressBar progressBarMain;
-    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        progressBarMain = findViewById(R.id.progressBarMain);
-        Util.progressBarMain = progressBarMain;
+        Util.progressBarMain = findViewById(R.id.progressBarMain);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         setNavMenuItemThemeColors(Color.BLACK, navigationView);
 
@@ -91,7 +68,7 @@ public class MainActivity extends AppCompatActivity
         tvUserEmail.setText(sharedPreferences.getString("csaFullName", null));
         tvUserName.setText(sharedPreferences.getString("user", null));
         tvBranch.setText(sharedPreferences.getString("branch", null));
-        tvVersion.setText("Version 2.1");
+        tvVersion.setText(R.string.version);
 
         Log.d("csaFullName", sharedPreferences.getString("csaFullName", null));
         Log.d("user", sharedPreferences.getString("user", null));
@@ -177,37 +154,35 @@ public class MainActivity extends AppCompatActivity
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
             @Override
             public boolean onQueryTextSubmit(String query) {
-                try {
-                    if (query.length() > 1) {
-                        Util.minKey(MainActivity.this);
+                if (query.length() > 1) {
+                    Util.minKey(MainActivity.this);
 
-                        if (currFrag instanceof SearchCustomerFragment ||
-                                currFrag instanceof CustomerResultFragment) {
-                            new SearchCustomerTask(MainActivity.this).execute(query);
-                        } else if (currFrag instanceof SearchContactFragment ||
-                                currFrag instanceof ContactsResultFragment) {
-                            new SearchContactTask(MainActivity.this).execute(query);
-                        } else if (currFrag instanceof DateCommitFragment) {
-                            try {
-                                new SearchJONumberDCTask(MainActivity.this)
-                                        .execute(String.valueOf(Integer.parseInt(query)), "true");
-                            } catch (NumberFormatException e) {
-                                new SearchJONumberDCTask(MainActivity.this).execute(query, "false");
-                            }
-                        } else if (currFrag instanceof QualityCheckFragment) {
-                            try {
-                                new SearchJONumberQCTask(MainActivity.this).
-                                        execute(String.valueOf(Integer.parseInt(query)), "true");
-                            } catch (NumberFormatException e) {
-                                new SearchJONumberQCTask(MainActivity.this).execute(query, "false");
-                            }
+                    if (currFrag instanceof SearchCustomerFragment ||
+                            currFrag instanceof CustomerResultFragment) {
+                        new SearchCustomerTask(MainActivity.this).execute(query);
+                    } else if (currFrag instanceof SearchContactFragment ||
+                            currFrag instanceof ContactsResultFragment) {
+                        new SearchContactTask(MainActivity.this).execute(query);
+                    } else if (currFrag instanceof DateCommitFragment) {
+                        try {
+                            new SearchJONumberDCTask(MainActivity.this)
+                                    .execute(String.valueOf(Integer.parseInt(query)), "true");
+                        } catch (NumberFormatException e) {
+                            new SearchJONumberDCTask(MainActivity.this).execute(query, "false");
                         }
-                    } else {
-                        Toast.makeText(MainActivity.this, "Too Short.", Toast.LENGTH_SHORT).show();
+                    } else if (currFrag instanceof QualityCheckFragment) {
+                        try {
+                            new SearchJONumberQCTask(MainActivity.this).
+                                    execute(String.valueOf(Integer.parseInt(query)), "true");
+                        } catch (NumberFormatException e) {
+                            new SearchJONumberQCTask(MainActivity.this).execute(query, "false");
+                        }
                     }
-                } finally {
-                    return true;
+                } else {
+                    Toast.makeText(MainActivity.this, "Too Short.", Toast.LENGTH_SHORT).show();
                 }
+
+                return true;
             }
 
             @Override
@@ -232,13 +207,12 @@ public class MainActivity extends AppCompatActivity
             case R.id.action_edit:
                 return true;
             case R.id.action_delete:
-                return true;
+                //return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         toolbar.setLogo(null);
@@ -385,130 +359,33 @@ public class MainActivity extends AppCompatActivity
         mNavView.setItemIconTintList(navMenuIconList);
     }
 
-    private class SwitchPlantTask extends AsyncTask<String, String, String> {
-        private HttpURLConnection conn = null;
-        private URL url = null;
-        private ProgressDialog progressDialog;
-        private Context context;
-        private String branch;
+    /*
+    private static class AutoLoginTask extends AsyncTask<String, String, String> {
 
-        public SwitchPlantTask(Context context, String branch) {
-            this.context = context;
-            this.branch = branch;
-            progressDialog = new ProgressDialog(context);
+        private WeakReference<FragmentActivity> activityWeakReference;
+
+        private SharedPreferences taskPrefs;
+
+        private HttpURLConnection conn = null;
+
+        private ProgressDialog progressDialog;
+
+        private AutoLoginTask(FragmentActivity activity) {
+            activityWeakReference = new WeakReference<>(activity);
+            taskPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
+            progressDialog = new ProgressDialog(activity);
         }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog.setTitle("Plant");
-            progressDialog.setMessage("Switching to "+branch+ ". Please wait...");
             progressDialog.show();
         }
 
         @Override
         protected String doInBackground(String[] params) {
             try {
-                sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                editor.remove("csaId");
-                editor.remove("csaFullname");
-                editor.remove("sessionId");
-                editor.apply();
-
-                url = new URL(params[0]);
-
-                conn = (HttpURLConnection) url.openConnection();
-                conn.setReadTimeout(10_000);
-                conn.setConnectTimeout(10_000);
-                conn.setRequestMethod("GET");
-                conn.connect();
-
-                int statusCode = conn.getResponseCode();
-                return "{\"success\": true, \"code\": "+statusCode+", " +
-                        "\"domain\": \""+params[0]+"\", \"reason\": \"Signing in to "+branch+"\"}";
-            } catch (MalformedURLException | ConnectException | SocketTimeoutException e) {
-                Util.displayStackTraceArray(e.getStackTrace(), Variables.MOBILECSA_PACKAGE,
-                        "NetworkException", e.toString());
-                if (e instanceof MalformedURLException) {
-                    return "{\"success\": false, \"reason\": \"Malformed URL.\"}";
-                } else if (e instanceof ConnectException) {
-                    return "{\"success\": false, \"reason\": \"Cannot connect to server. " +
-                            "Check wifi or mobile data and check if server is available.\"}";
-                } else {
-                    return "{\"success\": false, \"reason\": \"Connection timed out. " +
-                            "The server is taking too long to reply.\"}";
-                }
-            } catch (Exception e) {
-                Util.displayStackTraceArray(e.getStackTrace(), Variables.MOBILECSA_PACKAGE,
-                        "exception", e.toString());
-                return "{\"success\": false, \"reason\": \""+e.getMessage()+"\"}";
-            } finally {
-                if (conn != null) {
-                    conn.disconnect();
-                }
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String res) {
-            try {
-                JSONObject result = new JSONObject(res);
-                if (result.getBoolean("success")) {
-                    if (result.getInt("code") == 200) {
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                        editor.remove("domain");
-                        editor.apply();
-                        editor.putString("domain", result.getString("domain"));
-                        editor.apply();
-
-                        editor.remove("branch");
-                        editor.apply();
-                        editor.putString("branch", branch);
-                        editor.apply();
-
-                        String username = sharedPreferences.getString("user", null);
-                        String password = sharedPreferences.getString("password", null);
-
-                        new AutoLoginTask(progressDialog).execute(
-                                result.getString("domain"), username, password);
-                    } else {
-                        progressDialog.dismiss();
-                        Util.alertBox(context, "Response code is not ok.", "Request Failed.", false);
-                    }
-                } else {
-                    progressDialog.dismiss();
-                    Util.alertBox(context, result.getString("reason"), "", false);
-                }
-            } catch (JSONException je) {
-                progressDialog.dismiss();
-                Util.displayStackTraceArray(je.getStackTrace(),
-                        Variables.MOBILECSA_PACKAGE, "JSONException", je.toString());
-                Util.alertBox(context, je.getMessage(), "", false);
-            }
-        }
-    }
-
-    private class AutoLoginTask extends AsyncTask<String, String, String> {
-        private HttpURLConnection conn = null;
-        private URL url = null;
-        private ProgressDialog progressDialog;
-
-        public AutoLoginTask(ProgressDialog progressDialog) {
-            this.progressDialog = progressDialog;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected String doInBackground(String[] params) {
-            try {
-                url = new URL(params[0]+"Login");
+                URL url = new URL(params[0]+"Login");
 
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(10_000);
@@ -523,7 +400,8 @@ public class MainActivity extends AppCompatActivity
                 String query = builder.build().getEncodedQuery();
 
                 OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os,
+                        StandardCharsets.UTF_8));
 
                 writer.write(query);
                 writer.flush();
@@ -575,21 +453,28 @@ public class MainActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(String result) {
             this.progressDialog.dismiss();
+
+            FragmentActivity mainActivity = activityWeakReference.get();
+
+            if (mainActivity == null || mainActivity.isFinishing()) {
+                return;
+            }
+
             try {
                 JSONObject responseJson = new JSONObject(result);
-                SharedPreferences.Editor spEditor = sharedPreferences.edit();
+                SharedPreferences.Editor spEditor = taskPrefs.edit();
 
                 spEditor.putString("sessionId", responseJson.getString("sessionId"));
                 spEditor.apply();
 
-                Intent intent = new Intent(MainActivity.this, SecurityKeyActivity.class);
-                startActivity(intent);
-                MainActivity.this.finish();
+                Intent intent = new Intent(mainActivity, SecurityKeyActivity.class);
+                mainActivity.startActivity(intent);
+                mainActivity.finish();
             } catch (Exception e) {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "exception", e.toString());
-                Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                Util.shortToast(mainActivity, e.getMessage());
             }
         }
-    }
+    }*/
 }

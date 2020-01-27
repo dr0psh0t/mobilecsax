@@ -13,6 +13,7 @@ import android.wmdc.com.mobilecsa.asynchronousclasses.GetInitialJoborderTask;
 import android.wmdc.com.mobilecsa.model.InitialJoborderRowModel;
 import android.wmdc.com.mobilecsa.utils.Util;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -36,15 +37,11 @@ public class InitialJoborderListAdapter extends
         this.initialJoborderList = initialJoborderList;
     }
 
-    public void setInitialJoborderList(ArrayList<InitialJoborderRowModel> initialJoborderList) {
-        this.initialJoborderList = null;
-        this.initialJoborderList = initialJoborderList;
-        this.notifyDataSetChanged();
-    }
+    @NonNull
+    public InitialJoborderListViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-    public InitialJoborderListViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context)
-                .inflate(R.layout.initial_joborder_item, viewGroup, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.initial_joborder_item, viewGroup,
+                false);
 
         if (!heightSet) {
             final LinearLayout rootLay = view.findViewById(R.id.initialJORowItem);
@@ -102,7 +99,7 @@ public class InitialJoborderListAdapter extends
 
         private int index;
 
-        public InitialJoborderListViewHolder(View itemView) {
+        private InitialJoborderListViewHolder(View itemView) {
             super(itemView);
 
             this.initialJORowItem = itemView.findViewById(R.id.initialJORowItem);

@@ -12,12 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import org.json.JSONObject;
 
@@ -27,11 +27,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 /*** Created by wmdcprog on 4/13/2018.*/
 
@@ -39,19 +41,14 @@ public class SecurityKeyFragment extends Fragment {
     private Button buttonOk;
     private EditText editTextKey;
 
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor spEditor;
-
-    private SecurityKeyTask securityTask;
-
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle instanceState) {
         View v = inflater.inflate(R.layout.security_key_fragment, container, false);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        spEditor = sharedPreferences.edit();
+
+        SharedPreferences sPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor spEditor = sPrefs.edit();
+        spEditor.apply();
 
         editTextKey = v.findViewById(R.id.editTextKey);
 
@@ -60,26 +57,34 @@ public class SecurityKeyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (!editTextKey.getText().toString().isEmpty()) {
-                    securityTask = new SecurityKeyTask(Util.getProgressBar(getContext()));
-                    securityTask.execute(editTextKey.getText().toString());
+
+                    new SecurityKeyTask(getActivity(), Util.getProgressBar(getContext()))
+                            .execute(editTextKey.getText().toString());
 
                     buttonOk.setEnabled(true);
                     editTextKey.setEnabled(true);
                 } else {
-                    Util.alertBox(getContext(), "Empty security key.", "Empty", false);
+                    Util.alertBox(getContext(), "Empty security key.");
                 }
             }
         });
         return v;
     }
 
-    private class SecurityKeyTask extends AsyncTask<String, String, String> {
+    private static class SecurityKeyTask extends AsyncTask<String, String, String> {
+
+        private WeakReference<FragmentActivity> activityWeakReference;
+
         private HttpURLConnection conn = null;
-        private URL url = null;
+
+        private SharedPreferences taskPrefs;
+
         private Dialog dialog;
 
-        public SecurityKeyTask(Dialog dialog) {
+        private SecurityKeyTask(FragmentActivity activity, Dialog dialog) {
+            activityWeakReference = new WeakReference<>(activity);
             this.dialog = dialog;
+            taskPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
         }
 
         @Override
@@ -91,7 +96,7 @@ public class SecurityKeyFragment extends Fragment {
         @Override
         protected String doInBackground(String[] params) {
             try {
-                url = new URL(sharedPreferences.getString("domain", null)+"securitykey");
+                URL url = new URL(taskPrefs.getString("domain", null)+"securitykey");
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(10_000);
                 conn.setConnectTimeout(10_000);
@@ -102,8 +107,8 @@ public class SecurityKeyFragment extends Fragment {
                 conn.setRequestProperty("Connection", "keep-alive");
                 conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; " +
                         "charset=utf-8");
-                conn.setRequestProperty("Cookie", "JSESSIONID=" +
-                        sharedPreferences.getString("sessionId", null));
+                conn.setRequestProperty("Cookie",
+                        "JSESSIONID="+taskPrefs.getString("sessionId", null));
                 conn.setRequestProperty("Host", "localhost:8080");
                 conn.setRequestProperty("Referer", "http://localhost:8080/mcsa/httpsessiontest");
                 conn.setRequestProperty("X-Requested-Width", "XMLHttpRequest");
@@ -115,7 +120,8 @@ public class SecurityKeyFragment extends Fragment {
                 String query = builder.build().getEncodedQuery();
 
                 OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os,
+                        StandardCharsets.UTF_8));
 
                 writer.write(query);
                 writer.flush();
@@ -167,11 +173,22 @@ public class SecurityKeyFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             this.dialog.dismiss();
+
+            FragmentActivity securityActivity = activityWeakReference.get();
+
+            if (securityActivity == null || securityActivity.isFinishing()) {
+                return;
+            }
+
             try {
                 JSONObject responseJson = new JSONObject(result);
+
                 if (responseJson.getBoolean("success")) {
                     Util.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(
-                            getContext());
+                            securityActivity);
+
+                    SharedPreferences.Editor spEditor = taskPrefs.edit();
+
                     spEditor.putString("user", responseJson.getString("username"));
                     spEditor.putInt("csaId", responseJson.getInt("csaId"));
                     spEditor.putString("csaFullName", responseJson.getString("csaFullName"));
@@ -181,16 +198,18 @@ public class SecurityKeyFragment extends Fragment {
                             responseJson.getString("localAddressNorth"));
                     spEditor.apply();
 
-                    Intent intent = new Intent(getContext(), MainActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
+                    securityActivity.startActivity(new Intent(securityActivity,
+                            MainActivity.class));
+
+                    securityActivity.finish();
                 } else {
-                    Util.alertBox(getContext(), responseJson.getString("reason"), "", false);
+                    Util.alertBox(securityActivity, responseJson.getString("reason"));
                 }
             } catch (Exception e) {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "Exception", e.toString());
-                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+
+                Util.longToast(securityActivity, e.getMessage());
             }
         }
     }

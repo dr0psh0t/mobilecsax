@@ -29,17 +29,22 @@ import java.util.ArrayList;
 
 public class InitialJoborderList extends Fragment {
 
-    private ArrayList<InitialJoborderRowModel> quotationList = new ArrayList<>();
-    private InitialJoborderListAdapter initialJoborderListAdapter;
-    private SharedPreferences sharedPreferences;
+    private ArrayList<InitialJoborderRowModel> joList = new ArrayList<>();
+    private SharedPreferences sPrefs;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance) {
         View v = inflater.inflate(R.layout.initial_joborder_list, container, false);
-        getActivity().setTitle("Initial Joborder List");
+
+        if (getActivity() != null) {
+            getActivity().setTitle("Initial Joborder List");
+        } else {
+            Util.shortToast(getContext(), "Activity is null. Cannot set title of this fragment.");
+        }
+
         setHasOptionsMenu(true);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        sPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         final RecyclerView quotationRecyclerView = v.findViewById(R.id.rvQuotation);
         quotationRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -58,7 +63,7 @@ public class InitialJoborderList extends Fragment {
                     for (int i = 0; i < jsonArrayLen; ++i) {
                         JSONObject eachItem = jsonArray.getJSONObject(i);
 
-                        quotationList.add(new InitialJoborderRowModel(
+                        joList.add(new InitialJoborderRowModel(
                                 eachItem.getInt("initialJoborderId"),
                                 eachItem.getString("customer"),
                                 eachItem.getString("dateAdded"),
@@ -70,31 +75,29 @@ public class InitialJoborderList extends Fragment {
                         ));
                     }
 
-                    initialJoborderListAdapter = new InitialJoborderListAdapter(getActivity(), quotationList);
-                    quotationRecyclerView.setAdapter(initialJoborderListAdapter);
+                    InitialJoborderListAdapter initJoListAdapter = new InitialJoborderListAdapter(
+                            getActivity(), joList);
+                    quotationRecyclerView.setAdapter(initJoListAdapter);
                 }
             } catch (JSONException je) {
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "json_exception", je.toString());
-                Util.alertBox(getActivity(), "Problems occured in JSON data.", "Error", false);
+                Util.alertBox(getActivity(), je.getMessage());
             }
         }
         return v;
     }
 
     @Override
-    public void onPrepareOptionsMenu(Menu menu)
-    {
+    public void onPrepareOptionsMenu(Menu menu) {
         MenuItem refreshAction = menu.findItem(R.id.action_refresh);
         refreshAction.setVisible(true);
 
         refreshAction.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
-            public boolean onMenuItemClick(MenuItem item)
-            {
-                new GetInitialJoborderListTask(getActivity())
-                        .execute(String.valueOf(sharedPreferences.getInt("csaId", 0)));
-
+            public boolean onMenuItemClick(MenuItem item) {
+                new GetInitialJoborderListTask(getActivity()).execute(String.valueOf(
+                        sPrefs.getInt("csaId", 0)));
                 return true;
             }
         });

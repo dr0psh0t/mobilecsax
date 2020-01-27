@@ -33,37 +33,51 @@ import java.util.ArrayList;
 /**Created by wmdcprog on 4/13/2018.*/
 
 public class DateCommitFragment extends Fragment {
+
     private ArrayList<DateCommitModel> dcDataModels = new ArrayList<>();
-    private DateCommitAdapter dcAdapter;
     private SharedPreferences sharedPreferences;
-    private LinearLayout dcHeaderLinLay;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle instanceState) {
         final View v = inflater.inflate(R.layout.date_commit_fragment, container, false);
-        getActivity().setTitle("Date Commit");
+
+        if (getActivity() != null) {
+            getActivity().setTitle("Date Commit");
+        } else {
+            Util.shortToast(getContext(), "\"getActivity()\" is null. " +
+                    "Cannot set title of this fragment.");
+        }
+
         setHasOptionsMenu(true);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-        dcAdapter = new DateCommitAdapter(dcDataModels, getActivity());
+        LinearLayout dcHeaderLinLay = v.findViewById(R.id.dcTitleLL);
 
-        dcHeaderLinLay = v.findViewById(R.id.dcTitleLL);
         dcHeaderLinLay.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
-                Dialog dialog = new Dialog(getActivity());
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setCancelable(true);
-                dialog.setContentView(R.layout.dc_header_layout);
 
-                WindowManager.LayoutParams wmlp = dialog.getWindow().getAttributes();
-                wmlp.width = Util.systemWidth;
-                wmlp.gravity = Gravity.TOP;
-                wmlp.y = 200;
+                if (getActivity() != null) {
+                    Dialog dialog = new Dialog(getActivity());
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.setCancelable(true);
+                    dialog.setContentView(R.layout.dc_header_layout);
 
-                dialog.show();
+                    WindowManager.LayoutParams wmlp;
+
+                    if (dialog.getWindow() != null) {
+                        wmlp = dialog.getWindow().getAttributes();
+                        wmlp.width = Util.systemWidth;
+                        wmlp.gravity = Gravity.TOP;
+                        wmlp.y = 200;
+
+                        dialog.show();
+                    } else {
+                        Util.alertBox(getActivity(), "Window is null. Cannot open dialog.");
+                    }
+                } else {
+                    Util.alertBox(getActivity(), "Activity is null. Cannot open dialog.");
+                }
             }
         });
 
@@ -74,6 +88,7 @@ public class DateCommitFragment extends Fragment {
 
         if (bundle != null) {
             String searchResult = bundle.getString("searchResult");
+            dcDataModels.clear();
 
             try {
                 JSONObject jsonObject = new JSONObject(searchResult);
@@ -95,8 +110,8 @@ public class DateCommitFragment extends Fragment {
                     );
                 }
 
-                dcAdapter = new DateCommitAdapter(dcDataModels, getContext());
-                recyclerView.setAdapter(dcAdapter);
+                recyclerView.setAdapter(new DateCommitAdapter(dcDataModels, getContext()));
+
             } catch (JSONException je) {
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "json_exception", je.toString());

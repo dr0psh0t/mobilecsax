@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.wmdc.com.mobilecsa.utils.Util;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -18,11 +19,14 @@ public class CRMFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle state) {
         View v = inflater.inflate(R.layout.crm_layout, container, false);
-        getActivity().setTitle("Home");
+
+        if (getActivity() != null) {
+            getActivity().setTitle("Home");
+        } else {
+            Util.longToast(getContext(), "Activity is null. Cannot set fragment title.");
+        }
 
         final FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager()
                 .beginTransaction();

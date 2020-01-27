@@ -31,10 +31,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.wmdc.com.mobilecsa.asynchronousclasses.DialogImageUriTask;
 import android.wmdc.com.mobilecsa.asynchronousclasses.DialogSignatureTask;
 import android.wmdc.com.mobilecsa.asynchronousclasses.GetAreaCodeTask;
@@ -49,10 +47,12 @@ import android.wmdc.com.mobilecsa.model.Signature;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import org.json.JSONObject;
 
@@ -64,6 +64,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -72,18 +73,17 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
 
 /**Created by wmdcprog on 4/13/2018.*/
 
 public class AddCustomerFragment extends Fragment {
+
     private int year;
     private int month;
     private int day;
-
-    private Calendar calender;
 
     private EditText etLnameCust;
     private EditText etFnameCust;
@@ -130,34 +130,28 @@ public class AddCustomerFragment extends Fragment {
     private HashMap<String, Integer> countryCodeMap;
     private HashMap<String, Integer> zipCodeMap;
 
-    private HashMap<String, String> stringParams;
-
-    private Button mClear;          //  signature
-    private Button mGetSign;        //  signature
-    private Button mCancel;         //  signature
     private Dialog dialog;
-    private LinearLayout mContent;      //  signature content
-    private View signatureview;
+    private View viewSignature;
     private Signature mSignature;
 
     private String customerSignature = "";
     private SharedPreferences sharedPreferences;
 
-    private ScrollView scrollView;
-
-    private Button btnPhoto, btnPhotoPrev;
     private TextView tvPhotoName, tvPhotoSize;
-    private Button btnSign, btnSignPrev;
-    private Button btnSubmit;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle instanceState) {
         View v = inflater.inflate(R.layout.add_customer_fragment, container, false);
-        getActivity().setTitle("Add Customer");
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-        scrollView = v.findViewById(R.id.scrollViewCustomer);
+        if (getActivity() != null) {
+            getActivity().setTitle("Add Customer");
+        } else {
+            Util.longToast(getContext(),
+                    "\"getActivity()\" is null. Cannot set title of this fragment");
+        }
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         etLnameCust = v.findViewById(R.id.etLnameCust);
         etLnameCust.setFilters(Util.getEmojiFilters(32));
@@ -185,7 +179,7 @@ public class AddCustomerFragment extends Fragment {
 
         etZipCust = v.findViewById(R.id.etZipCust);
 
-        calender = Calendar.getInstance();
+        Calendar calender = Calendar.getInstance();
         year = calender.get(Calendar.YEAR);
         month = calender.get(Calendar.MONTH);
         day = calender.get(Calendar.DAY_OF_MONTH);
@@ -241,25 +235,33 @@ public class AddCustomerFragment extends Fragment {
         countryCodeCategory = new ArrayList<>();
         numberCategory = Util.getOneHundredNumbers();
 
-        btnPhoto = v.findViewById(R.id.btnPhoto);
+        Button btnPhoto = v.findViewById(R.id.btnPhoto);
         btnPhoto.setOnClickListener(photoListener);
-        btnPhotoPrev = v.findViewById(R.id.btnPhotoPrev);
+
+        Button btnPhotoPrev = v.findViewById(R.id.btnPhotoPrev);
         btnPhotoPrev.setOnClickListener(photoPrevListener);
+
         tvPhotoName = v.findViewById(R.id.tvPhotoName);
         tvPhotoSize = v.findViewById(R.id.tvPhotoSize);
 
-        btnSign = v.findViewById(R.id.btnSign);
+        Button btnSign = v.findViewById(R.id.btnSign);
         btnSign.setOnClickListener(signatureClickListner);
-        btnSignPrev = v.findViewById(R.id.btnSignPrev);
+
+        Button btnSignPrev = v.findViewById(R.id.btnSignPrev);
         btnSignPrev.setOnClickListener(signPrevListener);
-        btnSubmit = v.findViewById(R.id.btnSubmit);
+
+        Button btnSubmit = v.findViewById(R.id.btnSubmit);
         btnSubmit.setOnClickListener(submitListener);
 
         etDateCust.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(getActivity(), R.style.DialogTheme, dateListener, year, month,
-                        day).show();
+                if (getActivity() != null) {
+                    new DatePickerDialog(getActivity(), R.style.DialogTheme, dateListener, year,
+                            month, day).show();
+                } else {
+                    Util.alertBox(getContext(), "Activity is null. Cannot open date.");
+                }
             }
         });
 
@@ -273,19 +275,23 @@ public class AddCustomerFragment extends Fragment {
         Runnable progressRunnable = new Runnable() {
             @Override
             public void run() {
-                //progress.cancel();
-
-                if ((progress != null) && progress.isShowing()) {
+                if (progress.isShowing()) {
                     progress.cancel();
                 }
 
                 if (spinIndCust.getSelectedItem() == null) {
-                    Fragment currFrag = getFragmentManager().findFragmentById(R.id.content_main);
-                    Util.handleBackPress(currFrag, getActivity());
-                    Util.alertBox(getActivity(), "Connection was not established." +
-                                    "\nCheck data/wifi internet connectivity." +
-                                    "\nCheck server availability.",
-                            "Resource Empty", false);
+
+                    if (getFragmentManager() != null) {
+                        Fragment currFrag = getFragmentManager().findFragmentById(
+                                R.id.content_main);
+
+                        Util.handleBackPress(currFrag, getActivity());
+                        Util.alertBox(getActivity(), "Connection was not established." +
+                                "\nCheck data/wifi internet connectivity." +
+                                "\nCheck server availability.", "Resource Empty", false);
+                    } else {
+                        Util.longToast(getActivity(), "Fragment Manager is null.");
+                    }
                 }
             }
         };
@@ -309,11 +315,11 @@ public class AddCustomerFragment extends Fragment {
     private View.OnClickListener signPrevListener = new View.OnClickListener() {
         public void onClick(View view) {
             if (customerSignature == null) {
-                Toast.makeText(getActivity(), "Include signature.", Toast.LENGTH_SHORT).show();
+                Util.longToast(getActivity(), "Include signature.");
                 return;
             }
             if (customerSignature.isEmpty()) {
-                Toast.makeText(getActivity(), "Include signature.", Toast.LENGTH_SHORT).show();
+                Util.longToast(getActivity(), "Include signature.");
                 return;
             }
             new DialogSignatureTask(getContext()).execute(customerSignature);
@@ -323,11 +329,11 @@ public class AddCustomerFragment extends Fragment {
     private View.OnClickListener photoPrevListener = new View.OnClickListener() {
         public void onClick(View view) {
             if (displayName == null) {
-                Toast.makeText(getActivity(), "Include photo.", Toast.LENGTH_SHORT).show();
+                Util.shortToast(getActivity(), "Include photo.");
                 return;
             }
             if (displayName.isEmpty()) {
-                Toast.makeText(getActivity(), "Include photo.", Toast.LENGTH_SHORT).show();
+                Util.shortToast(getActivity(), "Include photo.");
                 return;
             }
             new DialogImageUriTask(getContext()).execute(fileUri);
@@ -340,51 +346,57 @@ public class AddCustomerFragment extends Fragment {
         }
     };
 
-    public void displaySignatureDialog() {
-        dialog = new Dialog(getActivity());
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_signature);
-        dialog.setCancelable(false);
+    private void displaySignatureDialog() {
 
-        mContent = dialog.findViewById(R.id.linearLayout);
-        mSignature = new Signature(getActivity().getApplicationContext(), null, mContent);
-        mSignature.setBackgroundColor(Color.WHITE);
+        if (getActivity() != null) {
+            dialog = new Dialog(getActivity());
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.dialog_signature);
+            dialog.setCancelable(false);
 
-        // Dynamically generating Layout through java code
-        mContent.addView(mSignature, ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT);
+            LinearLayout mContent = dialog.findViewById(R.id.linearLayout);
+            mSignature = new Signature(getActivity().getApplicationContext(), null, mContent);
+            mSignature.setBackgroundColor(Color.WHITE);
 
-        mClear = dialog.findViewById(R.id.btnSignClear);
-        mGetSign = dialog.findViewById(R.id.btn_sign_save);
-        mCancel = dialog.findViewById(R.id.btnSignCancel);
+            // Dynamically generating Layout through java code
+            mContent.addView(mSignature, ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT);
 
-        signatureview = mContent;
+            Button mClear = dialog.findViewById(R.id.btnSignClear);
+            Button mGetSign = dialog.findViewById(R.id.btn_sign_save);
+            Button mCancel = dialog.findViewById(R.id.btnSignCancel);
 
-        mClear.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                mSignature.clear();
-            }
-        });
+            viewSignature = mContent;
 
-        mGetSign.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                signatureview.setDrawingCacheEnabled(true);
-                customerSignature = mSignature.save(signatureview);
-                dialog.dismiss();
-            }
-        });
+            mClear.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    mSignature.clear();
+                }
+            });
 
-        mCancel.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                mSignature.clear();
-                dialog.dismiss();
-            }
-        });
+            mGetSign.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    viewSignature.setDrawingCacheEnabled(true);
+                    customerSignature = mSignature.save(viewSignature);
+                    dialog.dismiss();
+                }
+            });
 
-        dialog.show();
+            mCancel.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    mSignature.clear();
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.show();
+        } else {
+            Util.alertBox(getContext(), "Activity is null. Cannot open signature.");
+        }
     }
 
     private void loadOptions() {
+
         industryMap = new HashMap<>();
         plantMap = new HashMap<>();
         zipCodeMap = new HashMap<>();
@@ -406,31 +418,35 @@ public class AddCustomerFragment extends Fragment {
         new GetCountryCodeTask(getActivity(), countryCodeCategory, countryCodeMap,
                 spinCountCodeCust, spinFaxCountCodeCust).execute();
 
-        ArrayAdapter<Integer> numberAdapter = new ArrayAdapter<>(getActivity(),
-                R.layout.support_simple_spinner_dropdown_item, numberCategory);
-        numberAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        if (getActivity() != null) {
 
-        spinERCust.setAdapter(numberAdapter);
-        spinMFCust.setAdapter(numberAdapter);
-        spinCalibCust.setAdapter(numberAdapter);
-        spinSparePartsCust.setAdapter(numberAdapter);
+            ArrayAdapter<Integer> numberAdapter = new ArrayAdapter<>(getActivity(),
+                    R.layout.support_simple_spinner_dropdown_item, numberCategory);
+            numberAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+
+            spinERCust.setAdapter(numberAdapter);
+            spinMFCust.setAdapter(numberAdapter);
+            spinCalibCust.setAdapter(numberAdapter);
+            spinSparePartsCust.setAdapter(numberAdapter);
+        } else {
+            Util.shortToast(getContext(), "Number Adapter not initialized. Cannot load options.");
+        }
     }
 
-    //  date listener
     private DatePickerDialog.OnDateSetListener dateListener =
             new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            etDateCust.setText(new StringBuilder().append(year).append("-")
-                    .append(month+1).append("-").append(dayOfMonth));
-        }
-    };
+                @Override
+                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                    etDateCust.setText(new StringBuilder().append(year).append("-")
+                            .append(month+1).append("-").append(dayOfMonth));
+                }
+            };
 
-    /** Listeners ************************/
     private View.OnTouchListener touchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent e) {
             hideSoftKey();
+            view.performClick();
             return false;
         }
     };
@@ -442,27 +458,37 @@ public class AddCustomerFragment extends Fragment {
         }
     };
 
-    private String displayName = null;
+    private static String displayName = null;
     private Uri fileUri = null;
     private InputStream fileInputStream;
     private static final int REQUEST_TAKE_PHOTO = 1;
 
     private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-            File photoFile = null;
-            try {
-                photoFile = Util.createImageFile(getActivity());
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
 
-            if (photoFile != null) {
-                fileUri = FileProvider.getUriForFile(getContext(),
-                        BuildConfig.APPLICATION_ID + ".provider",photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+        if (getActivity() != null) {
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+            if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                File photoFile = null;
+
+                try {
+                    photoFile = Util.createImageFile(getActivity());
+                } catch (IOException ex) {
+                    Util.displayStackTraceArray(ex.getStackTrace(), "android.wmdc.com.mobilecsa",
+                            "IOException", ex.toString());
+                    Util.shortToast(getContext(), ex.toString());
+                }
+
+                if (photoFile != null) {
+                    fileUri = FileProvider.getUriForFile(getActivity(), BuildConfig.APPLICATION_ID
+                            + ".provider", photoFile);
+
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                    startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+                }
             }
+        } else {
+            Util.alertBox(getContext(), "Activity is null. Cannot open camera.");
         }
     }
 
@@ -473,8 +499,9 @@ public class AddCustomerFragment extends Fragment {
         }
     }
 
-    public void dumpImageMetaData(final Uri uri, final boolean toSubmit) {
+    private void dumpImageMetaData(final Uri uri, final boolean toSubmit) {
         final ProgressDialog pd = new ProgressDialog(getActivity());
+
         pd.setMessage("Dumping image. Please wait...");
         pd.setCancelable(false);
         pd.show();
@@ -482,57 +509,72 @@ public class AddCustomerFragment extends Fragment {
         Runnable pdRun = new Runnable() {
             @Override
             public void run() {
-                Cursor cursor = getActivity().getContentResolver()
-                        .query(uri, null, null, null, null,null);
-                try {
-                    if (cursor != null && cursor.moveToFirst()) {
-                        displayName = cursor.getString(
-                                cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
 
-                        int sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE);
-                        String size;
+                if (getActivity() != null) {
 
-                        if (!cursor.isNull(sizeIndex)) {
-                            size = cursor.getString(sizeIndex);
-                        } else {
-                            Toast.makeText(getActivity(), "Size unknown", Toast.LENGTH_LONG).show();
-                            return;
+                    try (Cursor cursor = getActivity().getContentResolver().query(uri, null, null,
+                            null, null, null)) {
+
+                        if (cursor != null && cursor.moveToFirst()) {
+                            displayName = cursor.getString(cursor.getColumnIndex(
+                                    OpenableColumns.DISPLAY_NAME));
+
+                            int sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE);
+                            String size;
+
+                            if (!cursor.isNull(sizeIndex)) {
+                                size = cursor.getString(sizeIndex);
+                            } else {
+                                Util.shortToast(getActivity(), "Unknown size.");
+                                return;
+                            }
+
+                            int intSize = Integer.parseInt(size);
+                            String smallFileSize = "";
+
+                            if (intSize > 512_000) {
+                                File file = Util.createImageFile(getActivity());
+
+                                Util.copyInputStreamToFile(Util.getStreamFromUri(uri,
+                                        getActivity()), file, getContext());
+
+                                File smallFile = Util.reduceBitmapFile(file);
+
+                                if (smallFile != null) {
+                                    smallFileSize = smallFile.length() + "";
+                                    fileInputStream = new FileInputStream(smallFile);
+                                } else {
+                                    Util.shortToast(getActivity(), "Small file is null.");
+                                }
+                            } else {
+                                fileInputStream = Util.getStreamFromUri(uri, getActivity());
+                                smallFileSize = size;
+                            }
+
+                            pd.cancel();
+
+                            if (toSubmit) {
+                                addCustomer();
+                            } else {
+                                tvPhotoName.setText(displayName);
+
+                                String txt = Integer.parseInt(size) / 1000 + "KB." +
+                                        Integer.parseInt(smallFileSize) / 1000 + "KB.";
+
+                                tvPhotoSize.setText(txt);
+                            }
                         }
-
-                        int intSize = Integer.parseInt(size);
-                        String smallFileSize;
-
-                        if (intSize > 512_000) {
-                            File file = Util.createImageFile(getActivity());
-                            Util.copyInputStreamToFile(Util.getStreamFromUri(uri, getActivity()),
-                                    file, getContext());
-
-                            File smallFile = Util.reduceBitmapFile(file);
-                            smallFileSize = smallFile.length()+"";
-                            fileInputStream = new FileInputStream(smallFile);
-                        } else {
-                            fileInputStream = Util.getStreamFromUri(uri, getActivity());
-                            smallFileSize = size;
-                        }
-
+                    } catch (IOException ie) {
                         pd.cancel();
 
-                        if (toSubmit) {
-                            addCustomer();
-                        } else {
-                            tvPhotoName.setText(displayName);
-                            tvPhotoSize.setText(Integer.parseInt(size)/1000+" KB."+
-                                    Integer.parseInt(smallFileSize)/1000+"KB.");
-                        }
-                    }
-                } catch (IOException ie) {
-                    pd.cancel();
+                        Util.displayStackTraceArray(ie.getStackTrace(), Variables.MOBILECSA_PACKAGE,
+                                "IOException", ie.toString());
 
-                    Util.displayStackTraceArray(ie.getStackTrace(), Variables.MOBILECSA_PACKAGE,
-                            "IOException", ie.toString());
-                    Toast.makeText(getContext(), ie.toString(), Toast.LENGTH_SHORT).show();
-                } finally {
-                    cursor.close();
+                        Util.shortToast(getContext(), ie.toString());
+                    }
+                } else {
+                    Util.longToast(getContext(),
+                            "\"getActivity()\" is null. Cannot dump image meta data.");
                 }
             }
         };
@@ -542,74 +584,79 @@ public class AddCustomerFragment extends Fragment {
     }
 
     private AdapterView.OnItemSelectedListener spinnerIndustryListener =
-        new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) { }
-        };
+            new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+                {
+                    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) { }
+            };
 
     private AdapterView.OnItemSelectedListener spinnerPlantListener =
-        new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) { }
-        };
+            new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+                {
+                    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) { }
+            };
 
     private AdapterView.OnItemSelectedListener spinnerCityListener =
-        new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-                String item = parent.getItemAtPosition(position).toString();
+            new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+                {
+                    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                    String item = parent.getItemAtPosition(position).toString();
 
-                if (etZipCust != null) {
-                    etZipCust.setText(""+zipCodeMap.get(item));
+                    if (etZipCust != null) {
+                        etZipCust.setText(String.valueOf(zipCodeMap.get(item)));
+                    }
                 }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
-        };
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {}
+            };
 
     private AdapterView.OnItemSelectedListener spinnerProvinceListener =
-        new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) { }
-        };
+            new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+                {
+                    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) { }
+            };
 
     private AdapterView.OnItemSelectedListener spinnerCountryListener =
-        new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) { }
-        };
+            new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) { }
+            };
 
     private AdapterView.OnItemSelectedListener spinnerAreaCodeListener =
-        new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) { }
-        };
+            new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) { }
+            };
 
     private AdapterView.OnItemSelectedListener spinnerFaxCodeListener =
             new AdapterView.OnItemSelectedListener() {
                 @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                public void onItemSelected(AdapterView<?> parent, View view, int position,
+                                           long id) {
                     ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
                 }
                 @Override
@@ -619,7 +666,8 @@ public class AddCustomerFragment extends Fragment {
     private AdapterView.OnItemSelectedListener spinnerFaxCountryCodeListener =
             new AdapterView.OnItemSelectedListener() {
                 @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                public void onItemSelected(AdapterView<?> parent, View view, int position,
+                                           long id) {
                     ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
                 }
                 @Override
@@ -627,73 +675,99 @@ public class AddCustomerFragment extends Fragment {
             };
 
     private AdapterView.OnItemSelectedListener spinnerCountryCodeListener =
-        new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
-        };
+            new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+                {
+                    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {}
+            };
 
     private AdapterView.OnItemSelectedListener spinnerERListener =
-        new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) { }
-        };
+            new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+                {
+                    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) { }
+            };
 
     private AdapterView.OnItemSelectedListener spinnerMFListener =
-        new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) { }
-        };
+            new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+                {
+                    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) { }
+            };
 
     private AdapterView.OnItemSelectedListener spinnerCalibrationListener =
-        new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) { }
-        };
+            new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+                {
+                    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) { }
+            };
 
     private AdapterView.OnItemSelectedListener spinnerSparePartsListener =
-        new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) { }
-        };
+            new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+                {
+                    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) { }
+            };
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(
+            int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
         if (requestCode == 0) {
             if (grantResults.length > 0 &&
                     grantResults[0] == PackageManager.PERMISSION_GRANTED &&
                     grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(getActivity(), "camera and storage permission denied",
-                        Toast.LENGTH_SHORT).show();
+
+                Util.shortToast(getActivity(), "Camera and Storage permission denied");
             }
         }
     }
 
-    boolean is_submitted = false;
+    private static boolean is_submitted = false;
 
-    private class AddCustomerTask extends AsyncTask<String, String, String> {
-        ProgressDialog progressDialog = new ProgressDialog(getActivity());
-        HttpURLConnection conn = null;
-        URL url = null;
+    private static class AddCustomerTask extends AsyncTask<String, String, String> {
+
+        private ProgressDialog progressDialog;
+
+        private WeakReference<FragmentActivity> activityWeakReference;
+
+        private SharedPreferences taskPrefs;
+
+        private HttpURLConnection conn = null;
+
+        private InputStream fileStream;
+
+        private HashMap<String, String> parameters;
+
+        private AddCustomerTask(FragmentActivity activity, InputStream fileStream,
+                                HashMap<String, String> parameters) {
+
+            activityWeakReference = new WeakReference<>(activity);
+            progressDialog = new ProgressDialog(activity);
+            taskPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
+            this.fileStream = fileStream;
+            this.parameters = parameters;
+        }
 
         @Override
         protected void onPreExecute() {
@@ -706,7 +780,7 @@ public class AddCustomerFragment extends Fragment {
         @Override
         protected String doInBackground(String[] params) {
             try {
-                url = new URL(sharedPreferences.getString("domain", null)+"addcustomerperson");
+                URL url = new URL(taskPrefs.getString("domain", null)+"addcustomerperson");
 
                 String lineEnd = "\r\n";
                 String twoHyphens = "--";
@@ -727,9 +801,10 @@ public class AddCustomerFragment extends Fragment {
                 conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
                 conn.setRequestProperty("Connection", "Keep-Alive");
                 conn.setRequestProperty("Content-Type", "multipart/form-data;boundary="+boundary);
-                conn.setRequestProperty("Cookie", "JSESSIONID="+sharedPreferences.getString("sessionId", null));
+                conn.setRequestProperty("Cookie",
+                        "JSESSIONID="+taskPrefs.getString("sessionId", null));
                 conn.setRequestProperty("Host", "localhost:8080");
-                conn.setRequestProperty("Referer", "http://localhost:8080/mcsa/searchcustomerfromuser");
+                conn.setRequestProperty("Referer", "daryll");
                 conn.setRequestProperty("X-Requested-Width", "XMLHttpRequest");
 
                 conn.setDoInput(true);
@@ -748,28 +823,29 @@ public class AddCustomerFragment extends Fragment {
                         "form-data; name=\"photo\";filename=\"" +displayName+ "\"" + lineEnd);
                 outputStream.writeBytes(lineEnd);
 
-                bytesAvailable = fileInputStream.available();
+                bytesAvailable = fileStream.available();
                 bufferSize = Math.min(bytesAvailable, maxBufferSize);
                 buffer = new byte[bufferSize];
 
-                bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+                bytesRead = fileStream.read(buffer, 0, bufferSize);
 
                 while (bytesRead > 0) {
                     outputStream.write(buffer, 0, bufferSize);
-                    bytesAvailable = fileInputStream.available();
+                    bytesAvailable = fileStream.available();
                     bufferSize = Math.min(bytesAvailable, maxBufferSize);
-                    bytesRead =  fileInputStream.read(buffer, 0, bufferSize);
+                    bytesRead =  fileStream.read(buffer, 0, bufferSize);
                 }
 
                 outputStream.writeBytes(lineEnd);
 
-                Iterator<String> keys = stringParams.keySet().iterator();
-                while (keys.hasNext()) {
-                    String key = keys.next();
-                    String value = stringParams.get(key);
+                for (Map.Entry<String, String> mapEntry : parameters.entrySet()) {
+
+                    String key = mapEntry.getKey();
+                    String value = mapEntry.getValue();
 
                     outputStream.writeBytes(twoHyphens + boundary + lineEnd);
-                    outputStream.writeBytes("Content-Disposition: form-data; name=\"" + key + "\"" + lineEnd);
+                    outputStream.writeBytes("Content-Disposition: form-data; name=\"" + key + "\""
+                            + lineEnd);
                     outputStream.writeBytes("Content-Type: text/plain" + lineEnd);
                     outputStream.writeBytes(lineEnd);
                     outputStream.writeBytes(value);
@@ -782,8 +858,8 @@ public class AddCustomerFragment extends Fragment {
                 outputStream.flush();
                 outputStream.close();
 
-                if (fileInputStream != null) {
-                    fileInputStream.close();
+                if (fileStream != null) {
+                    fileStream.close();
                 }
 
                 is_submitted = true;
@@ -802,11 +878,13 @@ public class AddCustomerFragment extends Fragment {
                         return stringBuilder.toString();
                     }
                 } else {
-                    return "{\"success\": false, \"reason\": \"Request did not succeed. Status Code: "+statusCode+"\"}";
+                    return "{\"success\": false, \"reason\": \"Request did not succeed. " +
+                            "Status Code: "+statusCode+"\"}";
                 }
             } catch (MalformedURLException | ConnectException | SocketTimeoutException e) {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "NetworkException", e.toString());
+
                 if (e instanceof MalformedURLException) {
                     return "{\"success\": false, \"reason\": \"Malformed URL.\"}";
                 } else if (e instanceof ConnectException) {
@@ -830,13 +908,20 @@ public class AddCustomerFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             progressDialog.dismiss();
+
+            final FragmentActivity mainActivity = activityWeakReference.get();
+
+            if (mainActivity == null || mainActivity.isFinishing()) {
+                return;
+            }
+
             try {
                 JSONObject response = new JSONObject(result);
-                if (response.getBoolean("success")) {
-                    AlertDialog.Builder warningBox =
-                            new AlertDialog.Builder(getActivity());
 
-                    TextView errMsg = new TextView(getActivity());
+                if (response.getBoolean("success")) {
+                    AlertDialog.Builder warningBox = new AlertDialog.Builder(mainActivity);
+
+                    TextView errMsg = new TextView(mainActivity);
                     errMsg.setText(response.getString("reason"));
                     errMsg.setTextSize(17);
                     errMsg.setPadding(20, 0, 10, 0);
@@ -848,18 +933,20 @@ public class AddCustomerFragment extends Fragment {
                     warningBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             dialog.cancel();
-                            Util.handleBackPress(getActivity().getSupportFragmentManager()
-                                            .findFragmentById(R.id.content_main), getActivity());
+                            Util.handleBackPress(mainActivity.getSupportFragmentManager()
+                                    .findFragmentById(R.id.content_main), mainActivity);
                         }
                     });
+
                     warningBox.create().show();
                 } else {
-                    Util.alertBox(getActivity(), response.getString("reason"), "Failed", false);
+                    Util.alertBox(mainActivity, response.getString("reason"));
                 }
             } catch (Exception e) {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "Exception", e.toString());
-                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+
+                Util.longToast(mainActivity, e.getMessage());
             }
         }
     }
@@ -869,24 +956,24 @@ public class AddCustomerFragment extends Fragment {
         Log.d(String.valueOf(gpsTracker.getLatitude()), String.valueOf(gpsTracker.getLongitude()));
 
         if (displayName == null) {
-            Toast.makeText(getActivity(), "Include photo.", Toast.LENGTH_SHORT).show(); return;
+            Util.shortToast(getActivity(), "Include photo."); return;
         } else {
             if (displayName.isEmpty()) {
-                Toast.makeText(getActivity(), "Include photo.", Toast.LENGTH_SHORT).show(); return;
+                Util.shortToast(getActivity(), "Include photo."); return;
             }
         }
 
         if (customerSignature == null) {
-            Toast.makeText(getActivity(), "Include signature.", Toast.LENGTH_SHORT).show(); return;
+            Util.shortToast(getActivity(), "Include signature."); return;
         } else {
             if (customerSignature.isEmpty()) {
-                Toast.makeText(getActivity(), "Include signature.", Toast.LENGTH_SHORT).show();
+                Util.shortToast(getActivity(), "Include signature.");
                 return;
             }
         }
 
         try {
-            stringParams = new HashMap<>();
+
             String lastname = etLnameCust.getText().toString();
             String firstname = etFnameCust.getText().toString();
             String mi = etMiCust.getText().toString();
@@ -901,53 +988,71 @@ public class AddCustomerFragment extends Fragment {
             String fax = etFaxCust.getText().toString();
 
             if (spinIndCust.getSelectedItem() == null) {
-                Toast.makeText(getActivity(), "Select Industry", Toast.LENGTH_SHORT).show(); return;
+                Util.shortToast(getActivity(), "Select Industry"); return;
             }
 
             if (spinPlantCust.getSelectedItem() == null) {
-                Toast.makeText(getActivity(), "Select Plant", Toast.LENGTH_SHORT).show(); return;
+                Util.shortToast(getActivity(), "Select Plant"); return;
             }
 
             if (spinCityCust.getSelectedItem() == null) {
-                Toast.makeText(getActivity(), "Select City", Toast.LENGTH_SHORT).show(); return;
+                Util.shortToast(getActivity(), "Select City"); return;
             }
 
             if (spinProvCust.getSelectedItem() == null) {
-                Toast.makeText(getActivity(), "Select Province", Toast.LENGTH_SHORT).show(); return;
+                Util.shortToast(getActivity(), "Select Province"); return;
             }
 
             if (spinCountCust.getSelectedItem() == null) {
-                Toast.makeText(getActivity(), "Select Country", Toast.LENGTH_SHORT).show(); return;
+                Util.shortToast(getActivity(), "Select Country"); return;
             }
 
             if (spinFaxCodeCust.getSelectedItem() == null) {
-                Toast.makeText(getActivity(), "Select Fax Code", Toast.LENGTH_SHORT).show(); return;
+                Util.shortToast(getActivity(), "Select Fax Code"); return;
             }
 
             if (spinFaxCountCodeCust.getSelectedItem() == null) {
-                Toast.makeText(getActivity(), "Select Fax Country Code", Toast.LENGTH_SHORT).show();
-                return;
+                Util.shortToast(getActivity(), "Select Fax Country Code"); return;
             }
 
             if (spinAreaCodeCust.getSelectedItem() == null) {
-                Toast.makeText(getActivity(), "Select Area Code", Toast.LENGTH_SHORT).show();
+                Util.shortToast(getActivity(), "Select Area Code");
                 return;
             }
 
             if (spinCountCodeCust.getSelectedItem() == null) {
-                Toast.makeText(getActivity(), "Select Country Code", Toast.LENGTH_SHORT).show();
+                Util.shortToast(getActivity(), "Select Country Code");
                 return;
             }
 
-            int industry = industryMap.get(spinIndCust.getSelectedItem().toString());
-            int plant = plantMap.get(spinPlantCust.getSelectedItem().toString());
-            int city = cityMap.get(spinCityCust.getSelectedItem().toString());
-            int province = provinceMap.get(spinProvCust.getSelectedItem().toString());
-            int country = countryMap.get(spinCountCust.getSelectedItem().toString());
-            int faxCode = areaCodeMap.get(spinFaxCodeCust.getSelectedItem().toString());
-            int faxCountryCode = countryCodeMap.get(spinFaxCountCodeCust.getSelectedItem().toString());
-            int areaCode = areaCodeMap.get(spinAreaCodeCust.getSelectedItem().toString());
-            int countryCode = countryCodeMap.get(spinCountCodeCust.getSelectedItem().toString());
+            Integer industryInt = industryMap.get(spinIndCust.getSelectedItem().toString());
+            int industry = (industryInt != null) ? industryInt : 0;
+
+            Integer plantInt = plantMap.get(spinPlantCust.getSelectedItem().toString());
+            int plant = (plantInt != null) ? plantInt : 0;
+
+            Integer cityInt = cityMap.get(spinCityCust.getSelectedItem().toString());
+            int city = (cityInt != null) ? cityInt : 0;
+
+            Integer provinceInt = provinceMap.get(spinProvCust.getSelectedItem().toString());
+            int province = (provinceInt != null) ? provinceInt : 0;
+
+            Integer countryInt = countryMap.get(spinCountCust.getSelectedItem().toString());
+            int country = (countryInt != null) ? countryInt : 0;
+
+            Integer faxCodeInt = areaCodeMap.get(spinFaxCodeCust.getSelectedItem().toString());
+            int faxCode = (faxCodeInt != null) ? faxCodeInt : 0;
+
+            Integer faxCountryCodeInt = countryCodeMap.get(spinFaxCountCodeCust.getSelectedItem()
+                    .toString());
+            int faxCountryCode = (faxCountryCodeInt != null) ? faxCountryCodeInt : 0;
+
+            Integer areaCodeInt = areaCodeMap.get(spinAreaCodeCust.getSelectedItem().toString());
+            int areaCode = (areaCodeInt != null) ? areaCodeInt : 0;
+
+            Integer countryCodeInt = countryCodeMap.get(spinCountCodeCust.getSelectedItem()
+                    .toString());
+            int countryCode = (countryCodeInt != null) ? countryCodeInt : 0;
 
             String er = spinERCust.getSelectedItem().toString();
             String mf = spinMFCust.getSelectedItem().toString();
@@ -959,73 +1064,91 @@ public class AddCustomerFragment extends Fragment {
             String signature = customerSignature;
 
             if (!Util.validEmail(email)) {
-                Toast.makeText(getActivity(), "Email format is wrong", Toast.LENGTH_LONG).show();
+                Util.longToast(getActivity(), "Email format is wrong");
                 return;
             }
+
             if (!Util.validURL(website)) {
-                Toast.makeText(getActivity(), "Website format is wrong", Toast.LENGTH_LONG).show();
+                Util.longToast(getActivity(), "Website format is wrong");
                 return;
             }
+
             if (lastname.isEmpty()) {
-                Toast.makeText(getActivity(), "Lastname is required.", Toast.LENGTH_LONG).show();
+                Util.longToast(getActivity(), "Lastname is required.");
                 return;
             }
+
             if (firstname.isEmpty()) {
-                Toast.makeText(getActivity(), "Firstname is required.", Toast.LENGTH_LONG).show();
+                Util.longToast(getActivity(), "Firstname is required.");
                 return;
             }
+
             if (mi.isEmpty()) {
-                Toast.makeText(getActivity(), "Middle Initial is required.", Toast.LENGTH_LONG).show();
+                Util.longToast(getActivity(), "Middle Initial is required.");
                 return;
             }
+
             if (address.isEmpty()) {
-                Toast.makeText(getActivity(), "Address is required.", Toast.LENGTH_LONG).show();
+                Util.longToast(getActivity(), "Address is required.");
                 return;
             }
+
             if (date.isEmpty()) {
-                Toast.makeText(getActivity(), "Date of Birth is required.", Toast.LENGTH_LONG).show();
+                Util.longToast(getActivity(), "Date of Birth is required.");
                 return;
             }
+
             if (mobile.isEmpty()) {
-                Toast.makeText(getActivity(), "Mobile number is required.", Toast.LENGTH_LONG).show();
+                Util.longToast(getActivity(), "Mobile number is required.");
                 return;
             }
+
             if (industry == 0) {
-                Toast.makeText(getActivity(), "Select an industry.", Toast.LENGTH_LONG).show();
+                Util.longToast(getActivity(), "Select an industry.");
                 return;
             }
+
             if (plant == 0) {
-                Toast.makeText(getActivity(), "Select Plant.", Toast.LENGTH_LONG).show();
+                Util.longToast(getActivity(), "Select Plant.");
                 return;
             }
+
             if (city == 0) {
-                Toast.makeText(getActivity(), "Select City.", Toast.LENGTH_LONG).show();
+                Util.longToast(getActivity(), "Select City.");
                 return;
             }
+
             if (province == 0) {
-                Toast.makeText(getActivity(), "Select Province.", Toast.LENGTH_LONG).show();
+                Util.longToast(getActivity(), "Select Province.");
                 return;
             }
+
             if (country == 0) {
-                Toast.makeText(getActivity(), "Select Country.", Toast.LENGTH_LONG).show();
+                Util.longToast(getActivity(), "Select Country.");
                 return;
             }
+
             if (faxCode == 0) {
-                Toast.makeText(getActivity(), "Select Fax Code.", Toast.LENGTH_LONG).show();
+                Util.longToast(getActivity(), "Select Fax Code.");
                 return;
             }
+
             if (faxCountryCode == 0) {
-                Toast.makeText(getActivity(), "Select Fax Country Code.", Toast.LENGTH_LONG).show();
+                Util.longToast(getActivity(), "Select Fax Country Code.");
                 return;
             }
+
             if (areaCode == 0) {
-                Toast.makeText(getActivity(), "Select Area Code.", Toast.LENGTH_LONG).show();
+                Util.longToast(getActivity(), "Select Area Code.");
                 return;
             }
+
             if (countryCode == 0) {
-                Toast.makeText(getActivity(), "Select Country Code.", Toast.LENGTH_LONG).show();
+                Util.longToast(getActivity(), "Select Country Code.");
                 return;
             }
+
+            final HashMap<String, String> stringParams = new HashMap<>();
 
             stringParams.put("lastname", lastname);
             stringParams.put("firstname", firstname);
@@ -1059,35 +1182,48 @@ public class AddCustomerFragment extends Fragment {
             stringParams.put("signature", signature);
             stringParams.put("signStatus", "true");
 
-            AlertDialog.Builder confirmBox = new AlertDialog.Builder(getActivity());
-            confirmBox.setMessage("Do really want to add customer?");
-            confirmBox.setTitle("Confirm");
-            confirmBox.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    new AddCustomerTask().execute();
-                }
-            });
-            confirmBox.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-            confirmBox.show();
+            if (getActivity() != null) {
+                AlertDialog.Builder confirmBox = new AlertDialog.Builder(getActivity());
+
+                confirmBox.setMessage("Do really want to add customer?");
+                confirmBox.setTitle("Confirm");
+                confirmBox.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        new AddCustomerTask(getActivity(), fileInputStream, stringParams).execute();
+                    }
+                });
+                confirmBox.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                confirmBox.show();
+            } else {
+                Util.alertBox(getContext(), "\"getActivity()\" is null. Cannot build alertdialog.");
+            }
         } catch (Exception e) {
             Log.e("Exception", e.toString());
-            Util.alertBox(getContext(), e.toString(), "", false);
+
+            Util.alertBox(getContext(), e.toString());
         }
     }
 
     private void hideSoftKey() {
-        View viewFocused = getActivity().getCurrentFocus();
-        if (viewFocused != null) {
-            InputMethodManager imm = (InputMethodManager)
-                    getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(viewFocused.getWindowToken(), 0);
+        if (getActivity() != null) {
+            View viewFocused = getActivity().getCurrentFocus();
+
+            if (viewFocused != null) {
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
+                        Context.INPUT_METHOD_SERVICE);
+
+                imm.hideSoftInputFromWindow(viewFocused.getWindowToken(), 0);
+                viewFocused.clearFocus();
+            }
+        } else {
+            Util.shortToast(getActivity(), "\"getActivity()\" is null.");
         }
-        viewFocused.clearFocus();
     }
 }

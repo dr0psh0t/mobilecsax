@@ -12,6 +12,7 @@ import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.asynchronousclasses.DialogImageTask;
 import android.wmdc.com.mobilecsa.model.KeyValueInfo;
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,7 +39,8 @@ public class JOSearchResultInfoAdapter extends
     }
 
     @Override
-    public JOSearchResViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    @NonNull
+    public JOSearchResViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.jo_search_info_layout, viewGroup,
                 false);
         return new JOSearchResViewHolder(view);
@@ -99,7 +101,7 @@ public class JOSearchResultInfoAdapter extends
 
         private int index;
 
-        public JOSearchResViewHolder(View itemView) {
+        private JOSearchResViewHolder(View itemView) {
             super(itemView);
 
             this.tvKey = itemView.findViewById(R.id.tvKey);

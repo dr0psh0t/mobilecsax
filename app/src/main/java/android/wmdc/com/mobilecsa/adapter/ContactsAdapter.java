@@ -1,7 +1,6 @@
 package android.wmdc.com.mobilecsa.adapter;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -20,8 +19,9 @@ import android.wmdc.com.mobilecsa.model.Contacts;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,40 +36,38 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**
  * Created by wmdcprog on 12/27/2017.
  */
 
-public class ContactsAdapter extends
-        RecyclerView.Adapter<ContactsAdapter.ContactsViewHolder> {
-    private Context context;
+public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ContactsViewHolder> {
+
+    private FragmentActivity fragmentActivity;
     private ArrayList<Contacts> contacts;
     private SharedPreferences sharedPreferences;
     private boolean heightSet = false;
 
-    public ContactsAdapter(Context context, ArrayList<Contacts> contacts) {
-        this.context = context;
+    public ContactsAdapter(FragmentActivity fragmentActivity, ArrayList<Contacts> contacts) {
+        this.fragmentActivity = fragmentActivity;
         this.contacts = contacts;
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(fragmentActivity);
     }
 
-    public void replaceAdapterList(ArrayList<Contacts> contacts) {
-        this.contacts = null;
-        this.contacts = contacts;
-        this.notifyDataSetChanged();
-    }
-
+    @NonNull
     @Override
-    public ContactsViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context)
-                .inflate(R.layout.search_result_layout, viewGroup, false);
+    public ContactsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+
+        View view = LayoutInflater.from(fragmentActivity).inflate(R.layout.search_result_layout,
+                viewGroup, false);
 
         if (!heightSet) {
             final ConstraintLayout rootLay = view.findViewById(R.id.rootLay);
@@ -94,13 +92,14 @@ public class ContactsAdapter extends
         contactsViewHolder.tvId.setText(String.valueOf(contacts.get(i).getId()));
 
         if (contacts.get(i).getIsTransferred() > 0) {
-            contactsViewHolder.ivTransferred.setImageResource(R.drawable.ic_action_check_colored_round);
+            contactsViewHolder.ivTransferred.setImageResource(
+                    R.drawable.ic_action_check_colored_round);
         } else {
             contactsViewHolder.ivTransferred.setImageResource(R.drawable.ic_action_x_colored_round);
         }
 
-        new SetThumbnailTask(contacts.get(i).getImageUrl(),
-                contactsViewHolder.ivProfile, context).execute();
+        new SetThumbnailTask(contacts.get(i).getImageUrl(), contactsViewHolder.ivProfile,
+                fragmentActivity).execute();
     }
 
     @Override
@@ -115,7 +114,7 @@ public class ContactsAdapter extends
         private TextView tvCsa;
         private TextView tvId;
 
-        public ContactsViewHolder(View itemView) {
+        private ContactsViewHolder(View itemView) {
             super(itemView);
 
             ivProfile = itemView.findViewById(R.id.ivProfile);
@@ -127,21 +126,32 @@ public class ContactsAdapter extends
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
-                    if (tvCsa.getText().toString().equals(
-                            sharedPreferences.getString("csaFullName", null))) {
-                        new GetContactsTask().execute(tvId.getText().toString());
+                    if (tvCsa.getText().toString().equals(sharedPreferences.getString(
+                            "csaFullName", null))) {
+                        new GetContactsTask(fragmentActivity).execute(tvId.getText().toString());
                     } else {
-                        Util.alertBox(context, "Not yours. Not allowed.", "Denied.", false);
+                        Util.alertBox(fragmentActivity, "Restricted not yours.", "Denied.", false);
                     }
                 }
             });
         }
     }
 
-    private class GetContactsTask extends AsyncTask<String, String, String> {
-        private ProgressDialog progressDialog = new ProgressDialog(context);
+    private static class GetContactsTask extends AsyncTask<String, String, String> {
+
+        private ProgressDialog progressDialog;
+
         private HttpURLConnection conn = null;
-        private URL url = null;
+
+        private WeakReference<FragmentActivity> activityWeakReference;
+
+        private SharedPreferences taskPrefs;
+
+        private GetContactsTask(FragmentActivity activity) {
+            activityWeakReference = new WeakReference<>(activity);
+            taskPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
+            progressDialog = new ProgressDialog(activity);
+        }
 
         @Override
         protected void onPreExecute() {
@@ -154,7 +164,7 @@ public class ContactsAdapter extends
         @Override
         protected String doInBackground(String[] params) {
             try {
-                url = new URL(sharedPreferences.getString("domain", null)+"getcontactsbyparams");
+                URL url = new URL(taskPrefs.getString("domain", null)+"getcontactsbyparams");
 
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(Util.READ_TIMEOUT);
@@ -167,18 +177,19 @@ public class ContactsAdapter extends
                 conn.setRequestProperty("Content-Type",
                         "application/x-www-form-urlencoded; charset=utf-8");
                 conn.setRequestProperty("Cookie",
-                        "JSESSIONID="+sharedPreferences.getString("sessionId", null));
+                        "JSESSIONID="+taskPrefs.getString("sessionId", null));
                 conn.setRequestProperty("Host", "localhost:8080");
                 conn.setRequestProperty("Referer", "http://localhost:8080/mcsa/httpsessiontest");
                 conn.setRequestProperty("X-Requested-Width", "XMLHttpRequest");
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
 
-                Uri.Builder builder = new Uri.Builder().appendQueryParameter("contactId", params[0]);
-                String query = builder.build().getEncodedQuery();
+                Uri.Builder build = new Uri.Builder().appendQueryParameter("contactId", params[0]);
+                String query = build.build().getEncodedQuery();
 
                 OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os,
+                        StandardCharsets.UTF_8));
 
                 writer.write(query);
                 writer.flush();
@@ -202,7 +213,8 @@ public class ContactsAdapter extends
                         return stringBuilder.toString();
                     }
                 } else {
-                    return "{\"success\": false, \"reason\": \"Request did not succeed. Status Code: "+statusCode+"\"}";
+                    return "{\"success\": false, \"reason\": \"Request did not succeed. " +
+                            "Status Code: "+statusCode+"\"}";
                 }
             } catch (MalformedURLException | ConnectException | SocketTimeoutException e) {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.ADAPTER_PACKAGE,
@@ -230,8 +242,16 @@ public class ContactsAdapter extends
         @Override
         protected void onPostExecute(String result) {
             progressDialog.dismiss();
+
+            FragmentActivity mainActivity = activityWeakReference.get();
+
+            if (mainActivity == null || mainActivity.isFinishing()) {
+                return;
+            }
+
             try {
                 JSONObject resJson = new JSONObject(result);
+
                 if (resJson.getBoolean("success")) {
                     ContactsInformationFragment contactsInformationFragment =
                             new ContactsInformationFragment();
@@ -241,8 +261,7 @@ public class ContactsAdapter extends
                     bundle.putString("result", resJson.toString());
                     contactsInformationFragment.setArguments(bundle);
 
-                    FragmentManager fragmentManager =
-                            ((AppCompatActivity) context).getSupportFragmentManager();
+                    FragmentManager fragmentManager = mainActivity.getSupportFragmentManager();
 
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -252,12 +271,12 @@ public class ContactsAdapter extends
                     fragmentTransaction.replace(R.id.content_main, contactsInformationFragment)
                             .addToBackStack(null).commit();   //  required
                 } else {
-                    Util.alertBox(context, resJson.getString("reason"), "Error", false);
+                    Util.alertBox(mainActivity, resJson.getString("reason"), "Error", false);
                 }
             } catch (JSONException je) {
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.ADAPTER_PACKAGE, "",
                         je.toString());
-                Util.alertBox(context, je.getMessage(), "", false);
+                Util.alertBox(mainActivity, je.getMessage(), "", false);
             }
         }
     }

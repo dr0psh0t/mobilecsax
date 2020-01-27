@@ -21,7 +21,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 import android.wmdc.com.mobilecsa.asynchronousclasses.SwitchPlant;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
@@ -44,6 +43,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
@@ -51,6 +51,7 @@ import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Created by wmdcprog on 4/13/2018.
@@ -58,7 +59,6 @@ import java.net.URL;
 
 public class LoginFragment extends Fragment {
 
-    private Button loginButton;
     private EditText user;
     private EditText pass;
 
@@ -67,76 +67,74 @@ public class LoginFragment extends Fragment {
 
     private WifiManager wifiManager;
 
-    private Toolbar toolbarLogin;
     private boolean isRemembered = false;
-
-    public void setToolbarTitle(FragmentActivity thisActivity) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(thisActivity);
-        thisActivity.setTitle(prefs.getString("branch", null));
-    }
 
     @Nullable
     @Override
-    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle instanceState) {
         View v = inflater.inflate(R.layout.login_fragment, container, false);
+
         setHasOptionsMenu(true);
-        //setToolbarTitle(getActivity());
-        //getActivity().setTitle("TEST");
 
-        this.wifiManager = (WifiManager) getContext()
-                .getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        if (getActivity() != null) {
+            this.wifiManager = (WifiManager) getActivity()
+                    .getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
-        toolbarLogin = v.findViewById(R.id.toolbarLogin);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbarLogin);
+            Toolbar toolbarLogin = v.findViewById(R.id.toolbarLogin);
+            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbarLogin);
 
-        sPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        spEditor = sPrefs.edit();
+            sPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            spEditor = sPrefs.edit();
 
-        loginButton = v.findViewById(R.id.buttonLogin);
-        user = v.findViewById(R.id.editTextUser);
-        pass = v.findViewById(R.id.editTextPass);
+            Button loginButton = v.findViewById(R.id.buttonLogin);
+            user = v.findViewById(R.id.editTextUser);
+            pass = v.findViewById(R.id.editTextPass);
 
-        String username = sPrefs.getString("user", null);
-        user.setText(username == null ? "" : username);
+            String username = sPrefs.getString("user", null);
+            user.setText(username == null ? "" : username);
 
-        pass.setText(sPrefs.getString("password", null));
-        pass.setTransformationMethod(new PasswordTransformationMethod());
+            pass.setText(sPrefs.getString("password", null));
+            pass.setTransformationMethod(new PasswordTransformationMethod());
 
-        loginButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                String userStr = user.getText().toString();
-                String passStr = pass.getText().toString();
-                String address = sPrefs.getString("domain", null);
+            loginButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String userStr = user.getText().toString();
+                    String passStr = pass.getText().toString();
+                    String address = sPrefs.getString("domain", null);
 
-                if (userStr.isEmpty() || passStr.isEmpty()) {
-                    Util.alertBox(getActivity(), "Fields are empty", "", false); return;
-                }
-
-                if (!Util.validUserPass(passStr)) {
-                    Util.alertBox(getActivity(), "Password should be 8-32 characters in length",
-                            "", false); return;
-                }
-
-                if (address != null) {
-                    if (isRemembered) {
-                        String password = pass.getText().toString();
-
-                        if (!password.isEmpty()) {
-                            spEditor.remove("password");
-                            spEditor.apply();
-                            spEditor.putString("password", password);
-                            spEditor.apply();
-                        }
+                    if (userStr.isEmpty() || passStr.isEmpty()) {
+                        Util.alertBox(getActivity(), "Fields are empty");
+                        return;
                     }
-                    new LoginTask(Util.getProgressBar(getContext())).execute(
-                            user.getText().toString(), pass.getText().toString());
-                } else {
-                    Toast.makeText(getActivity(), "Select Plant", Toast.LENGTH_SHORT).show();
+
+                    if (!Util.validUserPass(passStr)) {
+                        Util.alertBox(getActivity(), "Password should be 8-32 in length");
+                        return;
+                    }
+
+                    if (address != null) {
+                        if (isRemembered) {
+                            String password = pass.getText().toString();
+
+                            if (!password.isEmpty()) {
+                                spEditor.remove("password");
+                                spEditor.apply();
+                                spEditor.putString("password", password);
+                                spEditor.apply();
+                            }
+                        }
+                        new LoginTask(Util.getProgressBar(getContext()), getActivity()).execute(
+                                user.getText().toString(), pass.getText().toString());
+                    } else {
+                        Util.shortToast(getActivity(), "Select Plant");
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            Util.alertBox(getContext(), "Activity is null. Cannot render login page.");
+        }
+
         return v;
     }
 
@@ -153,33 +151,39 @@ public class LoginFragment extends Fragment {
                 final String mcsaPassword = sPrefs.getString("mcsaPasswordPrefs", null);
 
                 if (mcsaPassword != null && !mcsaPassword.isEmpty()) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                    builder.setTitle("Password");
+                    if (getContext() != null) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setTitle("Password");
 
-                    final EditText input = new EditText(getContext());
-                    input.setInputType(InputType.TYPE_CLASS_TEXT |
-                            InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    builder.setView(input);
+                        final EditText input = new EditText(getContext());
+                        input.setInputType(InputType.TYPE_CLASS_TEXT |
+                                InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        builder.setView(input);
 
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            String password = input.getText().toString();
-                            if (!password.isEmpty()) {
-                                if (password.equals(mcsaPassword)) {
-                                    startActivity(new Intent(getContext(), SettingsActivity.class));
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String password = input.getText().toString();
+
+                                if (!password.isEmpty()) {
+                                    if (password.equals(mcsaPassword)) {
+                                        startActivity(new Intent(getContext(),
+                                                SettingsActivity.class));
+                                    }
                                 }
                             }
-                        }
-                    });
+                        });
 
-                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
-                    builder.show();
+                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                        builder.show();
+                    } else {
+                        Util.alertBox(getActivity(), "Acivity is null. Cannot go to settings");
+                    }
                 } else {
                     startActivity(new Intent(getContext(), SettingsActivity.class));
                 }
@@ -194,37 +198,38 @@ public class LoginFragment extends Fragment {
                 }
                 return true;
             case R.id.plantSwitch:
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                if (getContext() != null) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
-                String[] plants = {"North", "Central", "South", "Dumaguete"};
+                    String[] plants = {"North", "Central", "South", "Dumaguete"};
 
-                builder.setItems(plants, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    builder.setItems(plants, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
-                        if (isWifiEnabled() || isDataEnabled()) {
-                            if (isInternetAvailable() || isNetworkConnected()) {
+                            if (isWifiEnabled() || isDataEnabled()) {
+                                if (isInternetAvailable() || isNetworkConnected()) {
+                                    switchPlant(which);
+                                } else {
+                                    Util.alertBox(getContext(), "No internet.");
+                                }
+                            } else if (isInternetAvailable() || isNetworkConnected()) {
                                 switchPlant(which);
                             } else {
-                                Util.alertBox(getContext(), "No internet.", "", false);
+                                Util.alertBox(getContext(), "No internet. Turn on wifi or data.");
                             }
-                        } else if (isInternetAvailable() || isNetworkConnected()) {
-                            switchPlant(which);
-                        } else {
-                            Util.alertBox(getContext(), "No internet. Turn on wifi or data.", "",
-                                    false);
                         }
-                    }
-                });
+                    });
 
-                builder.create().show();
+                    builder.create().show();
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    public void switchPlant(int which) {
+    private void switchPlant(int which) {
         switch (which) {
             case 0:
                 new SwitchPlant(sPrefs.getString("northWifi", null),
@@ -239,16 +244,25 @@ public class LoginFragment extends Fragment {
                         sPrefs.getString("southSim", null), "South", getActivity());
                 break;
             case 3:
+                new SwitchPlant(sPrefs.getString("dumagueteWifi", null),
+                        sPrefs.getString("dumagueteSim", null), "Dumaguete", getActivity());
                 break;
         }
     }
 
-    private class LoginTask extends AsyncTask<String, String, String> {
-        private Dialog dialog;
-        private HttpURLConnection conn = null;
-        private URL url = null;
+    private static class LoginTask extends AsyncTask<String, String, String> {
 
-        public LoginTask(Dialog dialog) {
+        private WeakReference<FragmentActivity> activityWeakReference;
+
+        private SharedPreferences taskPrefs;
+
+        private Dialog dialog;
+
+        private HttpURLConnection conn = null;
+
+        private LoginTask(Dialog dialog, FragmentActivity activity) {
+            activityWeakReference = new WeakReference<>(activity);
+            taskPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
             this.dialog = dialog;
         }
 
@@ -261,7 +275,7 @@ public class LoginFragment extends Fragment {
         @Override
         protected String doInBackground(String[] params) {
             try {
-                url = new URL(sPrefs.getString("domain", null)+"Login");
+                URL url = new URL(taskPrefs.getString("domain", null)+"Login");
 
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(10_000);
@@ -276,7 +290,8 @@ public class LoginFragment extends Fragment {
                 String query = builder.build().getEncodedQuery();
 
                 OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os,
+                        StandardCharsets.UTF_8));
 
                 writer.write(query);
                 writer.flush();
@@ -328,23 +343,33 @@ public class LoginFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             this.dialog.dismiss();
-            try {
-                JSONObject responseJson = new JSONObject(result);
-                if (responseJson.getBoolean("success")) {
-                    if (!responseJson.getBoolean("isAdmin")) {
-                        spEditor = sPrefs.edit();
-                        spEditor.putString("sessionId", responseJson.getString("sessionId"));
-                        spEditor.apply();
 
-                        FragmentTransaction fragmentTransaction =
-                                getFragmentManager().beginTransaction();
+            FragmentActivity loginActivity = activityWeakReference.get();
+
+            if (loginActivity == null || loginActivity.isFinishing()) {
+                return;
+            }
+
+            try {
+                JSONObject resJson = new JSONObject(result);
+                SharedPreferences.Editor taskSpEditor = taskPrefs.edit();
+
+                if (resJson.getBoolean("success")) {
+                    if (!resJson.getBoolean("isAdmin")) {
+
+                        taskSpEditor.putString("sessionId", resJson.getString("sessionId"));
+                        taskSpEditor.apply();
+
+                        FragmentTransaction fragmentTransaction = loginActivity
+                                .getSupportFragmentManager().beginTransaction();
+
                         fragmentTransaction.setCustomAnimations(R.anim.enter,
                                 R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
                         fragmentTransaction.replace(R.id.content_login, new SecurityKeyFragment());
                         fragmentTransaction.addToBackStack(null);
                         fragmentTransaction.commit();
                     } else {
-                        AlertDialog.Builder warningBox = new AlertDialog.Builder(getContext());
+                        AlertDialog.Builder warningBox = new AlertDialog.Builder(loginActivity);
                         warningBox.setMessage("The app cannot be used by administrators.");
                         warningBox.setCancelable(true);
                         warningBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -356,75 +381,85 @@ public class LoginFragment extends Fragment {
                     }
                 } else {
                     try {
-                        if (responseJson.getBoolean("isLocked")) {
-                            spEditor.putString("sessionId", responseJson.getString("sessionId"));
-                            spEditor.apply();
+                        if (resJson.getBoolean("isLocked")) {
+                            taskSpEditor.putString("sessionId", resJson.getString("sessionId"));
+                            taskSpEditor.apply();
 
                             Bundle bundle = new Bundle();
-                            bundle.putString("lockedUsername",
-                                    responseJson.getString("lockedUsername"));
+                            bundle.putString("lockedUsername", resJson.getString("lockedUsername"));
 
                             CreatePassword createPassword = new CreatePassword();
                             createPassword.setArguments(bundle);
 
-                            FragmentManager fragmentManager = ((AppCompatActivity) getContext())
+                            FragmentManager fragmentManager = loginActivity
                                     .getSupportFragmentManager();
-                            FragmentTransaction fragmentTransaction =
-                                    fragmentManager.beginTransaction();
+
+                            FragmentTransaction fragmentTransaction = fragmentManager
+                                    .beginTransaction();
+
                             fragmentTransaction.replace(R.id.content_login, createPassword)
                                     .setCustomAnimations(R.anim.enter, R.anim.exit,
-                                            R.anim.pop_enter, R.anim.pop_exit)
-                                    .commit();
+                                            R.anim.pop_enter, R.anim.pop_exit).commit();
                         } else {
-                            Util.alertBox(getContext(), responseJson.getString("reason"), "Error",
+                            Util.alertBox(loginActivity, resJson.getString("reason"), "Error",
                                     false);
                         }
                     } catch (JSONException e) {
                         Util.displayStackTraceArray(e.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                                 "json_exception", e.toString());
-                        Util.alertBox(getContext(), responseJson.getString("reason"), "", false);
+                        Util.alertBox(loginActivity, resJson.getString("reason"));
                     }
                 }
             } catch (Exception e) {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "exception", e.toString());
-                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                Util.longToast(loginActivity, e.getMessage());
             }
         }
     }
 
-    public boolean isWifiEnabled() {
+    private boolean isWifiEnabled() {
         return wifiManager.isWifiEnabled();
     }
 
-    public boolean isDataEnabled() {
-        boolean mobileDataEnabled = false;
-        ConnectivityManager cm = (ConnectivityManager) getContext().
-                getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        try {
-            Class cmClass = Class.forName(cm.getClass().getName());
-            Method method = cmClass.getDeclaredMethod("getMobileDataEnabled");
-            method.setAccessible(true); //  make the method callable
+    private boolean isDataEnabled() {
+        if (getContext() != null) {
+            boolean mobileDataEnabled;
 
-            mobileDataEnabled = (Boolean) method.invoke(cm);
-            return mobileDataEnabled;
-        } catch (Exception e) {
-            return mobileDataEnabled;
+            ConnectivityManager cm = (ConnectivityManager) getContext().getApplicationContext()
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            try {
+                Class<?> cmClass = Class.forName(cm.getClass().getName());
+                Method method = cmClass.getDeclaredMethod("getMobileDataEnabled");
+                method.setAccessible(true); //  make the method callable
+
+                mobileDataEnabled = (Boolean) method.invoke(cm);
+                return mobileDataEnabled;
+            } catch (Exception e) {
+                return false;
+            }
+        } else {
+            Util.shortToast(getActivity(), "Context is null. Cannot get data enabled status.");
+            return false;
         }
     }
 
     private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager)
-                getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        return cm.getActiveNetworkInfo() != null;
+        if (getContext() != null) {
+            ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(
+                    Context.CONNECTIVITY_SERVICE);
+            return cm.getActiveNetworkInfo() != null;
+        } else {
+            Util.shortToast(getActivity(), "Activity is null. Can't get network connected status.");
+            return false;
+        }
     }
 
-    public boolean isInternetAvailable() {
+    private boolean isInternetAvailable() {
         try {
-            InetAddress ipAddr = InetAddress.getByName("google.com");
+            InetAddress ipAddress = InetAddress.getByName("google.com");
             //You can replace it with your name
-            return !ipAddr.equals("");
+            return !ipAddress.getHostAddress().equals("google");
         } catch (Exception e) {
             return false;
         }

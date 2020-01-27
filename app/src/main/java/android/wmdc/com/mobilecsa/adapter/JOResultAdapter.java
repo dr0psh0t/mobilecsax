@@ -10,6 +10,7 @@ import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.asynchronousclasses.GetJoWoStatusListTask;
 import android.wmdc.com.mobilecsa.model.JobOrder;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -29,14 +30,15 @@ public class JOResultAdapter extends RecyclerView.Adapter<JOResultAdapter.JOView
     }
 
     @Override
-    public JOViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context)
-                .inflate(R.layout.jo_search_result_row_item, viewGroup, false);
+    @NonNull
+    public JOViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(context).inflate(R.layout.jo_search_result_row_item,
+                viewGroup, false);
         return new JOViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(JOViewHolder joViewHolder, int i) {
+    public void onBindViewHolder(@NonNull JOViewHolder joViewHolder, int i) {
         if (i % 2 != 0) {
             joViewHolder.rowItemJOLinLay.setBackgroundResource(
                     R.drawable.custom_card_background_odd);
@@ -63,7 +65,7 @@ public class JOResultAdapter extends RecyclerView.Adapter<JOResultAdapter.JOView
         private LinearLayout rowItemJOLinLay;
         private int index;
 
-        public JOViewHolder(View itemView) {
+        private JOViewHolder(View itemView) {
             super(itemView);
             this.tvJONumber = itemView.findViewById(R.id.tvJONumber);
             this.tvCustomer = itemView.findViewById(R.id.tvCustomer);

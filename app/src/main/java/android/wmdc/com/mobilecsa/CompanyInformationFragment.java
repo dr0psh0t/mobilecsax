@@ -66,7 +66,7 @@ public class CompanyInformationFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle instanceState) {
         View v = inflater.inflate(R.layout.information_viewholder_layout, container, false);
         Bundle thisBundle = this.getArguments();
 
@@ -79,25 +79,26 @@ public class CompanyInformationFragment extends Fragment {
 
             try {
                 JSONObject object = new JSONObject(result);
-                getActivity().setTitle(object.getString("company"));
 
-                for (int i = 0; i < LIST_LENGTH; ++i) {
-                    customerInfos.add(
-                            new KeyValueInfo(COLUMNS.get(i),object.getString(JSON_KEY.get(i))));
+                if (getActivity() != null) {
+                    getActivity().setTitle(object.getString("company"));
+
+                    for (int i = 0; i < LIST_LENGTH; ++i) {
+                        customerInfos.add(new KeyValueInfo(COLUMNS.get(i), object.getString(
+                                JSON_KEY.get(i))));
+                    }
+
+                    KeyValueInfoAdapter customerInfoAdapter = new KeyValueInfoAdapter(
+                            getActivity(), customerInfos, object.getInt("customerId"), true);
+
+                    recyclerView.setAdapter(customerInfoAdapter);
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),
+                            LinearLayoutManager.VERTICAL));
+                } else {
+                    Util.alertBox(getContext(), "Activity is null. Cannot set fragment title, " +
+                            "create adapter and add item decoration to recycler view.");
                 }
-
-                KeyValueInfoAdapter customerInfoAdapter =
-                        new KeyValueInfoAdapter(
-                                getActivity(),
-                                customerInfos,
-                                object.getInt("customerId"),
-                                true);
-
-                recyclerView.setAdapter(customerInfoAdapter);
-                recyclerView.setItemAnimator(new DefaultItemAnimator());
-                recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),
-                        LinearLayoutManager.VERTICAL));
-
             } catch (JSONException je) {
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "JSONException", je.toString());

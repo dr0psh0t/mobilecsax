@@ -2,7 +2,6 @@ package android.wmdc.com.mobilecsa.adapter;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -14,12 +13,13 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.model.WorkOrders;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -33,11 +33,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**Created by wmdcprog on 9/15/2018.*/
@@ -45,19 +47,19 @@ import java.util.ArrayList;
 public class WorkOrdersAdapter extends
         RecyclerView.Adapter<WorkOrdersAdapter.WorkOrdersViewHolder> {
 
-    private LinearLayout linearLayout;
-    private Context context;
+    //private Context context;
+    private FragmentActivity fragmentActivity;
     private ArrayList<WorkOrders> workOrders;
     private FloatingActionButton fabOptions;
     private int selected_position;
 
-    FloatingActionButton fabExtension;
-    boolean isFabOpen = false;
+    private FloatingActionButton fabExtension;
+    private boolean isFabOpen = false;
 
     private void showFABMenu(){
         isFabOpen = true;
         fabExtension.animate().translationY(
-                -context.getResources().getDimension(R.dimen.standard_75));
+                -fragmentActivity.getResources().getDimension(R.dimen.standard_75));
     }
 
     private void closeFABMenu(){
@@ -66,16 +68,16 @@ public class WorkOrdersAdapter extends
         fabOptions.setImageResource(R.drawable.ic_action_more_white);
     }
 
-    public void setSnackBar(View root, String text) {
-        final Snackbar snackbar = Snackbar.make(root, text, Snackbar.LENGTH_SHORT);
-        snackbar.show();
+    private void setSnackBar(View root) {
+        Snackbar.make(root, "Select a workorder first.", Snackbar.LENGTH_SHORT).show();
     }
 
-    public WorkOrdersAdapter(final Context context, ArrayList<WorkOrders> workOrders,
+    public WorkOrdersAdapter(final FragmentActivity fragmentActivity,
+                             ArrayList<WorkOrders> workOrders,
                              final FloatingActionButton fabOptions,
                              FloatingActionButton fabExtension, final LinearLayout linearLayout) {
-        this.linearLayout = linearLayout;
-        this.context = context;
+
+        this.fragmentActivity = fragmentActivity;
         this.workOrders = workOrders;
         this.fabOptions = fabOptions;
         this.fabExtension = fabExtension;
@@ -92,7 +94,7 @@ public class WorkOrdersAdapter extends
                         closeFABMenu();
                     }
                 } else {
-                    setSnackBar(linearLayout, "Select a workorder first.");
+                    setSnackBar(linearLayout);
                 }
             }
         });
@@ -102,20 +104,22 @@ public class WorkOrdersAdapter extends
             public void onClick(View view) {
                 closeFABMenu();
 
-                LayoutInflater layoutInflater = LayoutInflater.from(context);
-                View mView = layoutInflater.inflate(R.layout.work_extension_input_dialog, null);
+                LayoutInflater layoutInflater = LayoutInflater.from(fragmentActivity);
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                ViewGroup vGroup = view.findViewById(R.id.custom_dialog_layout_design_user_input);
+
+                View mView = layoutInflater.inflate(R.layout.work_extension_input_dialog, vGroup);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(fragmentActivity);
                 builder.setView(mView);
 
                 final EditText hoursInputDialog = mView.findViewById(R.id.hoursInputDialog);
-                final EditText etReason = mView.findViewById(R.id.etReason);
 
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String hours = hoursInputDialog.getText().toString();
-                        new ExtensionTask().execute(hours);
+                        new ExtensionTask(fragmentActivity).execute(hours);
                         selected_position = -1;
                         notifyDataSetChanged();
                     }
@@ -133,14 +137,15 @@ public class WorkOrdersAdapter extends
     }
 
     @Override
-    public WorkOrdersViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.workorders_rowitem, viewGroup,
-                false);
+    @NonNull
+    public WorkOrdersViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(fragmentActivity).inflate(R.layout.workorders_rowitem,
+                viewGroup, false);
         return new WorkOrdersViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(WorkOrdersViewHolder workOrdersViewHolder, final int i) {
+    public void onBindViewHolder(@NonNull WorkOrdersViewHolder workOrdersViewHolder, final int i) {
         if (i % 2 != 0) {
             workOrdersViewHolder.rootLayWorkOrders.setBackgroundResource(
                     R.drawable.custom_card_background_odd);
@@ -191,7 +196,7 @@ public class WorkOrdersAdapter extends
         private TextView tvStatus;
         private LinearLayout rootLayWorkOrders;
 
-        public WorkOrdersViewHolder(View itemView) {
+        private WorkOrdersViewHolder(View itemView) {
             super(itemView);
             this.tvScope = itemView.findViewById(R.id.tvScope);
             this.tvStatus = itemView.findViewById(R.id.tvStatus);
@@ -199,13 +204,20 @@ public class WorkOrdersAdapter extends
         }
     }
 
-    private class ExtensionTask extends AsyncTask<String, String, String> {
+    private static class ExtensionTask extends AsyncTask<String, String, String> {
+
+        private WeakReference<FragmentActivity> activityWeakReference;
+
         private HttpURLConnection conn = null;
-        private URL url = null;
+
         private ProgressDialog progressDialog;
 
-        public ExtensionTask() {
-            this.progressDialog = new ProgressDialog(context);
+        private SharedPreferences prefs;
+
+        private ExtensionTask(FragmentActivity activity) {
+            activityWeakReference = new WeakReference<>(activity);
+            this.progressDialog = new ProgressDialog(activity);
+            prefs = PreferenceManager.getDefaultSharedPreferences(activity);
         }
 
         @Override
@@ -217,10 +229,9 @@ public class WorkOrdersAdapter extends
 
         @Override
         protected String doInBackground(String[] params) {
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
             try {
-                url = new URL(prefs.getString("domain", null)+"<required>");
+                URL url = new URL(prefs.getString("domain", null)+"<required>");
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(10_000);
                 conn.setConnectTimeout(10_000);
@@ -244,7 +255,8 @@ public class WorkOrdersAdapter extends
                 String query = builder.build().getEncodedQuery();
 
                 OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os,
+                        StandardCharsets.UTF_8));
 
                 writer.write(query);
                 writer.flush();
@@ -296,11 +308,18 @@ public class WorkOrdersAdapter extends
         @Override
         protected void onPostExecute(String result) {
             progressDialog.dismiss();
+
+            FragmentActivity mainActivity = activityWeakReference.get();
+
+            if (mainActivity == null || mainActivity.isFinishing()) {
+                return;
+            }
+
             try {
                 JSONObject resJson = new JSONObject(result);
-                Toast.makeText(context, resJson.getString("reason"), Toast.LENGTH_SHORT).show();
+                Util.shortToast(mainActivity, resJson.getString("reason"));
             } catch (Exception e) {
-                Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+                Util.shortToast(mainActivity, e.toString());
             }
         }
     }

@@ -7,9 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.wmdc.com.mobilecsa.asynchronousclasses.GetDCJOListTask;
 import android.wmdc.com.mobilecsa.asynchronousclasses.GetQCJOListTask;
+import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
 import androidx.annotation.Nullable;
@@ -19,29 +19,28 @@ import androidx.fragment.app.Fragment;
 
 public class ApprovalFragment extends Fragment {
 
-    private Button btnQC;
-    private Button btnDateComm;
     private SharedPreferences sharedPreferences;
     private GetQCJOListTask qcTask;
     private GetDCJOListTask dcTask;
-    private ProgressBar progressBarApproval;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle instanceState) {
         View v = inflater.inflate(R.layout.approval_fragment, container, false);
-        getActivity().setTitle("Approval");
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        progressBarApproval = v.findViewById(R.id.progressBarApproval);
 
-        btnQC = v.findViewById(R.id.btnQC);
-        btnDateComm = v.findViewById(R.id.btnDateComm);
+        if (getActivity() != null) {
+            getActivity().setTitle("Approval");
+            sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        } else {
+            Util.longToast(getContext(),
+                    "Activity is null. Cannot set fragment title and preferences.");
+        }
+
+        Button btnQC = v.findViewById(R.id.btnQC);
+        Button btnDateComm = v.findViewById(R.id.btnDateComm);
 
         btnQC.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 Variables.currentPage = 1;
                 qcTask = new GetQCJOListTask(getActivity());
 
@@ -50,9 +49,8 @@ public class ApprovalFragment extends Fragment {
             }
         });
 
-        btnDateComm.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view)
-            {
+        btnDateComm.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
                 dcTask = new GetDCJOListTask(getActivity(), null, true);
                 dcTask.execute(String.valueOf(sharedPreferences.getInt("csaId", 0)), "mcsa");
             }

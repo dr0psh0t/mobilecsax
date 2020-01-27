@@ -2,7 +2,6 @@ package android.wmdc.com.mobilecsa;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -26,6 +25,7 @@ import android.wmdc.com.mobilecsa.utils.Variables;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,11 +39,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**
@@ -54,74 +56,78 @@ public class QualityCheckFragment extends Fragment {
 
     private TextView tvPage;
 
-    private ImageButton next;
-    private ImageButton prev;
-    private ImageButton first;
-    private ImageButton last;
-
-    private ArrayList<QCDataModel> qcDataModels = new ArrayList<>();
-    private QCAdapter qcAdapter;
+    private static ArrayList<QCDataModel> qcDataModels = new ArrayList<>();
+    private static QCAdapter qcAdapter;
 
     private SharedPreferences sharedPreferences;
-
-    private LinearLayout qcHeaderLinLay;
-    private SetPageTask setPageTask;
 
     @Override
     public void onResume() {
         super.onResume();
-        setPage(Variables.currentPage);
+        setPage(Variables.currentPage, tvPage);
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle instanceState) {
         View v = inflater.inflate(R.layout.quality_check_fragment, container, false);
-        getActivity().setTitle("Quality Check");
+
+        if (getActivity() != null) {
+            getActivity().setTitle("Quality Check");
+        } else {
+            Util.shortToast(getContext(), "Activity is null. Cannot set title of this fragment.");
+        }
+
         setHasOptionsMenu(true);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 
-        qcHeaderLinLay = v.findViewById(R.id.qcTitleLL);
+        LinearLayout qcHeaderLinLay = v.findViewById(R.id.qcTitleLL);
         qcHeaderLinLay.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view)
-            {
-                Dialog dialog = new Dialog(getActivity());
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setCancelable(true);
-                dialog.setContentView(R.layout.qc_header_layout);
-
-                WindowManager.LayoutParams wmlp = dialog.getWindow().getAttributes();
-                wmlp.width = Util.systemWidth;
-                wmlp.gravity = Gravity.TOP;
-                wmlp.y = 200;
-
-                dialog.show();
-            }
-        });
-
-        tvPage = v.findViewById(R.id.tvPage);
-        tvPage.setText(new StringBuilder().append(Variables.currentPage)
-                .append(" of ").append(Variables.lastPage).toString());
-
-        final RecyclerView recyclerView = v.findViewById(R.id.rvQCData);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        next = v.findViewById(R.id.next);
-        next.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
-                if (Variables.currentPage < Variables.lastPage) {
-                    setPage(++Variables.currentPage);
+
+                if (getActivity() != null) {
+                    Dialog dialog = new Dialog(getActivity());
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.setCancelable(true);
+                    dialog.setContentView(R.layout.qc_header_layout);
+
+                    if (dialog.getWindow() != null) {
+                        WindowManager.LayoutParams wmlp = dialog.getWindow().getAttributes();
+                        wmlp.width = Util.systemWidth;
+                        wmlp.gravity = Gravity.TOP;
+                        wmlp.y = 200;
+
+                        dialog.show();
+                    } else {
+                        Util.alertBox(getContext(), "Dialog window is null. Cannot open dialog.");
+                    }
+                } else {
+                    Util.alertBox(getContext(), "Activity is null. Cannot open dialog.");
                 }
             }
         });
 
-        prev = v.findViewById(R.id.prev);
+        tvPage = v.findViewById(R.id.tvPage);
+        String txt = Variables.currentPage+" of "+Variables.lastPage;
+        tvPage.setText(txt);
+
+        final RecyclerView recyclerView = v.findViewById(R.id.rvQCData);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        ImageButton next = v.findViewById(R.id.next);
+        next.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                if (Variables.currentPage < Variables.lastPage) {
+                    setPage(++Variables.currentPage, tvPage);
+                }
+            }
+        });
+
+        ImageButton prev = v.findViewById(R.id.prev);
         prev.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
                 if (Variables.currentPage > 1) {
-                    setPage(--Variables.currentPage);
+                    setPage(--Variables.currentPage, tvPage);
                 }
             }
         });
@@ -172,24 +178,31 @@ public class QualityCheckFragment extends Fragment {
         return v;
     }
 
-    public void setPage(int currentPage) {
-        setPageTask = new SetPageTask(getActivity());
-        setPageTask.execute(String.valueOf(sharedPreferences.getInt("csaId", 0)),
+    private void setPage(int currentPage, TextView tvPage) {
+        String txt = Variables.currentPage+" of "+Variables.lastPage;
+        tvPage.setText(txt);
+
+        new SetPageTask(getActivity()).execute(String.valueOf(sharedPreferences.getInt("csaId", 0)),
                 "mcsa", String.valueOf(currentPage));
     }
 
-    private class SetPageTask extends AsyncTask<String, String, String> {
-        private SharedPreferences sharedPreferences;
-        private Context context;
+    private static class SetPageTask extends AsyncTask<String, String, String> {
+
+        private WeakReference<FragmentActivity> activityWeakReference;
+
+        private SharedPreferences taskPrefs;
 
         private ProgressDialog progressDialog;
-        private HttpURLConnection conn = null;
-        private URL url = null;
 
-        public SetPageTask(Context context) {
-            this.context = context;
-            this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
-            this.progressDialog = new ProgressDialog(context);
+        private HttpURLConnection conn = null;
+
+        //private TextView tvPage;
+
+        private SetPageTask(FragmentActivity activity/*, TextView tvPage*/) {
+            activityWeakReference = new WeakReference<>(activity);
+            this.taskPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
+            this.progressDialog = new ProgressDialog(activity);
+            //this.tvPage = tvPage;
         }
 
         @Override
@@ -204,7 +217,7 @@ public class QualityCheckFragment extends Fragment {
         @Override
         protected String doInBackground(String[] params) {
             try {
-                url = new URL(sharedPreferences.getString("domain", null)+"getqclist");
+                URL url = new URL(taskPrefs.getString("domain", null)+"getqclist");
 
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(60_000);
@@ -214,10 +227,13 @@ public class QualityCheckFragment extends Fragment {
                 conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
                 conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
                 conn.setRequestProperty("Connection", "keep-alive");
-                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-                conn.setRequestProperty("Cookie", "JSESSIONID="+sharedPreferences.getString("sessionId", null));
+                conn.setRequestProperty("Content-Type",
+                        "application/x-www-form-urlencoded; charset=utf-8");
+                conn.setRequestProperty("Cookie",
+                        "JSESSIONID="+taskPrefs.getString("sessionId", null));
                 conn.setRequestProperty("Host", "localhost:8080");
-                conn.setRequestProperty("Referer", "http://localhost:8080/mcsa/searchcustomerfromuser");
+                conn.setRequestProperty("Referer",
+                        "http://localhost:8080/mcsa/searchcustomerfromuser");
                 conn.setRequestProperty("X-Requested-Width", "XMLHttpRequest");
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
@@ -229,7 +245,8 @@ public class QualityCheckFragment extends Fragment {
                 String query = builder.build().getEncodedQuery();
 
                 OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os,
+                        StandardCharsets.UTF_8));
 
                 writer.write(query);
                 writer.flush();
@@ -254,7 +271,8 @@ public class QualityCheckFragment extends Fragment {
                         return stringBuilder.toString();
                     }
                 } else {
-                    return "{\"success\": false, \"reason\": \"Request did not succeed. Status Code: "+statusCode+"\"}";
+                    return "{\"success\": false, \"reason\": \"Request did not succeed. " +
+                            "Status Code: "+statusCode+"\"}";
                 }
             } catch (MalformedURLException | ConnectException | SocketTimeoutException e) {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
@@ -284,6 +302,12 @@ public class QualityCheckFragment extends Fragment {
         protected void onPostExecute(String result) {
             progressDialog.dismiss();
 
+            FragmentActivity mainActivity = activityWeakReference.get();
+
+            if (mainActivity == null || mainActivity.isFinishing()) {
+                return;
+            }
+
             try {
                 JSONObject jsonObject = new JSONObject(result);
                 Variables.qcStore = jsonObject;
@@ -298,28 +322,28 @@ public class QualityCheckFragment extends Fragment {
                     for (i = 1; i <= jobordersArrayLength; ++i) {
                         JSONObject itemObj = jsonArray.getJSONObject(i-1);
 
-                        qcDataModels.add(
-                                new QCDataModel(
-                                        itemObj.getInt("joId"),
-                                        itemObj.getString("serialNum"),
-                                        itemObj.getString("dateCommit"),
-                                        itemObj.getString("dateReceived"),
-                                        itemObj.getString("joNum"),
-                                        itemObj.getString("customerId"),
-                                        itemObj.getString("model"),
-                                        itemObj.getString("category"),
-                                        itemObj.getString("make"),
-                                        itemObj.getString("customer"),
-                                        itemObj.getBoolean("isPending")
-                                ));
+                        qcDataModels.add(new QCDataModel(
+                            itemObj.getInt("joId"),
+                            itemObj.getString("serialNum"),
+                            itemObj.getString("dateCommit"),
+                            itemObj.getString("dateReceived"),
+                            itemObj.getString("joNum"),
+                            itemObj.getString("customerId"),
+                            itemObj.getString("model"),
+                            itemObj.getString("category"),
+                            itemObj.getString("make"),
+                            itemObj.getString("customer"),
+                            itemObj.getBoolean("isPending")
+                        ));
                     }
 
                     qcAdapter.replaceAdapterList(qcDataModels);
 
-                    tvPage.setText(new StringBuilder().append(Variables.currentPage)
-                            .append(" of ").append(Variables.lastPage).toString());
+                    //String txt = Variables.currentPage+" of "+Variables.lastPage;
+
+                    //tvPage.setText(txt);
                 } else {
-                    Util.alertBox(getContext(), "Empty List", "Joborders", false);
+                    Util.alertBox(mainActivity, "Empty List");
                 }
             } catch (JSONException je) {
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
@@ -336,7 +360,7 @@ public class QualityCheckFragment extends Fragment {
         refreshAction.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                setPage(Variables.currentPage);
+                setPage(Variables.currentPage, tvPage);
                 return true;
             }
         });

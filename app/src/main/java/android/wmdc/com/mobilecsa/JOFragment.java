@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.wmdc.com.mobilecsa.asynchronousclasses.CheckExpiryTask;
 import android.wmdc.com.mobilecsa.asynchronousclasses.GetInitialJoborderListTask;
+import android.wmdc.com.mobilecsa.utils.Util;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -17,60 +18,71 @@ import androidx.fragment.app.Fragment;
 
 public class JOFragment extends Fragment {
 
-    private Button btnNewJo;
-    private Button btnSearchJO;
-    private Button btnJOApproval;
-    private Button btnJOQuotationList;
-
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences sPrefs;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle instanceState) {
         View v = inflater.inflate(R.layout.jo_fragment, container, false);
-        getActivity().setTitle("Job Order");
+
+        if (getActivity() != null) {
+            getActivity().setTitle("Job Order");
+        } else {
+            Util.longToast(getContext(), "Activity is null. Cannot set title of this fragment.");
+        }
+
         setHasOptionsMenu(true);
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        sPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-        btnNewJo = v.findViewById(R.id.btnNewJO);
-        btnSearchJO = v.findViewById(R.id.btnSearchJO);
-        btnJOApproval = v.findViewById(R.id.btnJOApproval);
-        btnJOQuotationList = v.findViewById(R.id.btnJOQuotationList);
+        Button btnNewJo = v.findViewById(R.id.btnNewJO);
+        Button btnSearchJO = v.findViewById(R.id.btnSearchJO);
+        Button btnJOApproval = v.findViewById(R.id.btnJOApproval);
+        Button btnJOQuotationList = v.findViewById(R.id.btnJOQuotationList);
 
         btnJOQuotationList.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
-                new GetInitialJoborderListTask(getActivity())
-                        .execute(String.valueOf(sharedPreferences.getInt("csaId", 0)));
+                new GetInitialJoborderListTask(getActivity()).execute(String.valueOf(
+                        sPrefs.getInt("csaId", 0)));
             }
         });
 
         btnNewJo.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
-                getFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit)
-                        .replace(R.id.content_main, new InitialJobOrder())
-                        .commit();
+                if (getFragmentManager() != null) {
+                    getFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter,
+                            R.anim.exit, R.anim.pop_enter, R.anim.pop_exit).replace(
+                                    R.id.content_main, new InitialJobOrder()).commit();
+                } else {
+                    Util.alertBox(getContext(), "Fragment Manager is null. Cannot add joborder.");
+                }
             }
         });
 
         btnSearchJO.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
-                getFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit)
-                        .replace(R.id.content_main, new SearchJOFragment())
-                        .commit();
+                if (getFragmentManager() != null) {
+                    getFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter,
+                            R.anim.exit, R.anim.pop_enter, R.anim.pop_exit).replace(
+                                    R.id.content_main, new SearchJOFragment()).commit();
+                } else {
+                    Util.alertBox(getContext(),
+                            "Fragment Manager is null. Cannot search joborder.");
+                }
             }
         });
 
         btnJOApproval.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
-                getFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit)
-                        .replace(R.id.content_main, new ApprovalFragment())
-                        .commit();
+                if (getFragmentManager() != null) {
+                    getFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter,
+                                    R.anim.pop_exit).replace(R.id.content_main,
+                            new ApprovalFragment()).commit();
+                } else {
+                    Util.alertBox(getContext(),
+                            "Fragment Manager is null. Cannot go to Approval.");
+                }
             }
         });
 

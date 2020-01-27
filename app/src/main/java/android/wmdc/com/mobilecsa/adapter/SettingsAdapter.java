@@ -4,12 +4,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.preference.PreferenceManager;
 import android.text.InputType;
-import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,36 +23,40 @@ import java.util.ArrayList;
 import android.wmdc.com.mobilecsa.asynchronousclasses.CheckValidDomainTask;
 import android.wmdc.com.mobilecsa.utils.Util;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 /** Created by wmdcprog on 3/14/2018.*/
 
 public class SettingsAdapter extends RecyclerView.Adapter {
+
     private ArrayList<KeyValueInfo> settingsData;
     private Context context;
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences taskPrefs;
     private SharedPreferences.Editor spEditor;
     private WifiManager wifiManager;
 
     public SettingsAdapter(ArrayList<KeyValueInfo> settingsData, Context context) {
         this.settingsData = settingsData;
         this.context = context;
-        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
-        this.spEditor = this.sharedPreferences.edit();
+        this.taskPrefs = PreferenceManager.getDefaultSharedPreferences(this.context);
+        this.spEditor = this.taskPrefs.edit();
+        spEditor.apply();
         this.wifiManager = (WifiManager) context.getApplicationContext()
                 .getSystemService(Context.WIFI_SERVICE);
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    @NonNull
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.settings_card_layout, viewGroup,
                 false);
         return new SettingsViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         SettingsViewHolder settingsViewHolder = (SettingsViewHolder) viewHolder;
         settingsViewHolder.tvSettingsKey.setText(settingsData.get(i).getKey());
         settingsViewHolder.tvSettingsValue.setText(settingsData.get(i).getValue());
@@ -65,11 +67,11 @@ public class SettingsAdapter extends RecyclerView.Adapter {
         return settingsData.size();
     }
 
-    class SettingsViewHolder extends RecyclerView.ViewHolder {
+    private class SettingsViewHolder extends RecyclerView.ViewHolder {
         private TextView tvSettingsKey;
         private TextView tvSettingsValue;
 
-        public SettingsViewHolder(View itemView) {
+        private SettingsViewHolder(View itemView) {
             super(itemView);
             tvSettingsKey = itemView.findViewById(R.id.tvSettingsKey);
             tvSettingsValue = itemView.findViewById(R.id.tvSettingsValue);
@@ -232,7 +234,8 @@ public class SettingsAdapter extends RecyclerView.Adapter {
                             break;
                         case "Password":
                             final EditText etPassword = new EditText(context);
-                            etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                            etPassword.setInputType(InputType.TYPE_CLASS_TEXT
+                                    | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                             etPassword.setText(val);
 
                             aBox.setView(etPassword);
@@ -271,27 +274,27 @@ public class SettingsAdapter extends RecyclerView.Adapter {
 
                                         switch (which) {
                                             case 0:
-                                                address = sharedPreferences.getString("northSim", null);
+                                                address = taskPrefs.getString("northSim", null);
                                                 branch = "North SIM";
                                                 break;
                                             case 1:
-                                                address = sharedPreferences.getString("northWifi", null);
+                                                address = taskPrefs.getString("northWifi", null);
                                                 branch = "North Wifi";
                                                 break;
                                             case 2:
-                                                address = sharedPreferences.getString("centralSim", null);
+                                                address = taskPrefs.getString("centralSim", null);
                                                 branch = "Central SIM";
                                                 break;
                                             case 3:
-                                                address = sharedPreferences.getString("centralWifi", null);
+                                                address = taskPrefs.getString("centralWifi", null);
                                                 branch = "Central Wifi";
                                                 break;
                                             case 4:
-                                                address = sharedPreferences.getString("southSim", null);
+                                                address = taskPrefs.getString("southSim", null);
                                                 branch = "South SIM";
                                                 break;
                                             case 5:
-                                                address = sharedPreferences.getString("southWifi", null);
+                                                address = taskPrefs.getString("southWifi", null);
                                                 branch = "South Wifi";
                                                 break;
                                         }
@@ -299,8 +302,8 @@ public class SettingsAdapter extends RecyclerView.Adapter {
                                         new CheckValidDomainTask(tvSettingsValue, context, branch)
                                                 .execute(address);
                                     } else {
-                                        Util.alertBox(context, "You are not connected to network.\n" +
-                                                "Turn on Wifi/Data first.", "", false);
+                                        Util.alertBox(context, "You are not connected to " +
+                                                "network. Turn on Wifi/Data first.");
                                     }
                                 }
                             });
@@ -312,63 +315,50 @@ public class SettingsAdapter extends RecyclerView.Adapter {
         }
     }
 
-    public boolean isWifiEnabled() {
+    private boolean isWifiEnabled() {
         return wifiManager.isWifiEnabled();
     }
 
-    public boolean isDataEnabled() {
-        boolean mobileDataEnabled = false;
-        ConnectivityManager cm = (ConnectivityManager) context.
-                getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        try {
-            Class cmClass = Class.forName(cm.getClass().getName());
-            Method method = cmClass.getDeclaredMethod("getMobileDataEnabled");
-            method.setAccessible(true); //  make the method callable
+    private boolean isDataEnabled() {
+        if (context != null) {
+            boolean mobileDataEnabled;
 
-            mobileDataEnabled = (Boolean) method.invoke(cm);
-            return mobileDataEnabled;
-        } catch (Exception e) {
-            return mobileDataEnabled;
-        }
-    }
+            ConnectivityManager cm = (ConnectivityManager) context.getApplicationContext()
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            try {
+                Class<?> cmClass = Class.forName(cm.getClass().getName());
+                Method method = cmClass.getDeclaredMethod("getMobileDataEnabled");
+                method.setAccessible(true); //  make the method callable
 
-    public String getCurrentSSID() {
-        String ssid = null;
-
-        ConnectivityManager connManager = (ConnectivityManager)
-                context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
-
-        if (networkInfo == null) {
-            return null;
-        }
-
-        if (networkInfo.isConnected())
-        {
-            WifiInfo connectionInfo = wifiManager.getConnectionInfo();
-
-            if (connectionInfo != null &&
-                    !TextUtils.isEmpty(connectionInfo.getSSID())) {
-                ssid = connectionInfo.getSSID();
+                mobileDataEnabled = (Boolean) method.invoke(cm);
+                return mobileDataEnabled;
+            } catch (Exception e) {
+                return false;
             }
+        } else {
+            //Util.shortToast(context, "Context is null. Cannot get data enabled status.");
+            Log.e("NULL", "Context is null. Cannot get data enabled status.");
+            return false;
         }
-
-        return ssid;
     }
 
     private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager)
-                context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        return cm.getActiveNetworkInfo() != null;
+        if (context != null) {
+            ConnectivityManager cm = (ConnectivityManager) context.getSystemService(
+                    Context.CONNECTIVITY_SERVICE);
+            return cm.getActiveNetworkInfo() != null;
+        } else {
+            //Util.shortToast(context, "Activity is null. Can't get network connected status.");
+            Log.e("NULL", "Activity is null. Can't get network connected status.");
+            return false;
+        }
     }
 
-    public boolean isInternetAvailable() {
+    private boolean isInternetAvailable() {
         try {
-            InetAddress ipAddr = InetAddress.getByName("google.com");
-
-            return !ipAddr.equals("");
+            InetAddress ipAddress = InetAddress.getByName("google.com");
+            //You can replace it with your name
+            return !ipAddress.getHostAddress().equals("google");
         } catch (Exception e) {
             return false;
         }

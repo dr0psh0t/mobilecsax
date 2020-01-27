@@ -31,68 +31,70 @@ import java.util.ArrayList;
  */
 
 public class ContactsResultFragment extends Fragment {
-
     private ArrayList<Contacts> contactPages = new ArrayList<>();
-    private ContactsAdapter contactsAdapter;
-    private SharedPreferences sharedPreferences;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle state) {
         final View v = inflater.inflate(R.layout.search_viewholder_layout, container, false);
         setHasOptionsMenu(true);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        final RecyclerView recyclerView = v.findViewById(R.id.rvEntities);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),
-                LinearLayoutManager.VERTICAL));
+        if (getActivity() != null) {
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(
+                    getActivity());
 
-        Bundle bundle = this.getArguments();
+            final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
 
-        if (bundle != null) {
-            String searchResult = bundle.getString("searchResult");
+            final RecyclerView recyclerView = v.findViewById(R.id.rvEntities);
 
-            try {
-                final JSONObject jsonbObject = new JSONObject(searchResult);
-                final JSONArray jsonArray = jsonbObject.getJSONArray("result");
-                final JSONArray infoArray = jsonbObject.getJSONArray("info");
-                final JSONObject infoObj = infoArray.getJSONObject(0);
-                int arrayLength = jsonArray.length();
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),
+                    LinearLayoutManager.VERTICAL));
 
-                Variables.headerTitle = Html.fromHtml("\""+infoObj.getString("wordQuery")+"\"" +
-                        " <i><small>"+infoObj.getString("searchCount")+" results</small></i>");
-                getActivity().setTitle(Variables.headerTitle);
+            Bundle bundle = this.getArguments();
 
-                if (arrayLength > 0) {
+            if (bundle != null) {
+                String searchResult = bundle.getString("searchResult");
+                contactPages.clear();
 
-                    for (int i = 0; i < arrayLength; ++i) {
-                        JSONObject itemObj = jsonArray.getJSONObject(i);
+                try {
+                    final JSONObject jsonbObject = new JSONObject(searchResult);
+                    final JSONArray jsonArray = jsonbObject.getJSONArray("result");
+                    final JSONArray infoArray = jsonbObject.getJSONArray("info");
+                    final JSONObject infoObj = infoArray.getJSONObject(0);
+                    int arrayLength = jsonArray.length();
 
-                        contactPages.add(new Contacts(
-                            itemObj.get("label").toString(),
-                            sharedPreferences.getString("domain", null)+itemObj.get("src"),
-                            itemObj.get("salesman").toString(),
-                            23,
-                            Integer.parseInt(itemObj.get("id").toString()),
-                            itemObj.getInt("isTransferred")
-                        ));
+                    Variables.headerTitle = Html.fromHtml("\"" + infoObj.getString("wordQuery")
+                            +" <i><small>"+infoObj.getString("searchCount")+" results</small></i>");
+                    getActivity().setTitle(Variables.headerTitle);
+
+                    if (arrayLength > 0) {
+
+                        for (int i = 0; i < arrayLength; ++i) {
+                            JSONObject itemObj = jsonArray.getJSONObject(i);
+
+                            contactPages.add(new Contacts(itemObj.get("label").toString(),
+                                    sharedPreferences.getString("domain", null)+itemObj.get("src"),
+                                    itemObj.get("salesman").toString(), 23,
+                                    Integer.parseInt(itemObj.get("id").toString()),
+                                    itemObj.getInt("isTransferred")));
+                        }
+
+                        ContactsAdapter contactsAdapter = new ContactsAdapter(getActivity(),
+                                contactPages);
+                        recyclerView.setAdapter(contactsAdapter);
+                    } else {
+                        Util.alertBox(getContext(), "Empty List");
                     }
+                } catch (JSONException je) {
+                    Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
+                            "json_exception", je.toString());
 
-                    contactsAdapter = new ContactsAdapter(getActivity(), contactPages);
-                    recyclerView.setAdapter(contactsAdapter);
-                } else {
-                    Util.alertBox(getContext(), "Empty List", "Contacts", false);
+                    Util.alertBox(getActivity(), je.getMessage());
                 }
-            } catch (JSONException je) {
-                Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
-                        "json_exception", je.toString());
-
-                Util.alertBox(getActivity(), je.getMessage(), "JSONException", false);
             }
+        } else {
+            Util.alertBox(getContext(), "Activity is null. Cannot load search result");
         }
 
         return v;

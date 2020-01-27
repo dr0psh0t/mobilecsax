@@ -1,7 +1,6 @@
 package android.wmdc.com.mobilecsa.adapter;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -13,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.wmdc.com.mobilecsa.MapsActivity;
 import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.asynchronousclasses.DialogImageTask;
@@ -21,6 +19,8 @@ import android.wmdc.com.mobilecsa.model.KeyValueInfo;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONObject;
@@ -32,11 +32,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**
@@ -46,7 +48,7 @@ import java.util.ArrayList;
 public class KeyValueInfoAdapter extends
         RecyclerView.Adapter<KeyValueInfoAdapter.CustomerInfoViewHolder> {
 
-    private Context context;
+    private FragmentActivity fragmentActivity;
     private ArrayList<KeyValueInfo> customerInfos;
 
     private int kvId;
@@ -54,27 +56,26 @@ public class KeyValueInfoAdapter extends
 
     private SharedPreferences sharedPreferences;
 
-    public KeyValueInfoAdapter(Context context,
-                               ArrayList<KeyValueInfo> customerInfos,
-                               int kvId,
-                               boolean isCustomer) {
+    public KeyValueInfoAdapter(FragmentActivity activity, ArrayList<KeyValueInfo> customerInfos,
+                               int kvId, boolean isCustomer) {
 
-        this.context = context;
+        fragmentActivity = activity;
         this.customerInfos = customerInfos;
         this.kvId = kvId;
         this.isCustomer =isCustomer;
-        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(fragmentActivity);
     }
 
     @Override
-    public CustomerInfoViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.customer_information_layout,
-                viewGroup, false);
+    @NonNull
+    public CustomerInfoViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(fragmentActivity).inflate(
+                R.layout.customer_information_layout, viewGroup, false);
         return new CustomerInfoViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(CustomerInfoViewHolder customerInfoViewHolder, int i) {
+    public void onBindViewHolder(@NonNull CustomerInfoViewHolder customerInfoViewHolder, int i) {
         String key = customerInfos.get(i).getKey();
 
         switch (key) {
@@ -166,7 +167,7 @@ public class KeyValueInfoAdapter extends
         private TextView tvKey;
         private TextView tvValue;
 
-        public CustomerInfoViewHolder(View itemView) {
+        private CustomerInfoViewHolder(View itemView) {
             super(itemView);
 
             this.icon = itemView.findViewById(R.id.icon);
@@ -188,7 +189,7 @@ public class KeyValueInfoAdapter extends
                                     +"getcontactsphoto?contactId="+kvId;
                         }
 
-                        new DialogImageTask(context).execute(url);
+                        new DialogImageTask(fragmentActivity).execute(url);
                     } else if (tvKey.getText().toString().equals("Signature")) {
                         String url;
 
@@ -200,9 +201,9 @@ public class KeyValueInfoAdapter extends
                                     +"getcontactsignature?contactId="+kvId;
                         }
 
-                        new DialogImageTask(context).execute(url);
+                        new DialogImageTask(fragmentActivity).execute(url);
                     } else if (tvKey.getText().toString().equals("Location")) {
-                        final ProgressDialog progress = new ProgressDialog(context);
+                        final ProgressDialog progress = new ProgressDialog(fragmentActivity);
 
                         progress.setTitle("Maps");
                         progress.setMessage("Opening maps. Please wait...");
@@ -212,7 +213,7 @@ public class KeyValueInfoAdapter extends
                         Runnable progressRunnable = new Runnable() {
                             @Override
                             public void run() {
-                                new LocationTask().execute(""+kvId, ""+isCustomer);
+                                new LocationTask(fragmentActivity).execute(""+kvId, ""+isCustomer);
                                 progress.dismiss();
                             }
                         };
@@ -225,21 +226,28 @@ public class KeyValueInfoAdapter extends
         }
     }
 
-    private class LocationTask extends AsyncTask<String, String, String> {
+    private static class LocationTask extends AsyncTask<String, String, String> {
+
+        private WeakReference<FragmentActivity> activityWeakReference;
+
         private HttpURLConnection conn = null;
-        private URL url = null;
-        private SharedPreferences sharedPreferences;
+
+        private SharedPreferences taskPrefs;
+
+        private LocationTask(FragmentActivity activity) {
+            activityWeakReference = new WeakReference<>(activity);
+            taskPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
+        }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         }
 
         @Override
         protected String doInBackground(String[] args) {
             try {
-                url = new URL(sharedPreferences.getString("domain", null)+"getlocationandroid");
+                URL url = new URL(taskPrefs.getString("domain", null)+"getlocationandroid");
 
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(Util.READ_TIMEOUT);
@@ -254,7 +262,8 @@ public class KeyValueInfoAdapter extends
                 String query = builder.build().getEncodedQuery();
 
                 OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os,
+                        StandardCharsets.UTF_8));
 
                 writer.write(query);
                 writer.flush();
@@ -306,22 +315,30 @@ public class KeyValueInfoAdapter extends
 
         @Override
         protected void onPostExecute(String result) {
+            FragmentActivity mainActivity = activityWeakReference.get();
+
+            if (mainActivity == null || mainActivity.isFinishing()) {
+                return;
+            }
+
             try {
                 JSONObject responseJson = new JSONObject(result);
+
                 if (responseJson.getBoolean("success")) {
-                    Intent intent = new Intent(context, MapsActivity.class);
+                    Intent intent = new Intent(mainActivity, MapsActivity.class);
+
                     intent.putExtra("lat", responseJson.getDouble("lat"));
                     intent.putExtra("lng", responseJson.getDouble("lng"));
                     intent.putExtra("object", responseJson.getString("object"));
-                    context.startActivity(intent);
+
+                    mainActivity.startActivity(intent);
                 } else {
-                    Toast.makeText(context, responseJson.getString("reason"),
-                            Toast.LENGTH_LONG).show();
+                    Util.longToast(mainActivity, responseJson.getString("reason"));
                 }
             } catch (Exception e) {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.ADAPTER_PACKAGE,
                         "Exception", e.toString());
-                Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+                Util.longToast(mainActivity, e.getMessage());
             }
         }
     }

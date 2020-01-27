@@ -29,24 +29,20 @@ import java.util.Arrays;
 
 public class JoSearchInfoFragment extends Fragment {
 
-    private final ArrayList<String> LABEL = new ArrayList<>(Arrays.asList(
-            "JO #", "Customer", "Date Created", "Date Started", "Date Target",
-            "CSA", "Model", "Make", "Serial", "Image"
+    private final ArrayList<String> LABEL = new ArrayList<>(Arrays.asList("JO #", "Customer",
+            "Date Created", "Date Started", "Date Target", "CSA", "Model", "Make", "Serial", "Image"
     ));
 
-    private final ArrayList<String> JSON_KEY = new ArrayList<>(Arrays.asList(
-            "joNumber", "customer", "dateCreated", "dateStarted", "dateTarget",
-            "csa", "model", "make", "serial", "image"
-    ));
+    private final ArrayList<String> JSON_KEY = new ArrayList<>(Arrays.asList("joNumber", "customer",
+            "dateCreated", "dateStarted", "dateTarget", "csa", "model", "make", "serial", "image"));
 
     private final int LENGTH = LABEL.size();
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle instanceState) {
         View v = inflater.inflate(R.layout.jo_search_info_container, container, false);
+
         v.setPadding(20, 0, 20, 0);
 
         Bundle bundle = this.getArguments();
@@ -61,17 +57,21 @@ public class JoSearchInfoFragment extends Fragment {
 
             try {
                 JSONObject object = new JSONObject(bundle.getString("result"));
-                getActivity().setTitle(object.getString("customer"));
 
-                for (int i = 0; i < LENGTH; ++i) {
-                    jobOrderInfos.add(new KeyValueInfo(LABEL.get(i),
-                            object.getString(JSON_KEY.get(i))));
+                if (getActivity() != null) {
+                    getActivity().setTitle(object.getString("customer"));
+                } else {
+                    Util.longToast(getContext(),
+                            "Activity is null. Cannot set title of this fragment.");
                 }
 
-                JOSearchResultInfoAdapter joResAdapter =
-                        new JOSearchResultInfoAdapter(getContext(),
-                                jobOrderInfos,
-                                Integer.parseInt(object.getString("jobOrderId")));
+                for (int i = 0; i < LENGTH; ++i) {
+                    jobOrderInfos.add(new KeyValueInfo(LABEL.get(i), object.getString(
+                            JSON_KEY.get(i))));
+                }
+
+                JOSearchResultInfoAdapter joResAdapter = new JOSearchResultInfoAdapter(getContext(),
+                                jobOrderInfos, Integer.parseInt(object.getString("jobOrderId")));
 
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 recyclerView.setAdapter(joResAdapter);

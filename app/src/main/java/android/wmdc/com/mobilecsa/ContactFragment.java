@@ -27,16 +27,26 @@ public class ContactFragment extends Fragment {
     private String progLocalAddressNorth;
     private String usedUrl;
 
-    private SharedPreferences sharedPreferences;
     private FragmentTransaction fragmentTransaction;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstaceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle instanceState) {
         View v = inflater.inflate(R.layout.contact_fragment, container, false);
-        getActivity().setTitle("Contacts");
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+        SharedPreferences sharedPreferences;
+
+        if (getActivity() != null) {
+            getActivity().setTitle("Contacts");
+            sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+            localAddressNorth = sharedPreferences.getString("localAddressNorth", null);
+            publicAddressNorth = sharedPreferences.getString("publicAddressNorth", null);
+            usedUrl = sharedPreferences.getString("domain", null);
+        } else {
+            Util.longToast(getContext(),
+                    "Activity is null. Cannot set fragment title and preferences.");
+        }
 
         Button btnAddContacts = v.findViewById(R.id.btnAddContact);
         Button btnSearchContacts = v.findViewById(R.id.btnSearchContacts);
@@ -45,15 +55,11 @@ public class ContactFragment extends Fragment {
         fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter,
                 R.anim.pop_exit);
 
-        localAddressNorth = sharedPreferences.getString("localAddressNorth", null);
-        publicAddressNorth = sharedPreferences.getString("publicAddressNorth", null);
         progLocalAddressNorth = "http://192.168.1.30:8080/mcsa/";
-        usedUrl = sharedPreferences.getString("domain", null);
 
         btnAddContacts.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-
                 if (usedUrl.equals(localAddressNorth) ||
                         usedUrl.equals(publicAddressNorth) ||
                         usedUrl.equals(progLocalAddressNorth)) {
@@ -67,7 +73,8 @@ public class ContactFragment extends Fragment {
                         @Override
                         public void run() {
                             progress.cancel();
-                            fragmentTransaction.replace(R.id.content_main, new AddContactFragment());
+                            fragmentTransaction.replace(R.id.content_main,
+                                    new AddContactFragment());
                             fragmentTransaction.commit();
                         }
                     };

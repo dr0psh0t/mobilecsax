@@ -2,20 +2,18 @@ package android.wmdc.com.mobilecsa.adapter;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.model.CustomerJO;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -29,7 +27,6 @@ public class CustomerJOAdapter extends
 
     private ArrayList<CustomerJO> customerList;
     private Context context;
-    private SharedPreferences sharedPreferences;
     private EditText etCustomer;
     private Dialog dialog;
 
@@ -38,13 +35,13 @@ public class CustomerJOAdapter extends
 
         this.customerList = customerList;
         this.context = context;
-        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
         this.etCustomer = etCustomer;
         this.dialog = dialog;
     }
 
+    @NonNull
     @Override
-    public CustomerTestViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public CustomerTestViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.searchable_row_item, viewGroup,
                 false);
         return new CustomerTestViewHolder(view);
@@ -68,7 +65,7 @@ public class CustomerJOAdapter extends
         private int index;
         private LinearLayout rowItemJOCustomerLinLay;
 
-        public CustomerTestViewHolder(View itemView) {
+        private CustomerTestViewHolder(View itemView) {
             super(itemView);
             this.tvCustomerJO = itemView.findViewById(R.id.tvCustomerJO);
             this.rowItemJOCustomerLinLay = itemView.findViewById(R.id.rowItemJOCustomerLinLay);
@@ -84,7 +81,7 @@ public class CustomerJOAdapter extends
                     } catch (Exception e) {
                         Util.displayStackTraceArray(e.getStackTrace(), Variables.ADAPTER_PACKAGE,
                                 "Exception", e.toString());
-                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+                        Util.longToast(context, e.getMessage());
                     }
                 }
             });

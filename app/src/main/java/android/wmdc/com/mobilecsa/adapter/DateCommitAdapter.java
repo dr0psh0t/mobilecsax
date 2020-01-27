@@ -16,8 +16,8 @@ import android.wmdc.com.mobilecsa.model.DateCommitModel;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,14 +42,9 @@ public class DateCommitAdapter extends RecyclerView.Adapter<DateCommitAdapter.DC
         this.context = context;
     }
 
-    public void replaceAdapterList(ArrayList<DateCommitModel> dcData) {
-        this.dcData = null;
-        this.dcData = dcData;
-        this.notifyDataSetChanged();
-    }
-
+    @NonNull
     @Override
-    public DCViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public DCViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.row_item_dc, viewGroup, false);
 
         if (!heightSet) {
@@ -69,10 +64,11 @@ public class DateCommitAdapter extends RecyclerView.Adapter<DateCommitAdapter.DC
     }
 
     @Override
-    public void onBindViewHolder(DCViewHolder dcViewHolder, int i) {
+    public void onBindViewHolder(@NonNull DCViewHolder dcViewHolder, int i) {
 
         if (i % 2 != 0) {
-            dcViewHolder.rowItemDCRelLay.setBackgroundResource(R.drawable.custom_card_background_odd);
+            dcViewHolder.rowItemDCRelLay.setBackgroundResource(
+                    R.drawable.custom_card_background_odd);
         }
         else {
             dcViewHolder.rowItemDCRelLay.setBackgroundResource(R.drawable.custom_card_background_even);
@@ -107,7 +103,7 @@ public class DateCommitAdapter extends RecyclerView.Adapter<DateCommitAdapter.DC
         private TextView tvCustomerDC;
         private int index;
 
-        public DCViewHolder(View itemView) {
+        private DCViewHolder(View itemView) {
             super(itemView);
 
             rowItemDCRelLay = itemView.findViewById(R.id.rowItemDCRelLay);
@@ -150,16 +146,18 @@ public class DateCommitAdapter extends RecyclerView.Adapter<DateCommitAdapter.DC
                     bundle.putString("result", object.toString());
                     bundle.putInt("joId", dcData.get(index).getJoId());
 
-                    Fragment dateCommitFragment = new DCJOInfoFragment();
-                    ((DCJOInfoFragment) dateCommitFragment).setDateCommitAdapter(DateCommitAdapter.this);
-                    ((DCJOInfoFragment) dateCommitFragment).setDateCommitList(dcData);
-                    ((DCJOInfoFragment) dateCommitFragment).setDcJoborderId(dcData.get(index).getJoId());
+                    DCJOInfoFragment dateCommitFragment = new DCJOInfoFragment();
+                    dateCommitFragment.setDateCommitAdapter(DateCommitAdapter.this);
+                    dateCommitFragment.setDateCommitList(dcData);
+                    dateCommitFragment.setDcJoborderId(dcData.get(index).getJoId());
                     dateCommitFragment.setArguments(bundle);
 
-                    FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+                    FragmentManager fragmentManager = ((AppCompatActivity) context)
+                            .getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-                    fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+                    fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit,
+                            R.anim.pop_enter, R.anim.pop_exit);
                     fragmentTransaction.replace(R.id.content_main, dateCommitFragment);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();

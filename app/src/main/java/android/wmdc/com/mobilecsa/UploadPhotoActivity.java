@@ -268,7 +268,8 @@ public class UploadPhotoActivity extends AppCompatActivity {
                 conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
                 conn.setRequestProperty("Connection", "Keep-Alive");
                 conn.setRequestProperty("Content-Type", "multipart/form-data;boundary="+boundary);
-                conn.setRequestProperty("Cookie", "JSESSIONID="+sPrefs.getString("sessionId", null));
+                conn.setRequestProperty("Cookie", "JSESSIONID="+sPrefs.getString("sessionId",
+                        null));
                 conn.setRequestProperty("Host", "localhost:8080");
                 conn.setRequestProperty("Referer", "newquotation-android");
                 conn.setRequestProperty("X-Requested-Width", "XMLHttpRequest");
@@ -278,16 +279,15 @@ public class UploadPhotoActivity extends AppCompatActivity {
 
                 DataOutputStream outputStream = new DataOutputStream(conn.getOutputStream());
                 outputStream.writeBytes(twoHypens+boundary+lineEnd);
-                outputStream.writeBytes("Content-Disposition: form-data; name\"reference\""+lineEnd);
+                outputStream.writeBytes("Content-Disposition: form-data; " +
+                        "name\"reference\""+lineEnd);
                 outputStream.writeBytes(lineEnd);
                 outputStream.writeBytes("my_reference_text");
                 outputStream.writeBytes(lineEnd);
                 outputStream.writeBytes(twoHypens+boundary+lineEnd);
-                outputStream.writeBytes("Content-Disposition: form-data; name=\"photo\";filename\""+displayName+"\""+lineEnd);
+                outputStream.writeBytes("Content-Disposition: form-data; " +
+                        "name=\"photo\";filename\""+displayName+"\""+lineEnd);
                 outputStream.writeBytes(lineEnd);
-
-                //InputStream fileInputStream = inputStream;
-                //InputStream fileInputStream = getStreamFromUri(fileUri);
 
                 bytesAvailable = inputStream.available();
                 bufferSize = Math.min(bytesAvailable, maxBufferSize);

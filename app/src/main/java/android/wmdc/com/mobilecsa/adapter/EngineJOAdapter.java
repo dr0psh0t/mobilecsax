@@ -2,8 +2,6 @@ package android.wmdc.com.mobilecsa.adapter;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,18 +14,17 @@ import android.wmdc.com.mobilecsa.model.Engine;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 /**Created by wmdcprog on 7/2/2018.*/
 
-public class EngineJOAdapter
-        extends RecyclerView.Adapter<EngineJOAdapter.EngineViewHolder> {
+public class EngineJOAdapter extends RecyclerView.Adapter<EngineJOAdapter.EngineViewHolder> {
 
     private ArrayList<Engine> engineList;
     private Context context;
-    private SharedPreferences sharedPreferences;
 
     private EditText etEngine;
     private EditText etMakeCat;
@@ -39,14 +36,14 @@ public class EngineJOAdapter
 
         this.engineList = engineList;
         this.context = context;
-        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         this.etEngine = etEngine;
         this.etMakeCat = etMakeCat;
         this.dialog = dialog;
     }
 
+    @NonNull
     @Override
-    public EngineViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public EngineViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.engine_row_item, viewGroup,
                 false);
         return new EngineViewHolder(view);
@@ -70,7 +67,7 @@ public class EngineJOAdapter
         private int index;
         private LinearLayout rowItemJOEngineLinLay;
 
-        public EngineViewHolder(View itemView) {
+        private EngineViewHolder(View itemView) {
             super(itemView);
             this.tvEngineJO = itemView.findViewById(R.id.tvEngineJO);
             this.rowItemJOEngineLinLay = itemView.findViewById(R.id.rowItemJOEngineLinLay);
@@ -81,8 +78,10 @@ public class EngineJOAdapter
                     try {
                         etEngine.setText(engineList.get(index).getModel());
 
-                        etMakeCat.setText(engineList.get(index).getMake() + "/" +
-                                engineList.get(index).getCategory());
+                        String txt = engineList.get(index).getMake() + "/" +
+                                engineList.get(index).getCategory();
+
+                        etMakeCat.setText(txt);
 
                         Variables.modelId = engineList.get(index).getModelId();
 

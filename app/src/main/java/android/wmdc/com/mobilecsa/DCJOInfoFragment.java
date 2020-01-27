@@ -26,8 +26,6 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.navigation.NavigationView;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -40,21 +38,12 @@ import java.util.Arrays;
 
 public class DCJOInfoFragment extends Fragment {
 
-    private TextView tvSwipe;
-
     private DateCommitAdapter dateCommitAdapter;
     private ArrayList<DateCommitModel> dcData;
     private int dcJoborderId;
 
-    private final ArrayList<String> DC_KEY = new ArrayList<>(Arrays.asList(
-            "JO Number",
-            "Customer",
-            "Item Image",
-            "Date Received",
-            "Date Commit"
-    ));
-
-    private SharedPreferences sharedPreferences;
+    private final ArrayList<String> DC_KEY = new ArrayList<>(Arrays.asList("JO Number", "Customer",
+            "Item Image", "Date Received", "Date Commit"));
 
     public void setDateCommitAdapter(DateCommitAdapter dateCommitAdapter) {
         this.dateCommitAdapter = dateCommitAdapter;
@@ -76,12 +65,11 @@ public class DCJOInfoFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle instanceState) {
         View v = inflater.inflate(R.layout.dc_jo_info_viewholder_layout, container, false);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        tvSwipe = v.findViewById(R.id.tvSwipe);
 
-        NavigationView navView = getActivity().findViewById(R.id.nav_view);
+        SharedPreferences sPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        TextView tvSwipe = v.findViewById(R.id.tvSwipe);
 
         Bundle thisBundle = this.getArguments();
 
@@ -93,62 +81,63 @@ public class DCJOInfoFragment extends Fragment {
             String result = thisBundle.getString("result");
 
             try {
-                JSONObject responseJson = new JSONObject(result);
+                JSONObject resJson = new JSONObject(result);
 
-                if (responseJson.getBoolean("success")) {
-                    getActivity().setTitle(responseJson.getString("customer"));
+                if (getActivity() != null) {
+                    if (resJson.getBoolean("success")) {
+                        getActivity().setTitle(resJson.getString("customer"));
 
-                    dcInfos.add(new KeyValueInfo(DC_KEY.get(0), responseJson.getString("joNum")));
-                    dcInfos.add(new KeyValueInfo(DC_KEY.get(1), responseJson.getString("customer")));
-                    dcInfos.add(new KeyValueInfo(DC_KEY.get(2), "Tap to view item image"));
-                    dcInfos.add(new KeyValueInfo(DC_KEY.get(3), responseJson.getString("dateReceive")));
-                    dcInfos.add(new KeyValueInfo(DC_KEY.get(4), responseJson.getString("dateCommit")));
+                        dcInfos.add(new KeyValueInfo(DC_KEY.get(0), resJson.getString("joNum")));
+                        dcInfos.add(new KeyValueInfo(DC_KEY.get(1), resJson.getString("customer")));
+                        dcInfos.add(new KeyValueInfo(DC_KEY.get(2), "Tap to view item image"));
+                        dcInfos.add(new KeyValueInfo(DC_KEY.get(3), resJson.getString("dateReceive")));
+                        dcInfos.add(new KeyValueInfo(DC_KEY.get(4), resJson.getString("dateCommit")));
 
-                    DCValueInfoAdapter dcValueInfoAdapter = new DCValueInfoAdapter(
-                                    dcInfos,
-                                    getActivity(),
-                                    thisBundle.getInt("joId"),
-                                    responseJson.getBoolean("csaApproved"));
+                        DCValueInfoAdapter dcValueInfoAdapter = new DCValueInfoAdapter(dcInfos,
+                                getActivity(), thisBundle.getInt("joId"),
+                                resJson.getBoolean("csaApproved"));
 
-                    recyclerView.setAdapter(dcValueInfoAdapter);
-                    recyclerView.setItemAnimator(new DefaultItemAnimator());
-                    recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+                        recyclerView.setAdapter(dcValueInfoAdapter);
+                        recyclerView.setItemAnimator(new DefaultItemAnimator());
+                        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),
+                                LinearLayoutManager.VERTICAL));
 
-                    //  cid, akey, source, joid
-                    SwipeButton swipeButton = v.findViewById(R.id.swipe_btn);
-                    swipeButton.setTVSwipe(tvSwipe);
-                    swipeButton.setParameters(
-                            sharedPreferences.getInt("csaId", 0), "mcsa", responseJson.getInt("joId"), 0,  //  <-- DC has no work_order_id
-                            false);
+                        SwipeButton swipeButton = v.findViewById(R.id.swipe_btn);
+                        swipeButton.setTVSwipe(tvSwipe);
+                        swipeButton.setParameters(sPrefs.getInt("csaId", 0), "mcsa",
+                                resJson.getInt("joId"), 0, false);
 
-                    swipeButton.setDateCommitAdapter(dateCommitAdapter);
-                    swipeButton.setDateCommitList(dcData);
-                    swipeButton.setDcJoborderId(dcJoborderId);
+                        swipeButton.setDateCommitAdapter(dateCommitAdapter);
+                        swipeButton.setDateCommitList(dcData);
+                        swipeButton.setDcJoborderId(dcJoborderId);
 
-                    if (responseJson.getBoolean("csaApproved")) {
-                        swipeButton.setVisibility(View.GONE);
-                        tvSwipe.setVisibility(View.GONE);
+                        if (resJson.getBoolean("csaApproved")) {
+                            swipeButton.setVisibility(View.GONE);
+                            tvSwipe.setVisibility(View.GONE);
+                        }
+                    } else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                        builder.setMessage(resJson.getString("reason"));
+                        builder.setTitle("Error");
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Util.handleBackPress(null, getContext());
+                            }
+                        });
+
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
                     }
                 } else {
-                    AlertDialog.Builder builder =
-                            new AlertDialog.Builder(getActivity());
-
-                    builder.setMessage(responseJson.getString("reason"));
-                    builder.setTitle("Error");
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Util.handleBackPress(null, getContext());
-                        }
-                    });
-
-                    AlertDialog alertDialog = builder.create();
-                    alertDialog.show();
+                    Util.alertBox(getContext(),
+                            "Activity is null. Cannot adapter, recycler view and swipe button");
                 }
             } catch (JSONException je) {
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "JSONException", je.toString());
-                Util.alertBox(getActivity(), je.getMessage(), "JSON Exception", false);
+                Util.alertBox(getActivity(), je.getMessage());
             }
         }
         return v;

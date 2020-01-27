@@ -3,11 +3,9 @@ package android.wmdc.com.mobilecsa.adapter;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +20,10 @@ import android.wmdc.com.mobilecsa.model.Customer;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,11 +38,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**
@@ -52,28 +53,23 @@ import java.util.ArrayList;
 
 public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.CustomerViewHolder> {
 
-    private Context context;
+    private FragmentActivity fragmentActivity;
     private ArrayList<Customer> customers;
     private SharedPreferences sharedPreferences;
     private boolean heightSet = false;
 
-    public CustomerAdapter(Context context, ArrayList<Customer> customers) {
-        this.context = context;
+    public CustomerAdapter(FragmentActivity fragmentActivity, ArrayList<Customer> customers) {
+        this.fragmentActivity = fragmentActivity;
         this.customers = customers;
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(fragmentActivity);
     }
 
-    public void replaceAdapterList(ArrayList<Customer> customers) {
-        this.customers = null;
-        this.customers = customers;
-        this.notifyDataSetChanged();
-    }
-
+    @NonNull
     @Override
-    public CustomerViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public CustomerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.search_result_layout, viewGroup,
-                false);
+        View view = LayoutInflater.from(fragmentActivity).inflate(R.layout.search_result_layout,
+                viewGroup, false);
 
         if (!heightSet) {
             final ConstraintLayout rootLay = view.findViewById(R.id.rootLay);
@@ -96,7 +92,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
 
         entityViewHolder.tvName.setText(customers.get(i).getName());
         entityViewHolder.tvCsa.setText(customers.get(i).getCsa());
-        entityViewHolder.tvId.setText(customers.get(i).getId()+"");
+        entityViewHolder.tvId.setText(String.valueOf(customers.get(i).getId()));
         entityViewHolder.index = i;
 
         if (customers.get(i).getIsTransferred() > 0) {
@@ -107,7 +103,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
         }
 
         new SetThumbnailTask(customers.get(i).getImageUrl(),
-                entityViewHolder.ivProfile, context).execute();
+                entityViewHolder.ivProfile, fragmentActivity).execute();
     }
 
     @Override
@@ -123,7 +119,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
         private TextView tvId;
         private int index;
 
-        public CustomerViewHolder(View itemView) {
+        private CustomerViewHolder(View itemView) {
             super(itemView);
 
             ivProfile = itemView.findViewById(R.id.ivProfile);
@@ -138,20 +134,31 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
                     if (tvCsa.getText().toString().equals(
                             sharedPreferences.getString("csaFullName", null))) {
 
-                        new GetCustomerTask().execute(tvId.getText().toString(),
+                        new GetCustomerTask(fragmentActivity).execute(tvId.getText().toString(),
                                 String.valueOf(customers.get(index).isAPerson()));
                     } else {
-                        Util.alertBox(context, "Not your customer.", "Not Allowed", false);
+                        Util.alertBox(fragmentActivity, "Not your customer.", "Not Allowed", false);
                     }
                 }
             });
         }
     }
 
-    private class GetCustomerTask extends AsyncTask<String, String, String> {
-        private ProgressDialog progressDialog = new ProgressDialog(context);
+    private static class GetCustomerTask extends AsyncTask<String, String, String> {
+
+        private WeakReference<FragmentActivity> activityWeakReference;
+
+        private SharedPreferences taskPrefs;
+
         private HttpURLConnection conn = null;
-        private URL url = null;
+
+        private ProgressDialog progressDialog;
+
+        private GetCustomerTask(FragmentActivity activity) {
+            activityWeakReference = new WeakReference<>(activity);
+            progressDialog = new ProgressDialog(activity);
+            taskPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
+        }
 
         @Override
         protected void onPreExecute() {
@@ -164,10 +171,12 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
         @Override
         protected String doInBackground(String[] params) {
             try {
+                URL url;
+
                 if (Boolean.parseBoolean(params[1])) {
-                    url = new URL(sharedPreferences.getString("domain", null)+"getindividual");
+                    url = new URL(taskPrefs.getString("domain", null)+"getindividual");
                 } else {
-                    url = new URL(sharedPreferences.getString("domain", null)
+                    url = new URL(taskPrefs.getString("domain", null)
                             +"getcustomercompanybyparams");
                 }
 
@@ -182,9 +191,9 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
                 conn.setRequestProperty("Content-Type",
                         "application/x-www-form-urlencoded; charset=utf-8");
                 conn.setRequestProperty("Cookie",
-                        "JSESSIONID="+sharedPreferences.getString("sessionId", null));
+                        "JSESSIONID="+taskPrefs.getString("sessionId", null));
                 conn.setRequestProperty("Host", "localhost:8080");
-                conn.setRequestProperty("Referer", "http://localhost:8080/mcsa/httpsessiontest");
+                conn.setRequestProperty("Referer", "daryll");
                 conn.setRequestProperty("X-Requested-Width", "XMLHttpRequest");
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
@@ -194,7 +203,8 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
                 String query = builder.build().getEncodedQuery();
 
                 OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os,
+                        StandardCharsets.UTF_8));
 
                 writer.write(query);
                 writer.flush();
@@ -247,8 +257,16 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
         @Override
         protected void onPostExecute(String result) {
             progressDialog.dismiss();
+
+            FragmentActivity mainActivity = activityWeakReference.get();
+
+            if (mainActivity == null || mainActivity.isFinishing()) {
+                return;
+            }
+
             try {
                 JSONObject jsonObject = new JSONObject(result);
+
                 if (jsonObject.getBoolean("success")) {
                     Fragment cifFrag;
 
@@ -263,8 +281,10 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
                     bundle.putString("result", jsonObject.toString());
                     cifFrag.setArguments(bundle);
 
-                    FragmentManager fragmentManager = ((AppCompatActivity) context)
-                            .getSupportFragmentManager();
+                    //FragmentManager fragmentManager = ((AppCompatActivity) context)
+                            //.getSupportFragmentManager();
+
+                    FragmentManager fragmentManager = mainActivity.getSupportFragmentManager();
 
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit,
@@ -273,12 +293,13 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
                 } else {
-                    Util.alertBox(context, jsonObject.getString("reason"), "Error", false);
+                    Util.alertBox(mainActivity, jsonObject.getString("reason"));
                 }
             } catch (JSONException je) {
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.ADAPTER_PACKAGE, "",
                         je.toString());
-                Util.alertBox(context, je.getMessage(), "", false);
+
+                Util.alertBox(mainActivity, je.getMessage());
             }
         }
     }

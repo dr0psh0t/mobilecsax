@@ -17,10 +17,6 @@ import java.util.ArrayList;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private ArrayList<KeyValueInfo> settingsModelList;
-    private RecyclerView recyclerView;
-    private SharedPreferences sharedPreferences;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,10 +26,11 @@ public class SettingsActivity extends AppCompatActivity {
         toolbar.setTitle("Settings");
         setSupportActionBar(toolbar);
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(SettingsActivity.this);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(
+                SettingsActivity.this);
 
-        settingsModelList = new ArrayList<>();
-        recyclerView = findViewById(R.id.rvSettingsList);
+        ArrayList<KeyValueInfo> settingsModelList = new ArrayList<>();
+        RecyclerView recyclerView = findViewById(R.id.rvSettingsList);
 
         String northSim = sharedPreferences.getString("northSim", null);
         String centralSim = sharedPreferences.getString("centralSim", null);
@@ -65,7 +62,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         settingsModelList.add(new KeyValueInfo("", ""));
 
-        SettingsAdapter settingsAdapter = new SettingsAdapter(settingsModelList, SettingsActivity.this);
+        SettingsAdapter settingsAdapter = new SettingsAdapter(settingsModelList,
+                SettingsActivity.this);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(SettingsActivity.this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -73,7 +71,8 @@ public class SettingsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(settingsAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new DividerItemDecoration(SettingsActivity.this, LinearLayoutManager.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(SettingsActivity.this,
+                LinearLayoutManager.VERTICAL));
     }
 
     @Override

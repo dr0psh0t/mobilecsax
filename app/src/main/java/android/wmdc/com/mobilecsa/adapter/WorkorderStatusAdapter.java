@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.model.WorkOrderStatus;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -22,21 +23,22 @@ public class WorkorderStatusAdapter extends
     private ArrayList<WorkOrderStatus> workorderStatusList;
     private Context context;
 
-    public WorkorderStatusAdapter(ArrayList<WorkOrderStatus> workorderStatusList,
-                                  Context context) {
+    public WorkorderStatusAdapter(ArrayList<WorkOrderStatus> workorderStatusList, Context context) {
         this.workorderStatusList = workorderStatusList;
         this.context = context;
     }
 
     @Override
-    public WorkorderStatusViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    @NonNull
+    public WorkorderStatusViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.work_order_status_row,
                 viewGroup, false);
         return new WorkorderStatusViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(WorkorderStatusViewHolder workorderStatusViewHolder, int i) {
+    public void onBindViewHolder(@NonNull WorkorderStatusViewHolder workorderStatusViewHolder,
+                                 int i) {
         if (i % 2 != 0) {
             workorderStatusViewHolder.workorderStatusLinLay
                     .setBackgroundResource(R.drawable.custom_card_background_odd);
@@ -65,7 +67,7 @@ public class WorkorderStatusAdapter extends
         private TextView tvWorkItem;
         private ImageView ivIsCompletedIcon;
 
-        public WorkorderStatusViewHolder(View itemView) {
+        private WorkorderStatusViewHolder(View itemView) {
 
             super(itemView);
             tvWorkItem = itemView.findViewById(R.id.tvWorkItem);

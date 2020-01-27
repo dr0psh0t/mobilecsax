@@ -13,6 +13,7 @@ import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.asynchronousclasses.DialogImageTask;
 import android.wmdc.com.mobilecsa.model.KeyValueInfo;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -35,14 +36,15 @@ public class QCValueInfoAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context)
-                .inflate(R.layout.qc_jo_info_fragment, viewGroup, false);
+    @NonNull
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(context).inflate(R.layout.qc_jo_info_fragment, viewGroup,
+                false);
         return new QCInfoViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         QCInfoViewHolder qcInfoViewHolder = (QCInfoViewHolder) viewHolder;
 
         String key = customerInfo.get(i).getKey();
@@ -89,13 +91,13 @@ public class QCValueInfoAdapter extends RecyclerView.Adapter {
         return customerInfo.size();
     }
 
-    class QCInfoViewHolder extends RecyclerView.ViewHolder {
+    private class QCInfoViewHolder extends RecyclerView.ViewHolder {
         private ImageView icon;
         private TextView tvKey;
         private TextView tvValue;
         private LinearLayout rootLinLay;
 
-        public QCInfoViewHolder(View itemView) {
+        private QCInfoViewHolder(View itemView) {
             super(itemView);
 
             this.icon = itemView.findViewById(R.id.iconQCInfo);

@@ -579,7 +579,7 @@ public class UpdateInitialJOFragment extends Fragment {
             btnGallerySelection.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
-                    Util.performFileSearch(getActivity(), READ_REQUEST_CODE);
+                    //Util.performFileSearch(getActivity(), READ_REQUEST_CODE);
                 }
             });
 

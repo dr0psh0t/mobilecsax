@@ -10,11 +10,11 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import org.json.JSONObject;
 
@@ -24,18 +24,18 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class SecurityKeyActivity extends AppCompatActivity {
-    private Button buttonOkAct;
-    private EditText editTextKeyAct;
 
+    private EditText editTextKeyAct;
     private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor spEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,32 +43,42 @@ public class SecurityKeyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_security_key);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(SecurityKeyActivity.this);
-        spEditor = sharedPreferences.edit();
+        SharedPreferences.Editor spEditor = sharedPreferences.edit();
+        spEditor.apply();
 
         editTextKeyAct = findViewById(R.id.editTextKeyAct);
-        buttonOkAct = findViewById(R.id.buttonOkAct);
+        Button buttonOkAct = findViewById(R.id.buttonOkAct);
         buttonOkAct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String key = editTextKeyAct.getText().toString();
+
                 if (!key.isEmpty()) {
                     String domain = sharedPreferences.getString("domain", null);
-                    SecurityTask securityTask = new SecurityTask(Util.getProgressBar(SecurityKeyActivity.this));
-                    securityTask.execute(domain, key);
+
+                    new SecurityTask(SecurityKeyActivity.this,
+                            Util.getProgressBar(SecurityKeyActivity.this)).execute(domain, key);
                 } else {
-                    Util.alertBox(SecurityKeyActivity.this, "Empty security key.", "Empty", false);
+                    Util.alertBox(SecurityKeyActivity.this, "Empty security key.");
                 }
             }
         });
     }
 
-    private class SecurityTask extends AsyncTask<String, String, String> {
+    private static class SecurityTask extends AsyncTask<String, String, String> {
+
+        private WeakReference<FragmentActivity> activityWeakReference;
+
         private HttpURLConnection conn = null;
-        private URL url = null;
+
+        private SharedPreferences taskPrefs;
+
         private Dialog dialog;
 
-        public SecurityTask(Dialog dialog) {
+        private SecurityTask(FragmentActivity activity, Dialog dialog) {
+            activityWeakReference = new WeakReference<>(activity);
             this.dialog = dialog;
+            taskPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
         }
 
         @Override
@@ -80,7 +90,7 @@ public class SecurityKeyActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String[] params) {
             try {
-                url = new URL(params[0]+"securitykey");
+                URL url = new URL(params[0]+"securitykey");
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(10000);
                 conn.setConnectTimeout(10000);
@@ -89,19 +99,23 @@ public class SecurityKeyActivity extends AppCompatActivity {
                 conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
                 conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
                 conn.setRequestProperty("Connection", "keep-alive");
-                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-                conn.setRequestProperty("Cookie", "JSESSIONID=" + sharedPreferences.getString("sessionId", null));
+                conn.setRequestProperty("Content-Type",
+                        "application/x-www-form-urlencoded; charset=utf-8");
+                conn.setRequestProperty("Cookie",
+                        "JSESSIONID=" + taskPrefs.getString("sessionId", null));
                 conn.setRequestProperty("Host", "localhost:8080");
                 conn.setRequestProperty("Referer", "http://localhost:8080/mcsa/httpsessiontest");
                 conn.setRequestProperty("X-Requested-Width", "XMLHttpRequest");
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
 
-                Uri.Builder builder = new Uri.Builder().appendQueryParameter("securityKey", params[1]);
+                Uri.Builder builder = new Uri.Builder().appendQueryParameter("securityKey",
+                        params[1]);
                 String query = builder.build().getEncodedQuery();
 
                 OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os,
+                        StandardCharsets.UTF_8));
 
                 writer.write(query);
                 writer.flush();
@@ -153,26 +167,38 @@ public class SecurityKeyActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             this.dialog.dismiss();
+
+            FragmentActivity securityActivity = activityWeakReference.get();
+
+            if (securityActivity == null || securityActivity.isFinishing()) {
+                return;
+            }
+
             try {
                 JSONObject resJson = new JSONObject(result);
+
                 if (resJson.getBoolean("success")) {
+                    SharedPreferences.Editor spEditor = taskPrefs.edit();
+
                     spEditor.putString("user", resJson.getString("username"));
                     spEditor.putInt("csaId", resJson.getInt("csaId"));
                     spEditor.putString("csaFullName", resJson.getString("csaFullName"));
-                    spEditor.putString("publicAddressNorth", resJson.getString("publicAddressNorth"));
+                    spEditor.putString("publicAddressNorth",
+                            resJson.getString("publicAddressNorth"));
                     spEditor.putString("localAddressNorth", resJson.getString("localAddressNorth"));
                     spEditor.apply();
 
-                    Intent intent = new Intent(SecurityKeyActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    SecurityKeyActivity.this.finish();
+                    Intent intent = new Intent(securityActivity, MainActivity.class);
+                    securityActivity.startActivity(intent);
+                    securityActivity.finish();
                 } else {
-                    Util.alertBox(SecurityKeyActivity.this, resJson.getString("reason"), "", false);
+                    Util.alertBox(securityActivity, resJson.getString("reason"));
                 }
             } catch (Exception e) {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "Exception", e.toString());
-                Toast.makeText(SecurityKeyActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+
+                Util.longToast(securityActivity, e.getMessage());
             }
         }
     }

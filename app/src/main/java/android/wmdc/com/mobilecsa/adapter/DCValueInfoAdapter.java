@@ -14,6 +14,7 @@ import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.asynchronousclasses.DialogImageTask;
 import android.wmdc.com.mobilecsa.model.KeyValueInfo;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -30,8 +31,8 @@ public class DCValueInfoAdapter extends RecyclerView.Adapter<DCValueInfoAdapter.
     private int joId;
     private boolean csaApproved;
 
-    public DCValueInfoAdapter(ArrayList<KeyValueInfo> customerInfo,
-                              Context context, int joId, boolean csaApproved) {
+    public DCValueInfoAdapter(ArrayList<KeyValueInfo> customerInfo, Context context, int joId,
+                              boolean csaApproved) {
         this.context = context;
         this.customerInfo = customerInfo;
         this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -39,17 +40,18 @@ public class DCValueInfoAdapter extends RecyclerView.Adapter<DCValueInfoAdapter.
         this.csaApproved = csaApproved;
     }
 
+    @NonNull
     @Override
-    public DCInfoViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context)
-                .inflate(R.layout.dc_jo_info_fragment, viewGroup, false);
+    public DCInfoViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(context).inflate(R.layout.dc_jo_info_fragment, viewGroup,
+                false);
         return new DCInfoViewHolder(view);
     }
 
-    static DCInfoViewHolder dcInfoViewHolder = null;
+    private static DCInfoViewHolder dcInfoViewHolder = null;
 
     @Override
-    public void onBindViewHolder(DCInfoViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull DCInfoViewHolder viewHolder, int i) {
         dcInfoViewHolder = viewHolder;
         String key = customerInfo.get(i).getKey();
 
@@ -138,7 +140,7 @@ public class DCValueInfoAdapter extends RecyclerView.Adapter<DCValueInfoAdapter.
 
         private LinearLayout rootLinLay;
 
-        public DCInfoViewHolder(View itemView) {
+        private DCInfoViewHolder(View itemView) {
             super(itemView);
 
             this.icon = itemView.findViewById(R.id.iconDCInfo);

@@ -1,6 +1,7 @@
 package android.wmdc.com.mobilecsa;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,9 +29,7 @@ public class JOResultFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle instanceState) {
         final View v = inflater.inflate(R.layout.jo_search_result_container, container, false);
 
         Util.minKey(getActivity());
@@ -42,9 +41,14 @@ public class JOResultFragment extends Fragment {
                 JSONObject searchResult = new JSONObject(bundle.getString("searchResult"));
                 JSONArray joborderArray = searchResult.getJSONArray("initialJos");
 
-                getActivity().setTitle(joborderArray.getJSONObject(0).getString("customer"));
+                if (getActivity() != null) {
+                    getActivity().setTitle(joborderArray.getJSONObject(0).getString("customer"));
+                } else {
+                    Log.e("NULL", "\"getActivity()\" is null. Cannot set title of this fragment.");
+                }
 
                 int arrayLength = joborderArray.length();
+
                 for (int i = 0; i < arrayLength; ++i) {
                     JSONObject itemObject = joborderArray.getJSONObject(i);
 

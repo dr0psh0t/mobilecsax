@@ -125,8 +125,31 @@ public class Util {
         return dialog;
     }
 
-    public static void alertBox(
-            final Context context, String message, String title, final boolean minimizable) {
+    public static void shortToast(Context context, String msg) {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void longToast(Context context, String msg) {
+        Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+    }
+
+    public static void alertBox(final Context context, String msg) {
+        AlertDialog.Builder warningBox = new AlertDialog.Builder(context);
+
+        warningBox.setMessage(msg);
+        warningBox.setCancelable(false);
+
+        warningBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+
+        warningBox.create().show();
+    }
+
+    public static void alertBox(final Context context, String message, String title,
+                                final boolean minimizable) {
 
         AlertDialog.Builder warningBox = new AlertDialog.Builder(context);
 
@@ -436,12 +459,13 @@ public class Util {
         return File.createTempFile(imageFileName, ".jpg", storageDir);
     }
 
+    /*
     public static void performFileSearch(FragmentActivity activity, int request_code) {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("image/*");
         activity.startActivityForResult(intent, request_code);
-    }
+    }*/
 
     public static void copyInputStreamToFile(InputStream in, File file, Context context) {
         OutputStream out = null;

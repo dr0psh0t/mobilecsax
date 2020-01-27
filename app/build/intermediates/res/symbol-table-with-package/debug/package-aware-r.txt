@@ -2169,6 +2169,7 @@ string path_password_strike_through
 string percent_comple
 string percent_comple_value
 string photo
+string photo_prob
 string photoofyou
 string plant
 string plant_req
@@ -2222,6 +2223,7 @@ string title_activity_security_key
 string user
 string user_email
 string value
+string version
 string website
 string zip_code_req
 style AlertDialog_AppCompat

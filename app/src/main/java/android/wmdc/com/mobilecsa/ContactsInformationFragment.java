@@ -84,7 +84,7 @@ public class ContactsInformationFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle state) {
         View v = inflater.inflate(R.layout.information_viewholder_layout, container, false);
         Bundle thisBundle = this.getArguments();
 
@@ -97,42 +97,45 @@ public class ContactsInformationFragment extends Fragment {
 
             try {
                 JSONObject object = new JSONObject(result);
-                if (object.getBoolean("success")) {
-                    getActivity().setTitle(object.getString("firstname")+" "+object.getString("lastname"));
 
-                    for (int i = 0; i < LIST_LENGTH; ++i) {
-                        contactInfos.add(
-                            new KeyValueInfo(COLUMNS.get(i), object.getString(JSON_KEY.get(i)))
-                        );
-                    }
+                if (getActivity() != null) {
+                    if (object.getBoolean("success")) {
+                        getActivity().setTitle(object.getString("firstname")+" "
+                                +object.getString("lastname"));
 
-                    KeyValueInfoAdapter customerInfoAdapter = new KeyValueInfoAdapter(
-                        getActivity(),
-                        contactInfos,
-                        object.getInt("contactId"),
-                        false
-                    );
-
-                    recyclerView.setAdapter(customerInfoAdapter);
-                    recyclerView.setItemAnimator(new DefaultItemAnimator());
-                    recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-                } else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setMessage(object.getString("reason"));
-                    builder.setTitle("Error");
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Util.handleBackPress(null, getContext());
+                        for (int i = 0; i < LIST_LENGTH; ++i) {
+                            contactInfos.add(new KeyValueInfo(COLUMNS.get(i), object.getString(
+                                    JSON_KEY.get(i))));
                         }
-                    });
-                    AlertDialog alertDialog = builder.create();
-                    alertDialog.show();
+
+                        KeyValueInfoAdapter customerInfoAdapter = new KeyValueInfoAdapter(
+                                getActivity(), contactInfos, object.getInt("contactId"), false);
+
+                        recyclerView.setAdapter(customerInfoAdapter);
+                        recyclerView.setItemAnimator(new DefaultItemAnimator());
+                        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),
+                                LinearLayoutManager.VERTICAL));
+                    } else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        builder.setMessage(object.getString("reason"));
+                        builder.setTitle("Error");
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Util.handleBackPress(null, getContext());
+                            }
+                        });
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+                    }
+                } else {
+                    Util.alertBox(getContext(), "Activity is null. Cannot set fragment title, " +
+                            "create adapter and add item decoration to recycler view.");
                 }
             } catch (JSONException je) {
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "json_exception", je.toString());
-                Util.alertBox(getActivity(), je.getMessage(), "JSON Exception", false);
+                Util.alertBox(getActivity(), je.getMessage());
             }
         }
 

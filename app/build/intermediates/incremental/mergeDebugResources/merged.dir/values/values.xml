@@ -734,6 +734,7 @@
     <string name="percent_comple">Percentage Completion:</string>
     <string name="percent_comple_value"><u>100 %</u></string>
     <string name="photo">Photo</string>
+    <string name="photo_prob">Problem occured in displaying photo</string>
     <string name="photoofyou">Photo</string>
     <string name="plant">Plant</string>
     <string name="plant_req">Plant *</string>
@@ -787,6 +788,7 @@
     <string name="user">Username</string>
     <string name="user_email">android.studio@android.com</string>
     <string name="value">Value</string>
+    <string name="version">Version 2.2</string>
     <string name="website">Website</string>
     <string name="zip_code_req">Zip Code *</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>

@@ -12,11 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,30 +27,29 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 /**Created by wmdcprog on 8/29/2018.*/
 
 public class CreatePassword extends Fragment {
-    private Button btnSubmit;
+
     private EditText etPassword, etRetypePassword;
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor spEditor;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle instanceState) {
         View v = inflater.inflate(R.layout.create_password, container, false);
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        spEditor = sharedPreferences.edit();
+        SharedPreferences sPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        SharedPreferences.Editor spEditor = sPrefs.edit();
+        spEditor.apply();
 
-        btnSubmit = v.findViewById(R.id.btnSubmit);
+        Button btnSubmit = v.findViewById(R.id.btnSubmit);
         etPassword = v.findViewById(R.id.etPassword);
         etRetypePassword = v.findViewById(R.id.etRetypePassword);
 
@@ -58,29 +57,30 @@ public class CreatePassword extends Fragment {
 
         if (bundle != null) {
             final String lockedUsername = bundle.getString("lockedUsername");
+
             btnSubmit.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     String pass = etPassword.getText().toString();
                     String rePass = etRetypePassword.getText().toString();
 
                     if (pass.isEmpty() || rePass.isEmpty()) {
-                        Toast.makeText(getContext(), "Fill all fields", Toast.LENGTH_SHORT).show();
+                        Util.shortToast(getContext(), "Fill all fields");
                         return;
                     }
 
                     if (!pass.equals(rePass)) {
-                        Toast.makeText(getContext(), "Password does not match with Retype password.",
-                                Toast.LENGTH_SHORT).show();
+                        Util.shortToast(getContext(),
+                                "Password does not match with Retype password.");
                         return;
                     }
 
                     if (pass.length() < 8 || pass.length() > 32) {
-                        Toast.makeText(getContext(), "Password should be 8-32 characters in length.",
-                                Toast.LENGTH_SHORT).show();
+                        Util.shortToast(getContext(),
+                                "Password must be 8-32 characters in length.");
                         return;
                     }
 
-                    new ActivateUserTask().execute(pass, rePass, lockedUsername);
+                    new ActivateUserTask(getActivity()).execute(pass, rePass, lockedUsername);
                 }
             });
         }
@@ -88,14 +88,26 @@ public class CreatePassword extends Fragment {
         return v;
     }
 
-    private class ActivateUserTask extends AsyncTask<String, Void, String> {
-        private ProgressDialog progressDialog = new ProgressDialog(getContext());
+    private static class ActivateUserTask extends AsyncTask<String, Void, String> {
+
+        private WeakReference<FragmentActivity> activityWeakReference;
+
+        private SharedPreferences taskPrefs;
+
+        private ProgressDialog progressDialog;
+
         private HttpURLConnection conn = null;
-        private URL url = null;
+
+        private ActivateUserTask(FragmentActivity activity) {
+            activityWeakReference = new WeakReference<>(activity);
+            taskPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
+            progressDialog = new ProgressDialog(activity);
+        }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
             progressDialog.setMessage("Activating you account...");
             progressDialog.setCancelable(false);
             progressDialog.show();
@@ -103,9 +115,8 @@ public class CreatePassword extends Fragment {
 
         @Override
         protected String doInBackground(String[] params) {
-            try
-            {
-                url = new URL(sharedPreferences.getString("domain", null)+"activateuser");
+            try {
+                URL url = new URL(taskPrefs.getString("domain", null)+"activateuser");
                 conn= (HttpURLConnection) url.openConnection();
 
                 conn.setReadTimeout(Util.READ_TIMEOUT - 15000);
@@ -114,11 +125,15 @@ public class CreatePassword extends Fragment {
                 conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
                 conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
                 conn.setRequestProperty("Connection", "keep-alive");
-                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-                conn.setRequestProperty("Cookie", "JSESSIONID="+sharedPreferences.getString("sessionId", null));
+                conn.setRequestProperty("Content-Type",
+                        "application/x-www-form-urlencoded; charset=utf-8");
+                conn.setRequestProperty("Cookie", "JSESSIONID="+taskPrefs.getString("sessionId",
+                        null));
                 conn.setRequestProperty("Host", "localhost:8080");
-                conn.setRequestProperty("Referer", "http://localhost:8080/mcsa/searchcustomerfromuser");
-                conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1: Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0");
+                conn.setRequestProperty("Referer",
+                        "http://localhost:8080/mcsa/searchcustomerfromuser");
+                conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1: Win64; x64; " +
+                        "rv:59.0) Gecko/20100101 Firefox/59.0");
                 conn.setRequestProperty("X-Requested-Width", "XMLHttpRequest");
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
@@ -131,7 +146,8 @@ public class CreatePassword extends Fragment {
                 String query = builder.build().getEncodedQuery();
 
                 OutputStream outputStream = conn.getOutputStream();
-                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(
+                        outputStream, StandardCharsets.UTF_8));
 
                 bufferedWriter.write(query);
                 bufferedWriter.flush();
@@ -154,7 +170,8 @@ public class CreatePassword extends Fragment {
                         return stringBuilder.toString();
                     }
                 } else {
-                    return "{\"success\": false, \"reason\": \"Request did not succeed. Status Code: "+statusCode+"\"}";
+                    return "{\"success\": false, \"reason\": \"Request did not succeed. " +
+                            "Status Code: "+statusCode+"\"}";
                 }
             } catch (MalformedURLException | ConnectException | SocketTimeoutException e) {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
@@ -182,26 +199,37 @@ public class CreatePassword extends Fragment {
         @Override
         protected void onPostExecute(String resultString) {
             progressDialog.dismiss();
+
+            FragmentActivity loginActivity = activityWeakReference.get();
+
+            if (loginActivity == null || loginActivity.isFinishing()) {
+                return;
+            }
+
             try {
                 JSONObject result = new JSONObject(resultString);
+                SharedPreferences.Editor taskSpEditor = taskPrefs.edit();
+
                 if (result.getBoolean("success")) {
                     int csaId = result.getInt("csaId");
 
-                    spEditor.remove("csaId");
-                    spEditor.apply();
+                    taskSpEditor.remove("csaId");
+                    taskSpEditor.apply();
 
-                    spEditor.putString("user", result.getString("username"));
-                    spEditor.putInt("csaId", csaId);
-                    spEditor.putString("csaFullName", result.getString("csaFullName"));
-                    spEditor.putString("publicAddressNorth", result.getString("publicAddressNorth"));
-                    spEditor.putString("localAddressNorth", result.getString("localAddressNorth"));
-                    spEditor.apply();
+                    taskSpEditor.putString("user", result.getString("username"));
+                    taskSpEditor.putInt("csaId", csaId);
+                    taskSpEditor.putString("csaFullName", result.getString("csaFullName"));
+                    taskSpEditor.putString("publicAddressNorth",
+                            result.getString("publicAddressNorth"));
+                    taskSpEditor.putString("localAddressNorth",
+                            result.getString("localAddressNorth"));
 
-                    Intent intent = new Intent(getContext(), MainActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
+                    taskSpEditor.apply();
+
+                    loginActivity.startActivity(new Intent(loginActivity, MainActivity.class));
+                    loginActivity.finish();
                 } else {
-                    Util.alertBox(getContext(), result.getString("reason"), "", false);
+                    Util.alertBox(loginActivity, result.getString("reason"));
                 }
             } catch (JSONException je) {
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,

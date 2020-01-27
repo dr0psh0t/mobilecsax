@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.model.KeyValueInfo;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -29,9 +30,10 @@ public class JOStatusDetailsAdapter extends
     }
 
     @Override
-    public DetailsViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.jo_search_info_layout,
-                viewGroup, false);
+    @NonNull
+    public DetailsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(context).inflate(R.layout.jo_search_info_layout, viewGroup,
+                false);
         return new DetailsViewHolder(view);
     }
 
@@ -71,7 +73,7 @@ public class JOStatusDetailsAdapter extends
         private TextView tvKey;
         private TextView tvValue;
 
-        public DetailsViewHolder(View itemView) {
+        private DetailsViewHolder(View itemView) {
             super(itemView);
 
             joIcon = itemView.findViewById(R.id.joIcon);

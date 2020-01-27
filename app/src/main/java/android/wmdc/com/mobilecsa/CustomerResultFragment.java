@@ -4,13 +4,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.wmdc.com.mobilecsa.adapter.CustomerAdapter;
 import android.wmdc.com.mobilecsa.model.Customer;
 import android.wmdc.com.mobilecsa.utils.Util;
@@ -32,33 +30,34 @@ import java.util.ArrayList;
 
 public class CustomerResultFragment extends Fragment {
 
-    TextView tvPage;
-    ArrayList<Customer> customerPages = new ArrayList<>();
-
-    CustomerAdapter customerAdapter;
+    private ArrayList<Customer> customerPages = new ArrayList<>();
     SharedPreferences sharedPreferences;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle instanceState) {
         final View v = inflater.inflate(R.layout.search_viewholder_layout, container, false);
+
         setHasOptionsMenu(true);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         Bundle bundle = this.getArguments();
 
-        tvPage = v.findViewById(R.id.tvPage);
-
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         final RecyclerView recyclerView = v.findViewById(R.id.rvEntities);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),
-                LinearLayoutManager.VERTICAL));
+
+        if (getActivity() != null) {
+            recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),
+                    LinearLayoutManager.VERTICAL));
+        } else {
+            Util.longToast(getContext(),
+                    "Activity is null. Cannot add item decoration to recycler view.");
+        }
 
         if (bundle != null) {
             final String searchResult = bundle.getString("searchResult");
+            customerPages.clear();
 
             try {
 
@@ -87,15 +86,14 @@ public class CustomerResultFragment extends Fragment {
                     ));
                 }
 
-                customerAdapter = new CustomerAdapter(getActivity(), customerPages);
-                recyclerView.setAdapter(customerAdapter);
+                recyclerView.setAdapter(new CustomerAdapter(getActivity(), customerPages));
 
             } catch (Exception je) {
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "exception", je.toString());
             }
         } else {
-            Util.alertBox(getContext(), "A bundle containing the result is empty", "", false);
+            Util.alertBox(getContext(), "A bundle containing the result is empty.");
         }
 
         return v;

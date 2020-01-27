@@ -16,6 +16,7 @@ import android.wmdc.com.mobilecsa.model.QCDataModel;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -48,7 +49,8 @@ public class QCAdapter extends RecyclerView.Adapter<QCAdapter.QCViewHolder> {
     }
 
     @Override
-    public QCViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    @NonNull
+    public QCViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.row_item_qc, viewGroup, false);
 
         if (!heightSet) {
@@ -68,7 +70,7 @@ public class QCAdapter extends RecyclerView.Adapter<QCAdapter.QCViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(QCViewHolder qcViewHolder, int i) {
+    public void onBindViewHolder(@NonNull QCViewHolder qcViewHolder, int i) {
         if (i % 2 != 0) {
             qcViewHolder.rowItemQCRelLay.setBackgroundResource(
                     R.drawable.custom_card_background_odd);
@@ -93,7 +95,7 @@ public class QCAdapter extends RecyclerView.Adapter<QCAdapter.QCViewHolder> {
 
         private int index;
 
-        public QCViewHolder(View itemView) {
+        private QCViewHolder(View itemView) {
             super(itemView);
 
             rowItemQCRelLay = itemView.findViewById(R.id.rowItemQCLinLay);

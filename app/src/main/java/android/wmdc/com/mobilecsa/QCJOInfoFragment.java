@@ -24,8 +24,6 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.navigation.NavigationView;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,19 +35,10 @@ import java.util.Arrays;
  */
 
 public class QCJOInfoFragment extends Fragment {
-    private final ArrayList<String> QC_KEY = new ArrayList<>(Arrays.asList(
-            "JO Number",
-            "Customer ID",
-            "Model",
-            "Make",
-            "Category",
-            "Serial",
-            "Date Received",
-            "Date Committed",
-            "View Image"
-    ));
 
-    private SharedPreferences sharedPreferences;
+    private final ArrayList<String> QC_KEY = new ArrayList<>(Arrays.asList("JO Number",
+            "Customer ID", "Model", "Make", "Category", "Serial", "Date Received", "Date Committed",
+            "View Image"));
 
     @Override
     public void onResume() {
@@ -63,18 +52,21 @@ public class QCJOInfoFragment extends Fragment {
         Log.d("DESTROY", "FRAGMENT IS DESTROYED");
     }
 
-    Toolbar toolbar;
+    private Toolbar toolbar;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle instanceState) {
         View v = inflater.inflate(R.layout.qc_jo_info_viewholder_layout, container, false);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-        toolbar = getActivity().findViewById(R.id.toolbar);
-        toolbar.setLogo(R.drawable.ic_action_white_domain);
+        SharedPreferences sPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+        if (getActivity() != null) {
+            toolbar = getActivity().findViewById(R.id.toolbar);
+            toolbar.setLogo(R.drawable.ic_action_white_domain);
+        } else {
+            Util.longToast(getContext(), "Activity is null. Cannot inflate toolbar.");
+        }
 
         Bundle thisBundle = this.getArguments();
 
@@ -127,7 +119,7 @@ public class QCJOInfoFragment extends Fragment {
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "JSONException", je.toString());
 
-                Util.alertBox(getActivity(), je.getMessage(), "JSON Exception", false);
+                Util.alertBox(getActivity(), je.getMessage());
             }
 
             //  fill work order list
@@ -136,7 +128,7 @@ public class QCJOInfoFragment extends Fragment {
             ArrayList<WorkOrderModel> workOrderList = new ArrayList<>();
 
             new GetWorkOrderQCList(getActivity(), workOrderRecyclerView, workOrderList).execute(
-                    String.valueOf(sharedPreferences.getInt("csaId", 0)), "mcsa",
+                    String.valueOf(sPrefs.getInt("csaId", 0)), "mcsa",
                     String.valueOf(thisBundle.getInt("joid")));
         }
 

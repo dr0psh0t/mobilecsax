@@ -9,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import android.wmdc.com.mobilecsa.adapter.InitialJoborderAdapter;
 import android.wmdc.com.mobilecsa.asynchronousclasses.DeleteInitialJoborderTask;
 import android.wmdc.com.mobilecsa.asynchronousclasses.UpdateInitialJoborderTransferredTask;
@@ -33,97 +32,111 @@ import java.util.ArrayList;
 
 public class InitialJoborderFragment extends Fragment {
 
-    private InitialJoborderAdapter initialJoborderAdapter;
-    private RecyclerView initialJoborderRecyclerView;
-    private ArrayList<KeyValueInfo> initialJoKeyValue;
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle instanceState) {
         View v = inflater.inflate(R.layout.initial_joborder_fragment, container, false);
-        Bundle bundle = this.getArguments();
+
         setHasOptionsMenu(true);
-        getActivity().setTitle("");
+        Bundle bundle = this.getArguments();
 
-        initialJoborderRecyclerView = v.findViewById(R.id.rvInitialJOInfo);
-        initialJoKeyValue = new ArrayList<>();
+        if (bundle != null) {
 
-        try {
+            if (getActivity() != null) {
+                getActivity().setTitle("");
+            } else {
+                Util.longToast(getContext(),
+                        "Activity is null. Cannot set title of this fragment.");
+            }
 
-            JSONObject initJo = new JSONObject(bundle.getString("quotation"));
-            int initJoId = initJo.getInt("initialJoborderId");
+            RecyclerView initJoRecView = v.findViewById(R.id.rvInitialJOInfo);
+            ArrayList<KeyValueInfo> initJoKeyVal = new ArrayList<>();
 
-            initialJoKeyValue.add(new KeyValueInfo("Status", getStatus(initJo.getInt("isAdded"))));
-            initialJoKeyValue.add(new KeyValueInfo("JO Number", initJo.getString("joNumber")));
-            initialJoKeyValue.add(new KeyValueInfo("Customer", initJo.getString("customer")));
-            initialJoKeyValue.add(new KeyValueInfo("PO Date", initJo.getString("poDate")));
+            try {
 
-            String po = initJo.getString("purchaseOrder");
-            String mobile = initJo.getString("mobile");
-            String refNo = initJo.getString("referenceNo");
-            String model = String.valueOf(initJo.getInt("model"));
-            String make = initJo.getString("make");
-            String cat = initJo.getString("category");
+                JSONObject initJo = new JSONObject(bundle.getString("quotation"));
+                int initJoId = initJo.getInt("initialJoborderId");
 
-            if (po.equals("0")) { po = "- - - - - -"; }
-            if (mobile.equals("0")) { mobile = "- - - - - -"; }
-            if (refNo.isEmpty() || refNo.equals("0")) { refNo = "- - - - - -"; }
-            if (model.equals("0")) { model = make = cat = "- - - - - -"; }
+                initJoKeyVal.add(new KeyValueInfo("Status", getStatus(initJo.getInt("isAdded"))));
+                initJoKeyVal.add(new KeyValueInfo("JO Number", initJo.getString("joNumber")));
+                initJoKeyVal.add(new KeyValueInfo("Customer", initJo.getString("customer")));
+                initJoKeyVal.add(new KeyValueInfo("PO Date", initJo.getString("poDate")));
 
-            initialJoKeyValue.add(new KeyValueInfo("Purchase Order", po));
-            initialJoKeyValue.add(new KeyValueInfo("Mobile", mobile));
-            initialJoKeyValue.add(new KeyValueInfo("Reference No", refNo));
-            initialJoKeyValue.add(new KeyValueInfo("Engine Model", model));
-            initialJoKeyValue.add(new KeyValueInfo("Engine Make", make));
-            initialJoKeyValue.add(new KeyValueInfo("Engine Category", cat));
-            initialJoKeyValue.add(new KeyValueInfo("Serial No", initJo.getString("serialNo")));
-            initialJoKeyValue.add(new KeyValueInfo("Date Received",
-                    initJo.getString("dateReceived")));
-            initialJoKeyValue.add(new KeyValueInfo("Date Committed",
-                    initJo.getString("dateCommitted")));
-            initialJoKeyValue.add(new KeyValueInfo("Remarks",
-                    Util.filterSpecialChars(initJo.getString("remarks"))));
-            initialJoKeyValue.add(new KeyValueInfo("View Image", "Tap to view image"));
-            initialJoKeyValue.add(new KeyValueInfo("View Signature", "Tap to view signature"));
+                String po = initJo.getString("purchaseOrder");
+                String mobile = initJo.getString("mobile");
+                String refNo = initJo.getString("referenceNo");
+                String model = String.valueOf(initJo.getInt("model"));
+                String make = initJo.getString("make");
+                String cat = initJo.getString("category");
 
-            initialJoborderAdapter = new InitialJoborderAdapter(getActivity(), initialJoKeyValue,
-                    initJoId);
+                if (po.equals("0")) {
+                    po = "- - - - - -";
+                }
+                if (mobile.equals("0")) {
+                    mobile = "- - - - - -";
+                }
+                if (refNo.isEmpty() || refNo.equals("0")) {
+                    refNo = "- - - - - -";
+                }
+                if (model.equals("0")) {
+                    model = make = cat = "- - - - - -";
+                }
 
-            initialJoborderRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            initialJoborderRecyclerView.setAdapter(initialJoborderAdapter);
-            initialJoborderRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                initJoKeyVal.add(new KeyValueInfo("Purchase Order", po));
+                initJoKeyVal.add(new KeyValueInfo("Mobile", mobile));
+                initJoKeyVal.add(new KeyValueInfo("Reference No", refNo));
+                initJoKeyVal.add(new KeyValueInfo("Engine Model", model));
+                initJoKeyVal.add(new KeyValueInfo("Engine Make", make));
+                initJoKeyVal.add(new KeyValueInfo("Engine Category", cat));
+                initJoKeyVal.add(new KeyValueInfo("Serial No", initJo.getString("serialNo")));
+                initJoKeyVal.add(new KeyValueInfo("Date Received",
+                        initJo.getString("dateReceived")));
+                initJoKeyVal.add(new KeyValueInfo("Date Committed",
+                        initJo.getString("dateCommitted")));
+                initJoKeyVal.add(new KeyValueInfo("Remarks",
+                        Util.filterSpecialChars(initJo.getString("remarks"))));
+                initJoKeyVal.add(new KeyValueInfo("View Image", "Tap to view image"));
+                initJoKeyVal.add(new KeyValueInfo("View Signature", "Tap to view signature"));
 
-            initialJoborderRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),
-                    LinearLayoutManager.VERTICAL));
+                InitialJoborderAdapter initialJoborderAdapter = new InitialJoborderAdapter(
+                        getActivity(), initJoKeyVal, initJoId);
 
-            objects.put("initialJoborderId", initJoId);
-            objects.put("purchaseOrder", initJo.getString("purchaseOrder"));
-            objects.put("referenceNo", initJo.getString("referenceNo"));
-            objects.put("mobile", initJo.getString("mobile"));
-            objects.put("poDate", initJo.getString("poDate"));
-            objects.put("serialNo", initJo.getString("serialNo"));
-            objects.put("dateReceive", initJo.getString("dateReceived"));
-            objects.put("dateCommit", initJo.getString("dateCommitted"));
-            objects.put("remarks", Util.filterSpecialChars(initJo.getString("remarks")));
-            objects.put("model", String.valueOf(initJo.getInt("model")));
-            objects.put("cat", initJo.getString("category"));
-            objects.put("make", initJo.getString("make"));
-            objects.put("joNumber", initJo.getString("joNumber"));
-            objects.put("customerId", initJo.getInt("customerId"));
-            objects.put("customer", initJo.getString("customer"));
-            objects.put("source", initJo.getString("source"));
+                initJoRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                initJoRecView.setAdapter(initialJoborderAdapter);
+                initJoRecView.setItemAnimator(new DefaultItemAnimator());
 
-        } catch (JSONException je) {
-            Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
-                    "json_exception", je.toString());
-            Util.alertBox(getActivity(), je.getMessage(), "Error", false);
+                initJoRecView.addItemDecoration(new DividerItemDecoration(getActivity(),
+                        LinearLayoutManager.VERTICAL));
+
+                objects.put("initialJoborderId", initJoId);
+                objects.put("purchaseOrder", initJo.getString("purchaseOrder"));
+                objects.put("referenceNo", initJo.getString("referenceNo"));
+                objects.put("mobile", initJo.getString("mobile"));
+                objects.put("poDate", initJo.getString("poDate"));
+                objects.put("serialNo", initJo.getString("serialNo"));
+                objects.put("dateReceive", initJo.getString("dateReceived"));
+                objects.put("dateCommit", initJo.getString("dateCommitted"));
+                objects.put("remarks", Util.filterSpecialChars(initJo.getString("remarks")));
+                objects.put("model", String.valueOf(initJo.getInt("model")));
+                objects.put("cat", initJo.getString("category"));
+                objects.put("make", initJo.getString("make"));
+                objects.put("joNumber", initJo.getString("joNumber"));
+                objects.put("customerId", initJo.getInt("customerId"));
+                objects.put("customer", initJo.getString("customer"));
+                objects.put("source", initJo.getString("source"));
+
+            } catch (JSONException je) {
+                Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
+                        "json_exception", je.toString());
+                Util.alertBox(getActivity(), je.getMessage(), "Error", false);
+            }
+        } else {
+            Util.alertBox(getActivity(), "Bundle is null. Cannot get data of initial joborder.");
         }
 
         return v;
     }
 
-    public String getStatus(int isAdded) {
+    private String getStatus(int isAdded) {
         if (isAdded == 0) {
             return "Pending";
         } else if (isAdded == 1) {
@@ -155,35 +168,41 @@ public class InitialJoborderFragment extends Fragment {
             public boolean onMenuItemClick(MenuItem item) {
 
                 if (objects.toString().isEmpty()) {
-                    Toast.makeText(getContext(), "Empty", Toast.LENGTH_SHORT).show();
+                    Util.shortToast(getContext(), "Empty");
                     return false;
                 }
 
-                AlertDialog.Builder aBox = new AlertDialog.Builder(getContext());
-                aBox.setTitle("Confirm");
-                aBox.setMessage("Do you really want to delete joborder?");
-                aBox.setCancelable(false);
+                if (getContext() != null) {
+                    AlertDialog.Builder aBox = new AlertDialog.Builder(getContext());
+                    aBox.setTitle("Confirm");
+                    aBox.setMessage("Do you really want to delete joborder?");
+                    aBox.setCancelable(false);
 
-                aBox.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        try {
-                            String initialJoId = String.valueOf(objects.getInt("initialJoborderId"));
-                            new DeleteInitialJoborderTask(getContext()).execute(initialJoId);
-                        } catch (JSONException je) {
-                            Util.alertBox(getContext(), je.toString(), "Error JSON", false);
+                    aBox.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            try {
+                                String initialJoId = String.valueOf(
+                                        objects.getInt("initialJoborderId"));
+                                new DeleteInitialJoborderTask(getContext()).execute(initialJoId);
+                            } catch (JSONException je) {
+                                Util.alertBox(getContext(), je.toString());
+                            }
                         }
-                    }
-                });
+                    });
 
-                aBox.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
+                    aBox.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
 
-                aBox.create().show();
+                    aBox.create().show();
+
+                } else {
+                    Util.alertBox(getActivity(), "Context is null. Cannot open dialog");
+                }
 
                 return false;
             }
@@ -211,12 +230,16 @@ public class InitialJoborderFragment extends Fragment {
                     public void run() {
                         progress.cancel();
 
-                        getFragmentManager().beginTransaction()
-                                .setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter,
-                                        R.anim.pop_exit)
-                                .replace(R.id.content_main, updateInitialJOFragment)
-                                .addToBackStack(null)
-                                .commit();
+                        if (getFragmentManager() != null) {
+                            getFragmentManager().beginTransaction()
+                                    .setCustomAnimations(R.anim.enter, R.anim.exit,
+                                            R.anim.pop_enter, R.anim.pop_exit)
+                                    .replace(R.id.content_main, updateInitialJOFragment)
+                                    .addToBackStack(null) .commit();
+                        } else {
+                            Util.longToast(getActivity(),
+                                    "Fragment Manager is null. Cannot update joborder");
+                        }
                     }
                 };
 
@@ -232,31 +255,40 @@ public class InitialJoborderFragment extends Fragment {
             public boolean onMenuItemClick(MenuItem item) {
 
                 if (objects.toString().isEmpty()) {
-                    Toast.makeText(getContext(), "Empty", Toast.LENGTH_SHORT).show();
+                    Util.shortToast(getContext(), "Empty");
                     return false;
                 }
 
-                AlertDialog.Builder aBox = new AlertDialog.Builder(getContext());
-                aBox.setTitle("Confirm");
-                aBox.setMessage("Confirm Transfer?");
-                aBox.setCancelable(false);
+                if (getContext() != null) {
+                    AlertDialog.Builder aBox = new AlertDialog.Builder(getContext());
 
-                aBox.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        try {
-                            new UpdateInitialJoborderTransferredTask(getContext()).execute(
-                                    String.valueOf(objects.getInt("initialJoborderId")));
-                        } catch (JSONException je) {
-                            Util.alertBox(getContext(), je.getMessage(), "Error JSON", false);
+                    aBox.setTitle("Confirm");
+                    aBox.setMessage("Confirm Transfer?");
+                    aBox.setCancelable(false);
+
+                    aBox.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            try {
+                                new UpdateInitialJoborderTransferredTask(getContext()).execute(
+                                        String.valueOf(objects.getInt("initialJoborderId")));
+
+                            } catch (JSONException je) {
+                                Util.alertBox(getContext(), je.getMessage());
+                            }
                         }
-                    }
-                });
+                    });
 
-                aBox.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) { dialog.cancel(); }
-                });
+                    aBox.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
 
-                aBox.create().show();
+                    aBox.create().show();
+                } else {
+                    Util.alertBox(getActivity(), "Activity is null. Cannot open dialog.");
+                }
+
                 return false;
             }
         });

@@ -31,8 +31,7 @@ public class WorkOrderFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle instanceState) {
 
         View v = inflater.inflate(R.layout.workorder_fragment, container, false);
         LinearLayout linearLayoutTitle = v.findViewById(R.id.linearLayoutTitle);
@@ -59,7 +58,7 @@ public class WorkOrderFragment extends Fragment {
                             itemObject.getString("status")
                     ));
 
-                    WorkOrdersAdapter workOrdersAdapter = new WorkOrdersAdapter(getContext(),
+                    WorkOrdersAdapter workOrdersAdapter = new WorkOrdersAdapter(getActivity(),
                             workOrders, fabOptions, fabExtension, linearLayoutTitle);
                     RecyclerView recyclerViewWorkOrders =
                             v.findViewById(R.id.recyclerViewWorkOrders);
@@ -67,12 +66,13 @@ public class WorkOrderFragment extends Fragment {
                     recyclerViewWorkOrders.setAdapter(workOrdersAdapter);
                 }
             } catch (JSONException je) {
-                Util.alertBox(getContext(), "JSON Error occured", "Workorder", false);
+                Util.alertBox(getContext(), je.getMessage());
+
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "JSONException", je.toString());
             }
         } else {
-            Util.alertBox(getContext(), "Bundle containing data is null.", "Bundle empty", false);
+            Util.alertBox(getContext(), "Bundle containing data is null.");
         }
 
         return v;
