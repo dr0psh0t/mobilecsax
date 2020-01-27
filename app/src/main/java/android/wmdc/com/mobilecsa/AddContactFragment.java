@@ -341,7 +341,7 @@ public class AddContactFragment extends Fragment {
                 Util.shortToast(getActivity(), "Include signature.");
                 return;
             }
-            new DialogSignatureTask(getContext()).execute(contactSignature);
+            new DialogSignatureTask(getActivity()).execute(contactSignature);
         }
     };
 
@@ -355,7 +355,7 @@ public class AddContactFragment extends Fragment {
                 Util.shortToast(getActivity(), "Include photo.");
                 return;
             }
-            new DialogImageUriTask(getContext()).execute(fileUri);
+            new DialogImageUriTask(getActivity()).execute(fileUri);
         }
     };
 

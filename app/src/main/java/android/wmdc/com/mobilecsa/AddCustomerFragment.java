@@ -322,7 +322,7 @@ public class AddCustomerFragment extends Fragment {
                 Util.longToast(getActivity(), "Include signature.");
                 return;
             }
-            new DialogSignatureTask(getContext()).execute(customerSignature);
+            new DialogSignatureTask(getActivity()).execute(customerSignature);
         }
     };
 
@@ -336,7 +336,7 @@ public class AddCustomerFragment extends Fragment {
                 Util.shortToast(getActivity(), "Include photo.");
                 return;
             }
-            new DialogImageUriTask(getContext()).execute(fileUri);
+            new DialogImageUriTask(getActivity()).execute(fileUri);
         }
     };
 

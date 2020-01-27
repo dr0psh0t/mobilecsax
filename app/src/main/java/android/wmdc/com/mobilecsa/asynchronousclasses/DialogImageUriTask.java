@@ -1,7 +1,6 @@
 package android.wmdc.com.mobilecsa.asynchronousclasses;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -10,30 +9,25 @@ import android.os.AsyncTask;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.RelativeLayout;
+import android.wmdc.com.mobilecsa.utils.Util;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
 
 import com.github.chrisbanes.photoview.PhotoView;
 
-public class DialogImageUriTask extends AsyncTask<Uri, String, Uri> {
-    private Context context;
-    PhotoView imageView;
-    Dialog builder;
+import java.lang.ref.WeakReference;
 
-    public DialogImageUriTask(Context context) {
-        this.context = context;
+public class DialogImageUriTask extends AsyncTask<Uri, String, Uri> {
+
+    private WeakReference<FragmentActivity> weakReference;
+
+    public DialogImageUriTask(FragmentActivity activity) {
+        this.weakReference = new WeakReference<>(activity);
     }
 
     protected void onPreExecute() {
         super.onPreExecute();
-
-        imageView = new PhotoView(context);
-        builder = new Dialog(context);
-
-        builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        builder.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        builder.addContentView(imageView, new RelativeLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
     }
 
     protected Uri doInBackground(Uri[] uris) {
@@ -42,10 +36,26 @@ public class DialogImageUriTask extends AsyncTask<Uri, String, Uri> {
 
     protected void onPostExecute(Uri uri) {
         if (uri != null) {
-            imageView.setImageURI(uri);
+            PhotoView photoView = new PhotoView(weakReference.get());
+
+            Dialog builder = new Dialog(weakReference.get());
+
+            builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+            if (builder.getWindow() != null) {
+                builder.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            } else {
+                Util.longToast(weakReference.get(),
+                        "Builder Window is null. Cannot set background drawable to dialog.");
+            }
+
+            builder.addContentView(photoView, new RelativeLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
+            photoView.setImageURI(uri);
             builder.show();
         } else {
-            AlertDialog.Builder warningBox = new AlertDialog.Builder(context);
+            AlertDialog.Builder warningBox = new AlertDialog.Builder(weakReference.get());
 
             warningBox.setMessage("A problem has occured in displaying Photo.");
             warningBox.setTitle("Error");

@@ -25,6 +25,7 @@ import android.wmdc.com.mobilecsa.utils.Util;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 /** Created by wmdcprog on 3/14/2018.*/
@@ -32,25 +33,25 @@ import androidx.recyclerview.widget.RecyclerView;
 public class SettingsAdapter extends RecyclerView.Adapter {
 
     private ArrayList<KeyValueInfo> settingsData;
-    private Context context;
+    private FragmentActivity activity;
     private SharedPreferences taskPrefs;
     private SharedPreferences.Editor spEditor;
     private WifiManager wifiManager;
 
-    public SettingsAdapter(ArrayList<KeyValueInfo> settingsData, Context context) {
+    public SettingsAdapter(ArrayList<KeyValueInfo> settingsData, FragmentActivity activity) {
         this.settingsData = settingsData;
-        this.context = context;
-        this.taskPrefs = PreferenceManager.getDefaultSharedPreferences(this.context);
+        this.activity = activity;
+        this.taskPrefs = PreferenceManager.getDefaultSharedPreferences(this.activity);
         this.spEditor = this.taskPrefs.edit();
         spEditor.apply();
-        this.wifiManager = (WifiManager) context.getApplicationContext()
-                .getSystemService(Context.WIFI_SERVICE);
+        this.wifiManager = (WifiManager) activity.getApplicationContext().getSystemService(
+                Context.WIFI_SERVICE);
     }
 
     @Override
     @NonNull
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.settings_card_layout, viewGroup,
+        View view = LayoutInflater.from(activity).inflate(R.layout.settings_card_layout, viewGroup,
                 false);
         return new SettingsViewHolder(view);
     }
@@ -81,10 +82,10 @@ public class SettingsAdapter extends RecyclerView.Adapter {
                     String key = tvSettingsKey.getText().toString();
                     String val = tvSettingsValue.getText().toString();
 
-                    final EditText editText = new EditText(context);
+                    final EditText editText = new EditText(activity);
                     editText.setText(val);
 
-                    AlertDialog.Builder aBox = new AlertDialog.Builder(context);
+                    AlertDialog.Builder aBox = new AlertDialog.Builder(activity);
                     aBox.setView(editText);
 
                     switch (key) {
@@ -233,7 +234,7 @@ public class SettingsAdapter extends RecyclerView.Adapter {
                             aBox.create().show();
                             break;
                         case "Password":
-                            final EditText etPassword = new EditText(context);
+                            final EditText etPassword = new EditText(activity);
                             etPassword.setInputType(InputType.TYPE_CLASS_TEXT
                                     | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                             etPassword.setText(val);
@@ -258,7 +259,7 @@ public class SettingsAdapter extends RecyclerView.Adapter {
                             break;
                         case "Domain":
 
-                            AlertDialog.Builder aBuilder = new AlertDialog.Builder(context);
+                            AlertDialog.Builder aBuilder = new AlertDialog.Builder(activity);
 
                             String[] plantURLs = {"North SIM", "North Wifi", "Central SIM",
                                     "Central Wifi", "South SIM", "South Wifi"};
@@ -299,10 +300,10 @@ public class SettingsAdapter extends RecyclerView.Adapter {
                                                 break;
                                         }
 
-                                        new CheckValidDomainTask(tvSettingsValue, context, branch)
+                                        new CheckValidDomainTask(activity, tvSettingsValue, branch)
                                                 .execute(address);
                                     } else {
-                                        Util.alertBox(context, "You are not connected to " +
+                                        Util.alertBox(activity, "You are not connected to " +
                                                 "network. Turn on Wifi/Data first.");
                                     }
                                 }
@@ -320,10 +321,10 @@ public class SettingsAdapter extends RecyclerView.Adapter {
     }
 
     private boolean isDataEnabled() {
-        if (context != null) {
+        if (activity != null) {
             boolean mobileDataEnabled;
 
-            ConnectivityManager cm = (ConnectivityManager) context.getApplicationContext()
+            ConnectivityManager cm = (ConnectivityManager) activity.getApplicationContext()
                     .getSystemService(Context.CONNECTIVITY_SERVICE);
             try {
                 Class<?> cmClass = Class.forName(cm.getClass().getName());
@@ -343,8 +344,8 @@ public class SettingsAdapter extends RecyclerView.Adapter {
     }
 
     private boolean isNetworkConnected() {
-        if (context != null) {
-            ConnectivityManager cm = (ConnectivityManager) context.getSystemService(
+        if (activity != null) {
+            ConnectivityManager cm = (ConnectivityManager) activity.getSystemService(
                     Context.CONNECTIVITY_SERVICE);
             return cm.getActiveNetworkInfo() != null;
         } else {

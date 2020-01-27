@@ -749,6 +749,7 @@
     <string name="qc_ico_img">qcicoimg</string>
     <string name="re_pass">Retype Password</string>
     <string name="ref_no">Reference No *</string>
+    <string name="relogin">Relogin to continue</string>
     <string name="remarks_hint">Enter remarks here</string>
     <string name="remarks_req">Remarks *</string>
     <string name="retype_pass">Retype Password</string>

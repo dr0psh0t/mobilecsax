@@ -1,6 +1,5 @@
 package android.wmdc.com.mobilecsa.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,10 @@ import android.wmdc.com.mobilecsa.asynchronousclasses.GetJoWoStatusListTask;
 import android.wmdc.com.mobilecsa.model.JobOrder;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 /**
@@ -21,19 +22,19 @@ import java.util.ArrayList;
 
 public class JOResultAdapter extends RecyclerView.Adapter<JOResultAdapter.JOViewHolder> {
 
-    private Context context;
+    private WeakReference<FragmentActivity> weakReference;
     private ArrayList<JobOrder> jobOrders;
 
-    public JOResultAdapter(Context context, ArrayList<JobOrder> jobOrders) {
-        this.context = context;
+    public JOResultAdapter(FragmentActivity activity, ArrayList<JobOrder> jobOrders) {
+        this.weakReference = new WeakReference<>(activity);
         this.jobOrders = jobOrders;
     }
 
     @Override
     @NonNull
     public JOViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.jo_search_result_row_item,
-                viewGroup, false);
+        View view = LayoutInflater.from(weakReference.get()).inflate(
+                R.layout.jo_search_result_row_item, viewGroup, false);
         return new JOViewHolder(view);
     }
 
@@ -74,7 +75,7 @@ public class JOResultAdapter extends RecyclerView.Adapter<JOResultAdapter.JOView
 
             itemView.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View view) {
-                    new GetJoWoStatusListTask(context).execute(
+                    new GetJoWoStatusListTask(weakReference.get()).execute(
                             String.valueOf(jobOrders.get(index).getJoId()));
                 }
             });

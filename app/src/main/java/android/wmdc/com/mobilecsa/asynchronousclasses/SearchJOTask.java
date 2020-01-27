@@ -1,6 +1,5 @@
 package android.wmdc.com.mobilecsa.asynchronousclasses;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -10,13 +9,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 import android.wmdc.com.mobilecsa.JOResultFragment;
 import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -28,33 +26,41 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 /** * Created by wmdcprog on 4/5/2018.*/
 
 public class SearchJOTask extends AsyncTask<String, String, String> {
+
+    private WeakReference<FragmentActivity> weakReference;
+
+    private WeakReference<ProgressBar> progressBarWeakReference;
+
+    private WeakReference<Button> btnSearchJOWeakReference;
+
     private SharedPreferences sharedPreferences;
-    private Context context;
 
-    private ProgressBar progressBar;
     private HttpURLConnection conn = null;
-    private URL url = null;
-    private Button btnSearchJO;
 
-    public SearchJOTask(Context context, ProgressBar progressBar, Button btnSearchJO) {
-        this.context = context;
-        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
-        this.progressBar = progressBar;
-        this.btnSearchJO = btnSearchJO;
+    public SearchJOTask(FragmentActivity activity, ProgressBar progressBar, Button btnSearchJO) {
+        this.weakReference = new WeakReference<>(activity);
+        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
+        this.progressBarWeakReference = new WeakReference<>(progressBar);
+        this.btnSearchJOWeakReference = new WeakReference<>(btnSearchJO);
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+
+        Button btnSearchJO = btnSearchJOWeakReference.get();
+
         if (btnSearchJO != null) {
             btnSearchJO.setEnabled(false);
         }
@@ -63,7 +69,7 @@ public class SearchJOTask extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String[] params) {
         try {
-            url = new URL(sharedPreferences.getString("domain", null)+"getcsajolist");
+            URL url = new URL(sharedPreferences.getString("domain", null)+"getcsajolist");
             conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(15_000);
             conn.setConnectTimeout(15_000);
@@ -88,7 +94,8 @@ public class SearchJOTask extends AsyncTask<String, String, String> {
                     .appendQueryParameter("query", params[2]);
 
             OutputStream os = conn.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os,
+                    StandardCharsets.UTF_8));
 
             writer.write(builder.build().getEncodedQuery());
             writer.flush();
@@ -140,6 +147,15 @@ public class SearchJOTask extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String result) {
+        FragmentActivity mainActivity = weakReference.get();
+
+        if (mainActivity == null || mainActivity.isFinishing()) {
+            return;
+        }
+
+        Button btnSearchJO = btnSearchJOWeakReference.get();
+        ProgressBar progressBar = progressBarWeakReference.get();
+
         if (progressBar != null) {
             progressBar.setVisibility(View.INVISIBLE);
         }
@@ -149,7 +165,7 @@ public class SearchJOTask extends AsyncTask<String, String, String> {
 
             if (jsonObject.has("totalCount")) {
                 if (jsonObject.getInt("totalCount") < 1) {
-                    Util.alertBox(context, "No joborder found", "", false);
+                    Util.alertBox(mainActivity, "No joborder found.");
                 } else {
                     JOResultFragment joResFrag = new JOResultFragment();
                     Bundle bundle = new Bundle();
@@ -158,8 +174,7 @@ public class SearchJOTask extends AsyncTask<String, String, String> {
                     joResFrag.setArguments(bundle);
                     Variables.currentPage = -1;
 
-                    FragmentManager fragmentManager =
-                            ((AppCompatActivity) context).getSupportFragmentManager();
+                    FragmentManager fragmentManager = mainActivity.getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.content_main, joResFrag);
                     fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit,
@@ -169,7 +184,7 @@ public class SearchJOTask extends AsyncTask<String, String, String> {
                 }
             } else if (jsonObject.has("success")) {
                 if (!jsonObject.getBoolean("success")) {
-                    Util.alertBox(context, jsonObject.getString("reason"), "", false);
+                    Util.alertBox(mainActivity, jsonObject.getString("reason"));
                 } else {
                     Log.d("SearchJOTask", jsonObject.toString());
                 }
@@ -177,7 +192,7 @@ public class SearchJOTask extends AsyncTask<String, String, String> {
         } catch (Exception e) {
             Util.displayStackTraceArray(e.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                     "Exception", e.toString());
-            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+            Util.longToast(mainActivity, e.getMessage());
         } finally {
             if (btnSearchJO != null) {
                 btnSearchJO.setEnabled(true);

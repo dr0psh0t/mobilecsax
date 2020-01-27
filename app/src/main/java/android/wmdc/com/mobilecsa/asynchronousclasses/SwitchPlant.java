@@ -20,27 +20,26 @@ import java.net.URL;
 
 public class SwitchPlant {
 
-    private String wifi;
-    private String sim;
-    private FragmentActivity fragAct;
-    private String branch;
+    private static String sim;
+    private static FragmentActivity fragAct;
+    private static String branch;
 
-    public SwitchPlant(String wifi, String sim, String branch, FragmentActivity fragAct) {
-        this.wifi = wifi;
-        this.sim = sim;
-        this.branch = branch;
-        this.fragAct = fragAct;
+    public SwitchPlant(String wifiArg, String simArg, String branchArg, FragmentActivity fragActArg)
+    {
+        sim = simArg;
+        branch = branchArg;
+        fragAct = fragActArg;
 
-        new WifiTask().execute(this.wifi);
+        new WifiTask().execute(wifiArg);
     }
 
-    class WifiTask extends AsyncTask<String, String, String> {
+    static class WifiTask extends AsyncTask<String, String, String> {
 
         private ProgressDialog pDialog;
-        private HttpURLConnection conn = null;
-        private URL url = null;
 
-        public WifiTask() {
+        private HttpURLConnection conn = null;
+
+        private WifiTask() {
             pDialog = new ProgressDialog(fragAct);
         }
 
@@ -52,7 +51,7 @@ public class SwitchPlant {
 
         protected String doInBackground(String... params) {
             try {
-                url = new URL(params[0]);
+                URL url = new URL(params[0]);
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setReadTimeout(2500);
@@ -95,7 +94,8 @@ public class SwitchPlant {
                 JSONObject resJson = new JSONObject(s);
 
                 if (resJson.getBoolean("success")) {
-                    SharedPreferences mySPrefs = PreferenceManager.getDefaultSharedPreferences(fragAct);
+                    SharedPreferences mySPrefs =
+                            PreferenceManager.getDefaultSharedPreferences(fragAct);
                     SharedPreferences.Editor editor = mySPrefs.edit();
 
                     editor.remove("domain");
@@ -123,13 +123,12 @@ public class SwitchPlant {
         }
     }
 
-    class SimTask extends AsyncTask<String, String, String> {
+    static class SimTask extends AsyncTask<String, String, String> {
 
         private ProgressDialog pDialog;
         private HttpURLConnection conn = null;
-        private URL url = null;
 
-        public SimTask() {
+        private SimTask() {
             pDialog = new ProgressDialog(fragAct);
         }
 
@@ -141,7 +140,7 @@ public class SwitchPlant {
 
         protected String doInBackground(String... params) {
             try {
-                url = new URL(params[0]);
+                URL url = new URL(params[0]);
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setReadTimeout(2500);
@@ -184,7 +183,8 @@ public class SwitchPlant {
                 JSONObject resJson = new JSONObject(s);
 
                 if (resJson.getBoolean("success")) {
-                    SharedPreferences mySPrefs = PreferenceManager.getDefaultSharedPreferences(fragAct);
+                    SharedPreferences mySPrefs =
+                            PreferenceManager.getDefaultSharedPreferences(fragAct);
                     SharedPreferences.Editor editor = mySPrefs.edit();
 
                     editor.remove("domain");

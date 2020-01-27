@@ -35,7 +35,6 @@ public class MapsActivity extends AppCompatActivity implements
         GoogleMap.OnMarkerClickListener,
         LocationListener {
 
-    private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
 
     private String objectName;
@@ -53,14 +52,22 @@ public class MapsActivity extends AppCompatActivity implements
             setSupportActionBar(toolbar);
 
             // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-            SupportMapFragment mapFragment =
-                    (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.map);
 
-            mapFragment.getMapAsync(this);
+            if (mapFragment != null) {
+                mapFragment.getMapAsync(this);
+            } else {
+                Util.longToast(MapsActivity.this, "Map Fragment is null");
+            }
 
-            lat = getIntent().getExtras().getDouble("lat");
-            lng = getIntent().getExtras().getDouble("lng");
-            objectName = getIntent().getExtras().getString("object");
+            if (getIntent().getExtras() != null) {
+                lat = getIntent().getExtras().getDouble("lat");
+                lng = getIntent().getExtras().getDouble("lng");
+                objectName = getIntent().getExtras().getString("object");
+            } else {
+                Util.longToast(MapsActivity.this, "Intent Extras is null");
+            }
 
             setTitle(objectName);
 
@@ -86,40 +93,35 @@ public class MapsActivity extends AppCompatActivity implements
      * installed Google Play services and returned to the app.
      */
     @Override
-    public void onMapReady(GoogleMap googleMap)
-    {
-        mMap = googleMap;
+    public void onMapReady(GoogleMap gMap) {
 
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(lat, lng);
-        mMap.addMarker(new MarkerOptions().position(sydney).title(objectName)).showInfoWindow();
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 12));
+        gMap.addMarker(new MarkerOptions().position(sydney).title(objectName)).showInfoWindow();
+        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 12));
 
-        mMap.getUiSettings().setZoomControlsEnabled(true);
-        mMap.setOnMarkerClickListener(this);
+        gMap.getUiSettings().setZoomControlsEnabled(true);
+        gMap.setOnMarkerClickListener(this);
 
-        EnableMyLocation(mMap);
+        EnableMyLocation(gMap);
     }
 
-    public void EnableMyLocation(GoogleMap googleMap)
-    {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
-                PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-                        != PackageManager.PERMISSION_GRANTED) {
+    public void EnableMyLocation(GoogleMap googleMap) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
+            ActivityCompat.requestPermissions(this, new
+                    String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     PackageManager.PERMISSION_GRANTED);
-        }
-        else
-        {
+        } else {
             googleMap.setMyLocationEnabled(true);
         }
     }
 
     @Override
-    protected void onStart()
-    {
+    protected void onStart() {
         super.onStart();
 
         if (mGoogleApiClient != null) {
@@ -128,8 +130,7 @@ public class MapsActivity extends AppCompatActivity implements
     }
 
     @Override
-    protected void onStop()
-    {
+    protected void onStop() {
         super.onStop();
 
         if( mGoogleApiClient != null && mGoogleApiClient.isConnected() ) {

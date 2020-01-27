@@ -1,7 +1,6 @@
 package android.wmdc.com.mobilecsa.asynchronousclasses;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -11,6 +10,7 @@ import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,30 +21,34 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class UpdateInitialJoborderTransferredTask extends AsyncTask<String, String, String> {
 
+    private WeakReference<FragmentActivity> weakReference;
+
     private SharedPreferences sharedPreferences;
-    private Context context;
 
     private ProgressDialog progressDialog;
-    private HttpURLConnection conn = null;
-    private URL url = null;
 
-    public UpdateInitialJoborderTransferredTask(Context context) {
-        this.context = context;
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
-        progressDialog = new ProgressDialog(this.context);
+    private HttpURLConnection conn = null;
+
+    public UpdateInitialJoborderTransferredTask(FragmentActivity activity) {
+        this.weakReference = new WeakReference<>(activity);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(weakReference.get());
+        progressDialog = new ProgressDialog(weakReference.get());
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+
         progressDialog.setMessage("Updating...");
         progressDialog.setCancelable(false);
         progressDialog.show();
@@ -53,7 +57,7 @@ public class UpdateInitialJoborderTransferredTask extends AsyncTask<String, Stri
     @Override
     protected String doInBackground(String[] params) {
         try {
-            url = new URL(sharedPreferences.getString("domain", null)+"settransfer");
+            URL url = new URL(sharedPreferences.getString("domain", null)+"settransfer");
             conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(Util.READ_TIMEOUT);
             conn.setConnectTimeout(Util.CONNECTION_TIMEOUT);
@@ -62,8 +66,10 @@ public class UpdateInitialJoborderTransferredTask extends AsyncTask<String, Stri
             conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
             conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
             conn.setRequestProperty("Connection", "keep-alive");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            conn.setRequestProperty("Cookie", "JSESSIONID="+sharedPreferences.getString("sessionId", null));
+            conn.setRequestProperty("Content-Type",
+                    "application/x-www-form-urlencoded; charset=utf-8");
+            conn.setRequestProperty("Cookie",
+                    "JSESSIONID="+sharedPreferences.getString("sessionId", null));
             conn.setRequestProperty("Host", "localhost:8080");
             conn.setRequestProperty("Referer", "http://localhost:8080/mcsa/searchcustomerfromuser");
             conn.setRequestProperty("X-Requested-Width", "XMLHttpRequest");
@@ -72,11 +78,13 @@ public class UpdateInitialJoborderTransferredTask extends AsyncTask<String, Stri
 
             Uri.Builder builder = new Uri.Builder()
                     .appendQueryParameter("initJoId", params[0])
-                    .appendQueryParameter("csaId", String.valueOf(sharedPreferences.getInt("csaId", 0)));
+                    .appendQueryParameter("csaId",
+                            String.valueOf(sharedPreferences.getInt("csaId", 0)));
             String query = builder.build().getEncodedQuery();
 
             OutputStream os = conn.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os,
+                    StandardCharsets.UTF_8));
 
             writer.write(query);
             writer.flush();
@@ -99,7 +107,8 @@ public class UpdateInitialJoborderTransferredTask extends AsyncTask<String, Stri
                     return stringBuilder.toString();
                 }
             } else {
-                return "{\"success\": false, \"reason\": \"Request did not succeed. Status Code: "+statusCode+"\"}";
+                return "{\"success\": false, \"reason\": \"Request did not succeed. Status Code: "
+                        +statusCode+"\"}";
             }
         } catch (MalformedURLException | ConnectException | SocketTimeoutException e) {
             Util.displayStackTraceArray(e.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
@@ -130,7 +139,7 @@ public class UpdateInitialJoborderTransferredTask extends AsyncTask<String, Stri
         try {
             JSONObject jsonObject = new JSONObject(result);
             if (jsonObject.getBoolean("success")) {
-                AlertDialog.Builder aBox = new AlertDialog.Builder(context);
+                AlertDialog.Builder aBox = new AlertDialog.Builder(weakReference.get());
                 aBox.setTitle("Success");
                 aBox.setMessage(jsonObject.getString("reason"));
                 aBox.setCancelable(false);
@@ -138,18 +147,18 @@ public class UpdateInitialJoborderTransferredTask extends AsyncTask<String, Stri
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
-                        new GetInitialJoborderListTask(context)
-                                .execute(String.valueOf(sharedPreferences.getInt("csaId", 0)));
+                        new GetInitialJoborderListTask(weakReference.get()).execute(
+                                String.valueOf(sharedPreferences.getInt("csaId", 0)));
                     }
                 });
                 aBox.create().show();
             } else {
-                Util.alertBox(context, jsonObject.getString("reason"), "Fail", false);
+                Util.alertBox(weakReference.get(), jsonObject.getString("reason"));
             }
         } catch (JSONException je) {
             Util.displayStackTraceArray(je.getStackTrace(),
                     Variables.ASYNCHRONOUS_PACKAGE, "JSONException", je.toString());
-            Util.alertBox(context, je.toString(), "Fail", false);
+            Util.alertBox(weakReference.get(), je.toString());
         }
     }
 }

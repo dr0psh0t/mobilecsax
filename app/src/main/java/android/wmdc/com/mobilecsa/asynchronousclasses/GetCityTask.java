@@ -1,6 +1,5 @@
 package android.wmdc.com.mobilecsa.asynchronousclasses;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
@@ -11,6 +10,8 @@ import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
+import androidx.fragment.app.FragmentActivity;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,6 +19,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -31,29 +33,31 @@ import java.util.HashMap;
 /*** Created by wmdcprog on 2/15/2018.*/
 
 public class GetCityTask extends AsyncTask<String, Void, String> {
-    private Context context;
+
+    private WeakReference<FragmentActivity> weakReference;
+
+    private WeakReference<Spinner> spinnerCityWeakReference;
+
     private ArrayList<String> cityCategory;
+
     private HashMap<String, Integer> cityMap;
     private HashMap<String, Integer> zipCodeMap;
-    private ArrayAdapter<String> cityDataAdapter;
-    private Spinner spinnerCity;
 
     private SharedPreferences sharedPreferences;
 
     private HttpURLConnection conn = null;
-    private URL url = null;
 
-    public GetCityTask(Context context,
-                       ArrayList<String> cityCategory,
-                       HashMap<String, Integer> cityMap,
-                       HashMap<String, Integer> zipCodeMap,
+
+    public GetCityTask(FragmentActivity activity, ArrayList<String> cityCategory,
+                       HashMap<String, Integer> cityMap, HashMap<String, Integer> zipCodeMap,
                        Spinner spinnerCity) {
-        this.context = context;
+
+        this.weakReference = new WeakReference<>(activity);
         this.cityCategory = cityCategory;
         this.cityMap = cityMap;
         this.zipCodeMap = zipCodeMap;
-        this.spinnerCity = spinnerCity;
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        this.spinnerCityWeakReference = new WeakReference<>(spinnerCity);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(weakReference.get());
     }
 
     @Override
@@ -64,7 +68,8 @@ public class GetCityTask extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String[] params) {
         try {
-            url = new URL(sharedPreferences.getString("domain", null)+"getcities");
+            URL url = new URL(sharedPreferences.getString("domain", null)+"getcities");
+
             conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(Util.READ_TIMEOUT);
             conn.setConnectTimeout(Util.CONNECTION_TIMEOUT);
@@ -153,10 +158,13 @@ public class GetCityTask extends AsyncTask<String, Void, String> {
                     }
                 });
 
-                cityDataAdapter = new ArrayAdapter<>(context,
+                ArrayAdapter<String> cityDataAdapter = new ArrayAdapter<>(weakReference.get(),
                         R.layout.support_simple_spinner_dropdown_item, cityCategory);
-                cityDataAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                spinnerCity.setAdapter(cityDataAdapter);
+
+                cityDataAdapter.setDropDownViewResource(
+                        R.layout.support_simple_spinner_dropdown_item);
+
+                spinnerCityWeakReference.get().setAdapter(cityDataAdapter);
             } else {
                 Log.d("json_success_false", responseJson.getString("reason")+" on " +
                         this.getClass().getSimpleName());

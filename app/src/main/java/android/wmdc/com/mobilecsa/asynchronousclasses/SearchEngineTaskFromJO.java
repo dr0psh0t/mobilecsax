@@ -1,17 +1,16 @@
 package android.wmdc.com.mobilecsa.asynchronousclasses;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
 import android.wmdc.com.mobilecsa.adapter.EngineJOAdapter;
 import android.wmdc.com.mobilecsa.model.Engine;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,30 +25,38 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**Created by wmdcprog on 7/2/2018.*/
 
 public class SearchEngineTaskFromJO extends AsyncTask<String, String, String> {
+
+    private WeakReference<FragmentActivity> weakReference;
+
+    private WeakReference<RecyclerView> recViewWeakReference;
+
     private SharedPreferences sharedPreferences;
-    private Context context;
+
     private HttpURLConnection conn = null;
-    private URL url = null;
+
     private ArrayList<Engine> engineList;
-    private RecyclerView recyclerView;
+
     private EngineJOAdapter engineJOAdapter;
 
-    public SearchEngineTaskFromJO(Context context, ArrayList<Engine> engineList,
+    public SearchEngineTaskFromJO(FragmentActivity activity, ArrayList<Engine> engineList,
                                   RecyclerView recyclerView, EngineJOAdapter engineJOAdapter) {
-        this.context = context;
-        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        this.weakReference = new WeakReference<>(activity);
+        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
         this.engineList = engineList;
-        this.recyclerView = recyclerView;
+        this.recViewWeakReference = new WeakReference<>(recyclerView);
         this.engineJOAdapter = engineJOAdapter;
     }
 
@@ -61,7 +68,7 @@ public class SearchEngineTaskFromJO extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String[] params) {
         try {
-            url = new URL(sharedPreferences.getString("domain", null)+"getmcsaenginemodellist");
+            URL url = new URL(sharedPreferences.getString("domain", null)+"getmcsaenginemodellist");
             conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(Util.READ_TIMEOUT);
             conn.setConnectTimeout(Util.CONNECTION_TIMEOUT);
@@ -85,7 +92,8 @@ public class SearchEngineTaskFromJO extends AsyncTask<String, String, String> {
             String query = builder.build().getEncodedQuery();
 
             OutputStream os = conn.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os,
+                    StandardCharsets.UTF_8));
 
             writer.write(query);
             writer.flush();
@@ -136,6 +144,12 @@ public class SearchEngineTaskFromJO extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String result) {
+        FragmentActivity mainActivity = weakReference.get();
+
+        if (mainActivity == null || mainActivity.isFinishing()) {
+            return;
+        }
+
         try {
             JSONObject jsonObject = new JSONObject(result);
             if (jsonObject.getInt("totalCount") > 0) {
@@ -159,17 +173,17 @@ public class SearchEngineTaskFromJO extends AsyncTask<String, String, String> {
             } else {
                 Log.e("FAILED", jsonObject.toString());
             }
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(engineJOAdapter);
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recViewWeakReference.get().setLayoutManager(new LinearLayoutManager(mainActivity));
+            recViewWeakReference.get().setAdapter(engineJOAdapter);
+            recViewWeakReference.get().setItemAnimator(new DefaultItemAnimator());
         } catch (JSONException je) {
             Util.displayStackTraceArray(je.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                     "JSONException", je.toString());
-            Toast.makeText(context, je.getMessage(), Toast.LENGTH_LONG).show();
+            Util.longToast(mainActivity, je.getMessage());
         } catch (Exception e) {
             Util.displayStackTraceArray(e.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                     "Exception", e.toString());
-            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+            Util.longToast(mainActivity, e.getMessage());
         }
     }
 }

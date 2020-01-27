@@ -1,20 +1,19 @@
 package android.wmdc.com.mobilecsa.asynchronousclasses;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -24,18 +23,22 @@ import java.net.URL;
 /** Created by wmdcprog on 6/9/2018.*/
 
 public class CheckValidDomainTask extends AsyncTask<String, Void, String> {
+
+    private WeakReference<FragmentActivity> activityWeakReference;
+
+    private WeakReference<TextView> textViewWeakReferenceDomain;
+
     private ProgressDialog pDialog;
+
     private HttpURLConnection conn = null;
-    private URL url = null;
-    private Context context;
-    private TextView domain;
+
     private String branch;
 
-    public CheckValidDomainTask(TextView domain, Context context, String branch) {
-        this.domain = domain;
-        this.context = context;
+    public CheckValidDomainTask(FragmentActivity activity, TextView domain, String branch) {
+        this.textViewWeakReferenceDomain = new WeakReference<>(domain);
+        this.activityWeakReference = new WeakReference<>(activity);
         this.branch = branch;
-        this.pDialog = new ProgressDialog(context);
+        this.pDialog = new ProgressDialog(activity);
     }
 
     @Override
@@ -48,14 +51,15 @@ public class CheckValidDomainTask extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String[] params) {
         try {
-            url = new URL(params[0]);
+            URL url = new URL(params[0]);
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setReadTimeout(2500);
             conn.setConnectTimeout(2500);
             conn.connect();
 
-            return "{\"success\": true, \"code\": "+conn.getResponseCode()+", \"domain\": \""+params[0]+"\"}";
+            return "{\"success\": true, \"code\": "+conn.getResponseCode()+", \"domain\": \""
+                    +params[0]+"\"}";
 
         } catch (MalformedURLException | ConnectException | SocketTimeoutException e) {
             Util.displayStackTraceArray(e.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
@@ -84,10 +88,20 @@ public class CheckValidDomainTask extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result) {
         pDialog.dismiss();
 
+        FragmentActivity activity = activityWeakReference.get();
+
+        if (activity == null || activity.isFinishing()) {
+            return;
+        }
+
+        TextView textViewDomain = textViewWeakReferenceDomain.get();
+
         try {
             JSONObject responseJson = new JSONObject(result);
+
             if (responseJson.getBoolean("success")) {
-                SharedPreferences mySPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+                SharedPreferences mySPrefs = PreferenceManager.getDefaultSharedPreferences(
+                        activity);
                 SharedPreferences.Editor editor = mySPrefs.edit();
 
                 editor.remove("domain");
@@ -100,19 +114,19 @@ public class CheckValidDomainTask extends AsyncTask<String, Void, String> {
                 editor.putString("branch", branch);
                 editor.apply();
 
-                if (domain != null) {
-                    domain.setText(responseJson.getString("domain"));
+                if (textViewDomain != null) {
+                    textViewDomain.setText(responseJson.getString("domain"));
                 }
 
-                ((AppCompatActivity)context).setTitle(branch);
-                Toast.makeText(context, "You are now connected to "+branch, Toast.LENGTH_SHORT).show();
+                activity.setTitle(branch);
+                Util.shortToast(activity, "You are now connected to "+branch);
             } else {
-                Util.alertBox(context, responseJson.getString("reason"), "Error", false);
+                Util.alertBox(activity, responseJson.getString("reason"));
             }
         } catch (JSONException je) {
             Util.displayStackTraceArray(je.getStackTrace(),
                     Variables.ASYNCHRONOUS_PACKAGE, "JSONException", je.toString());
-            Util.alertBox(context, je.getMessage(), "JSON Error", false);
+            Util.alertBox(activity, je.getMessage());
         }
     }
 }

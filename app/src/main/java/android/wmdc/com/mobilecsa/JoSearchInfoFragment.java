@@ -70,8 +70,9 @@ public class JoSearchInfoFragment extends Fragment {
                             JSON_KEY.get(i))));
                 }
 
-                JOSearchResultInfoAdapter joResAdapter = new JOSearchResultInfoAdapter(getContext(),
-                                jobOrderInfos, Integer.parseInt(object.getString("jobOrderId")));
+                JOSearchResultInfoAdapter joResAdapter = new JOSearchResultInfoAdapter(
+                        getActivity(), jobOrderInfos,
+                        Integer.parseInt(object.getString("jobOrderId")));
 
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 recyclerView.setAdapter(joResAdapter);

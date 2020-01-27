@@ -1,19 +1,18 @@
 package android.wmdc.com.mobilecsa.asynchronousclasses;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.widget.Toast;
+
 import android.wmdc.com.mobilecsa.ContactsResultFragment;
 import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -27,25 +26,30 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 /**Created by wmdcprog on 3/1/2018.*/
 
 public class SearchContactTask extends AsyncTask<String, String, String> {
-    private SharedPreferences sharedPreferences;
-    private Context context;
-    private ProgressDialog progressDialog;
-    private HttpURLConnection conn = null;
-    private URL url = null;
 
-    public SearchContactTask(Context context) {
-        this.context = context;
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
-        progressDialog = new ProgressDialog(this.context);
+    private WeakReference<FragmentActivity> weakReference;
+
+    private SharedPreferences sharedPreferences;
+
+    private ProgressDialog progressDialog;
+
+    private HttpURLConnection conn = null;
+
+    public SearchContactTask(FragmentActivity activity) {
+        weakReference = new WeakReference<>(activity);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
+        progressDialog = new ProgressDialog(activity);
     }
 
     @Override
@@ -59,7 +63,7 @@ public class SearchContactTask extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String[] params) {
         try {
-            url = new URL(sharedPreferences.getString("domain", null)+"searchcontactfromuser");
+            URL url = new URL(sharedPreferences.getString("domain", null)+"searchcontactfromuser");
             conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(Util.READ_TIMEOUT);
             conn.setConnectTimeout(Util.CONNECTION_TIMEOUT);
@@ -68,8 +72,10 @@ public class SearchContactTask extends AsyncTask<String, String, String> {
             conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
             conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
             conn.setRequestProperty("Connection", "keep-alive");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            conn.setRequestProperty("Cookie", "JSESSIONID="+sharedPreferences.getString("sessionId", null));
+            conn.setRequestProperty("Content-Type",
+                    "application/x-www-form-urlencoded; charset=utf-8");
+            conn.setRequestProperty("Cookie",
+                    "JSESSIONID="+sharedPreferences.getString("sessionId", null));
             conn.setRequestProperty("Host", "localhost:8080");
             conn.setRequestProperty("Referer", "http://localhost:8080/mcsa/searchcontactfromuser");
             conn.setRequestProperty("X-Requested-Width", "XMLHttpRequest");
@@ -81,7 +87,8 @@ public class SearchContactTask extends AsyncTask<String, String, String> {
             String query = builder.build().getEncodedQuery();
 
             OutputStream os = conn.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os,
+                    StandardCharsets.UTF_8));
 
             writer.write(query);
             writer.flush();
@@ -104,7 +111,8 @@ public class SearchContactTask extends AsyncTask<String, String, String> {
                     return stringBuilder.toString();
                 }
             } else {
-                return "{\"success\": false, \"reason\": \"Request did not succeed. Status Code: "+statusCode+"\"}";
+                return "{\"success\": false, \"reason\": \"Request did not succeed. Status Code: "
+                        +statusCode+"\"}";
             }
         } catch (MalformedURLException | ConnectException | SocketTimeoutException e) {
             Util.displayStackTraceArray(e.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
@@ -132,6 +140,13 @@ public class SearchContactTask extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String result) {
         progressDialog.dismiss();
+
+        FragmentActivity mainActivity = weakReference.get();
+
+        if (mainActivity == null || mainActivity.isFinishing()) {
+            return;
+        }
+
         try {
             JSONObject jsonObject = new JSONObject(result);
             if (jsonObject.getBoolean("success")) {
@@ -143,30 +158,31 @@ public class SearchContactTask extends AsyncTask<String, String, String> {
                 JSONObject obj = jsonArray.getJSONObject(0);
 
                 if (obj.getInt("searchCount") < 1) {
-                    Util.alertBox(context, "No contact found.", "Error", false);
+                    Util.alertBox(mainActivity, "No contact found.");
                     return;
                 }
 
                 Variables.currentPage = -1;
                 resultFragment.setArguments(bundle);
 
-                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+                FragmentManager fragmentManager = mainActivity.getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+                fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter,
+                        R.anim.pop_exit);
                 fragmentTransaction.replace(R.id.content_main, resultFragment);
                 fragmentTransaction.commit();
             }
             else {
-                Util.alertBox(context, jsonObject.getString("reason"), "Error", false);
+                Util.alertBox(mainActivity, jsonObject.getString("reason"));
             }
         } catch (JSONException je) {
             Util.displayStackTraceArray(je.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                     "JSONException", je.toString());
-            Toast.makeText(context, je.getMessage(), Toast.LENGTH_LONG).show();
+            Util.longToast(mainActivity, je.getMessage());
         } catch (Exception e) {
             Util.displayStackTraceArray(e.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                     "Exception", e.toString());
-            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+            Util.longToast(mainActivity, e.getMessage());
         }
     }
 }

@@ -1,5 +1,7 @@
 package android.wmdc.com.mobilecsa.model;
 
+import androidx.annotation.NonNull;
+
 /**
  * Created by wmdcprog on 12/27/2017.
  */
@@ -49,6 +51,7 @@ public class Contacts {
     }
 
     @Override
+    @NonNull
     public String toString() {
         return name+", "+imageUrl+", "+id;
     }

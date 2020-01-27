@@ -1,6 +1,5 @@
 package android.wmdc.com.mobilecsa.asynchronousclasses;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,11 +8,12 @@ import android.preference.PreferenceManager;
 import android.view.Gravity;
 import android.widget.TextView;
 import android.wmdc.com.mobilecsa.LoginActivity;
+import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,6 +21,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -30,15 +31,16 @@ import java.net.URL;
 /*** Created by wmdcprog on 2/22/2018.*/
 
 public class CheckExpiryTask extends AsyncTask<String, Void, String> {
+
+    private WeakReference<FragmentActivity> activityWeakReference;
+
     private HttpURLConnection conn = null;
-    private URL url;
 
-    private Context context;
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences sPrefs;
 
-    public CheckExpiryTask(Context context) {
-        this.context = context;
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    public CheckExpiryTask(FragmentActivity activity) {
+        this.activityWeakReference = new WeakReference<>(activity);
+        sPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
     }
 
     @Override
@@ -49,7 +51,7 @@ public class CheckExpiryTask extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String[] params) {
         try {
-            url = new URL(sharedPreferences.getString("domain", null)+"checksessionexpiry");
+            URL url = new URL(sPrefs.getString("domain", null)+"checksessionexpiry");
             conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(Util.READ_TIMEOUT);
             conn.setConnectTimeout(Util.CONNECTION_TIMEOUT);
@@ -58,10 +60,11 @@ public class CheckExpiryTask extends AsyncTask<String, Void, String> {
             conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
             conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
             conn.setRequestProperty("Connection", "keep-alive");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            conn.setRequestProperty("Cookie", "JSESSIONID="+sharedPreferences.getString("sessionId", null));
+            conn.setRequestProperty("Content-Type",
+                    "application/x-www-form-urlencoded; charset=utf-8");
+            conn.setRequestProperty("Cookie", "JSESSIONID="+sPrefs.getString("sessionId", null));
             conn.setRequestProperty("Host", "localhost:8080");
-            conn.setRequestProperty("Referer", "http://localhost:8080/mcsa/getcontactsphoto");
+            conn.setRequestProperty("Referer", "daryll");
             conn.setRequestProperty("X-Requested-Width", "XMLHttpRequest");
             conn.setDoInput(true);
             conn.setDoOutput(true);
@@ -82,7 +85,8 @@ public class CheckExpiryTask extends AsyncTask<String, Void, String> {
                     return stringBuilder.toString();
                 }
             } else {
-                return "{\"success\": false, \"reason\": \"Request did not succeed. Status Code: "+statusCode+"\"}";
+                return "{\"success\": false, \"reason\": \"Request did not succeed. " +
+                        "Status Code: "+statusCode+"\"}";
             }
         } catch (MalformedURLException | ConnectException | SocketTimeoutException e) {
             Util.displayStackTraceArray(e.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
@@ -109,13 +113,20 @@ public class CheckExpiryTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
+        final FragmentActivity activity = activityWeakReference.get();
+
+        if (activity == null || activity.isFinishing()) {
+            return;
+        }
+
         try {
             JSONObject responseJson = new JSONObject(result);
-            if (!responseJson.getBoolean("success")) {
-                AlertDialog.Builder warningBox = new AlertDialog.Builder(context);
 
-                TextView errMsg = new TextView(context);
-                errMsg.setText("Relogin to continue.");
+            if (!responseJson.getBoolean("success")) {
+                AlertDialog.Builder warningBox = new AlertDialog.Builder(activity);
+
+                TextView errMsg = new TextView(activity);
+                errMsg.setText(R.string.relogin);
                 errMsg.setTextSize(17);
                 errMsg.setPadding(20, 0, 10, 0);
                 errMsg.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -127,17 +138,16 @@ public class CheckExpiryTask extends AsyncTask<String, Void, String> {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
 
-                        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        sPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
+                        SharedPreferences.Editor editor = sPrefs.edit();
 
                         editor.remove("csaId");
                         editor.remove("csaFullname");
                         editor.remove("sessionId");
                         editor.apply();
 
-                        Intent intent = new Intent(context, LoginActivity.class);
-                        context.startActivity(intent);
-                        ((AppCompatActivity) context).finish();
+                        activity.startActivity(new Intent(activity, LoginActivity.class));
+                        activity.finish();
                     }
                 });
                 warningBox.create().show();

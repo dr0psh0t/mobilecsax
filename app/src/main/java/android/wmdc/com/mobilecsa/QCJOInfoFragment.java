@@ -108,7 +108,11 @@ public class QCJOInfoFragment extends Fragment {
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Util.handleBackPress(null, getContext());
+                            if (getActivity() != null) {
+                                Util.handleBackPress(null, getActivity());
+                            } else {
+                                Util.longToast(getContext(), "Activity is null.");
+                            }
                         }
                     });
 

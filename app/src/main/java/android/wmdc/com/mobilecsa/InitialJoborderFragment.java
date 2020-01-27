@@ -184,7 +184,7 @@ public class InitialJoborderFragment extends Fragment {
                             try {
                                 String initialJoId = String.valueOf(
                                         objects.getInt("initialJoborderId"));
-                                new DeleteInitialJoborderTask(getContext()).execute(initialJoId);
+                                new DeleteInitialJoborderTask(getActivity()).execute(initialJoId);
                             } catch (JSONException je) {
                                 Util.alertBox(getContext(), je.toString());
                             }
@@ -269,7 +269,7 @@ public class InitialJoborderFragment extends Fragment {
                     aBox.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             try {
-                                new UpdateInitialJoborderTransferredTask(getContext()).execute(
+                                new UpdateInitialJoborderTransferredTask(getActivity()).execute(
                                         String.valueOf(objects.getInt("initialJoborderId")));
 
                             } catch (JSONException je) {

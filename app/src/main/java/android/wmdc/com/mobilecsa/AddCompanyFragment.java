@@ -287,7 +287,7 @@ public class AddCompanyFragment extends Fragment {
                 Util.shortToast(getActivity(), "Include signature.");
                 return;
             }
-            new DialogSignatureTask(getContext()).execute(companySignature);
+            new DialogSignatureTask(getActivity()).execute(companySignature);
         }
     };
 
@@ -303,7 +303,7 @@ public class AddCompanyFragment extends Fragment {
                 return;
             }
 
-            new DialogImageUriTask(getContext()).execute(fileUri);
+            new DialogImageUriTask(getActivity()).execute(fileUri);
         }
     };
 

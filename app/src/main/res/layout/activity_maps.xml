@@ -21,13 +21,12 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <FrameLayout
+    <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/appbar_for_map"
-        tools:context="android.wmdc.com.mobilecsa.MapsActivity" />
-
+        tools:context="android.wmdc.com.mobilecsa.MapsActivity"/>
 
 </RelativeLayout>

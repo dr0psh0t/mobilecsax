@@ -1,6 +1,5 @@
 package android.wmdc.com.mobilecsa.asynchronousclasses;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
@@ -11,6 +10,8 @@ import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
+import androidx.fragment.app.FragmentActivity;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,6 +19,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -31,26 +33,26 @@ import java.util.HashMap;
 /**Created by wmdcprog on 2/15/2018.*/
 
 public class GetCountryTask extends AsyncTask<String, Void, String> {
-    private Context context;
+
+    private WeakReference<FragmentActivity> weakReference;
+
     private ArrayList<String> countryCategory;
     private HashMap<String, Integer> countryMap;
-    private ArrayAdapter<String> countryDataAdapter;
-    private Spinner spinnerCountry;
+
+    private WeakReference<Spinner> spinnerCountryWeakReference;
 
     private SharedPreferences sharedPreferences;
 
     private HttpURLConnection conn = null;
-    private URL url = null;
 
-    public GetCountryTask(Context context,
-                          ArrayList<String> countryCategory,
-                          HashMap<String, Integer> countryMap,
-                          Spinner spinnerCountry) {
-        this.context = context;
+    public GetCountryTask(FragmentActivity activity, ArrayList<String> countryCategory,
+                          HashMap<String, Integer> countryMap, Spinner spinnerCountry) {
+
+        this.weakReference = new WeakReference<>(activity);
         this.countryCategory = countryCategory;
         this.countryMap = countryMap;
-        this.spinnerCountry = spinnerCountry;
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        this.spinnerCountryWeakReference = new WeakReference<>(spinnerCountry);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(weakReference.get());
     }
 
     @Override
@@ -61,7 +63,7 @@ public class GetCountryTask extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String[] args) {
         try {
-            url = new URL(sharedPreferences.getString("domain", null)+"getcountries");
+            URL url = new URL(sharedPreferences.getString("domain", null)+"getcountries");
             conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(Util.READ_TIMEOUT);
             conn.setConnectTimeout(Util.CONNECTION_TIMEOUT);
@@ -70,8 +72,10 @@ public class GetCountryTask extends AsyncTask<String, Void, String> {
             conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
             conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
             conn.setRequestProperty("Connection", "keep-alive");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            conn.setRequestProperty("Cookie", "JSESSIONID="+sharedPreferences.getString("sessionId", null));
+            conn.setRequestProperty("Content-Type",
+                    "application/x-www-form-urlencoded; charset=utf-8");
+            conn.setRequestProperty("Cookie",
+                    "JSESSIONID="+sharedPreferences.getString("sessionId", null));
             conn.setRequestProperty("Host", "localhost:8080");
             conn.setRequestProperty("Referer", "http://localhost:8080/mcsa/getcontactsphoto");
             conn.setRequestProperty("X-Requested-Width", "XMLHttpRequest");
@@ -94,7 +98,8 @@ public class GetCountryTask extends AsyncTask<String, Void, String> {
                     return stringBuilder.toString();
                 }
             } else {
-                return "{\"success\": false, \"reason\": \"Request did not succeed. Status Code: "+statusCode+"\"}";
+                return "{\"success\": false, \"reason\": \"Request did not succeed. Status Code: "
+                        +statusCode+"\"}";
             }
         } catch (MalformedURLException | ConnectException | SocketTimeoutException e) {
             Util.displayStackTraceArray(e.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
@@ -147,11 +152,14 @@ public class GetCountryTask extends AsyncTask<String, Void, String> {
                     }
                 });
 
-                countryDataAdapter = new ArrayAdapter<>(context,
+                ArrayAdapter<String> countryDataAdapter = new ArrayAdapter<>(weakReference.get(),
                         R.layout.support_simple_spinner_dropdown_item, countryCategory);
-                countryDataAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                spinnerCountry.setAdapter(countryDataAdapter);
-                spinnerCountry.setSelection(171);
+
+                countryDataAdapter.setDropDownViewResource(
+                        R.layout.support_simple_spinner_dropdown_item);
+
+                spinnerCountryWeakReference.get().setAdapter(countryDataAdapter);
+                spinnerCountryWeakReference.get().setSelection(171);
             } else {
                 Log.d("json_success_false", responseJson.getString("reason")+" on " +
                         this.getClass().getSimpleName());

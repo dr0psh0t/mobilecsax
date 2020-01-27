@@ -1,6 +1,5 @@
 package android.wmdc.com.mobilecsa.asynchronousclasses;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
@@ -11,6 +10,8 @@ import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
+import androidx.fragment.app.FragmentActivity;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,6 +19,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -29,24 +31,26 @@ import java.util.HashMap;
 /**Created by wmdcprog on 2/14/2018.*/
 
 public class GetPlantTask extends AsyncTask<String, Void, String> {
-    private Context context;
+
+    private WeakReference<FragmentActivity> weakReference;
+
+    private WeakReference<Spinner> spinnerPlantWeakReference;
+
     private ArrayList<String> plantCategory;
     private HashMap<String, Integer> plantMap;
-    private ArrayAdapter<String> plantDataAdapter;
-    private Spinner spinnerPlant;
+
     private SharedPreferences sharedPreferences;
     private HttpURLConnection conn = null;
-    private URL url = null;
 
-    public GetPlantTask(Context context,
-                        ArrayList<String> plantCategory,
-                        HashMap<String, Integer> plantMap,
-                        Spinner spinnerPlant) {
-        this.context = context;
+    public GetPlantTask(FragmentActivity activity, ArrayList<String> plantCategory,
+                        HashMap<String, Integer> plantMap, Spinner spinnerPlant) {
+
+        this.weakReference = new WeakReference<>(activity);
+
         this.plantCategory = plantCategory;
         this.plantMap = plantMap;
-        this.spinnerPlant = spinnerPlant;
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        this.spinnerPlantWeakReference = new WeakReference<>(spinnerPlant);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
     }
 
     @Override
@@ -57,7 +61,7 @@ public class GetPlantTask extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String[] args) {
         try {
-            url = new URL(sharedPreferences.getString("domain", null)+"getplantassociated");
+            URL url = new URL(sharedPreferences.getString("domain", null)+"getplantassociated");
             conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(Util.READ_TIMEOUT);
             conn.setConnectTimeout(Util.CONNECTION_TIMEOUT);
@@ -66,8 +70,10 @@ public class GetPlantTask extends AsyncTask<String, Void, String> {
             conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
             conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
             conn.setRequestProperty("Connection", "keep-alive");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            conn.setRequestProperty("Cookie", "JSESSIONID="+sharedPreferences.getString("sessionId", null));
+            conn.setRequestProperty("Content-Type",
+                    "application/x-www-form-urlencoded; charset=utf-8");
+            conn.setRequestProperty("Cookie",
+                    "JSESSIONID="+sharedPreferences.getString("sessionId", null));
             conn.setRequestProperty("Host", "localhost:8080");
             conn.setRequestProperty("Referer", "http://localhost:8080/mcsa/getcontactsphoto");
             conn.setRequestProperty("X-Requested-Width", "XMLHttpRequest");
@@ -90,7 +96,8 @@ public class GetPlantTask extends AsyncTask<String, Void, String> {
                     return stringBuilder.toString();
                 }
             } else {
-                return "{\"success\": false, \"reason\": \"Request did not succeed. Status Code: "+statusCode+"\"}";
+                return "{\"success\": false, \"reason\": \"Request did not succeed. Status Code: "
+                        +statusCode+"\"}";
             }
         } catch (MalformedURLException | ConnectException | SocketTimeoutException e) {
             Util.displayStackTraceArray(e.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
@@ -136,10 +143,11 @@ public class GetPlantTask extends AsyncTask<String, Void, String> {
                     plantCategory.add(name);
                 }
 
-                plantDataAdapter = new ArrayAdapter<>(context,
+                ArrayAdapter<String> plantDataAdapter = new ArrayAdapter<>(weakReference.get(),
                         R.layout.support_simple_spinner_dropdown_item, plantCategory);
-                plantDataAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                spinnerPlant.setAdapter(plantDataAdapter);
+                plantDataAdapter.setDropDownViewResource(
+                        R.layout.support_simple_spinner_dropdown_item);
+                spinnerPlantWeakReference.get().setAdapter(plantDataAdapter);
             } else {
                 Log.d("json_success_false", responseJson.getString("reason")+" on " +
                         this.getClass().getSimpleName());

@@ -1,6 +1,5 @@
 package android.wmdc.com.mobilecsa.asynchronousclasses;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
@@ -11,6 +10,8 @@ import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
+import androidx.fragment.app.FragmentActivity;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,6 +19,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -29,26 +31,26 @@ import java.util.HashMap;
 /**Created by wmdcprog on 2/14/2018.*/
 
 public class GetIndustryTask extends AsyncTask<String, Void, String> {
-    private Context context;
+
+    private WeakReference<FragmentActivity> weakReference;
+
+    private WeakReference<Spinner> spinnerIndustryWeakReference;
+
     private ArrayList<String> industryCategory;
     private HashMap<String, Integer> industryMap;
-    private ArrayAdapter<String> industryDataAdapter;
-    private Spinner spinnerIndustry;
 
     private SharedPreferences sharedPreferences;
 
     private HttpURLConnection conn = null;
-    private URL url = null;
 
-    public GetIndustryTask(Context context,
-                           ArrayList<String> industryCategory,
-                           HashMap<String, Integer> industryMap,
-                           Spinner spinnerIndustry) {
-        this.context = context;
+    public GetIndustryTask(FragmentActivity activity, ArrayList<String> industryCategory,
+                           HashMap<String, Integer> industryMap, Spinner spinnerIndustry) {
+
+        this.weakReference = new WeakReference<>(activity);
         this.industryCategory = industryCategory;
         this.industryMap = industryMap;
-        this.spinnerIndustry = spinnerIndustry;
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        this.spinnerIndustryWeakReference = new WeakReference<>(spinnerIndustry);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(weakReference.get());
     }
 
     @Override
@@ -59,7 +61,7 @@ public class GetIndustryTask extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String[] params) {
         try {
-            url = new URL(sharedPreferences.getString("domain", null)+"getindustries");
+            URL url = new URL(sharedPreferences.getString("domain", null)+"getindustries");
             conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(Util.READ_TIMEOUT);
             conn.setConnectTimeout(Util.CONNECTION_TIMEOUT);
@@ -68,8 +70,10 @@ public class GetIndustryTask extends AsyncTask<String, Void, String> {
             conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
             conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
             conn.setRequestProperty("Connection", "keep-alive");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            conn.setRequestProperty("Cookie", "JSESSIONID="+sharedPreferences.getString("sessionId", null));
+            conn.setRequestProperty("Content-Type",
+                    "application/x-www-form-urlencoded; charset=utf-8");
+            conn.setRequestProperty("Cookie",
+                    "JSESSIONID="+sharedPreferences.getString("sessionId", null));
             conn.setRequestProperty("Host", "localhost:8080");
             conn.setRequestProperty("Referer", "http://localhost:8080/mcsa/getcontactsphoto");
             conn.setRequestProperty("X-Requested-Width", "XMLHttpRequest");
@@ -92,7 +96,8 @@ public class GetIndustryTask extends AsyncTask<String, Void, String> {
                     return stringBuilder.toString();
                 }
             } else {
-                return "{\"success\": false, \"reason\": \"Request did not succeed. Status Code: "+statusCode+"\"}";
+                return "{\"success\": false, \"reason\": \"Request did not succeed. Status Code: "
+                        +statusCode+"\"}";
             }
         } catch (MalformedURLException | ConnectException | SocketTimeoutException e) {
             Util.displayStackTraceArray(e.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
@@ -138,10 +143,13 @@ public class GetIndustryTask extends AsyncTask<String, Void, String> {
                     industryCategory.add(name);
                 }
 
-                industryDataAdapter = new ArrayAdapter<>(context,
+                ArrayAdapter<String> industryDataAdapter = new ArrayAdapter<>(weakReference.get(),
                         R.layout.support_simple_spinner_dropdown_item, industryCategory);
-                industryDataAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                spinnerIndustry.setAdapter(industryDataAdapter);
+
+                industryDataAdapter.setDropDownViewResource(
+                        R.layout.support_simple_spinner_dropdown_item);
+
+                spinnerIndustryWeakReference.get().setAdapter(industryDataAdapter);
             } else {
                 Log.d("json_success_false", responseJson.getString("reason")+" on " +
                         this.getClass().getSimpleName());

@@ -1,6 +1,5 @@
 package android.wmdc.com.mobilecsa.adapter;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -14,32 +13,35 @@ import android.wmdc.com.mobilecsa.asynchronousclasses.DialogImageTask;
 import android.wmdc.com.mobilecsa.model.KeyValueInfo;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 /**Created by wmdcprog on 3/10/2018.*/
 
 public class QCValueInfoAdapter extends RecyclerView.Adapter {
 
-    private Context context;
+    private WeakReference<FragmentActivity> weakReference;
     private ArrayList<KeyValueInfo> customerInfo;
     private int joId;
     private SharedPreferences sharedPreferences;
 
-    public QCValueInfoAdapter(Context context, ArrayList<KeyValueInfo> customerInfo, int joId) {
+    public QCValueInfoAdapter(FragmentActivity activity, ArrayList<KeyValueInfo> customerInfo,
+                              int joId) {
 
-        this.context = context;
+        this.weakReference = new WeakReference<>(activity);
         this.customerInfo = customerInfo;
         this.joId = joId;
-        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
     }
 
     @Override
     @NonNull
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.qc_jo_info_fragment, viewGroup,
-                false);
+        View view = LayoutInflater.from(weakReference.get()).inflate(R.layout.qc_jo_info_fragment,
+                viewGroup, false);
         return new QCInfoViewHolder(view);
     }
 
@@ -112,7 +114,7 @@ public class QCValueInfoAdapter extends RecyclerView.Adapter {
                         String url = sharedPreferences.getString("domain", null)
                                 +"getmcsajoimage?csaId="+csaId+"&joId="+joId;
 
-                        new DialogImageTask(context).execute(url);
+                        new DialogImageTask(weakReference.get()).execute(url);
                     }
                 }
             });

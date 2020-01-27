@@ -1,20 +1,18 @@
 package android.wmdc.com.mobilecsa.asynchronousclasses;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.wmdc.com.mobilecsa.InitialJoborderList;
 import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -27,28 +25,31 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 /**Created by wmdcprog on 6/4/2018.*/
 
 public class GetInitialJoborderListTask extends AsyncTask<String, String, String> {
+
+    private WeakReference<FragmentActivity> weakReference;
+
     private SharedPreferences sharedPreferences;
-    private Context context;
 
-    private ProgressBar progressBar;
     private ProgressDialog progressDialog;
-    private HttpURLConnection conn = null;
-    private URL url = null;
 
-    public GetInitialJoborderListTask(Context context) {
-        this.context = context;
-        progressBar = new ProgressBar(context, null, android.R.attr.progressBarStyleLarge);
-        progressDialog = new ProgressDialog(context);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    private HttpURLConnection conn = null;
+
+    public GetInitialJoborderListTask(FragmentActivity activity) {
+        this.weakReference = new WeakReference<>(activity);
+
+        progressDialog = new ProgressDialog(weakReference.get());
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(weakReference.get());
     }
 
     @Override
@@ -64,7 +65,7 @@ public class GetInitialJoborderListTask extends AsyncTask<String, String, String
     @Override
     protected String doInBackground(String[] params) {
         try {
-            url = new URL(sharedPreferences.getString("domain", null)+"getinitialjoborderlist");
+            URL url = new URL(sharedPreferences.getString("domain", null)+"getinitialjoborderlist");
             conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(Util.READ_TIMEOUT);
             conn.setConnectTimeout(Util.CONNECTION_TIMEOUT);
@@ -72,8 +73,10 @@ public class GetInitialJoborderListTask extends AsyncTask<String, String, String
             conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
             conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
             conn.setRequestProperty("Connection", "keep-alive");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            conn.setRequestProperty("Cookie", "JSESSIONID="+sharedPreferences.getString("sessionId", null));
+            conn.setRequestProperty("Content-Type",
+                    "application/x-www-form-urlencoded; charset=utf-8");
+            conn.setRequestProperty("Cookie",
+                    "JSESSIONID="+sharedPreferences.getString("sessionId", null));
             conn.setRequestProperty("Host", "localhost:8080");
             conn.setRequestProperty("Referer", "http://localhost:8080/mcsa/searchcustomerfromuser");
             conn.setRequestProperty("X-Requested-Width", "XMLHttpRequest");
@@ -84,7 +87,8 @@ public class GetInitialJoborderListTask extends AsyncTask<String, String, String
             String query = builder.build().getEncodedQuery();
 
             OutputStream os = conn.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os,
+                    StandardCharsets.UTF_8));
 
             writer.write(query);
             writer.flush();
@@ -135,6 +139,13 @@ public class GetInitialJoborderListTask extends AsyncTask<String, String, String
     @Override
     protected void onPostExecute(String result) {
         progressDialog.dismiss();
+
+        FragmentActivity mainActivity = weakReference.get();
+
+        if (mainActivity == null || mainActivity.isFinishing()) {
+            return;
+        }
+
         try {
             JSONObject jsonObject = new JSONObject(result);
             if (jsonObject.getBoolean("success")) {
@@ -145,18 +156,19 @@ public class GetInitialJoborderListTask extends AsyncTask<String, String, String
                 initialJoborderListFragment.setArguments(bundle);
                 Variables.currentPage = -1;
 
-                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+                FragmentManager fragmentManager = mainActivity.getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+                fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter,
+                        R.anim.pop_exit);
                 fragmentTransaction.replace(R.id.content_main, initialJoborderListFragment);
                 fragmentTransaction.commit();
             } else {
-                Util.alertBox(context, jsonObject.getString("reason"), "Error", false);
+                Util.alertBox(mainActivity, jsonObject.getString("reason"));
             }
         } catch (JSONException je) {
             Util.displayStackTraceArray(je.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                     "json_exception", je.toString());
-            Util.alertBox(context, je.toString(), "", false);
+            Util.alertBox(mainActivity, je.toString());
         }
     }
 }

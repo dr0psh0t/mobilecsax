@@ -2,7 +2,6 @@ package android.wmdc.com.mobilecsa.asynchronousclasses;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -18,9 +17,11 @@ import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
 
 import com.github.chrisbanes.photoview.PhotoView;
 
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -31,16 +32,19 @@ import java.net.URL;
  * Created by wmdcprog on 6/16/2018.
  */
 public class DialogImageTask extends AsyncTask<String, String, Bitmap> {
-    private Context context;
+
+    private WeakReference<FragmentActivity> activityWeakReference;
+
     private HttpURLConnection conn = null;
-    private URL fileURL = null;
-    private SharedPreferences sharedPreferences;
+
+    private SharedPreferences sPrefs;
+
     private ProgressDialog progressDialog;
 
-    public DialogImageTask(Context context) {
-        this.context = context;
-        this.progressDialog = new ProgressDialog(context);
-        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    public DialogImageTask(FragmentActivity activity) {
+        activityWeakReference = new WeakReference<>(activity);
+        this.progressDialog = new ProgressDialog(activity);
+        this.sPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
     }
 
     protected void onPreExecute() {
@@ -51,7 +55,7 @@ public class DialogImageTask extends AsyncTask<String, String, Bitmap> {
 
     protected Bitmap doInBackground(String[] params) {
         try {
-            fileURL = new URL(params[0]);
+            URL fileURL = new URL(params[0]);
 
             conn = (HttpURLConnection) fileURL.openConnection();
             conn.setReadTimeout(Util.READ_TIMEOUT);
@@ -61,8 +65,9 @@ public class DialogImageTask extends AsyncTask<String, String, Bitmap> {
             conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
             conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
             conn.setRequestProperty("Connection", "keep-alive");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            conn.setRequestProperty("Cookie", "JSESSIONID="+sharedPreferences.getString("sessionId", null));
+            conn.setRequestProperty("Content-Type",
+                    "application/x-www-form-urlencoded; charset=utf-8");
+            conn.setRequestProperty("Cookie", "JSESSIONID="+sPrefs.getString("sessionId", null));
             conn.setRequestProperty("Host", "localhost:8080");
             conn.setRequestProperty("Referer", "http://localhost:8080/mcsa/getcontactsphoto");
             conn.setRequestProperty("X-Requested-Width", "XMLHttpRequest");
@@ -70,8 +75,7 @@ public class DialogImageTask extends AsyncTask<String, String, Bitmap> {
             conn.setDoOutput(true);
             conn.connect();
 
-            Bitmap bmPic = BitmapFactory.decodeStream(conn.getInputStream());
-            return bmPic;
+            return BitmapFactory.decodeStream(conn.getInputStream());
         } catch (MalformedURLException | ConnectException | SocketTimeoutException e) {
             Util.displayStackTraceArray(e.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                     "NetworkException", e.toString());
@@ -127,7 +131,7 @@ public class DialogImageTask extends AsyncTask<String, String, Bitmap> {
     {
         progressDialog.dismiss();
 
-        PhotoView imageView = new PhotoView(context);
+        PhotoView imageView = new PhotoView(activityWeakReference.get());
 
         if (result != null)
         {
@@ -216,9 +220,16 @@ public class DialogImageTask extends AsyncTask<String, String, Bitmap> {
                 }
             }
 
-            Dialog builder = new Dialog(context);
+            Dialog builder = new Dialog(activityWeakReference.get());
             builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            builder.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+            if (builder.getWindow() != null) {
+                builder.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            } else {
+                Util.longToast(activityWeakReference.get(),
+                        "Builder Window is null. Cannot set background drawable to dialog");
+            }
+
             builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
@@ -234,7 +245,7 @@ public class DialogImageTask extends AsyncTask<String, String, Bitmap> {
         }
         else
         {
-            AlertDialog.Builder warningBox = new AlertDialog.Builder(context);
+            AlertDialog.Builder warningBox = new AlertDialog.Builder(activityWeakReference.get());
 
             warningBox.setMessage("A problem has occured in displaying Photo.");
             warningBox.setTitle("Error");

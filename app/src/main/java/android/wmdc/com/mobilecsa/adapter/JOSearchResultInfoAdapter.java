@@ -1,8 +1,8 @@
 package android.wmdc.com.mobilecsa.adapter;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +14,10 @@ import android.wmdc.com.mobilecsa.model.KeyValueInfo;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 /**
@@ -25,24 +27,25 @@ import java.util.ArrayList;
 public class JOSearchResultInfoAdapter extends
         RecyclerView.Adapter<JOSearchResultInfoAdapter.JOSearchResViewHolder> {
 
-    private Context context;
+    private WeakReference<FragmentActivity> weakReference;
     private ArrayList<KeyValueInfo> joInfos;
     private int initialJoborderId;
     private SharedPreferences sharedPreferences;
 
-    public JOSearchResultInfoAdapter(Context context, ArrayList<KeyValueInfo> joInfos,
+    public JOSearchResultInfoAdapter(FragmentActivity activity, ArrayList<KeyValueInfo> joInfos,
                                      int initialJoborderId) {
-        this.context = context;
+
+        this.weakReference = new WeakReference<>(activity);
         this.joInfos = joInfos;
         this.initialJoborderId = initialJoborderId;
-        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
     }
 
     @Override
     @NonNull
     public JOSearchResViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.jo_search_info_layout, viewGroup,
-                false);
+        View view = LayoutInflater.from(weakReference.get()).inflate(R.layout.jo_search_info_layout,
+                viewGroup, false);
         return new JOSearchResViewHolder(view);
     }
 
@@ -117,7 +120,7 @@ public class JOSearchResultInfoAdapter extends
                         String url = sharedPreferences.getString("domain", null)+
                                 "getinitialjoborderphoto?initialJoborderId="+initialJoborderId;
 
-                        new DialogImageTask(context).execute(url);
+                        new DialogImageTask(weakReference.get()).execute(url);
                     }
                 }
             });

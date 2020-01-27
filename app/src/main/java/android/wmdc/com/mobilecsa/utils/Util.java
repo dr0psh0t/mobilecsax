@@ -250,11 +250,11 @@ public class Util {
         return numberList;
     }
 
-    public static void handleBackPress(Fragment currFrag, Context context) {
-        FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+    public static void handleBackPress(Fragment currFrag, FragmentActivity activity) {
+        FragmentManager fragmentManager = activity.getSupportFragmentManager();
 
         if (currFrag == null) {
-            ((AppCompatActivity) context).onBackPressed();
+            activity.onBackPressed();
         } else {
             if (currFrag instanceof CRMFragment) {
                 HomeFragment homeFragment = new HomeFragment();
@@ -305,7 +305,7 @@ public class Util {
                                 R.anim.exit).replace(R.id.content_main, searchCustomersFragment)
                         .commit();
             } else if (currFrag instanceof HomeFragment) {
-                ((AppCompatActivity) context).finish();
+                activity.finish();
             } else if (currFrag instanceof JOFragment) {
                 fragmentManager.beginTransaction()
                         .setCustomAnimations(R.anim.pop_enter, R.anim.pop_exit, R.anim.enter,
@@ -335,9 +335,9 @@ public class Util {
                                 R.anim.exit).replace(R.id.content_main, new SearchJOFragment())
                         .commit();
             } else if (currFrag instanceof InitialJoborderFragment) {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-                new GetInitialJoborderListTask(context)
-                        .execute(String.valueOf(prefs.getInt("csaId", 0)));
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
+                new GetInitialJoborderListTask(activity).execute(String.valueOf(
+                        prefs.getInt("csaId", 0)));
             }
         }
     }

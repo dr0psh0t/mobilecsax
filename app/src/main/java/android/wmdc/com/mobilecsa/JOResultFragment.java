@@ -65,7 +65,7 @@ public class JOResultFragment extends Fragment {
                     ));
                 }
 
-                JOResultAdapter joResAdapter = new JOResultAdapter(getContext(), jobOrders);
+                JOResultAdapter joResAdapter = new JOResultAdapter(getActivity(), jobOrders);
                 RecyclerView recyclerViewForJO = v.findViewById(R.id.recyclerViewSearchJO);
                 recyclerViewForJO.setLayoutManager(new LinearLayoutManager(getContext()));
                 recyclerViewForJO.setAdapter(joResAdapter);

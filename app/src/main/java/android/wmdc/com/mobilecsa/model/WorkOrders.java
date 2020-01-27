@@ -22,10 +22,6 @@ public class WorkOrders {
         this.isSelected = false;
     }
 
-    public int getCtr() {
-        return ctr;
-    }
-
     public String getScopeWork() {
         return scopeWork;
     }

@@ -243,8 +243,7 @@ public class UpdateInitialJOFragment extends Fragment {
                                 etEngineModel,
                                 etMakeCat,
                                 dialog);
-                        new SearchEngineTaskFromJO(
-                                getContext(), engineList, recyclerViewEngine,
+                        new SearchEngineTaskFromJO(getActivity(), engineList, recyclerViewEngine,
                                 engineJOAdapter).execute(trimmedQuery);
                     }
 
@@ -323,10 +322,8 @@ public class UpdateInitialJOFragment extends Fragment {
                         customerJOAdapter = new CustomerJOAdapter(customerList,
                                 getActivity(), etCustomer, dialog);
 
-                        new SearchCustomerTaskFromJO(
-                                getContext(), customerList,
-                                recyclerViewCustomer, customerJOAdapter)
-                                .execute(trimmedQuery);
+                        new SearchCustomerTaskFromJO(getActivity(), customerList,
+                                recyclerViewCustomer, customerJOAdapter).execute(trimmedQuery);
                     }
                 }
 
@@ -464,7 +461,7 @@ public class UpdateInitialJOFragment extends Fragment {
                     return;
                 }
 
-                new DialogSignatureTask(getContext()).execute(joborderSignature);
+                new DialogSignatureTask(getActivity()).execute(joborderSignature);
             }
         };
 
@@ -480,7 +477,7 @@ public class UpdateInitialJOFragment extends Fragment {
                     return;
                 }
 
-                new DialogImageUriTask(getContext()).execute(fileUri);
+                new DialogImageUriTask(getActivity()).execute(fileUri);
             }
         };
 

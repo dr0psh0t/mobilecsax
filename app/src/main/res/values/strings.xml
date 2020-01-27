@@ -126,6 +126,7 @@
     <string name="check">Check</string>
     <string name="version">Version 2.2</string>
     <string name="photo_prob">Problem occured in displaying photo</string>
+    <string name="relogin">Relogin to continue</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

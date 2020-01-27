@@ -1,19 +1,17 @@
 package android.wmdc.com.mobilecsa.asynchronousclasses;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.widget.Toast;
 import android.wmdc.com.mobilecsa.CustomerResultFragment;
 import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -27,25 +25,30 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 /**Created by wmdcprog on 3/1/2018.*/
 
 public class SearchCustomerTask extends AsyncTask<String, String, String> {
-    private SharedPreferences sharedPreferences;
-    private Context context;
-    private ProgressDialog progressDialog;
-    private HttpURLConnection conn = null;
-    private URL url = null;
 
-    public SearchCustomerTask(Context context) {
-        this.context = context;
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
-        progressDialog = new ProgressDialog(this.context);
+    private WeakReference<FragmentActivity> weakReference;
+
+    private SharedPreferences sharedPreferences;
+
+    private ProgressDialog progressDialog;
+
+    private HttpURLConnection conn = null;
+
+    public SearchCustomerTask(FragmentActivity activity) {
+        this.weakReference = new WeakReference<>(activity);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
+        progressDialog = new ProgressDialog(activity);
     }
 
     @Override
@@ -59,7 +62,7 @@ public class SearchCustomerTask extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String[] params) {
         try {
-            url = new URL(sharedPreferences.getString("domain", null)+"searchcustomerfromuser");
+            URL url = new URL(sharedPreferences.getString("domain", null)+"searchcustomerfromuser");
             conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(Util.READ_TIMEOUT);
             conn.setConnectTimeout(Util.CONNECTION_TIMEOUT);
@@ -83,7 +86,8 @@ public class SearchCustomerTask extends AsyncTask<String, String, String> {
             String query = builder.build().getEncodedQuery();
 
             OutputStream os = conn.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os,
+                    StandardCharsets.UTF_8));
 
             writer.write(query);
             writer.flush();
@@ -136,6 +140,12 @@ public class SearchCustomerTask extends AsyncTask<String, String, String> {
     protected void onPostExecute(String result) {
         progressDialog.dismiss();
 
+        FragmentActivity mainActivity = weakReference.get();
+
+        if (mainActivity == null || mainActivity.isFinishing()) {
+            return;
+        }
+
         try {
             JSONObject jsonObject = new JSONObject(result);
 
@@ -149,31 +159,30 @@ public class SearchCustomerTask extends AsyncTask<String, String, String> {
                 JSONObject obj = jsonArray.getJSONObject(0);
 
                 if (obj.getInt("searchCount") < 1) {
-                    Util.alertBox(context, "No customer found.", "Error", false);
+                    Util.alertBox(mainActivity, "No customer found.");
                     return;
                 }
 
                 Variables.currentPage = -1;
                 resultFragment.setArguments(bundle);
 
-                FragmentManager fragmentManager = ((AppCompatActivity) context)
-                        .getSupportFragmentManager();
+                FragmentManager fragmentManager = mainActivity.getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit,
                         R.anim.pop_enter, R.anim.pop_exit);
                 fragmentTransaction.replace(R.id.content_main, resultFragment);
                 fragmentTransaction.commit();
             } else {
-                Util.alertBox(context, jsonObject.getString("reason"), "Error", false);
+                Util.alertBox(mainActivity, jsonObject.getString("reason"));
             }
         } catch (JSONException je) {
             Util.displayStackTraceArray(je.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                     "JSONException", je.toString());
-            Toast.makeText(context, je.getMessage(), Toast.LENGTH_LONG).show();
+            Util.longToast(mainActivity, je.getMessage());
         } catch (Exception e) {
             Util.displayStackTraceArray(e.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                     "Exception", e.toString());
-            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+            Util.longToast(mainActivity, e.getMessage());
         }
     }
 }

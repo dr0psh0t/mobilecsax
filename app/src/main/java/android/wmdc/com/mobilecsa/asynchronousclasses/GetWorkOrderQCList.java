@@ -1,7 +1,6 @@
 package android.wmdc.com.mobilecsa.asynchronousclasses;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -11,6 +10,7 @@ import android.wmdc.com.mobilecsa.model.WorkOrderModel;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,32 +24,39 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**Created by wmdcprog on 5/7/2018.*/
 
 public class GetWorkOrderQCList extends AsyncTask<String, String, String> {
-    private SharedPreferences sharedPreferences;
-    private Context context;
-    private ProgressDialog progressDialog;
-    private HttpURLConnection conn = null;
-    private URL url = null;
 
-    private RecyclerView workOrderRecyclerView;
+    private WeakReference<FragmentActivity> weakReference;
+
+    private WeakReference<RecyclerView> woRecWeakReference;
+
+    private SharedPreferences sharedPreferences;
+
+    private ProgressDialog progressDialog;
+
+    private HttpURLConnection conn = null;
+
     private ArrayList<WorkOrderModel> workOrderList;
 
-    public GetWorkOrderQCList(Context context, RecyclerView workOrderRecyclerView,
+    public GetWorkOrderQCList(FragmentActivity activity, RecyclerView workOrderRecyclerView,
                               ArrayList<WorkOrderModel> workOrderList) {
-        this.context = context;
-        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
-        this.progressDialog = new ProgressDialog(this.context);
+
+        this.weakReference = new WeakReference<>(activity);
+        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
+        this.progressDialog = new ProgressDialog(activity);
         this.workOrderList = workOrderList;
-        this.workOrderRecyclerView = workOrderRecyclerView;
+        this.woRecWeakReference = new WeakReference<>(workOrderRecyclerView);
     }
 
     @Override
@@ -63,7 +70,7 @@ public class GetWorkOrderQCList extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String[] params) {
         try{
-            url = new URL(sharedPreferences.getString("domain", null)+"getworkorderqclist");
+            URL url = new URL(sharedPreferences.getString("domain", null)+"getworkorderqclist");
             conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(Util.READ_TIMEOUT);
             conn.setConnectTimeout(Util.CONNECTION_TIMEOUT);
@@ -91,7 +98,8 @@ public class GetWorkOrderQCList extends AsyncTask<String, String, String> {
             String query = builder.build().getEncodedQuery();
 
             OutputStream os = conn.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os,
+                    StandardCharsets.UTF_8));
 
             writer.write(query);
             writer.flush();
@@ -145,6 +153,13 @@ public class GetWorkOrderQCList extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String result) {
         progressDialog.dismiss();
+
+        FragmentActivity mainActivity = weakReference.get();
+
+        if (mainActivity == null || mainActivity.isFinishing()) {
+            return;
+        }
+
         try {
             JSONObject jsonObject = new JSONObject(result);
             JSONArray workOrderArray = jsonObject.getJSONArray("workOrders");
@@ -159,13 +174,18 @@ public class GetWorkOrderQCList extends AsyncTask<String, String, String> {
                         joid,
                         workOrderInd.getInt("isCompleted")
                 ));
-                workOrderRecyclerView.setAdapter(new WorkOrderAdapter(context, workOrderList));
-                workOrderRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                //workOrderRecyclerView.setAdapter(new WorkOrderAdapter(context, workOrderList));
+                //workOrderRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
+                woRecWeakReference.get().setAdapter(new WorkOrderAdapter(mainActivity,
+                        workOrderList));
+
+                woRecWeakReference.get().setItemAnimator(new DefaultItemAnimator());
             }
         } catch (JSONException je) {
             Util.displayStackTraceArray(je.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                     "JSONException", je.toString());
-            Util.alertBox(context, je.toString(), "", false);
+            Util.alertBox(mainActivity, je.toString());
         }
     }
 }

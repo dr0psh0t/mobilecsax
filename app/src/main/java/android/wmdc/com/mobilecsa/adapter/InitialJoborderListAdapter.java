@@ -1,6 +1,5 @@
 package android.wmdc.com.mobilecsa.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,10 @@ import android.wmdc.com.mobilecsa.model.InitialJoborderRowModel;
 import android.wmdc.com.mobilecsa.utils.Util;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 /**
@@ -25,23 +26,21 @@ import java.util.ArrayList;
 public class InitialJoborderListAdapter extends
         RecyclerView.Adapter<InitialJoborderListAdapter.InitialJoborderListViewHolder> {
 
-    private Context context;
-    private ArrayList<InitialJoborderRowModel> initialJoborderList;
+    private WeakReference<FragmentActivity> weakReference;
+    private ArrayList<InitialJoborderRowModel> initJoList;
     private boolean heightSet = false;
 
-    public InitialJoborderListAdapter(
-            Context context,
-            ArrayList<InitialJoborderRowModel> initialJoborderList) {
-
-        this.context = context;
-        this.initialJoborderList = initialJoborderList;
+    public InitialJoborderListAdapter(FragmentActivity activity,
+                                      ArrayList<InitialJoborderRowModel> initJoList) {
+        this.weakReference = new WeakReference<>(activity);
+        this.initJoList = initJoList;
     }
 
     @NonNull
     public InitialJoborderListViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.initial_joborder_item, viewGroup,
-                false);
+        View view = LayoutInflater.from(weakReference.get()).inflate(R.layout.initial_joborder_item,
+                viewGroup, false);
 
         if (!heightSet) {
             final LinearLayout rootLay = view.findViewById(R.id.initialJORowItem);
@@ -72,21 +71,21 @@ public class InitialJoborderListAdapter extends
                     R.drawable.custom_card_background_even);
         }
 
-        initialJoborderListViewHolder.tvJoNumber.setText(initialJoborderList.get(i).getJoNumber());
-        initialJoborderListViewHolder.tvCustomer.setText(initialJoborderList.get(i).getCustomer());
-        initialJoborderListViewHolder.tvSerial.setText(initialJoborderList.get(i).getSerial());
+        initialJoborderListViewHolder.tvJoNumber.setText(initJoList.get(i).getJoNumber());
+        initialJoborderListViewHolder.tvCustomer.setText(initJoList.get(i).getCustomer());
+        initialJoborderListViewHolder.tvSerial.setText(initJoList.get(i).getSerial());
 
-        if (initialJoborderList.get(i).getIsAdded() == 1) {
+        if (initJoList.get(i).getIsAdded() == 1) {
             initialJoborderListViewHolder.ivStatusInitialJO
                     .setImageResource(R.drawable.ic_action_check_colored_round);
-        } else if (initialJoborderList.get(i).getIsAdded() == 0) {
+        } else if (initJoList.get(i).getIsAdded() == 0) {
             initialJoborderListViewHolder.ivStatusInitialJO
                     .setImageResource(R.drawable.ic_action_x_colored_round);
         }
     }
 
     public int getItemCount() {
-        return initialJoborderList.size();
+        return initJoList.size();
     }
 
     class InitialJoborderListViewHolder extends RecyclerView.ViewHolder {
@@ -110,9 +109,8 @@ public class InitialJoborderListAdapter extends
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
-                    new GetInitialJoborderTask(context)
-                            .execute(String.valueOf(initialJoborderList.get(index)
-                                    .getQuotationId()));
+                    new GetInitialJoborderTask(weakReference.get()).execute(
+                            String.valueOf(initJoList.get(index).getQuotationId()));
                 }
             });
         }

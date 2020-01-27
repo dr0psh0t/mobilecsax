@@ -1,6 +1,5 @@
 package android.wmdc.com.mobilecsa.asynchronousclasses;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
@@ -11,6 +10,8 @@ import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
+import androidx.fragment.app.FragmentActivity;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,6 +19,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -29,24 +31,27 @@ import java.util.HashMap;
 /** Created by wmdcprog on 2/15/2018. */
 
 public class GetProvinceTask extends AsyncTask<String, Void, String> {
-    private Context context;
-    private ArrayList<String> provinceCategory;
-    private HashMap<String, Integer> provinceMap;
-    private ArrayAdapter<String> provinceDataAdapter;
-    private Spinner spinnerProvince;
-    private SharedPreferences sharedPreferences;
-    private HttpURLConnection conn = null;
-    private URL url = null;
 
-    public GetProvinceTask(Context context,
-                           ArrayList<String> provinceCategory,
-                           HashMap<String, Integer> provinceMap,
-                           Spinner spinnerProvince) {
-        this.context = context;
+    private WeakReference<FragmentActivity> weakReference;
+
+    private WeakReference<Spinner> spinnerProvinceWeakReference;
+
+    private ArrayList<String> provinceCategory;
+
+    private HashMap<String, Integer> provinceMap;
+
+    private SharedPreferences sharedPreferences;
+
+    private HttpURLConnection conn = null;
+
+    public GetProvinceTask(FragmentActivity activity, ArrayList<String> provinceCategory,
+                           HashMap<String, Integer> provinceMap, Spinner spinnerProvince) {
+
+        this.weakReference = new WeakReference<>(activity);
         this.provinceCategory = provinceCategory;
         this.provinceMap = provinceMap;
-        this.spinnerProvince = spinnerProvince;
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        this.spinnerProvinceWeakReference = new WeakReference<>(spinnerProvince);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
     }
 
     @Override
@@ -57,7 +62,7 @@ public class GetProvinceTask extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String[] args) {
         try {
-            url = new URL(sharedPreferences.getString("domain", null)+"getprovinces");
+            URL url = new URL(sharedPreferences.getString("domain", null)+"getprovinces");
             conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(Util.READ_TIMEOUT);
             conn.setConnectTimeout(Util.CONNECTION_TIMEOUT);
@@ -66,8 +71,10 @@ public class GetProvinceTask extends AsyncTask<String, Void, String> {
             conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
             conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
             conn.setRequestProperty("Connection", "keep-alive");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            conn.setRequestProperty("Cookie", "JSESSIONID="+sharedPreferences.getString("sessionId", null));
+            conn.setRequestProperty("Content-Type",
+                    "application/x-www-form-urlencoded; charset=utf-8");
+            conn.setRequestProperty("Cookie",
+                    "JSESSIONID="+sharedPreferences.getString("sessionId", null));
             conn.setRequestProperty("Host", "localhost:8080");
             conn.setRequestProperty("Referer", "http://localhost:8080/mcsa/getcontactsphoto");
             conn.setRequestProperty("X-Requested-Width", "XMLHttpRequest");
@@ -90,7 +97,8 @@ public class GetProvinceTask extends AsyncTask<String, Void, String> {
                     return stringBuilder.toString();
                 }
             } else {
-                return "{\"success\": false, \"reason\": \"Request did not succeed. Status Code: "+statusCode+"\"}";
+                return "{\"success\": false, \"reason\": \"Request did not succeed. Status Code: "
+                        +statusCode+"\"}";
             }
         } catch (MalformedURLException | ConnectException | SocketTimeoutException e) {
             Util.displayStackTraceArray(e.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
@@ -136,10 +144,11 @@ public class GetProvinceTask extends AsyncTask<String, Void, String> {
                     provinceCategory.add(name);
                 }
 
-                provinceDataAdapter = new ArrayAdapter<>(context,
+                ArrayAdapter<String> provinceDataAdapter = new ArrayAdapter<>(weakReference.get(),
                         R.layout.support_simple_spinner_dropdown_item, provinceCategory);
-                provinceDataAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                spinnerProvince.setAdapter(provinceDataAdapter);
+                provinceDataAdapter.setDropDownViewResource(
+                        R.layout.support_simple_spinner_dropdown_item);
+                spinnerProvinceWeakReference.get().setAdapter(provinceDataAdapter);
             } else {
                 Log.d("json_success_false", responseJson.getString("reason")+" on " +
                         this.getClass().getSimpleName());

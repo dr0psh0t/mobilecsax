@@ -1,7 +1,6 @@
 package android.wmdc.com.mobilecsa.asynchronousclasses;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -12,7 +11,7 @@ import android.wmdc.com.mobilecsa.WorkOrderFragment;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -25,25 +24,30 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 /**Created by wmdcprog on 9/14/2018.*/
 
 public class GetJoWoStatusListTask extends AsyncTask<String, String, String> {
-    private ProgressDialog progressDialog;
-    private SharedPreferences sharedPreferences;
-    private Context context;
-    private HttpURLConnection conn = null;
-    private URL url = null;
 
-    public GetJoWoStatusListTask(Context context) {
-        this.context = context;
-        this.progressDialog = new ProgressDialog(context);
-        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    private WeakReference<FragmentActivity> weakReference;
+
+    private ProgressDialog progressDialog;
+
+    private SharedPreferences sharedPreferences;
+
+    private HttpURLConnection conn = null;
+
+    public GetJoWoStatusListTask(FragmentActivity activity) {
+        this.weakReference = new WeakReference<>(activity);
+        this.progressDialog = new ProgressDialog(activity);
+        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
     }
 
     protected void onPreExecute() {
@@ -55,7 +59,7 @@ public class GetJoWoStatusListTask extends AsyncTask<String, String, String> {
 
     protected String doInBackground(String[] args) {
         try {
-            url = new URL(sharedPreferences.getString("domain", null)+"getjowostatuslist");
+            URL url = new URL(sharedPreferences.getString("domain", null)+"getjowostatuslist");
             conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(Util.READ_TIMEOUT);
             conn.setConnectTimeout(Util.CONNECTION_TIMEOUT);
@@ -81,7 +85,8 @@ public class GetJoWoStatusListTask extends AsyncTask<String, String, String> {
             String query = builder.build().getEncodedQuery();
 
             OutputStream os = conn.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os,
+                    StandardCharsets.UTF_8));
 
             writer.write(query);
             writer.flush();
@@ -133,11 +138,18 @@ public class GetJoWoStatusListTask extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String result) {
         this.progressDialog.dismiss();
+
+        FragmentActivity mainActivity = weakReference.get();
+
+        if (mainActivity == null || mainActivity.isFinishing()) {
+            return;
+        }
+
         try {
             JSONObject resJson = new JSONObject(result);
             if (resJson.getBoolean("success")) {
                 if (resJson.getInt("totalCount") < 1) {
-                    Util.alertBox(context, resJson.getString("reason"), "Failure", false);
+                    Util.alertBox(mainActivity, resJson.getString("reason"));
                 } else {
                     WorkOrderFragment workOrderFragment = new WorkOrderFragment();
                     Bundle bundle = new Bundle();
@@ -146,8 +158,7 @@ public class GetJoWoStatusListTask extends AsyncTask<String, String, String> {
                     workOrderFragment.setArguments(bundle);
                     Variables.currentPage = -1;
 
-                    FragmentManager fragmentManager = ((AppCompatActivity) context)
-                            .getSupportFragmentManager();
+                    FragmentManager fragmentManager = mainActivity.getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
                     fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit,
@@ -157,7 +168,7 @@ public class GetJoWoStatusListTask extends AsyncTask<String, String, String> {
                     fragmentTransaction.commit();
                 }
             } else {
-                Util.alertBox(context, resJson.getString("reason"), "Failure", false);
+                Util.alertBox(mainActivity, resJson.getString("reason"));
             }
         } catch (JSONException je) {
             Util.displayStackTraceArray(je.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,

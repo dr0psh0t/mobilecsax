@@ -1,15 +1,15 @@
 package android.wmdc.com.mobilecsa.asynchronousclasses;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
+
+import androidx.fragment.app.FragmentActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,6 +18,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -31,29 +32,31 @@ import java.util.HashMap;
  */
 
 public class GetCountryCodeTask extends AsyncTask<String, Void, String> {
-    private Context context;
+
+    private WeakReference<FragmentActivity> weakReference;
+
+    private WeakReference<Spinner> spinnerCountryCodeWeakReference;
+
+    private WeakReference<Spinner> spinnerFaxCountryCodeWeakReference;
+
     private ArrayList<String> countryCodeCategory;
+
     private HashMap<String, Integer> countryCodeMap;
-    private ArrayAdapter<String> countryCodeAdapter;
-    private Spinner spinnerCountryCode;
-    private Spinner spinnerFaxCountryCode;
 
     private SharedPreferences sharedPreferences;
 
     private HttpURLConnection conn = null;
-    private URL url = null;
 
-    public GetCountryCodeTask(Context context,
-                              ArrayList<String> countryCodeCategory,
-                              HashMap<String, Integer> countryCodeMap,
-                              Spinner spinnerCountryCode,
+    public GetCountryCodeTask(FragmentActivity activity, ArrayList<String> countryCodeCategory,
+                              HashMap<String, Integer> countryCodeMap, Spinner spinnerCountryCode,
                               Spinner spinnerFaxCountryCode) {
-        this.context = context;
+
+        this.weakReference = new WeakReference<>(activity);
         this.countryCodeCategory = countryCodeCategory;
         this.countryCodeMap = countryCodeMap;
-        this.spinnerCountryCode = spinnerCountryCode;
-        this.spinnerFaxCountryCode = spinnerFaxCountryCode;
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        this.spinnerCountryCodeWeakReference = new WeakReference<>(spinnerCountryCode);
+        this.spinnerFaxCountryCodeWeakReference = new WeakReference<>(spinnerFaxCountryCode);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(weakReference.get());
     }
 
     @Override
@@ -64,7 +67,7 @@ public class GetCountryCodeTask extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String[] params) {
         try {
-            url = new URL(sharedPreferences.getString("domain", null)+"getcountrycode");
+            URL url = new URL(sharedPreferences.getString("domain", null)+"getcountrycode");
             conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(Util.READ_TIMEOUT);
             conn.setConnectTimeout(Util.CONNECTION_TIMEOUT);
@@ -126,6 +129,7 @@ public class GetCountryCodeTask extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result) {
         try {
             JSONObject responseJson = new JSONObject(result);
+
             if (responseJson.getBoolean("success")) {
                 JSONArray countryCodeJsonArray = responseJson.getJSONArray("countryCodeStore");
                 JSONObject tempJson;
@@ -143,18 +147,19 @@ public class GetCountryCodeTask extends AsyncTask<String, Void, String> {
                     countryCodeCategory.add(name);
                 }
 
-                countryCodeAdapter = new ArrayAdapter<>(context,
+                ArrayAdapter<String> countryCodeAdapter = new ArrayAdapter<>(weakReference.get(),
                         R.layout.support_simple_spinner_dropdown_item, countryCodeCategory);
-                countryCodeAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
 
-                spinnerCountryCode.setAdapter(countryCodeAdapter);
-                spinnerFaxCountryCode.setAdapter(countryCodeAdapter);
+                countryCodeAdapter.setDropDownViewResource(
+                        R.layout.support_simple_spinner_dropdown_item);
 
-                spinnerFaxCountryCode.setSelection(1);
-                spinnerCountryCode.setSelection(1);
+                spinnerCountryCodeWeakReference.get().setAdapter(countryCodeAdapter);
+                spinnerFaxCountryCodeWeakReference.get().setAdapter(countryCodeAdapter);
+
+                spinnerFaxCountryCodeWeakReference.get().setSelection(1);
+                spinnerCountryCodeWeakReference.get().setSelection(1);
             } else {
-                Log.d("json_success_false", responseJson.getString("reason")+" on " +
-                        this.getClass().getSimpleName());
+                Util.longToast(weakReference.get(), responseJson.getString("reason"));
             }
         } catch (JSONException je) {
             Util.displayStackTraceArray(je.getStackTrace(),

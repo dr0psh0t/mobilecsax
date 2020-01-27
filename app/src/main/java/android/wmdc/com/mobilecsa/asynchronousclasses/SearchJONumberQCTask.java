@@ -1,7 +1,6 @@
 package android.wmdc.com.mobilecsa.asynchronousclasses;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.wmdc.com.mobilecsa.QualityCheckFragment;
@@ -9,7 +8,7 @@ import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -17,17 +16,20 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 /**Created by wmdcprog on 5/18/2018.*/
 
 public class SearchJONumberQCTask extends AsyncTask<String, String, JSONObject> {
-    private Context context;
+
+    private WeakReference<FragmentActivity> weakReference;
+
     private ProgressDialog progressDialog;
 
-    public SearchJONumberQCTask(Context context) {
-        this.context = context;
-        progressDialog = new ProgressDialog(this.context);
+    public SearchJONumberQCTask(FragmentActivity activity) {
+        this.weakReference = new WeakReference<>(activity);
+        progressDialog = new ProgressDialog(activity);
     }
 
     @Override
@@ -77,8 +79,8 @@ public class SearchJONumberQCTask extends AsyncTask<String, String, JSONObject> 
                         if (params[0].length() <= customerStr.length()) {
                             if (customerStr.toLowerCase().substring(0, params[0].length())
                                     .contains(params[0].toLowerCase())) {
-                                JSONObject customer = obj;
-                                joborders.add(customer);
+
+                                joborders.add(obj);
                             }
                         }
                     }
@@ -107,6 +109,13 @@ public class SearchJONumberQCTask extends AsyncTask<String, String, JSONObject> 
     @Override
     protected void onPostExecute(JSONObject obj) {
         progressDialog.dismiss();
+
+        FragmentActivity mainActivity = weakReference.get();
+
+        if (mainActivity == null || mainActivity.isFinishing()) {
+            return;
+        }
+
         try {
             if (obj.getBoolean("success")) {
                 QualityCheckFragment qcFrag = new QualityCheckFragment();
@@ -115,18 +124,19 @@ public class SearchJONumberQCTask extends AsyncTask<String, String, JSONObject> 
                 bundle.putString("searchResult", obj.toString());
                 qcFrag.setArguments(bundle);
 
-                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+                FragmentManager fragmentManager = mainActivity.getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+                fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter,
+                        R.anim.pop_exit);
                 fragmentTransaction.replace(R.id.content_main, qcFrag);
                 fragmentTransaction.commit();
             } else {
-                Util.alertBox(context, obj.getString("reason"), "Failed", false);
+                Util.alertBox(mainActivity, obj.getString("reason"));
             }
         } catch (JSONException je) {
             Util.displayStackTraceArray(je.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                     "JSONException", je.toString());
-            Util.alertBox(context, je.toString(), "Error", false);
+            Util.alertBox(mainActivity, je.toString());
         }
     }
 }

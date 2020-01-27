@@ -2184,6 +2184,7 @@ string qc
 string qc_ico_img
 string re_pass
 string ref_no
+string relogin
 string remarks_hint
 string remarks_req
 string retype_pass

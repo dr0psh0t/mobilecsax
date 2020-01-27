@@ -1,6 +1,5 @@
 package android.wmdc.com.mobilecsa.adapter;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -14,8 +13,10 @@ import android.wmdc.com.mobilecsa.model.KeyValueInfo;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 /**
@@ -25,24 +26,25 @@ import java.util.ArrayList;
 public class InitialJoborderAdapter extends
         RecyclerView.Adapter<InitialJoborderAdapter.InitialJoborderViewHolder> {
 
-    private Context context;
-    private ArrayList<KeyValueInfo> initialJoborderList;
-    private SharedPreferences sharedPreferences;
+    private WeakReference<FragmentActivity> weakReference;
+    private ArrayList<KeyValueInfo> initJoList;
+    private SharedPreferences sPrefs;
     private int quotationId;
 
-    public InitialJoborderAdapter(Context context, ArrayList<KeyValueInfo> initialJoborderList,
+    public InitialJoborderAdapter(FragmentActivity activity, ArrayList<KeyValueInfo> initJoList,
                                   int quotationId) {
 
-        this.context = context;
-        this.initialJoborderList = initialJoborderList;
-        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        this.weakReference = new WeakReference<>(activity);
+        this.initJoList = initJoList;
+        this.sPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
         this.quotationId = quotationId;
     }
 
     @NonNull
     public InitialJoborderViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.initial_joborder_row_item,
-                viewGroup, false);
+
+        View view = LayoutInflater.from(weakReference.get()).inflate(
+                R.layout.initial_joborder_row_item, viewGroup, false);
 
         return new InitialJoborderViewHolder(view);
     }
@@ -50,11 +52,11 @@ public class InitialJoborderAdapter extends
     public void onBindViewHolder(InitialJoborderViewHolder initialJoborderViewHolder, int i) {
         initialJoborderViewHolder.index = i;
 
-        String key = initialJoborderList.get(i).getKey();
+        String key = initJoList.get(i).getKey();
 
         switch (key) {
             case "Status":
-                String status = initialJoborderList.get(i).getValue();
+                String status = initJoList.get(i).getValue();
 
                 switch (status) {
                     case "Pending":
@@ -116,12 +118,11 @@ public class InitialJoborderAdapter extends
         }
 
         initialJoborderViewHolder.tvKeyInitialJO.setText(key);
-        initialJoborderViewHolder.tvValueInitialJO.setText(
-                initialJoborderList.get(i).getValue());
+        initialJoborderViewHolder.tvValueInitialJO.setText(initJoList.get(i).getValue());
     }
 
     public int getItemCount() {
-        return initialJoborderList.size();
+        return initJoList.size();
     }
 
     class InitialJoborderViewHolder extends RecyclerView.ViewHolder {
@@ -145,16 +146,16 @@ public class InitialJoborderAdapter extends
 
             itemView.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View view) {
-                    String key = initialJoborderList.get(index).getKey();
+                    String key = initJoList.get(index).getKey();
 
                     if (key.equals("View Image")) {
-                        String url = sharedPreferences.getString("domain", null)
+                        String url = sPrefs.getString("domain", null)
                                 +"getinitialjoborderphoto?initialJoborderId="+quotationId;
-                        new DialogImageTask(context).execute(url);
+                        new DialogImageTask(weakReference.get()).execute(url);
                     } else if (key.equals("View Signature")) {
-                        String url = sharedPreferences.getString("domain", null)
+                        String url = sPrefs.getString("domain", null)
                                 +"getinitialjobordersignature?initialJoborderId="+quotationId;
-                        new DialogImageTask(context).execute(url);
+                        new DialogImageTask(weakReference.get()).execute(url);
                     }
                 }
             });

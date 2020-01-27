@@ -1,6 +1,5 @@
 package android.wmdc.com.mobilecsa.adapter;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
@@ -15,8 +14,10 @@ import android.wmdc.com.mobilecsa.asynchronousclasses.DialogImageTask;
 import android.wmdc.com.mobilecsa.model.KeyValueInfo;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 /**
@@ -25,17 +26,18 @@ import java.util.ArrayList;
 
 public class DCValueInfoAdapter extends RecyclerView.Adapter<DCValueInfoAdapter.DCInfoViewHolder> {
 
-    private Context context;
+    private WeakReference<FragmentActivity> weakReference;
     private ArrayList<KeyValueInfo> customerInfo;
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences sPrefs;
     private int joId;
     private boolean csaApproved;
 
-    public DCValueInfoAdapter(ArrayList<KeyValueInfo> customerInfo, Context context, int joId,
-                              boolean csaApproved) {
-        this.context = context;
+    public DCValueInfoAdapter(ArrayList<KeyValueInfo> customerInfo, FragmentActivity activity,
+                              int joId, boolean csaApproved) {
+
+        this.weakReference = new WeakReference<>(activity);
         this.customerInfo = customerInfo;
-        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        this.sPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
         this.joId = joId;
         this.csaApproved = csaApproved;
     }
@@ -43,8 +45,8 @@ public class DCValueInfoAdapter extends RecyclerView.Adapter<DCValueInfoAdapter.
     @NonNull
     @Override
     public DCInfoViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.dc_jo_info_fragment, viewGroup,
-                false);
+        View view = LayoutInflater.from(weakReference.get()).inflate(R.layout.dc_jo_info_fragment,
+                viewGroup, false);
         return new DCInfoViewHolder(view);
     }
 
@@ -151,14 +153,14 @@ public class DCValueInfoAdapter extends RecyclerView.Adapter<DCValueInfoAdapter.
 
             itemView.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View view) {
-                    int csaId = sharedPreferences.getInt("csaId", 0);
+                    int csaId = sPrefs.getInt("csaId", 0);
                     String key = tvKey.getText().toString();
 
                     if (key.equals("Item Image")) {
-                        String url = sharedPreferences.getString("domain", null)+
+                        String url = sPrefs.getString("domain", null)+
                                 "getmcsajoimage?csaId="+csaId+"&joId="+joId;
 
-                        new DialogImageTask(context).execute(url);
+                        new DialogImageTask(weakReference.get()).execute(url);
                     }
                 }
             });

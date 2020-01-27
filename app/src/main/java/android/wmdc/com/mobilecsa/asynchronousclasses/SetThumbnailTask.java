@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -20,15 +21,18 @@ import java.net.URL;
  * Created by wmdcprog on 2/7/2018.
  */
 public class SetThumbnailTask extends AsyncTask<String, String, Bitmap> {
+
+    private WeakReference<ImageView> imageViewWeakReference;
+
     private String fileUrl;
-    private ImageView imageView;
-    private URL myFileUrl;
+
     private HttpURLConnection conn = null;
+
     private SharedPreferences sharedPreferences;
 
     public SetThumbnailTask(String fileUrl, ImageView imageView, Context context) {
         this.fileUrl = fileUrl;
-        this.imageView = imageView;
+        this.imageViewWeakReference = new WeakReference<>(imageView);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
@@ -38,7 +42,7 @@ public class SetThumbnailTask extends AsyncTask<String, String, Bitmap> {
 
     protected Bitmap doInBackground(String[] asd) {
         try {
-            myFileUrl = new URL (fileUrl);
+            URL myFileUrl = new URL (fileUrl);
 
             conn = (HttpURLConnection) myFileUrl.openConnection();
             conn.setReadTimeout(Util.READ_TIMEOUT);
@@ -48,8 +52,10 @@ public class SetThumbnailTask extends AsyncTask<String, String, Bitmap> {
             conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
             conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
             conn.setRequestProperty("Connection", "keep-alive");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            conn.setRequestProperty("Cookie", "JSESSIONID="+sharedPreferences.getString("sessionId", null));
+            conn.setRequestProperty("Content-Type",
+                    "application/x-www-form-urlencoded; charset=utf-8");
+            conn.setRequestProperty("Cookie",
+                    "JSESSIONID="+sharedPreferences.getString("sessionId", null));
             conn.setRequestProperty("Host", "localhost:8080");
             conn.setRequestProperty("Referer", "http://localhost:8080/mcsa/getcontactsphoto");
             conn.setRequestProperty("X-Requested-Width", "XMLHttpRequest");
@@ -59,7 +65,9 @@ public class SetThumbnailTask extends AsyncTask<String, String, Bitmap> {
 
             Bitmap bmPic = BitmapFactory.decodeStream(conn.getInputStream());
 
-            return bmPic.createScaledBitmap(bmPic, (int)(bmPic.getWidth() * 0.10), (int)(bmPic.getHeight() * 0.10), false);
+            return Bitmap.createScaledBitmap(bmPic, (int)(bmPic.getWidth() * 0.10),
+                    (int)(bmPic.getHeight() * 0.10), false);
+
         } catch (MalformedURLException | ConnectException | SocketTimeoutException e) {
             Util.displayStackTraceArray(e.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                     "NetworkException", e.toString());
@@ -78,6 +86,7 @@ public class SetThumbnailTask extends AsyncTask<String, String, Bitmap> {
     }
 
     protected void onPostExecute(Bitmap result) {
+        ImageView imageView = imageViewWeakReference.get();
         imageView.setImageBitmap(result);
     }
 }

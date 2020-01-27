@@ -229,8 +229,8 @@ public class InitialJobOrder extends Fragment {
                             engineJOAdapter = new EngineJOAdapter(engineList, getActivity(),
                                     etEngineModel, etMakeCat, dialog);
 
-                            new SearchEngineTaskFromJO(getContext(), engineList, recyclerViewEngine,
-                                    engineJOAdapter).execute(trimmedQuery);
+                            new SearchEngineTaskFromJO(getActivity(), engineList,
+                                    recyclerViewEngine, engineJOAdapter).execute(trimmedQuery);
                         }
 
                         if (trimmedQuery.contains("none")) {
@@ -316,7 +316,7 @@ public class InitialJobOrder extends Fragment {
                             customerJOAdapter = new CustomerJOAdapter(customerList, getActivity(),
                                     etCustomer, dialog);
 
-                            new SearchCustomerTaskFromJO(getContext(), customerList,
+                            new SearchCustomerTaskFromJO(getActivity(), customerList,
                                     recyclerViewCustomer, customerJOAdapter).execute(trimmedQuery);
                         }
                     }
@@ -421,7 +421,7 @@ public class InitialJobOrder extends Fragment {
                 return;
             }
 
-            new DialogSignatureTask(getContext()).execute(joborderSignature);
+            new DialogSignatureTask(getActivity()).execute(joborderSignature);
         }
     };
 
@@ -437,7 +437,7 @@ public class InitialJobOrder extends Fragment {
                 return;
             }
 
-            new DialogImageUriTask(getContext()).execute(fileUri);
+            new DialogImageUriTask(getActivity()).execute(fileUri);
         }
     };
 

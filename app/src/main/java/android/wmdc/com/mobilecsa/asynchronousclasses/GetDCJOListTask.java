@@ -1,7 +1,6 @@
 package android.wmdc.com.mobilecsa.asynchronousclasses;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -14,7 +13,7 @@ import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -27,48 +26,58 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 /**Created by wmdcprog on 4/23/2018. */
 
 public class GetDCJOListTask extends AsyncTask<String, String, String> {
+
+    private WeakReference<FragmentActivity> weakReference;
+
+    private WeakReference<ProgressBar> progressBarWeakReference;
+
     private SharedPreferences sharedPreferences;
-    private Context context;
-    private ProgressBar progressBar;
+
     private ProgressDialog progressDialog;
+
     private HttpURLConnection conn = null;
-    private URL url = null;
+
     private boolean noProgressBar;
 
-    public GetDCJOListTask(Context context, ProgressBar progressBar, boolean noProgressBar) {
-        this.context = context;
-        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
-        this.progressDialog = new ProgressDialog(context);
-        this.progressBar = progressBar;
+    public GetDCJOListTask(FragmentActivity activity, ProgressBar progressBar,
+                           boolean noProgressBar) {
+
+        this.weakReference = new WeakReference<>(activity);
+        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(weakReference.get());
+        this.progressDialog = new ProgressDialog(weakReference.get());
+        this.progressBarWeakReference = new WeakReference<>(progressBar);
         this.noProgressBar = noProgressBar;
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+
         if (noProgressBar) {
             progressDialog.setTitle("Date Commit");
             progressDialog.setMessage("Loading Date Commit");
             progressDialog.setCancelable(false);
             progressDialog.show();
         } else {
-            progressBar.setVisibility(View.VISIBLE);
+            progressBarWeakReference.get().setVisibility(View.VISIBLE);
         }
     }
 
     @Override
     protected String doInBackground(String[] params) {
         try {
-            url = new URL(sharedPreferences.getString("domain", null)+"getdclist");
+            URL url = new URL(sharedPreferences.getString("domain", null)+"getdclist");
             conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(Util.READ_TIMEOUT);
             conn.setConnectTimeout(Util.CONNECTION_TIMEOUT);
@@ -77,8 +86,10 @@ public class GetDCJOListTask extends AsyncTask<String, String, String> {
             conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
             conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
             conn.setRequestProperty("Connection", "keep-alive");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            conn.setRequestProperty("Cookie", "JSESSIONID="+sharedPreferences.getString("sessionId", null));
+            conn.setRequestProperty("Content-Type",
+                    "application/x-www-form-urlencoded; charset=utf-8");
+            conn.setRequestProperty("Cookie",
+                    "JSESSIONID="+sharedPreferences.getString("sessionId", null));
             conn.setRequestProperty("Host", "localhost:8080");
             conn.setRequestProperty("Referer", "http://localhost:8080/mcsa/searchcustomerfromuser");
             conn.setRequestProperty("X-Requested-Width", "XMLHttpRequest");
@@ -91,7 +102,8 @@ public class GetDCJOListTask extends AsyncTask<String, String, String> {
             String query = builder.build().getEncodedQuery();
 
             OutputStream os = conn.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os,
+                    StandardCharsets.UTF_8));
 
             writer.write(query);
             writer.flush();
@@ -141,12 +153,19 @@ public class GetDCJOListTask extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String result) {
+
         if (noProgressBar) {
             progressDialog.dismiss();
         } else {
-            if (progressBar != null) {
-                progressBar.setVisibility(View.GONE);
+            if (progressBarWeakReference.get() != null) {
+                progressBarWeakReference.get().setVisibility(View.GONE);
             }
+        }
+
+        FragmentActivity mainActivity = weakReference.get();
+
+        if (mainActivity == null || mainActivity.isFinishing()) {
+            return;
         }
 
         try {
@@ -160,9 +179,10 @@ public class GetDCJOListTask extends AsyncTask<String, String, String> {
             dcFrag.setArguments(bundle);
             Variables.currentPage = -1;
 
-            FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+            FragmentManager fragmentManager = mainActivity.getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+            fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter,
+                    R.anim.pop_exit);
             fragmentTransaction.replace(R.id.content_main, dcFrag);
             fragmentTransaction.commit();
         } catch (JSONException je) {

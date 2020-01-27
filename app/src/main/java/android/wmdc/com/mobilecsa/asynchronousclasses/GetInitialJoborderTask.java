@@ -1,7 +1,6 @@
 package android.wmdc.com.mobilecsa.asynchronousclasses;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -12,7 +11,7 @@ import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -25,25 +24,30 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 /**Created by wmdcprog on 6/7/2018.*/
 
 public class GetInitialJoborderTask extends AsyncTask<String, String, String> {
-    private SharedPreferences sharedPreferences;
-    private Context context;
-    private ProgressDialog progressDialog;
-    private HttpURLConnection conn = null;
-    private URL url = null;
 
-    public GetInitialJoborderTask(Context context) {
-        this.context = context;
-        progressDialog = new ProgressDialog(context);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    private WeakReference<FragmentActivity> weakReference;
+
+    private SharedPreferences sharedPreferences;
+
+    private ProgressDialog progressDialog;
+
+    private HttpURLConnection conn = null;
+
+    public GetInitialJoborderTask(FragmentActivity activity) {
+        this.weakReference = new WeakReference<>(activity);
+        progressDialog = new ProgressDialog(weakReference.get());
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(weakReference.get());
     }
 
     @Override
@@ -57,7 +61,7 @@ public class GetInitialJoborderTask extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String[] params) {
         try {
-            url = new URL(sharedPreferences.getString("domain", null)+"getinitialjoborder");
+            URL url = new URL(sharedPreferences.getString("domain", null)+"getinitialjoborder");
             conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(Util.READ_TIMEOUT);
             conn.setConnectTimeout(Util.CONNECTION_TIMEOUT);
@@ -65,8 +69,10 @@ public class GetInitialJoborderTask extends AsyncTask<String, String, String> {
             conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
             conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
             conn.setRequestProperty("Connection", "keep-alive");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            conn.setRequestProperty("Cookie", "JSESSIONID="+sharedPreferences.getString("sessionId", null));
+            conn.setRequestProperty("Content-Type",
+                    "application/x-www-form-urlencoded; charset=utf-8");
+            conn.setRequestProperty("Cookie",
+                    "JSESSIONID="+sharedPreferences.getString("sessionId", null));
             conn.setRequestProperty("Host", "localhost:8080");
             conn.setRequestProperty("Referer", "getsinglequotationfromandroid");
             conn.setRequestProperty("X-Requested-Width", "XMLHttpRequest");
@@ -78,7 +84,8 @@ public class GetInitialJoborderTask extends AsyncTask<String, String, String> {
             String query = builder.build().getEncodedQuery();
 
             OutputStream os = conn.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os,
+                    StandardCharsets.UTF_8));
 
             writer.write(query);
             writer.flush();
@@ -101,7 +108,8 @@ public class GetInitialJoborderTask extends AsyncTask<String, String, String> {
                     return stringBuilder.toString();
                 }
             } else {
-                return "{\"success\": false, \"reason\": \"Request did not succeed. Status Code: "+statusCode+"\"}";
+                return "{\"success\": false, \"reason\": \"Request did not succeed. Status Code: "
+                        +statusCode+"\"}";
             }
         } catch (MalformedURLException | ConnectException | SocketTimeoutException e) {
             Util.displayStackTraceArray(e.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
@@ -129,6 +137,13 @@ public class GetInitialJoborderTask extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String result) {
         progressDialog.dismiss();
+
+        FragmentActivity mainActivity = weakReference.get();
+
+        if (mainActivity == null || mainActivity.isFinishing()) {
+            return;
+        }
+
         try {
             JSONObject jsonObject = new JSONObject(result);
             if (jsonObject.getBoolean("success")) {
@@ -138,20 +153,20 @@ public class GetInitialJoborderTask extends AsyncTask<String, String, String> {
                 bundle.putString("quotation", jsonObject.getJSONObject("quotation").toString());
                 initialJoborderFragment.setArguments(bundle);
 
-                FragmentManager fragmentManager =
-                        ((AppCompatActivity) context).getSupportFragmentManager();
+                FragmentManager fragmentManager = mainActivity.getSupportFragmentManager();
 
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+                fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter,
+                        R.anim.pop_exit);
                 fragmentTransaction.replace(R.id.content_main, initialJoborderFragment);
                 fragmentTransaction.commit();
             } else {
-                Util.alertBox(context, jsonObject.getString("reason"), "Error", false);
+                Util.alertBox(mainActivity, jsonObject.getString("reason"));
             }
         } catch (JSONException je) {
             Util.displayStackTraceArray(je.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                     "JSONException", je.toString());
-            Util.alertBox(context, je.toString(), "", false);
+            Util.alertBox(mainActivity, je.toString());
         }
     }
 }

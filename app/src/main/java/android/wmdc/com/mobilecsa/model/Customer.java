@@ -1,5 +1,7 @@
 package android.wmdc.com.mobilecsa.model;
 
+import androidx.annotation.NonNull;
+
 /**
  * Created by wmdcprog on 12/26/2017.
  *
@@ -56,6 +58,7 @@ public class Customer {
     }
 
     @Override
+    @NonNull
     public String toString() {
         return name + ", " + isPerson;
     }
