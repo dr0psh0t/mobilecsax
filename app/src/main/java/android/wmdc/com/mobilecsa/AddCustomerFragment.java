@@ -285,7 +285,12 @@ public class AddCustomerFragment extends Fragment {
                         Fragment currFrag = getFragmentManager().findFragmentById(
                                 R.id.content_main);
 
-                        Util.handleBackPress(currFrag, getActivity());
+                        if (getActivity() != null) {
+                            Util.handleBackPress(currFrag, getActivity());
+                        } else {
+                            Util.longToast(getContext(), "Activity is null.");
+                        }
+
                         Util.alertBox(getActivity(), "Connection was not established." +
                                 "\nCheck data/wifi internet connectivity." +
                                 "\nCheck server availability.", "Resource Empty", false);

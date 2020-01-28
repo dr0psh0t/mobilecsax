@@ -14,450 +14,18 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/android/wmdc/com/mobilecsa/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/android/wmdc/com/mobilecsa/R.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/appcompat/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/appcompat/R.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/asynclayoutinflater/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/asynclayoutinflater/R.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/coordinatorlayout/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/coordinatorlayout/R.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/core/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/core/R.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/customview/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/customview/R.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/drawerlayout/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/drawerlayout/R.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/fragment/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/fragment/R.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/legacy/coreui/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/legacy/coreui/R.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/legacy/coreutils/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/legacy/coreutils/R.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/legacy/v4/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/legacy/v4/R.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/loader/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/loader/R.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/media/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/media/R.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/recyclerview/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/recyclerview/R.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/slidingpanelayout/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/slidingpanelayout/R.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/swiperefreshlayout/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/swiperefreshlayout/R.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/transition/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/transition/R.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/vectordrawable/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/vectordrawable/R.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/viewpager/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/androidx/viewpager/R.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/com/google/android/material/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/r/com/google/android/material/R.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/debug.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/values.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/values.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeDexDebug/out/classes.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeDexDebug/out/classes.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/zip-cache/1HmteBf+8OnmnMwT502ucyseZ7o=" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/zip-cache/1HmteBf+8OnmnMwT502ucyseZ7o=" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/zip-cache/VUsW_Ulv0q2VOopwB5ZY5Q6ThfI=" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/zip-cache/VUsW_Ulv0q2VOopwB5ZY5Q6ThfI=" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddCompanyFragment$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddCompanyFragment$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddCompanyFragment$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddCompanyFragment$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddCompanyFragment$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddCompanyFragment$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddCompanyFragment$AddCompanyTask$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddCompanyFragment$AddCompanyTask$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddCompanyFragment.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddCompanyFragment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddContactFragment$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddContactFragment$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddContactFragment$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddContactFragment$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddContactFragment$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddContactFragment$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddContactFragment$AddContactTask$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddContactFragment$AddContactTask$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddContactFragment.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddContactFragment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddCustomerFragment$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddCustomerFragment$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddCustomerFragment$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddCustomerFragment$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddCustomerFragment$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddCustomerFragment$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddCustomerFragment$AddCustomerTask$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddCustomerFragment$AddCustomerTask$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddCustomerFragment.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddCustomerFragment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/ApprovalFragment$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/ApprovalFragment$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/ApprovalFragment$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/ApprovalFragment$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/ContactFragment.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/ContactFragment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/ContactsInformationFragment$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/ContactsInformationFragment$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/ContactsInformationFragment.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/ContactsInformationFragment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/CustomerFragment.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/CustomerFragment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/CustomerInformationFragment$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/CustomerInformationFragment$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/CustomerInformationFragment.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/CustomerInformationFragment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/DCJOInfoFragment$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/DCJOInfoFragment$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/DCJOInfoFragment.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/DCJOInfoFragment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/DateCommitFragment$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/DateCommitFragment$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/InitialJobOrder$6$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/InitialJobOrder$6$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/InitialJobOrder$7$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/InitialJobOrder$7$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/InitialJobOrder$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/InitialJobOrder$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/InitialJobOrder$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/InitialJobOrder$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/InitialJobOrder$InitialJoborderTask$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/InitialJobOrder$InitialJoborderTask$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/InitialJoborderFragment$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/InitialJoborderFragment$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/InitialJoborderFragment$3$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/InitialJoborderFragment$3$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/InitialJoborderFragment.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/InitialJoborderFragment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/InitialJoborderList$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/InitialJoborderList$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/InitialJoborderList.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/InitialJoborderList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/JOFragment$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/JOFragment$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/JOFragment.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/JOFragment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/JOResultFragment.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/JOResultFragment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/JoSearchInfoFragment.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/JoSearchInfoFragment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/MainActivity$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/MainActivity$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/MainActivity.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/MainActivity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/MapsActivity.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/MapsActivity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/QCJOInfoFragment$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/QCJOInfoFragment$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/QCJOInfoFragment.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/QCJOInfoFragment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/R$string.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/R$string.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/R$style.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/R$style.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/R$styleable.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/R$styleable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/R$xml.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/R$xml.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/SearchContactFragment$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/SearchContactFragment$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/SearchContactFragment.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/SearchContactFragment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/SearchCustomerFragment$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/SearchCustomerFragment$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/SearchCustomerFragment.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/SearchCustomerFragment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/SearchJOFragment$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/SearchJOFragment$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/SettingsActivity.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/SettingsActivity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$15.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$17.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$18$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$18$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$18$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$18$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$18$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$18$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$18.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$19.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$20.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$21.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$21.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$8$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$8$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$9$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$9$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$UpdateInitialJoborderTask$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$UpdateInitialJoborderTask$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$UpdateInitialJoborderTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$UpdateInitialJoborderTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/UpdateInitialJOFragment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/DCValueInfoAdapter$DCInfoViewHolder$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/DCValueInfoAdapter$DCInfoViewHolder$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/DCValueInfoAdapter$DCInfoViewHolder.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/DCValueInfoAdapter$DCInfoViewHolder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/DCValueInfoAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/DCValueInfoAdapter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/InitialJoborderAdapter$InitialJoborderViewHolder$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/InitialJoborderAdapter$InitialJoborderViewHolder$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/InitialJoborderAdapter$InitialJoborderViewHolder.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/InitialJoborderAdapter$InitialJoborderViewHolder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/InitialJoborderAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/InitialJoborderAdapter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/InitialJoborderListAdapter$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/InitialJoborderListAdapter$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/InitialJoborderListAdapter$InitialJoborderListViewHolder$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/InitialJoborderListAdapter$InitialJoborderListViewHolder$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/InitialJoborderListAdapter$InitialJoborderListViewHolder.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/InitialJoborderListAdapter$InitialJoborderListViewHolder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/InitialJoborderListAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/InitialJoborderListAdapter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/JOResultAdapter$JOViewHolder$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/JOResultAdapter$JOViewHolder$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/JOResultAdapter$JOViewHolder.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/JOResultAdapter$JOViewHolder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/JOResultAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/JOResultAdapter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/JOSearchResultInfoAdapter$JOSearchResViewHolder$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/JOSearchResultInfoAdapter$JOSearchResViewHolder$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/JOSearchResultInfoAdapter$JOSearchResViewHolder.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/JOSearchResultInfoAdapter$JOSearchResViewHolder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/JOSearchResultInfoAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/JOSearchResultInfoAdapter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/KeyValueInfoAdapter$CustomerInfoViewHolder$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/KeyValueInfoAdapter$CustomerInfoViewHolder$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/QCValueInfoAdapter$QCInfoViewHolder$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/QCValueInfoAdapter$QCInfoViewHolder$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/QCValueInfoAdapter$QCInfoViewHolder.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/QCValueInfoAdapter$QCInfoViewHolder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/QCValueInfoAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/QCValueInfoAdapter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/SettingsAdapter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/CheckExpiryTask$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/CheckExpiryTask$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/CheckExpiryTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/CheckExpiryTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/CheckValidDomainTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/CheckValidDomainTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/DeleteInitialJoborderTask$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/DeleteInitialJoborderTask$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/DeleteInitialJoborderTask$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/DeleteInitialJoborderTask$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/DeleteInitialJoborderTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/DeleteInitialJoborderTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageTask$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageTask$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageTask$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageTask$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageUriTask$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageUriTask$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageUriTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageUriTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/DialogSignatureTask$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/DialogSignatureTask$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/DialogSignatureTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/DialogSignatureTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetAreaCodeTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetAreaCodeTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetCityTask$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetCityTask$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetCityTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetCityTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetCountryCodeTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetCountryCodeTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetCountryTask$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetCountryTask$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetCountryTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetCountryTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetDCJOListTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetDCJOListTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetIndustryTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetIndustryTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetInitialJoborderListTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetInitialJoborderListTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetInitialJoborderTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetInitialJoborderTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetJoWoStatusListTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetJoWoStatusListTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetPlantTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetPlantTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetProvinceTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetProvinceTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetQCJOListTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetQCJOListTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetWorkOrderQCList.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/GetWorkOrderQCList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/SearchContactTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/SearchContactTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/SearchCustomerTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/SearchCustomerTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/SearchCustomerTaskFromJO.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/SearchCustomerTaskFromJO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/SearchEngineTaskFromJO.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/SearchEngineTaskFromJO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/SearchJONumberDCTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/SearchJONumberDCTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/SearchJONumberQCTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/SearchJONumberQCTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/SearchJOTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/SearchJOTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/SetThumbnailTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/SetThumbnailTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/SwitchPlant$SimTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/SwitchPlant$SimTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/SwitchPlant$WifiTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/SwitchPlant$WifiTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/SwitchPlant.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/SwitchPlant.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/UpdateInitialJoborderTransferredTask$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/UpdateInitialJoborderTransferredTask$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/UpdateInitialJoborderTransferredTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/asynchronousclasses/UpdateInitialJoborderTransferredTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/Contacts.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/Contacts.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/Customer.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/Customer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/WorkOrders.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/WorkOrders.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/utils/Util.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/utils/Util.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/appcompat/R$string.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/appcompat/R$string.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/asynclayoutinflater/R$string.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/asynclayoutinflater/R$string.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/coordinatorlayout/R$string.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/coordinatorlayout/R$string.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/core/R$string.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/core/R$string.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/customview/R$string.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/customview/R$string.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/drawerlayout/R$string.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/drawerlayout/R$string.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/fragment/R$string.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/fragment/R$string.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/legacy/coreui/R$string.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/legacy/coreui/R$string.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/legacy/coreutils/R$string.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/legacy/coreutils/R$string.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/legacy/v4/R$string.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/legacy/v4/R$string.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/loader/R$string.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/loader/R$string.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/media/R$string.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/media/R$string.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/recyclerview/R$string.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/recyclerview/R$string.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/slidingpanelayout/R$string.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/slidingpanelayout/R$string.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/swiperefreshlayout/R$string.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/swiperefreshlayout/R$string.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/transition/R$string.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/transition/R$string.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/vectordrawable/R$string.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/vectordrawable/R$string.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/viewpager/R$string.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/androidx/viewpager/R$string.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/google/android/material/R$string.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/google/android/material/R$string.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/merged_java_res/debug/out.jar" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/merged_java_res/debug/out.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/processed_res/debug/processDebugResources/out/resources-debug.ap_" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/processed_res/debug/processDebugResources/out/resources-debug.ap_" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout_activity_maps.xml.flat" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout_activity_maps.xml.flat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values_values.arsc.flat" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values_values.arsc.flat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddCompanyFragment$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddCompanyFragment$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddCompanyFragment$3.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddCompanyFragment$3.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddCompanyFragment$4.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddCompanyFragment$4.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddCompanyFragment$AddCompanyTask$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddCompanyFragment$AddCompanyTask$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddCompanyFragment.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddCompanyFragment.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddContactFragment$2.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddContactFragment$2.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddContactFragment$4.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddContactFragment$4.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddContactFragment$5.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddContactFragment$5.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddContactFragment$AddContactTask$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddContactFragment$AddContactTask$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddContactFragment.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddContactFragment.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddCustomerFragment$2.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddCustomerFragment$2.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddCustomerFragment$4.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddCustomerFragment$4.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddCustomerFragment$5.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddCustomerFragment$5.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddCustomerFragment$AddCustomerTask$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddCustomerFragment$AddCustomerTask$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddCustomerFragment.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddCustomerFragment.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/ApprovalFragment$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/ApprovalFragment$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/ApprovalFragment$2.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/ApprovalFragment$2.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/ContactFragment.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/ContactFragment.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/ContactsInformationFragment$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/ContactsInformationFragment$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/ContactsInformationFragment.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/ContactsInformationFragment.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/CustomerFragment.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/CustomerFragment.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/CustomerInformationFragment$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/CustomerInformationFragment$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/CustomerInformationFragment.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/CustomerInformationFragment.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/DCJOInfoFragment$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/DCJOInfoFragment$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/DCJOInfoFragment.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/DCJOInfoFragment.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/DateCommitFragment$2.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/DateCommitFragment$2.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/InitialJobOrder$6$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/InitialJobOrder$6$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/InitialJobOrder$7$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/InitialJobOrder$7$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/InitialJobOrder$8.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/InitialJobOrder$8.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/InitialJobOrder$9.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/InitialJobOrder$9.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/InitialJobOrder$InitialJoborderTask$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/InitialJobOrder$InitialJoborderTask$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/InitialJoborderFragment$1$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/InitialJoborderFragment$1$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/InitialJoborderFragment$3$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/InitialJoborderFragment$3$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/InitialJoborderFragment.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/InitialJoborderFragment.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/InitialJoborderList$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/InitialJoborderList$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/InitialJoborderList.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/InitialJoborderList.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/JOFragment$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/JOFragment$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/JOFragment.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/JOFragment.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/JOResultFragment.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/JOResultFragment.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/JoSearchInfoFragment.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/JoSearchInfoFragment.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/MainActivity$2.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/MainActivity$2.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/MainActivity.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/MainActivity.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/MapsActivity.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/MapsActivity.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/QCJOInfoFragment$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/QCJOInfoFragment$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/QCJOInfoFragment.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/QCJOInfoFragment.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/R$string.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/R$string.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/R$style.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/R$style.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/R$styleable.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/R$styleable.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/R$xml.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/R$xml.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/SearchContactFragment$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/SearchContactFragment$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/SearchContactFragment.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/SearchContactFragment.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/SearchCustomerFragment$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/SearchCustomerFragment$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/SearchCustomerFragment.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/SearchCustomerFragment.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/SearchJOFragment$2.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/SearchJOFragment$2.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/SettingsActivity.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/SettingsActivity.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$10.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$10.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$11.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$11.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$12.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$12.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$13.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$13.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$14.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$14.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$15.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$15.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$16.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$16.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$17.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$17.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$18$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$18$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$18$2.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$18$2.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$18$3.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$18$3.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$18.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$18.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$19.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$19.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$20.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$20.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$21.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$21.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$8$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$8$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$8.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$8.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$9$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$9$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$9.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$9.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$UpdateInitialJoborderTask$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$UpdateInitialJoborderTask$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$UpdateInitialJoborderTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment$UpdateInitialJoborderTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/UpdateInitialJOFragment.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/DCValueInfoAdapter$DCInfoViewHolder$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/DCValueInfoAdapter$DCInfoViewHolder$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/DCValueInfoAdapter$DCInfoViewHolder.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/DCValueInfoAdapter$DCInfoViewHolder.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/DCValueInfoAdapter.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/DCValueInfoAdapter.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/InitialJoborderAdapter$InitialJoborderViewHolder$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/InitialJoborderAdapter$InitialJoborderViewHolder$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/InitialJoborderAdapter$InitialJoborderViewHolder.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/InitialJoborderAdapter$InitialJoborderViewHolder.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/InitialJoborderAdapter.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/InitialJoborderAdapter.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/InitialJoborderListAdapter$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/InitialJoborderListAdapter$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/InitialJoborderListAdapter$InitialJoborderListViewHolder$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/InitialJoborderListAdapter$InitialJoborderListViewHolder$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/InitialJoborderListAdapter$InitialJoborderListViewHolder.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/InitialJoborderListAdapter$InitialJoborderListViewHolder.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/InitialJoborderListAdapter.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/InitialJoborderListAdapter.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/JOResultAdapter$JOViewHolder$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/JOResultAdapter$JOViewHolder$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/JOResultAdapter$JOViewHolder.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/JOResultAdapter$JOViewHolder.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/JOResultAdapter.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/JOResultAdapter.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/JOSearchResultInfoAdapter$JOSearchResViewHolder$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/JOSearchResultInfoAdapter$JOSearchResViewHolder$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/JOSearchResultInfoAdapter$JOSearchResViewHolder.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/JOSearchResultInfoAdapter$JOSearchResViewHolder.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/JOSearchResultInfoAdapter.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/JOSearchResultInfoAdapter.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/KeyValueInfoAdapter$CustomerInfoViewHolder$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/KeyValueInfoAdapter$CustomerInfoViewHolder$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/QCValueInfoAdapter$QCInfoViewHolder$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/QCValueInfoAdapter$QCInfoViewHolder$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/QCValueInfoAdapter$QCInfoViewHolder.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/QCValueInfoAdapter$QCInfoViewHolder.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/QCValueInfoAdapter.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/QCValueInfoAdapter.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$10.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$10.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$2.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$2.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$3.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$3.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$4.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$4.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$5.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$5.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$6.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$6.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$7.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$7.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$8.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$8.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$9.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1$9.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter$SettingsViewHolder.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/SettingsAdapter.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/CheckExpiryTask$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/CheckExpiryTask$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/CheckExpiryTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/CheckExpiryTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/CheckValidDomainTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/CheckValidDomainTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/DeleteInitialJoborderTask$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/DeleteInitialJoborderTask$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/DeleteInitialJoborderTask$2.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/DeleteInitialJoborderTask$2.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/DeleteInitialJoborderTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/DeleteInitialJoborderTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageTask$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageTask$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageTask$2.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageTask$2.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageUriTask$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageUriTask$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageUriTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageUriTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/DialogSignatureTask$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/DialogSignatureTask$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/DialogSignatureTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/DialogSignatureTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetAreaCodeTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetAreaCodeTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetCityTask$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetCityTask$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetCityTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetCityTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetCountryCodeTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetCountryCodeTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetCountryTask$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetCountryTask$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetCountryTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetCountryTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetDCJOListTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetDCJOListTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetIndustryTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetIndustryTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetInitialJoborderListTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetInitialJoborderListTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetInitialJoborderTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetInitialJoborderTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetJoWoStatusListTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetJoWoStatusListTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetPlantTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetPlantTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetProvinceTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetProvinceTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetQCJOListTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetQCJOListTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetWorkOrderQCList.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/GetWorkOrderQCList.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/SearchContactTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/SearchContactTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/SearchCustomerTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/SearchCustomerTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/SearchCustomerTaskFromJO.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/SearchCustomerTaskFromJO.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/SearchEngineTaskFromJO.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/SearchEngineTaskFromJO.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/SearchJONumberDCTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/SearchJONumberDCTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/SearchJONumberQCTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/SearchJONumberQCTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/SearchJOTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/SearchJOTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/SetThumbnailTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/SetThumbnailTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/SwitchPlant$SimTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/SwitchPlant$SimTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/SwitchPlant$WifiTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/SwitchPlant$WifiTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/SwitchPlant.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/SwitchPlant.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/UpdateInitialJoborderTransferredTask$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/UpdateInitialJoborderTransferredTask$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/UpdateInitialJoborderTransferredTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/asynchronousclasses/UpdateInitialJoborderTransferredTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/Contacts.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/Contacts.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/Customer.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/Customer.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/WorkOrders.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/WorkOrders.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/utils/Util.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/utils/Util.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/appcompat/R$string.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/appcompat/R$string.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/asynclayoutinflater/R$string.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/asynclayoutinflater/R$string.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/coordinatorlayout/R$string.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/coordinatorlayout/R$string.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/core/R$string.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/core/R$string.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/customview/R$string.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/customview/R$string.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/drawerlayout/R$string.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/drawerlayout/R$string.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/fragment/R$string.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/fragment/R$string.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/legacy/coreui/R$string.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/legacy/coreui/R$string.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/legacy/coreutils/R$string.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/legacy/coreutils/R$string.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/legacy/v4/R$string.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/legacy/v4/R$string.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/loader/R$string.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/loader/R$string.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/media/R$string.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/media/R$string.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/recyclerview/R$string.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/recyclerview/R$string.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/slidingpanelayout/R$string.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/slidingpanelayout/R$string.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/swiperefreshlayout/R$string.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/swiperefreshlayout/R$string.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/transition/R$string.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/transition/R$string.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/vectordrawable/R$string.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/vectordrawable/R$string.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/viewpager/R$string.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/androidx/viewpager/R$string.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/google/android/material/R$string.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/google/android/material/R$string.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/bundle_manifest/debug/processDebugManifest/bundle-manifest/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/bundle_manifest/debug/processDebugManifest/bundle-manifest/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/instant_app_manifest/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/instant_app_manifest/debug/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/AddCompanyFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/AddCompanyFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/AddContactFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/AddContactFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/AddCustomerFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/AddCustomerFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/ContactsInformationFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/ContactsInformationFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/CustomerInformationFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/CustomerInformationFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/DCJOInfoFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/DCJOInfoFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/InitialJobOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/InitialJobOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/InitialJoborderFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/InitialJoborderFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/JOResultFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/JOResultFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/JoSearchInfoFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/JoSearchInfoFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/MapsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/QCJOInfoFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/QCJOInfoFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/UpdateInitialJOFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/UpdateInitialJOFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/DCValueInfoAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/DCValueInfoAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/InitialJoborderAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/InitialJoborderAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/InitialJoborderListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/InitialJoborderListAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/JOResultAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/JOResultAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/JOSearchResultInfoAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/JOSearchResultInfoAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/QCValueInfoAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/QCValueInfoAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/SettingsAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/SettingsAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/CheckExpiryTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/CheckExpiryTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/CheckValidDomainTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/CheckValidDomainTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/DeleteInitialJoborderTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/DeleteInitialJoborderTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageUriTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageUriTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/DialogSignatureTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/DialogSignatureTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetAreaCodeTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetAreaCodeTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetCityTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetCityTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetCountryCodeTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetCountryCodeTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetCountryTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetCountryTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetDCJOListTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetDCJOListTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetIndustryTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetIndustryTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetInitialJoborderListTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetInitialJoborderListTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetInitialJoborderTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetInitialJoborderTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetJoWoStatusListTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetJoWoStatusListTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetPlantTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetPlantTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetProvinceTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetProvinceTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetQCJOListTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetQCJOListTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetWorkOrderQCList.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetWorkOrderQCList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SearchContactTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SearchContactTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SearchCustomerTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SearchCustomerTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SearchCustomerTaskFromJO.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SearchCustomerTaskFromJO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SearchEngineTaskFromJO.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SearchEngineTaskFromJO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SearchJONumberDCTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SearchJONumberDCTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SearchJONumberQCTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SearchJONumberQCTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SearchJOTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SearchJOTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SetThumbnailTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SetThumbnailTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SwitchPlant.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SwitchPlant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/UpdateInitialJoborderTransferredTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/UpdateInitialJoborderTransferredTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/model/Contacts.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/model/Contacts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/model/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/model/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/model/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/model/Engine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/model/WorkOrders.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/model/WorkOrders.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/utils/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/utils/Util.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -468,7 +36,6 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="IVQKHYO779SOPZMB" />
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -480,12 +47,12 @@
     <favorites_list name="Mobilecsa" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/InitialJobOrder.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/QualityCheckFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="318" column="60" selection-start-line="318" selection-start-column="60" selection-end-line="318" selection-end-column="60" />
+            <state relative-caret-position="-240">
+              <caret line="17" column="34" lean-forward="true" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -545,9 +112,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/JoSearchInfoFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageUriTask.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/DialogSignatureTask.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/AddCompanyFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/AddContactFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/AddCustomerFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetAreaCodeTask.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetCityTask.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetCountryCodeTask.java" />
@@ -582,6 +146,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SwitchPlant.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/InitialJobOrder.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/UpdateInitialJOFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/AddCompanyFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/AddContactFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/AddCustomerFragment.java" />
       </list>
     </option>
   </component>
@@ -606,11 +173,6 @@
             <path>
               <item name="Mobilecsa" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="manifests" type="f94875db:AndroidManifestsGroupNode" />
-            </path>
-            <path>
-              <item name="Mobilecsa" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
             </path>
             <path>
@@ -618,37 +180,13 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="mobilecsa" type="cbb59c9e:AndroidPsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Mobilecsa" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="mobilecsa" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="asynchronousclasses" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Mobilecsa" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-            </path>
-            <path>
-              <item name="Mobilecsa" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-            <path>
-              <item name="Mobilecsa" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="xml" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -762,7 +300,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.4992224" visible="true" weight="0.24377745" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.4992224" visible="true" weight="0.20424597" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" sideWeight="0.5007776" side_tool="true" weight="0.19619326" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -776,7 +314,7 @@
       <window_info anchor="bottom" id="Terminal" order="3" weight="0.32970452" />
       <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.5014641" side_tool="true" weight="0.44012442" />
       <window_info anchor="bottom" id="Build" order="5" sideWeight="0.49926794" weight="0.24572317" />
-      <window_info anchor="bottom" id="Android Profiler" order="6" />
+      <window_info anchor="bottom" id="Android Profiler" order="6" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="7" sideWeight="0.49853587" weight="0.27527216" />
       <window_info anchor="bottom" id="Debug" order="8" />
       <window_info anchor="bottom" id="Find" order="9" weight="0.32970452" />
@@ -789,403 +327,17 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/SettingsAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3960">
-          <caret line="315" column="9" lean-forward="true" selection-start-line="315" selection-start-column="9" selection-end-line="315" selection-end-column="9" />
-          <folding>
-            <element signature="e#10683#11476#0" expanded="true" />
-            <element signature="e#11475#11476#0" expanded="true" />
-            <element signature="e#12129#12911#0" expanded="true" />
-            <element signature="e#12910#12911#0" expanded="true" />
-            <element signature="e#13363#16077#0" expanded="true" />
-            <element signature="e#16076#16077#0" expanded="true" />
-            <element signature="e#16244#16245#0" expanded="true" />
-            <element signature="e#16294#16295#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/DCValueInfoAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5604#6145#0" expanded="true" />
-            <element signature="e#6144#6145#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/InitialJoborderAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-300">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5764#6566#0" expanded="true" />
-            <element signature="e#6565#6566#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/JOSearchResultInfoAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4061#4511#0" expanded="true" />
-            <element signature="e#4510#4511#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/QCValueInfoAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="36" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
-          <folding>
-            <element signature="e#4039#4545#0" expanded="true" />
-            <element signature="e#4544#4545#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/JoSearchInfoFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="74" column="24" selection-start-line="74" selection-start-column="24" selection-end-line="74" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/CheckExpiryTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="37" selection-start-line="37" selection-end-line="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageUriTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/DeleteInitialJoborderTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/CheckValidDomainTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/AddCompanyFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="289" column="49" selection-start-line="289" selection-start-column="49" selection-end-line="289" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/AddContactFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="343" column="49" selection-start-line="343" selection-start-column="49" selection-end-line="343" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/AddCustomerFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="324" column="49" selection-start-line="324" selection-start-column="49" selection-end-line="324" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/DialogSignatureTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="56" column="28" lean-forward="true" selection-start-line="56" selection-start-column="28" selection-end-line="56" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetAreaCodeTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1410">
-          <caret line="109" column="21" selection-start-line="109" selection-start-column="21" selection-end-line="109" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1953#1954#0" expanded="true" />
-            <element signature="e#1989#1990#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetCityTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-480">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#6238#6446#0" expanded="true" />
-            <element signature="e#6445#6446#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetCountryCodeTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="77" column="57" selection-start-line="77" selection-start-column="56" selection-end-line="77" selection-end-column="57" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2043#2044#0" expanded="true" />
-            <element signature="e#2079#2080#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetCountryTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="101" column="24" selection-start-line="101" selection-start-column="24" selection-end-line="101" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#6035#6243#0" expanded="true" />
-            <element signature="e#6242#6243#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetDCJOListTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetIndustryTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1823#1824#0" expanded="true" />
-            <element signature="e#1859#1860#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetInitialJoborderListTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/ContactsInformationFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="127" column="83" selection-start-line="127" selection-start-column="83" selection-end-line="127" selection-end-column="83" />
-          <folding>
-            <element signature="e#4178#4570#0" expanded="true" />
-            <element signature="e#4569#4570#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/InitialJoborderFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="280" column="49" selection-start-line="280" selection-start-column="49" selection-end-line="280" selection-end-column="49" />
-          <folding>
-            <element signature="e#11630#12188#0" expanded="true" />
-            <element signature="e#12187#12188#0" expanded="true" />
-            <element signature="e#12241#12454#0" expanded="true" />
-            <element signature="e#12453#12454#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/CustomerInformationFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="112" column="83" selection-start-line="112" selection-start-column="83" selection-end-line="112" selection-end-column="83" />
-          <folding>
-            <element signature="e#3876#4268#0" expanded="true" />
-            <element signature="e#4267#4268#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/DCJOInfoFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="128" column="83" selection-start-line="128" selection-start-column="83" selection-end-line="128" selection-end-column="83" />
-          <folding>
-            <element signature="e#5118#5510#0" expanded="true" />
-            <element signature="e#5509#5510#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/QCJOInfoFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="113" column="79" selection-start-line="113" selection-start-column="79" selection-end-line="113" selection-end-column="79" />
-          <folding>
-            <element signature="e#4542#4976#0" expanded="true" />
-            <element signature="e#4975#4976#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/UpdateInitialJoborderTransferredTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1466">
-          <caret line="110" column="24" selection-start-line="110" selection-start-column="24" selection-end-line="110" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5913#6300#0" expanded="true" />
-            <element signature="e#6299#6300#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/LoginFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3841">
-          <caret line="59" column="13" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetInitialJoborderTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetJoWoStatusListTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="123" column="79" selection-start-line="123" selection-start-column="79" selection-end-line="123" selection-end-column="79" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/JOResultFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-330">
-          <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/JOResultAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="58" column="32" selection-start-line="58" selection-start-column="32" selection-end-line="58" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1859#1860#0" expanded="true" />
-            <element signature="e#1898#1899#0" expanded="true" />
-            <element signature="e#2543#2792#0" expanded="true" />
-            <element signature="e#2791#2792#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/InitialJoborderListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1680">
-          <caret line="112" column="28" selection-start-line="112" selection-start-column="28" selection-end-line="112" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1678#1901#0" expanded="true" />
-            <element signature="e#1900#1901#0" expanded="true" />
-            <element signature="e#3259#3260#0" expanded="true" />
-            <element signature="e#3308#3309#0" expanded="true" />
-            <element signature="e#4122#4427#0" expanded="true" />
-            <element signature="e#4426#4427#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetProvinceTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1823#1824#0" expanded="true" />
-            <element signature="e#1859#1860#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetPlantTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-345">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1767#1768#0" expanded="true" />
-            <element signature="e#1803#1804#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetQCJOListTask.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
-          <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
+          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetWorkOrderQCList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="172" column="52" lean-forward="true" selection-start-line="172" selection-start-column="52" selection-end-line="172" selection-end-column="52" />
+        <state relative-caret-position="206">
+          <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1194,41 +346,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SearchContactTask.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
+        <state relative-caret-position="206">
+          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SearchCustomerTask.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1790">
-          <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SearchEngineTaskFromJO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-570">
-          <caret line="13" column="44" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="44" />
+        <state relative-caret-position="15">
+          <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SearchCustomerTaskFromJO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
+          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2055#2056#0" expanded="true" />
-            <element signature="e#2091#2092#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SearchEngineTaskFromJO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SearchJONumberDCTask.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-395">
-          <caret line="80" selection-start-line="80" selection-end-line="80" />
+        <state relative-caret-position="-1234">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1237,15 +390,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SearchJONumberQCTask.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
+        <state relative-caret-position="206">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SearchJOTask.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1415">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        <state relative-caret-position="15">
+          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1255,32 +411,208 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SetThumbnailTask.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
-          <caret line="5" column="38" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
-          <folding>
-            <element signature="e#1153#1154#0" expanded="true" />
-            <element signature="e#1189#1190#0" expanded="true" />
-          </folding>
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/SwitchPlant.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-66">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        <state relative-caret-position="15">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1293#1294#0" expanded="true" />
-            <element signature="e#1355#1356#0" expanded="true" />
-            <element signature="e#4763#4764#0" expanded="true" />
-            <element signature="e#4824#4825#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/utils/Util.java">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/UpdateInitialJoborderTransferredTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+        </state>
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/UpdateInitialJOFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/AddCompanyFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="244" column="31" lean-forward="true" selection-start-line="244" selection-start-column="31" selection-end-line="244" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#9733#10573#0" expanded="true" />
+            <element signature="e#10572#10573#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/AddContactFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="305" lean-forward="true" selection-start-line="305" selection-end-line="305" />
+          <folding>
+            <element signature="e#11111#12189#0" expanded="true" />
+            <element signature="e#12188#12189#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/AddCustomerFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="290" column="75" selection-start-line="290" selection-start-column="75" selection-end-line="290" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/ApprovalFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/CompanyInformationFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/ContactFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/ContactsInformationFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/ContactsResultFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/CreatePassword.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/CRMFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/CustomerFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/CustomerInformationFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/CustomerResultFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/DateCommitFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/DCJOInfoFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/HomeFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/InitialJobOrder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="84" column="13" selection-start-line="84" selection-start-column="13" selection-end-line="84" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/InitialJoborderFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/InitialJoborderList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/JoborderStatusFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/JOFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/JOResultFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/JoSearchInfoFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-330">
+          <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/LoginFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
@@ -1290,17 +622,104 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/CheckSessionExpiryTask.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-195">
-          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+        <state relative-caret-position="15">
+          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/InitialJobOrder.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/MapsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="318" column="60" selection-start-line="318" selection-start-column="60" selection-end-line="318" selection-end-column="60" />
+        <state relative-caret-position="15">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/PhotoFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/QCJOInfoFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/SearchContactFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/SearchJOFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/SecurityKeyActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/SecurityKeyFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/SettingsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/UpdateInitialJOFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="91" column="13" selection-start-line="91" selection-start-column="13" selection-end-line="91" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/UploadPhotoActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="47" column="13" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/WorkOrderFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/SearchCustomerFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="34" column="16" lean-forward="true" selection-start-line="34" selection-start-column="16" selection-end-line="34" selection-end-column="16" />
+          <folding>
+            <element signature="e#991#1015#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/QualityCheckFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-240">
+          <caret line="17" column="34" lean-forward="true" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
         </state>
       </provider>
     </entry>

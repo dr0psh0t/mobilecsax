@@ -250,7 +250,12 @@ public class AddCompanyFragment extends Fragment {
                     if (getFragmentManager() != null) {
                         Fragment frag = getFragmentManager().findFragmentById(R.id.content_main);
 
-                        Util.handleBackPress(frag, getActivity());
+                        if (getActivity() != null) {
+                            Util.handleBackPress(frag, getActivity());
+                        } else {
+                            Util.longToast(getContext(), "Activity is null.");
+                        }
+
                         Util.alertBox(getActivity(), "Connection was not established." +
                                         "\nCheck data/wifi internet connectivity." +
                                         "\nCheck server availability.", "Resource Empty", false);
