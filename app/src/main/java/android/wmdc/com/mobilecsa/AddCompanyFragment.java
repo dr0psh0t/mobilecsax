@@ -990,7 +990,12 @@ public class AddCompanyFragment extends Fragment {
                     .toString());
             int countryCode = (countryCodePlant != null) ? countryCodePlant : 0;
 
-            if (!Util.validEmail(email)) {
+            if (Util.isInvalidEmail(email)) {
+                Util.longToast(getActivity(), "Email format is wrong");
+                return;
+            }
+
+            if (Util.isInvalidEmail(email)) {
                 Util.longToast(getActivity(), "Email format is wrong");
                 return;
             }

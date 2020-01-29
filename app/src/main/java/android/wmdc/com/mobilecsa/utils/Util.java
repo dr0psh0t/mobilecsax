@@ -95,13 +95,7 @@ public class Util {
     public static int recyclerViewItemHeight = 0;
 
     public static boolean validUserPass(String pass) {
-        int passLen = pass.length();
-
-        if (passLen > 7 && passLen < 33) {
-            return true;
-        } else {
-            return false;
-        }
+        return (pass.length() > 7 && pass.length() < 33);
     }
 
     public static void minKey(Context context) {
@@ -117,8 +111,14 @@ public class Util {
     public static Dialog getProgressBar(Context context) {
         Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+        } else {
+            Util.longToast(context, "Dialog Window is null.");
+        }
+
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setContentView(R.layout.progressbar_layout);
         dialog.setCancelable(true);
@@ -174,58 +174,21 @@ public class Util {
         warningBox.create().show();
     }
 
-    public static boolean isNetworkAvailable(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager)
-                context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-
-    public static boolean isDataEnabled(Context context) {
-        boolean mobileDataEnabled = false;
-
-        ConnectivityManager cm = (ConnectivityManager) context.
-                getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        try {
-            Class cmClass = Class.forName(cm.getClass().getName());
-            Method method = cmClass.getDeclaredMethod("getMobileDataEnabled");
-            method.setAccessible(true); //  make the method callable
-
-            mobileDataEnabled = (Boolean) method.invoke(cm);
-            return mobileDataEnabled;
-        } catch (Exception e) {
-            return mobileDataEnabled;
+    /*
+    public static boolean isValidEmail(String email) {
+        if (email.isEmpty()) {
+            return true;
+        } else {
+            return email.matches(EMAIL_PATTERN);
         }
-    }
+    }*/
 
-    public static String getCurrentSSID(Context context, WifiManager wifiManager) {
-        String ssid = null;
-
-        ConnectivityManager connManager = (ConnectivityManager)
-                context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
-
-        if (networkInfo == null) {
-            return null;
+    public static boolean isInvalidEmail(String email) {
+        if (email.isEmpty()) {
+            return false;   //  empty email is always valid since email is not required.
+        } else {
+            return !email.matches(EMAIL_PATTERN);
         }
-
-        if (networkInfo.isConnected()) {
-            WifiInfo connectionInfo = wifiManager.getConnectionInfo();
-
-            if (connectionInfo != null && !TextUtils.isEmpty(connectionInfo.getSSID())) {
-                ssid = connectionInfo.getSSID();
-            }
-        }
-
-        return ssid;
-    }
-
-    public static boolean validEmail(String email) {
-        return email.isEmpty() ? true : email.matches(EMAIL_PATTERN);
     }
 
     public static boolean validURL(String url) {

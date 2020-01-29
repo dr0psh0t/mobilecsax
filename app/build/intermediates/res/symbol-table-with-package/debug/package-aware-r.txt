@@ -1335,12 +1335,10 @@ id btnSignClear
 id btnSignPrev
 id btnSubmit
 id btn_sign_save
-id buttonCapture
 id buttonLogin
 id buttonOk
 id buttonOkAct
 id buttonPanel
-id buttonUpload
 id cancel_action
 id center
 id center_horizontal
@@ -1391,7 +1389,6 @@ id editTextKeyAct
 id editTextLastname
 id editTextMI
 id editTextMobile
-id editTextNum
 id editTextPass
 id editTextSearchCustomer
 id editTextSearchEngine
@@ -1718,7 +1715,6 @@ id textStart
 id textView
 id textView2
 id textView3
-id textViewDetails
 id text_input_password_toggle
 id textinput_counter
 id textinput_error
@@ -1916,7 +1912,6 @@ layout activity_main
 layout activity_maps
 layout activity_security_key
 layout activity_settings
-layout activity_upload_photo
 layout add_company_fragment
 layout add_contact_fragment
 layout add_customer_fragment

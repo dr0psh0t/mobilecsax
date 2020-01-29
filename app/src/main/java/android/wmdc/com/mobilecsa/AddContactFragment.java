@@ -1037,7 +1037,7 @@ public class AddContactFragment extends Fragment {
             String csaId = sharedPreferences.getInt("csaId", 0) + "";
             String signature = contactSignature;
 
-            if (!Util.validEmail(email)) {
+            if (Util.isInvalidEmail(email)) {
                 Util.longToast(getActivity(), "Email format is wrong");
                 return;
             }

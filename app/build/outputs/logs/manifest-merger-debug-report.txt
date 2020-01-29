@@ -1,20 +1,20 @@
 -- Merging decision tree log ---
 provider#androidx.core.content.FileProvider
-INJECTED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:49:9-57:20
+INJECTED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:48:9-56:20
 	android:grantUriPermissions
-		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:53:13-47
+		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:52:13-47
 	android:authorities
 		INJECTED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml
-		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:51:13-60
+		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:50:13-60
 	android:exported
-		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:52:13-37
+		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:51:13-37
 	android:name
-		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:50:13-62
+		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:49:13-62
 manifest
-ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:2:1-60:12
-INJECTED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:2:1-60:12
-INJECTED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:2:1-60:12
-INJECTED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:2:1-60:12
+ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:2:1-59:12
+INJECTED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:2:1-59:12
+INJECTED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:2:1-59:12
+INJECTED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:2:1-59:12
 MERGED from [com.google.android.gms:play-services-maps:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\232262dbd37ea634c1250178c8c6054f\jetified-play-services-maps-11.8.0\AndroidManifest.xml:17:1-32:12
 MERGED from [com.google.android.gms:play-services-location:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\b0285f86b6cce4a4164a4b1e3e79c012\jetified-play-services-location-11.8.0\AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-base:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\53e57314a95363393fb041b9ae536bd4\jetified-play-services-base-11.8.0\AndroidManifest.xml:17:1-29:12
@@ -61,20 +61,20 @@ MERGED from [com.google.android.gms:play-services-location-license:11.8.0] C:\Us
 MERGED from [com.google.android.gms:play-services-base-license:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\3cacb6990f862d9f7892ba03f122893a\play-services-base-license-11.8.0\AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.android.gms:play-services-basement-license:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\dcdd92dcd245a587ca0c73f9be16aebd\play-services-basement-license-11.8.0\AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.android.gms:play-services-tasks-license:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\26f4e7573a31d14d374c943fd7881445\play-services-tasks-license-11.8.0\AndroidManifest.xml:2:1-6:12
-INJECTED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:2:1-60:12
-INJECTED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:2:1-60:12
-INJECTED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:2:1-60:12
+INJECTED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:2:1-59:12
+INJECTED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:2:1-59:12
+INJECTED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:2:1-59:12
 	package
 		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:3:5-41
 		INJECTED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml
 		INJECTED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml
-		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:2:1-60:12
+		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:2:1-59:12
 		INJECTED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml
-		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:2:1-60:12
+		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:2:1-59:12
 		INJECTED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:2:11-69
@@ -127,7 +127,7 @@ ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidMani
 	android:name
 		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:16:19-67
 application
-ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:18:5-58:19
+ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:18:5-57:19
 MERGED from [com.google.android.gms:play-services-maps:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\232262dbd37ea634c1250178c8c6054f\jetified-play-services-maps-11.8.0\AndroidManifest.xml:30:5-20
 MERGED from [com.google.android.gms:play-services-maps:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\232262dbd37ea634c1250178c8c6054f\jetified-play-services-maps-11.8.0\AndroidManifest.xml:30:5-20
 MERGED from [com.google.android.gms:play-services-location:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\b0285f86b6cce4a4164a4b1e3e79c012\jetified-play-services-location-11.8.0\AndroidManifest.xml:7:5-20
@@ -174,54 +174,50 @@ MERGED from [com.google.android.gms:play-services-tasks-license:11.8.0] C:\Users
 		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:19:9-35
 	android:theme
 		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:24:9-40
-activity#android.wmdc.com.mobilecsa.UploadPhotoActivity
-ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:25:9-66
-	android:name
-		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:25:19-54
 meta-data#com.google.android.geo.API_KEY
-ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:27:9-29:55
+ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:26:9-28:55
 	android:value
-		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:29:13-52
+		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:28:13-52
 	android:name
-		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:28:13-58
+		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:27:13-58
 activity#android.wmdc.com.mobilecsa.MainActivity
-ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:32:9-37:59
+ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:31:9-36:59
 	android:screenOrientation
-		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:36:13-49
+		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:35:13-49
 	android:label
-		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:34:13-45
+		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:33:13-45
 	android:configChanges
-		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:35:13-59
+		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:34:13-59
 	android:theme
-		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:37:13-56
+		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:36:13-56
 	android:name
-		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:33:13-41
+		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:32:13-41
 activity#android.wmdc.com.mobilecsa.LoginActivity
-ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:39:9-45:20
+ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:38:9-44:20
 	android:name
-		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:39:19-48
+		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:38:19-48
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:40:13-44:29
+ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:39:13-43:29
 action#android.intent.action.MAIN
-ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:41:17-69
+ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:40:17-69
 	android:name
-		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:41:25-66
+		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:40:25-66
 category#android.intent.category.LAUNCHER
-ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:43:17-77
+ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:42:17-77
 	android:name
-		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:43:27-74
+		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:42:27-74
 activity#android.wmdc.com.mobilecsa.SettingsActivity
-ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:46:9-54
+ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:45:9-54
 	android:name
-		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:46:19-51
+		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:45:19-51
 activity#android.wmdc.com.mobilecsa.MapsActivity
-ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:47:9-49
+ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:46:9-49
 	android:name
-		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:47:19-47
+		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:46:19-47
 activity#android.wmdc.com.mobilecsa.SecurityKeyActivity
-ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:48:9-57
+ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:47:9-57
 	android:name
-		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:48:19-54
+		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:47:19-54
 uses-sdk
 INJECTED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml
@@ -329,11 +325,11 @@ INJECTED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidM
 		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml
 		INJECTED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml
 meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:54:13-56:58
+ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:53:13-55:58
 	android:resource
-		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:56:17-55
+		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:55:17-55
 	android:name
-		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:55:17-67
+		ADDED from D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:54:17-67
 uses-feature#0x00020000
 ADDED from [com.google.android.gms:play-services-maps:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\232262dbd37ea634c1250178c8c6054f\jetified-play-services-maps-11.8.0\AndroidManifest.xml:26:5-28:35
 	android:glEsVersion

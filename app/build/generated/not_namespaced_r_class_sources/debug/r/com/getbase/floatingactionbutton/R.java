@@ -52,14 +52,14 @@ public final class R {
     public static final class id {
         private id() {}
 
-        public static final int down = 0x7f080075;
-        public static final int fab_expand_menu_button = 0x7f0800c0;
-        public static final int fab_label = 0x7f0800c1;
-        public static final int left = 0x7f0800f2;
-        public static final int mini = 0x7f080100;
-        public static final int normal = 0x7f08010f;
-        public static final int right = 0x7f080132;
-        public static final int up = 0x7f080253;
+        public static final int down = 0x7f080073;
+        public static final int fab_expand_menu_button = 0x7f0800bd;
+        public static final int fab_label = 0x7f0800be;
+        public static final int left = 0x7f0800ef;
+        public static final int mini = 0x7f0800fd;
+        public static final int normal = 0x7f08010c;
+        public static final int right = 0x7f08012f;
+        public static final int up = 0x7f08024f;
     }
     public static final class styleable {
         private styleable() {}

@@ -88,23 +88,23 @@ public final class R {
         public static final int adjust_height = 0x7f080024;
         public static final int adjust_width = 0x7f080025;
         public static final int auto = 0x7f08002c;
-        public static final int center = 0x7f080054;
-        public static final int dark = 0x7f080066;
-        public static final int hybrid = 0x7f0800cf;
-        public static final int icon_only = 0x7f0800d6;
-        public static final int light = 0x7f0800f3;
-        public static final int none = 0x7f08010e;
-        public static final int normal = 0x7f08010f;
-        public static final int progressBar = 0x7f08011e;
-        public static final int radio = 0x7f080129;
-        public static final int satellite = 0x7f08014b;
-        public static final int standard = 0x7f08019d;
-        public static final int terrain = 0x7f0801a9;
-        public static final int text = 0x7f0801aa;
-        public static final int text2 = 0x7f0801ab;
-        public static final int toolbar = 0x7f080219;
-        public static final int wide = 0x7f080257;
-        public static final int wrap_content = 0x7f08025c;
+        public static final int center = 0x7f080052;
+        public static final int dark = 0x7f080064;
+        public static final int hybrid = 0x7f0800cc;
+        public static final int icon_only = 0x7f0800d3;
+        public static final int light = 0x7f0800f0;
+        public static final int none = 0x7f08010b;
+        public static final int normal = 0x7f08010c;
+        public static final int progressBar = 0x7f08011b;
+        public static final int radio = 0x7f080126;
+        public static final int satellite = 0x7f080148;
+        public static final int standard = 0x7f08019a;
+        public static final int terrain = 0x7f0801a6;
+        public static final int text = 0x7f0801a7;
+        public static final int text2 = 0x7f0801a8;
+        public static final int toolbar = 0x7f080215;
+        public static final int wide = 0x7f080253;
+        public static final int wrap_content = 0x7f080258;
     }
     public static final class integer {
         private integer() {}

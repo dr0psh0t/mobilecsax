@@ -1068,7 +1068,7 @@ public class AddCustomerFragment extends Fragment {
             String csaId = String.valueOf(sharedPreferences.getInt("csaId", 0));
             String signature = customerSignature;
 
-            if (!Util.validEmail(email)) {
+            if (Util.isInvalidEmail(email)) {
                 Util.longToast(getActivity(), "Email format is wrong");
                 return;
             }

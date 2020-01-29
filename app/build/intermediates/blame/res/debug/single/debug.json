@@ -2348,10 +2348,6 @@
         "source": "C:\\Users\\wmdcprog\\.gradle\\caches\\transforms-2\\files-2.1\\7df26908078c74ff4eeaf46e7b6b476c\\appcompat-1.0.0\\res\\layout\\abc_expanded_menu_layout.xml"
     },
     {
-        "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_upload_photo.xml.flat",
-        "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\layout\\activity_upload_photo.xml"
-    },
-    {
         "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\color_abc_secondary_text_material_light.xml.flat",
         "source": "C:\\Users\\wmdcprog\\.gradle\\caches\\transforms-2\\files-2.1\\7df26908078c74ff4eeaf46e7b6b476c\\appcompat-1.0.0\\res\\color\\abc_secondary_text_material_light.xml"
     },
