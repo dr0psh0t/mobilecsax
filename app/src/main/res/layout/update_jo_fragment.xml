@@ -242,31 +242,6 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilDateCommit"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textInputLayoutAddress"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tilJODateReceived">
-
-            <EditText
-                android:id="@+id/etDateCommit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:focusable="false"
-                android:hint="@string/date_comm_req"
-                android:inputType="date"
-                android:maxLength="64"
-                android:textColor="@color/black"
-                android:textCursorDrawable="@drawable/color_cursor"
-                app:backgroundTint="@color/default_tint" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilRefNo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -277,7 +252,7 @@
             app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tilDateCommit">
+            app:layout_constraintTop_toBottomOf="@+id/tilJODateReceived">
 
             <EditText
                 android:id="@+id/etRefNo"

@@ -1,7 +1,6 @@
 package android.wmdc.com.mobilecsa.adapter;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,10 @@ import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 /**
@@ -26,15 +27,20 @@ public class CustomerJOAdapter extends
         RecyclerView.Adapter<CustomerJOAdapter.CustomerTestViewHolder> {
 
     private ArrayList<CustomerJO> customerList;
-    private Context context;
+    private WeakReference<FragmentActivity> activityWeakReference;
+    private WeakReference<TextView> textViewCustomerIdWeakReference;
+    private WeakReference<TextView> textViewSourceWeakReference;
     private EditText etCustomer;
     private Dialog dialog;
 
-    public CustomerJOAdapter(ArrayList<CustomerJO> customerList, Context context,
-                             EditText etCustomer, Dialog dialog) {
+    public CustomerJOAdapter(ArrayList<CustomerJO> customerList, FragmentActivity activity,
+                             EditText etCustomer, Dialog dialog, TextView textViewCustomerId,
+                             TextView textViewSource) {
 
         this.customerList = customerList;
-        this.context = context;
+        this.activityWeakReference = new WeakReference<>(activity);
+        textViewCustomerIdWeakReference = new WeakReference<>(textViewCustomerId);
+        textViewSourceWeakReference = new WeakReference<>(textViewSource);
         this.etCustomer = etCustomer;
         this.dialog = dialog;
     }
@@ -42,8 +48,10 @@ public class CustomerJOAdapter extends
     @NonNull
     @Override
     public CustomerTestViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.searchable_row_item, viewGroup,
-                false);
+
+        View view = LayoutInflater.from(activityWeakReference.get()).inflate(
+                R.layout.searchable_row_item, viewGroup, false);
+
         return new CustomerTestViewHolder(view);
     }
 
@@ -75,13 +83,17 @@ public class CustomerJOAdapter extends
                 public void onClick(View v) {
                     try {
                         etCustomer.setText(customerList.get(index).getCustomer());
-                        Variables.customerIdForJO = customerList.get(index).getcId();
-                        Variables.source = customerList.get(index).getSource();
+
+                        textViewCustomerIdWeakReference.get().setText(String.valueOf(customerList.get(index).getcId()));
+                        textViewSourceWeakReference.get().setText(customerList.get(index).getSource());
+
+                        //Variables.source = customerList.get(index).getSource();
+
                         dialog.cancel();
                     } catch (Exception e) {
                         Util.displayStackTraceArray(e.getStackTrace(), Variables.ADAPTER_PACKAGE,
                                 "Exception", e.toString());
-                        Util.longToast(context, e.getMessage());
+                        Util.longToast(activityWeakReference.get(), e.getMessage());
                     }
                 }
             });

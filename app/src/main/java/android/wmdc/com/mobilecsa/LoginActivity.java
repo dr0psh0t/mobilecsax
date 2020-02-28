@@ -50,36 +50,46 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sPrefs = PreferenceManager.getDefaultSharedPreferences(
                 LoginActivity.this);
 
-        /*
         SharedPreferences.Editor editor = sPrefs.edit();
 
-        editor.remove("northWifi");
-        editor.apply();
-        editor.putString("northWifi", "http://192.168.1.150:8080/mcsa/");
-        editor.apply();
+        if (sPrefs.getString("northWifi", null) == null
+                || sPrefs.getString("northSim", null) == null) {
+            editor.remove("northWifi");
+            editor.apply();
+            editor.putString("northWifi", "http://192.168.1.150:8080/mcsa/");
+            editor.apply();
 
-        editor.remove("northSim");
-        editor.apply();
-        editor.putString("northSim", "http://122.3.176.235:1959/mcsa/");
-        editor.apply();
+            editor.remove("northSim");
+            editor.apply();
+            editor.putString("northSim", "http://122.3.176.235:1959/mcsa/");
+            editor.apply();
+        }
 
-        editor.remove("centralWifi");
-        editor.apply();
-        editor.putString("centralWifi", "http://192.168.1.149:8080/mcsa/");
-        editor.apply();
+        if (sPrefs.getString("centralWifi", null) == null
+                || sPrefs.getString("centralSim", null) == null) {
+            editor.remove("centralWifi");
+            editor.apply();
+            editor.putString("centralWifi", "http://192.168.1.149:8080/mcsa/");
+            editor.apply();
 
-        editor.remove("centralSim");
-        editor.apply();
-        editor.putString("centralSim", "http://122.52.48.202:3316/mcsa/");
-        editor.apply();
+            editor.remove("centralSim");
+            editor.apply();
+            editor.putString("centralSim", "http://122.52.48.202:3316/mcsa/");
+            editor.apply();
+        }
 
-        editor.remove("southSim");
-        editor.apply();
-        editor.putString("southSim", "http://122.52.155.109:1116/mcsa/");
-        editor.apply();
+        if (sPrefs.getString("southWifi", null) == null
+                || sPrefs.getString("southSim", null) == null) {
+            editor.remove("southSim");
+            editor.apply();
+            editor.putString("southSim", "http://122.52.155.109:1116/mcsa/");
+            editor.apply();
 
-        Log.d("", "Done Setting URL Prefs");
-         */
+            editor.remove("southWifi");
+            editor.apply();
+            editor.putString("southWifi", "http://192.168.1.30:8080/mcsa/");
+            editor.apply();
+        }
 
         if (sPrefs.getString("user", null) == null) {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager()

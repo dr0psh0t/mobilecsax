@@ -16,6 +16,7 @@ import android.wmdc.com.mobilecsa.model.SwipeButton;
 import android.wmdc.com.mobilecsa.model.WorkOrderModel;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -24,20 +25,20 @@ import java.util.ArrayList;
 
 public class WorkOrderAdapter extends RecyclerView.Adapter<WorkOrderAdapter.WorkOrderViewHolder> {
 
-    private Context context;
+    private FragmentActivity activity;
     private ArrayList<WorkOrderModel> workOrderList;
     private SharedPreferences sharedPreferences;
 
-    public WorkOrderAdapter(Context context, ArrayList<WorkOrderModel> workOrderList) {
-        this.context = context;
+    public WorkOrderAdapter(FragmentActivity activity, ArrayList<WorkOrderModel> workOrderList) {
+        this.activity = activity;
         this.workOrderList = workOrderList;
-        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
     }
 
     @Override
     @NonNull
     public WorkOrderViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.work_order_info_fragment,
+        View view = LayoutInflater.from(activity).inflate(R.layout.work_order_info_fragment,
                 viewGroup, false);
         return new WorkOrderViewHolder(view);
     }
@@ -99,7 +100,7 @@ public class WorkOrderAdapter extends RecyclerView.Adapter<WorkOrderAdapter.Work
 
             itemView.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View view) {
-                    final Dialog dialog = new Dialog(context);
+                    final Dialog dialog = new Dialog(activity);
 
                     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                     dialog.setContentView(R.layout.slide_layout);
@@ -107,10 +108,11 @@ public class WorkOrderAdapter extends RecyclerView.Adapter<WorkOrderAdapter.Work
                     SwipeButton swipeButton = dialog.findViewById(R.id.swipe_btn_qc);
                     swipeButton.setItemStat(iconItemDC);
                     swipeButton.setDialogContainer(dialog);
+                    swipeButton.setFragmentActivity(activity);
 
                     swipeButton.setParameters(sharedPreferences.getInt("csaId", 0), "mcsa",
                             workOrderList.get(index).getJoId(),
-                            workOrderList.get(index).getWorkOrderId(), true);
+                            workOrderList.get(index).getWorkOrderId());
 
                     if (!workOrderList.get(index).getIsCsaQc()) {
                         dialog.show();

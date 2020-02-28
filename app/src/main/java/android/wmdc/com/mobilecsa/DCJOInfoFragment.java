@@ -103,13 +103,13 @@ public class DCJOInfoFragment extends Fragment {
                                 LinearLayoutManager.VERTICAL));
 
                         SwipeButton swipeButton = v.findViewById(R.id.swipe_btn);
-                        swipeButton.setTVSwipe(tvSwipe);
                         swipeButton.setParameters(sPrefs.getInt("csaId", 0), "mcsa",
-                                resJson.getInt("joId"), 0, false);
+                                resJson.getInt("joId"), 0);
 
                         swipeButton.setDateCommitAdapter(dateCommitAdapter);
                         swipeButton.setDateCommitList(dcData);
                         swipeButton.setDcJoborderId(dcJoborderId);
+                        swipeButton.setFragmentActivity(getActivity());
 
                         if (resJson.getBoolean("csaApproved")) {
                             swipeButton.setVisibility(View.GONE);

@@ -17,8 +17,8 @@ public final class R {
     public static final class id {
         private id() {}
 
-        public static final int listItems = 0x7f0800f5;
-        public static final int search = 0x7f080156;
+        public static final int listItems = 0x7f0800f3;
+        public static final int search = 0x7f080154;
     }
     public static final class layout {
         private layout() {}

@@ -1,22 +1,22 @@
 package android.wmdc.com.mobilecsa.adapter;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.model.Engine;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 /**Created by wmdcprog on 7/2/2018.*/
@@ -24,18 +24,20 @@ import java.util.ArrayList;
 public class EngineJOAdapter extends RecyclerView.Adapter<EngineJOAdapter.EngineViewHolder> {
 
     private ArrayList<Engine> engineList;
-    private Context context;
+    private WeakReference<FragmentActivity> activityWeakReference;
+    private WeakReference<TextView> textViewModelIdWeakReference;
 
     private EditText etEngine;
     private EditText etMakeCat;
 
     private Dialog dialog;
 
-    public EngineJOAdapter(ArrayList<Engine> engineList, Context context, EditText etEngine,
-                           EditText etMakeCat, Dialog dialog) {
+    public EngineJOAdapter(ArrayList<Engine> engineList, FragmentActivity activity, EditText etEngine,
+                           EditText etMakeCat, Dialog dialog, TextView textViewModelId) {
 
         this.engineList = engineList;
-        this.context = context;
+        this.activityWeakReference = new WeakReference<>(activity);
+        this.textViewModelIdWeakReference = new WeakReference<>(textViewModelId);
         this.etEngine = etEngine;
         this.etMakeCat = etMakeCat;
         this.dialog = dialog;
@@ -44,7 +46,7 @@ public class EngineJOAdapter extends RecyclerView.Adapter<EngineJOAdapter.Engine
     @NonNull
     @Override
     public EngineViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.engine_row_item, viewGroup,
+        View view = LayoutInflater.from(activityWeakReference.get()).inflate(R.layout.engine_row_item, viewGroup,
                 false);
         return new EngineViewHolder(view);
     }
@@ -83,13 +85,13 @@ public class EngineJOAdapter extends RecyclerView.Adapter<EngineJOAdapter.Engine
 
                         etMakeCat.setText(txt);
 
-                        Variables.modelId = engineList.get(index).getModelId();
+                        textViewModelIdWeakReference.get().setText(engineList.get(index).getModelId());
 
                         dialog.cancel();
                     } catch (Exception e) {
                         Util.displayStackTraceArray(e.getStackTrace(), Variables.ADAPTER_PACKAGE,
                                 "Exception", e.toString());
-                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+                        Util.longToast(activityWeakReference.get(), e.getMessage());
                     }
                 }
             });

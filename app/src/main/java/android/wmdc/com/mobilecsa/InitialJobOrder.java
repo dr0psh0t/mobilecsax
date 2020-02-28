@@ -21,7 +21,6 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,6 +82,10 @@ import static android.app.Activity.RESULT_OK;
 /*** Created by wmdcprog on 4/27/2018.*/
 
 public class InitialJobOrder extends Fragment {
+
+    private TextView textViewCustomerId;
+    private TextView textViewModelId;
+    private TextView textViewSource;
 
     private Calendar calendar = Calendar.getInstance();
     private SharedPreferences sharedPreferences;
@@ -227,7 +230,7 @@ public class InitialJobOrder extends Fragment {
                             engineList.clear();
 
                             engineJOAdapter = new EngineJOAdapter(engineList, getActivity(),
-                                    etEngineModel, etMakeCat, dialog);
+                                    etEngineModel, etMakeCat, dialog, textViewModelId);
 
                             new SearchEngineTaskFromJO(getActivity(), engineList,
                                     recyclerViewEngine, engineJOAdapter).execute(trimmedQuery);
@@ -237,7 +240,7 @@ public class InitialJobOrder extends Fragment {
                             engineList.clear();
 
                             engineJOAdapter = new EngineJOAdapter(engineList, getActivity(),
-                                    etEngineModel, etMakeCat, dialog);
+                                    etEngineModel, etMakeCat, dialog, null);
 
                             engineList.add(new Engine("0", "0", "0", "0", "0", "0"));
 
@@ -314,7 +317,7 @@ public class InitialJobOrder extends Fragment {
                             customerList.clear();
 
                             customerJOAdapter = new CustomerJOAdapter(customerList, getActivity(),
-                                    etCustomer, dialog);
+                                    etCustomer, dialog, textViewCustomerId, textViewSource);
 
                             new SearchCustomerTaskFromJO(getActivity(), customerList,
                                     recyclerViewCustomer, customerJOAdapter).execute(trimmedQuery);
@@ -357,9 +360,12 @@ public class InitialJobOrder extends Fragment {
         if (getActivity() != null) {
             getActivity().setTitle("Initial Job Order");
         } else {
-            Util.alertBox(getActivity(),
-                    "\"getActivity()\" is null. Cannot set title of this fragment.");
+            Util.alertBox(getContext(), "Activity is null. Cannot set title of this fragment.");
         }
+
+        textViewCustomerId = v.findViewById(R.id.textViewCustomerId);
+        textViewModelId = v.findViewById(R.id.textViewModelId);
+        textViewSource = v.findViewById(R.id.textViewSource);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
@@ -523,8 +529,7 @@ public class InitialJobOrder extends Fragment {
                     }
                 });
             } else {
-                Util.alertBox(getActivity(),
-                        "\"getContext()\" is null. Cannot set title of this fragment.");
+                Util.alertBox(getActivity(), "Context is null. Cannot show dialog.");
             }
         }
     };
@@ -562,11 +567,11 @@ public class InitialJobOrder extends Fragment {
                     Util.shortToast(getContext(), "\"photoFile\" is null");
                 }
             } else {
-                Util.alertBox(getActivity(), "\"getActivity()\" is null. Cannot take picture.");
+                Util.alertBox(getActivity(), "Activity is null. Cannot take picture.");
             }
         } else {
             Util.alertBox(getActivity(),
-                    "resolve activity of picture intent is null. Cannot take picture.");
+                    "Resolve Activity of picture intent is null. Cannot take picture.");
         }
     }
 
@@ -637,7 +642,7 @@ public class InitialJobOrder extends Fragment {
                                     small_file_size = small_file.length() + "";
                                     fileInputStream = new FileInputStream(small_file);
                                 } else {
-                                    Util.shortToast(getActivity(), "Small file is null");
+                                    Util.shortToast(getActivity(), "Small file is null.");
                                 }
                             } else {
                                 fileInputStream = Util.getStreamFromUri(uri, getActivity());
@@ -651,6 +656,7 @@ public class InitialJobOrder extends Fragment {
                             } else {
                                 textPhoto = Integer.parseInt(size) / 1000 + "KB. " +
                                         Integer.parseInt(small_file_size) / 1000 + "KB.";
+
                                 tvPhotoName.setText(displayName);
                                 tvPhotoSize.setText(textPhoto);
                             }
@@ -664,8 +670,7 @@ public class InitialJobOrder extends Fragment {
                         Util.alertBox(getActivity(), ie.toString());
                     }
                 } else {
-                    Util.alertBox(getActivity(),
-                            "\"getActivity()\" is null. Cannot dump image meta data.");
+                    Util.alertBox(getActivity(), "Activity is null. Cannot dump image meta data.");
                 }
             }
         };
@@ -677,7 +682,11 @@ public class InitialJobOrder extends Fragment {
     private String textPhoto;
 
     private void newQuotation() {
+
         try {
+            int customerId = Integer.parseInt(textViewCustomerId.getText().toString());
+            int modelId = Integer.parseInt(textViewModelId.getText().toString());
+
             if (displayName == null) {
                 Util.shortToast(getActivity(), "Include photo.");
                 return;
@@ -698,7 +707,7 @@ public class InitialJobOrder extends Fragment {
                 }
             }
 
-            int customerId = Variables.customerIdForJO;
+            String source = textViewSource.getText().toString();
             String customer = etCustomer.getText().toString();
             String mobile = etMobile.getText().toString();
             String purchaseOrder = etPurchaseOrder.getText().toString();
@@ -748,6 +757,11 @@ public class InitialJobOrder extends Fragment {
                 return;
             }
 
+            if (modelId < 0) {
+                Util.shortToast(getActivity(), "Model is required.");
+                return;
+            }
+
             if (mobile.isEmpty()) {
                 Util.shortToast(getActivity(), "Mobile is required");
                 return;
@@ -789,21 +803,21 @@ public class InitialJobOrder extends Fragment {
 
             final HashMap<String, String> params = new HashMap<>();
 
-            params.put("customerId", Util.val(customerId));
+            params.put("customerId", String.valueOf(customerId));
             params.put("customer", customer);
-            params.put("source", Variables.source);
+            params.put("source", source);
             params.put("mobile", mobile);
             params.put("purchaseOrder", purchaseOrder);
             params.put("poDate", poDate);
             params.put("make", make);
             params.put("cat", cat);
-            params.put("modelId", Variables.modelId);
+            params.put("modelId", String.valueOf(modelId));
             params.put("serialNo", serialNo);
             params.put("dateReceive", dateReceive);
             params.put("dateCommit", dateReceive);
             params.put("refNo", refNo);
             params.put("remarks", remarks);
-            params.put("preparedBy", Util.val(sharedPreferences.getInt("csaId", 0)));
+            params.put("preparedBy", String.valueOf(sharedPreferences.getInt("csaId", 0)));
             params.put("imageType", "JPEG");
             params.put("joSignature", joSignature);
             params.put("joNumber", joNumber);
@@ -830,10 +844,9 @@ public class InitialJobOrder extends Fragment {
 
                 confirmBox.show();
             } else {
-                Util.alertBox(getContext(), "\"getActivity()\" is null. Cannot build alertdialog.");
+                Util.alertBox(getContext(), "Activity is null. Cannot build Alert Dialog.");
             }
         } catch (Exception e) {
-            Log.e("Exception", e.toString());
             Util.alertBox(getContext(), e.toString());
         }
     }

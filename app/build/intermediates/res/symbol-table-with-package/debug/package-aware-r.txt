@@ -1312,7 +1312,6 @@ id btnAddContact
 id btnAddCustomer
 id btnCRM
 id btnCameraSelection
-id btnCheckJo
 id btnContact
 id btnCustomer
 id btnDateComm
@@ -1407,7 +1406,6 @@ id etCompany
 id etContNumComp
 id etContPersComp
 id etCustomerJO
-id etDateCommit
 id etDateCust
 id etDateReceive
 id etEmailComp
@@ -1715,6 +1713,9 @@ id textStart
 id textView
 id textView2
 id textView3
+id textViewCustomerId
+id textViewModelId
+id textViewSource
 id text_input_password_toggle
 id textinput_counter
 id textinput_error
@@ -1736,7 +1737,6 @@ id tilCountCust
 id tilCountryCodeComp
 id tilCountryCodeCust
 id tilCustomer
-id tilDateCommit
 id tilDateCust
 id tilERLLComp
 id tilERLLContact
@@ -2108,11 +2108,13 @@ string country_code_req
 string credited_req
 string csa_stat
 string customer
+string customerId
 string customer_req
 string date_comm
 string date_comm_req
 string date_rec_req
 string date_req
+string dc_approve_msg
 string dc_ico_img
 string email
 string emergency
@@ -2145,6 +2147,7 @@ string mf
 string mi_req
 string mob_req
 string mobile
+string modelId
 string more
 string mtrl_chip_close_icon_content_description
 string navigation_drawer_close
@@ -2176,6 +2179,7 @@ string preview
 string prov_req
 string purchase_order
 string qc
+string qc_approve_msg
 string qc_ico_img
 string re_pass
 string ref_no
@@ -2207,8 +2211,10 @@ string sign_clear
 string sign_enter
 string sign_save
 string signature
+string slide
 string slide_qc_msg
 string slide_right_msg
+string source
 string spare_parts
 string specimen
 string status_bar_notification_info_overflow

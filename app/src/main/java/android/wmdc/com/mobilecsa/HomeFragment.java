@@ -33,8 +33,8 @@ public class HomeFragment extends Fragment {
         final FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager()
                 .beginTransaction();
 
-        fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter,
-                R.anim.pop_exit);
+        fragmentTransaction.setCustomAnimations(
+                R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
 
         final Button btnCRM = v.findViewById(R.id.btnCRM);
 

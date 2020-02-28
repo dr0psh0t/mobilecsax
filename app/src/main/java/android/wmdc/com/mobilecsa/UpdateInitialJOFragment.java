@@ -21,10 +21,8 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -54,6 +52,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -70,18 +69,16 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -91,7 +88,11 @@ import static android.app.Activity.RESULT_OK;
 
 public class UpdateInitialJOFragment extends Fragment {
 
-    Calendar calendar = Calendar.getInstance();
+    private TextView textViewCustomerId;
+    private TextView textViewModelId;
+    private TextView textViewSource;
+
+    private Calendar calendar = Calendar.getInstance();
 
     private int year = calendar.get(Calendar.YEAR);
     private int month = calendar.get(Calendar.MONTH);
@@ -100,7 +101,6 @@ public class UpdateInitialJOFragment extends Fragment {
     private EditText etCustomer;
     private EditText etPODate;
     private EditText etDateReceive;
-    private EditText etDateCommit;
     private EditText etEngineModel;
     private EditText etMakeCat;
     private EditText etMobile;
@@ -110,341 +110,369 @@ public class UpdateInitialJOFragment extends Fragment {
     private EditText etSerialNo;
     private EditText etJONumber;
 
-    private Button btnPhoto, btnPhotoPrev;
     private TextView tvPhotoName, tvPhotoSize;
-
-    private Button btnSign, btnSignPrev, btnSubmit;
 
     private SharedPreferences sharedPreferences;
 
     private View.OnClickListener datePOClickListener = new View.OnClickListener() {
         public void onClick(View view) {
-            new DatePickerDialog(getActivity(), R.style.DialogTheme, datePOListener, year, month, day).show();
-        }
-    };
-    private View.OnClickListener dateDRClickListener = new View.OnClickListener() {
-        public void onClick(View view) {
-            new DatePickerDialog(getActivity(), R.style.DialogTheme, dateDRListener, year, month, day).show();
-        }
-    };
-    private View.OnClickListener dateDcClickListener = new View.OnClickListener() {
-        public void onClick(View view) {
-            new DatePickerDialog(getActivity(), R.style.DialogTheme, dateDCListener, year, month, day).show();
-        }
-    };
-    private View.OnTouchListener etRemarksTouchListener = new View.OnTouchListener(){
-        public boolean onTouch(View view, MotionEvent event) {
-            view.getParent().requestDisallowInterceptTouchEvent(true);
-            switch (event.getAction()&MotionEvent.ACTION_MASK) {
-                case MotionEvent.ACTION_UP:
-                    view.getParent().requestDisallowInterceptTouchEvent(false);
-                    break;
+            if (getActivity() != null) {
+                new DatePickerDialog(getActivity(), R.style.DialogTheme, datePOListener, year,
+                        month, day).show();
+            } else {
+                Util.alertBox(getContext(), "Activity is null. Cannot open date.");
             }
-            return false;
         }
     };
 
-    private Button mClear;
-    private Button mGetSign;
-    private Button mCancel;
+    private View.OnClickListener dateDRClickListener = new View.OnClickListener() {
+        public void onClick(View view) {
+            if (getActivity() != null) {
+                new DatePickerDialog(getActivity(), R.style.DialogTheme, dateDRListener, year,
+                        month, day).show();
+            } else {
+                Util.alertBox(getContext(), "Activity is null. Cannot open date.");
+            }
+        }
+    };
+
     private Dialog signatureDialog;
-    private LinearLayout mContent;
     private View signatureview;
     private Signature mSignature;
     private String joborderSignature;
 
-    public void displaySignatureDialog()
-    {
-        signatureDialog = new Dialog(getActivity());
+    private void displaySignatureDialog() {
+        if (getActivity() != null) {
+            signatureDialog = new Dialog(getActivity());
 
-        signatureDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        signatureDialog.setContentView(R.layout.dialog_signature);
-        signatureDialog.setCancelable(false);
+            signatureDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            signatureDialog.setContentView(R.layout.dialog_signature);
+            signatureDialog.setCancelable(false);
 
-        mContent = signatureDialog.findViewById(R.id.linearLayout);
-        mSignature = new Signature(getActivity().getApplicationContext(), null, mContent);
-        mSignature.setBackgroundColor(Color.WHITE);
+            LinearLayout mContent = signatureDialog.findViewById(R.id.linearLayout);
+            mSignature = new Signature(getActivity().getApplicationContext(), null, mContent);
+            mSignature.setBackgroundColor(Color.WHITE);
 
-        mContent.addView(mSignature, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            mContent.addView(mSignature, ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT);
 
-        mClear = signatureDialog.findViewById(R.id.btnSignClear);
-        mGetSign = signatureDialog.findViewById(R.id.btn_sign_save);
-        mCancel = signatureDialog.findViewById(R.id.btnSignCancel);
+            Button mClear = signatureDialog.findViewById(R.id.btnSignClear);
+            Button mGetSign = signatureDialog.findViewById(R.id.btn_sign_save);
+            Button mCancel = signatureDialog.findViewById(R.id.btnSignCancel);
 
-        signatureview = mContent;
+            signatureview = mContent;
 
-        mClear.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-                mSignature.clear();
-            }
-        });
+            mClear.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    mSignature.clear();
+                }
+            });
 
-        mGetSign.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-                signatureview.setDrawingCacheEnabled(true);
-                joborderSignature = mSignature.save(signatureview);
-                signatureDialog.dismiss();
-            }
-        });
+            mGetSign.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    signatureview.setDrawingCacheEnabled(true);
+                    joborderSignature = mSignature.save(signatureview);
+                    signatureDialog.dismiss();
+                }
+            });
 
-        mCancel.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-                mSignature.clear();
-                signatureDialog.dismiss();
-            }
-        });
-        signatureDialog.show();
+            mCancel.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    mSignature.clear();
+                    signatureDialog.dismiss();
+                }
+            });
+            signatureDialog.show();
+        } else {
+            Util.alertBox(getContext(), "Activity is null. Cannot open signature.");
+        }
     }
 
-    RecyclerView recyclerViewEngine;
-    EngineJOAdapter engineJOAdapter;
-
-    Fragment currFrag;
+    private RecyclerView recyclerViewEngine;
+    private EngineJOAdapter engineJOAdapter;
 
     private View.OnClickListener engineModelClickListener = new View.OnClickListener() {
         public void onClick(View view) {
-            final Dialog dialog = new Dialog(getActivity());
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setCancelable(true);
 
-            View searchView = LayoutInflater.from(getActivity())
-                    .inflate(R.layout.engine_recycler_layout, null);
+            if (getActivity() != null) {
+                final Dialog dialog = new Dialog(getActivity());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setCancelable(true);
 
-            recyclerViewEngine = searchView.findViewById(R.id.recyclerViewEngine);
+                View searchView = LayoutInflater.from(getActivity()).inflate(
+                        R.layout.engine_recycler_layout, containerViewGroup, false);
 
-            final ArrayList<Engine> engineList = new ArrayList<>();
+                recyclerViewEngine = searchView.findViewById(R.id.recyclerViewEngine);
 
-            EditText editTextSearchEngine = searchView.findViewById(R.id.editTextSearchEngine);
-            editTextSearchEngine.setFilters(
-                    new InputFilter[] {
-                            new EmojiExcludeFilter(),
-                            new InputFilter.LengthFilter(16)
+                final ArrayList<Engine> engineList = new ArrayList<>();
+
+                EditText editTextSearchEngine = searchView.findViewById(R.id.editTextSearchEngine);
+                editTextSearchEngine.setFilters(new InputFilter[]{new EmojiExcludeFilter(),
+                        new InputFilter.LengthFilter(16)});
+
+                editTextSearchEngine.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                     }
-            );
 
-            editTextSearchEngine.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-                @Override
-                public void onTextChanged(CharSequence query, int start, int before, int count) {
-                    query = query.toString().toLowerCase();
-                    String trimmedQuery = query.toString().trim();
+                    @Override
+                    public void onTextChanged(CharSequence query, int start, int before, int count)
+                    {
+                        query = query.toString().toLowerCase();
+                        String trimmedQuery = query.toString().trim();
 
-                    if (trimmedQuery.length() < 1) {
-                        engineList.clear();
-                        if (engineJOAdapter != null) {
-                            engineJOAdapter.notifyDataSetChanged();
+                        if (trimmedQuery.length() < 1) {
+                            engineList.clear();
+                            if (engineJOAdapter != null) {
+                                engineJOAdapter.notifyDataSetChanged();
+                            }
+                        } else {
+                            engineList.clear();
+
+                            engineJOAdapter = new EngineJOAdapter(engineList, getActivity(),
+                                    etEngineModel, etMakeCat, dialog, textViewModelId);
+
+                            new SearchEngineTaskFromJO(getActivity(), engineList,
+                                    recyclerViewEngine, engineJOAdapter).execute(trimmedQuery);
                         }
-                    } else if (trimmedQuery.length() >= 1) {
-                        engineList.clear();
-                        engineJOAdapter = new EngineJOAdapter(
-                                engineList,
-                                getActivity(),
-                                etEngineModel,
-                                etMakeCat,
-                                dialog);
-                        new SearchEngineTaskFromJO(getActivity(), engineList, recyclerViewEngine,
-                                engineJOAdapter).execute(trimmedQuery);
+
+                        if (trimmedQuery.contains("none")) {
+                            engineList.clear();
+
+                            engineJOAdapter = new EngineJOAdapter(engineList, getActivity(),
+                                    etEngineModel, etMakeCat, dialog, textViewModelId);
+
+                            engineList.add(new Engine("0", "0", "0", "0", "0", "0"));
+
+                            recyclerViewEngine.setLayoutManager(new LinearLayoutManager(
+                                    getContext()));
+                            recyclerViewEngine.setAdapter(engineJOAdapter);
+                            recyclerViewEngine.setItemAnimator(new DefaultItemAnimator());
+                        }
                     }
 
-                    if (trimmedQuery.contains("none")) {
-                        engineList.clear();
-                        engineJOAdapter = new EngineJOAdapter(
-                                engineList,
-                                getActivity(),
-                                etEngineModel,
-                                etMakeCat,
-                                dialog);
-
-                        engineList.add(new Engine("0", "0", "0", "0", "0", "0"));
-
-                        recyclerViewEngine.setLayoutManager(new LinearLayoutManager(getContext()));
-                        recyclerViewEngine.setAdapter(engineJOAdapter);
-                        recyclerViewEngine.setItemAnimator(new DefaultItemAnimator());
+                    @Override
+                    public void afterTextChanged(Editable s) {
                     }
+                });
+
+                dialog.setContentView(searchView);
+
+                if (dialog.getWindow() != null) {
+
+                    WindowManager.LayoutParams wmlp = dialog.getWindow().getAttributes();
+                    wmlp.width = Util.systemWidth;
+                    wmlp.gravity = Gravity.TOP;
+                    wmlp.y = 200;
+
+                    dialog.show();
+                } else {
+                    Util.alertBox(getActivity(),
+                            "Activity is null. Cannot set layout params to dialog.");
                 }
-                @Override
-                public void afterTextChanged(Editable s) {}
-            });
-
-            dialog.setContentView(searchView);
-
-            WindowManager.LayoutParams wmlp = dialog.getWindow().getAttributes();
-            wmlp.width = Util.systemWidth;
-            wmlp.gravity = Gravity.TOP;
-            wmlp.y = 200;
-
-            dialog.show();
+            } else {
+                Util.alertBox(getContext(), "Activity is null. Cannot open engine model dialog.");
+            }
         }
     };
 
-    RecyclerView recyclerViewCustomer;
-    CustomerJOAdapter customerJOAdapter;
+    private RecyclerView recyclerViewCustomer;
+    private CustomerJOAdapter customerJOAdapter;
 
     private View.OnClickListener customerClickListener = new View.OnClickListener() {
-        public void onClick(View view)
-        {
-            final Dialog dialog = new Dialog(getActivity());
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setCancelable(true);
+        public void onClick(View view) {
 
-            View searchView = LayoutInflater.from(getActivity())
-                    .inflate(R.layout.searchable_recycler_layout, null);
+            if (getActivity() != null) {
+                final Dialog dialog = new Dialog(getActivity());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setCancelable(true);
 
-            recyclerViewCustomer = searchView.findViewById(R.id.recyclerViewCustomer);
+                View searchView = LayoutInflater.from(getActivity())
+                        .inflate(R.layout.searchable_recycler_layout, containerViewGroup, false);
 
-            final ArrayList<CustomerJO> customerList = new ArrayList<>();
+                recyclerViewCustomer = searchView.findViewById(R.id.recyclerViewCustomer);
 
-            EditText editTextSearchCustomer = searchView.findViewById(R.id.editTextSearchCustomer);
-            editTextSearchCustomer.setFilters(
-                    new InputFilter[] {
-                            new EmojiExcludeFilter(),
-                            new InputFilter.LengthFilter(16)
+                final ArrayList<CustomerJO> customerList = new ArrayList<>();
+
+                EditText editTextSearchCustomer = searchView.findViewById(R.id.editTextSearchCustomer);
+                editTextSearchCustomer.setFilters(
+                        new InputFilter[]{new EmojiExcludeFilter(),
+                                new InputFilter.LengthFilter(16)});
+
+                editTextSearchCustomer.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                     }
-            );
 
-            editTextSearchCustomer.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-                @Override
-                public void onTextChanged(CharSequence query, int start, int before, int count) {
-                    query = query.toString().toLowerCase();
-                    String trimmedQuery = query.toString().trim();
+                    @Override
+                    public void onTextChanged(CharSequence query, int start, int before, int count)
+                    {
+                        query = query.toString().toLowerCase();
+                        String trimmedQuery = query.toString().trim();
 
-                    if (trimmedQuery.length() < 1) {
-                        customerList.clear();
-                        if (customerJOAdapter != null) {
-                            customerJOAdapter.notifyDataSetChanged();
+                        if (trimmedQuery.length() < 1) {
+                            customerList.clear();
+                            if (customerJOAdapter != null) {
+                                customerJOAdapter.notifyDataSetChanged();
+                            }
+                        } else if (trimmedQuery.length() >= 2) {
+                            customerList.clear();
+
+                            customerJOAdapter = new CustomerJOAdapter(customerList, getActivity(),
+                                    etCustomer, dialog, textViewCustomerId, textViewSource);
+
+                            new SearchCustomerTaskFromJO(getActivity(), customerList,
+                                    recyclerViewCustomer, customerJOAdapter).execute(trimmedQuery);
                         }
-                    } else if (trimmedQuery.length() >= 2) {
-                        customerList.clear();
-
-                        customerJOAdapter = new CustomerJOAdapter(customerList,
-                                getActivity(), etCustomer, dialog);
-
-                        new SearchCustomerTaskFromJO(getActivity(), customerList,
-                                recyclerViewCustomer, customerJOAdapter).execute(trimmedQuery);
                     }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                    }
+                });
+
+                dialog.setContentView(searchView);
+
+                if (dialog.getWindow() != null) {
+
+                    WindowManager.LayoutParams wmlp = dialog.getWindow().getAttributes();
+                    wmlp.width = Util.systemWidth;
+                    wmlp.gravity = Gravity.TOP;
+                    wmlp.y = 200;
+
+                    dialog.show();
+                } else {
+                    Util.alertBox(getActivity(),
+                            "Activity is null. Cannot set layout params to dialog.");
                 }
-
-                @Override
-                public void afterTextChanged(Editable s) {}
-            });
-
-            dialog.setContentView(searchView);
-
-            WindowManager.LayoutParams wmlp = dialog.getWindow().getAttributes();
-            wmlp.width = Util.systemWidth;
-            wmlp.gravity = Gravity.TOP;
-            wmlp.y = 200;
-
-            dialog.show();
+            } else {
+                Util.alertBox(getActivity(), "Activity is null. Cannot open customer dialog.");
+            }
         }
     };
 
     private int initialJoborderId;
-    private String localSource;
+    private ViewGroup containerViewGroup;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle instanceState) {
         View v = inflater.inflate(R.layout.update_jo_fragment, container, false);
-        getActivity().setTitle("Update Joborder");
+
+        textViewModelId = new TextView(getActivity());
+        textViewCustomerId = new TextView(getActivity());
+        textViewSource = new TextView(getActivity());
+
+        containerViewGroup = container;
+
+        if (getActivity() != null) {
+            getActivity().setTitle("Update Joborder");
+        } else {
+            Util.alertBox(getContext(), "Activity is null. Cannot set title of this fragment.");
+        }
+
         setHasOptionsMenu(true);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         Bundle bundle = this.getArguments();
-        JSONObject jsonBundle;
 
-        currFrag = getActivity().getSupportFragmentManager().findFragmentById(R.id.content_main);
+        if (bundle != null) {
+            JSONObject jsonBundle;
 
-        etCustomer = v.findViewById(R.id.etCustomerJO);
-        etPODate = v.findViewById(R.id.etPODate);
-        etDateReceive = v.findViewById(R.id.etDateReceive);
-        etDateCommit = v.findViewById(R.id.etDateCommit);
-        etEngineModel = v.findViewById(R.id.etEngineModel);
-        etMakeCat = v.findViewById(R.id.etMakeCat);
-        etMobile = v.findViewById(R.id.etMobile);
-        etPurchaseOrder = v.findViewById(R.id.etPurchaseOrder);
-        etRemarks = v.findViewById(R.id.etRemarks);
-        etRefNo = v.findViewById(R.id.etRefNo);
-        etSerialNo = v.findViewById(R.id.etSerialNo);
-        etJONumber = v.findViewById(R.id.etJONumber);
+            etCustomer = v.findViewById(R.id.etCustomerJO);
+            etPODate = v.findViewById(R.id.etPODate);
+            etDateReceive = v.findViewById(R.id.etDateReceive);
+            etEngineModel = v.findViewById(R.id.etEngineModel);
+            etMakeCat = v.findViewById(R.id.etMakeCat);
+            etMobile = v.findViewById(R.id.etMobile);
+            etPurchaseOrder = v.findViewById(R.id.etPurchaseOrder);
+            etRemarks = v.findViewById(R.id.etRemarks);
+            etRefNo = v.findViewById(R.id.etRefNo);
+            etSerialNo = v.findViewById(R.id.etSerialNo);
+            etJONumber = v.findViewById(R.id.etJONumber);
 
-        try {
-            jsonBundle = new JSONObject(bundle.getString("prevValues"));
+            try {
+                jsonBundle = new JSONObject(bundle.getString("prevValues"));
 
-            initialJoborderId = jsonBundle.getInt("initialJoborderId");
+                initialJoborderId = jsonBundle.getInt("initialJoborderId");
 
-            etPurchaseOrder.setText(jsonBundle.getString("purchaseOrder"));
-            etRefNo.setText(jsonBundle.getString("referenceNo"));
-            etMobile.setText(jsonBundle.getString("mobile"));
-            etPODate.setText(jsonBundle.getString("poDate"));
-            etSerialNo.setText(jsonBundle.getString("serialNo"));
-            etDateReceive.setText(jsonBundle.getString("dateReceive"));
-            etDateCommit.setText(jsonBundle.getString("dateCommit"));
-            etRemarks.setText(jsonBundle.getString("remarks"));
-            etEngineModel.setText(jsonBundle.getString("model"));
+                etPurchaseOrder.setText(jsonBundle.getString("purchaseOrder"));
+                etRefNo.setText(jsonBundle.getString("referenceNo"));
+                etMobile.setText(jsonBundle.getString("mobile"));
+                etPODate.setText(jsonBundle.getString("poDate"));
+                etSerialNo.setText(jsonBundle.getString("serialNo"));
+                etDateReceive.setText(jsonBundle.getString("dateReceive"));
+                etRemarks.setText(jsonBundle.getString("remarks"));
 
-            etMakeCat.setText(jsonBundle.getString("make")+"/"
-                    +jsonBundle.getString("cat"));
+                etEngineModel.setText(jsonBundle.getString("model"));
 
-            etJONumber.setText(String.valueOf(jsonBundle.getString("joNumber")));
-            etCustomer.setText(jsonBundle.getString("customer"));
+                String text = jsonBundle.getString("make") + "/" + jsonBundle.getString("cat");
+                etMakeCat.setText(text);
 
-            Variables.customerIdForJO = jsonBundle.getInt("customerId");
-            Variables.modelId = jsonBundle.getString("model");
-            localSource = jsonBundle.getString("source");
-        } catch (JSONException e) {
-            Util.displayStackTraceArray(e.getStackTrace(), "android.wmdc.com.mobilecsa", "JSONException", e.toString());
-            Util.alertBox(getContext(), e.getMessage(), "JSON error", false);
-        }
+                etJONumber.setText(String.valueOf(jsonBundle.getString("joNumber")));
+                etCustomer.setText(jsonBundle.getString("customer"));
 
-        etRemarks.setScroller(new Scroller(getActivity()));
-        etRemarks.setVerticalScrollBarEnabled(true);
-        etRemarks.setMovementMethod(new ScrollingMovementMethod());
-        etRemarks.setOnTouchListener(etRemarksTouchListener);
+                textViewCustomerId.setText(String.valueOf(jsonBundle.getInt("customerId")));
+                textViewModelId.setText(jsonBundle.getString("model"));
 
-        btnSubmit = v.findViewById(R.id.btnSubmit);
-        btnSubmit.setOnClickListener(submitListener);
+                textViewSource.setText(jsonBundle.getString("source"));
 
-        etPODate.setOnClickListener(datePOClickListener);
-        etDateCommit.setOnClickListener(dateDcClickListener);
-        etDateReceive.setOnClickListener(dateDRClickListener);
+            } catch (JSONException e) {
 
-        etCustomer.setOnClickListener(customerClickListener);
-        etEngineModel.setOnClickListener(engineModelClickListener);
+                Util.displayStackTraceArray(e.getStackTrace(), "android.wmdc.com.mobilecsa",
+                        "JSONException", e.toString());
 
-        btnPhoto = v.findViewById(R.id.btnPhoto);
-        btnPhoto.setOnClickListener(photoListener);
-        btnPhotoPrev = v.findViewById(R.id.btnPhotoPrev);
-        btnPhotoPrev.setOnClickListener(photoPrevListener);
-        tvPhotoName = v.findViewById(R.id.tvPhotoName);
-        tvPhotoSize = v.findViewById(R.id.tvPhotoSize);
-
-        btnSign = v.findViewById(R.id.btnSign);
-        btnSign.setOnClickListener(signatureClickListner);
-        btnSignPrev = v.findViewById(R.id.btnSignPrev);
-        btnSignPrev.setOnClickListener(signPrevListener);
-
-        final ProgressDialog progress = new ProgressDialog(getActivity());
-        progress.setTitle("Initializing");
-        progress.setMessage("Preparing job order.\nPlease wait...");
-        progress.setCancelable(false);
-        progress.show();
-
-        Runnable progressRunnable = new Runnable() {
-            @Override
-            public void run() {
-                progress.cancel();
+                Util.alertBox(getContext(), e.getMessage());
             }
-        };
 
-        Handler pdCanceller = new Handler();
-        pdCanceller.postDelayed(progressRunnable, 3000);
+            etRemarks.setScroller(new Scroller(getActivity()));
+            etRemarks.setVerticalScrollBarEnabled(true);
+            etRemarks.setMovementMethod(new ScrollingMovementMethod());
+            //etRemarks.setOnTouchListener(etRemarksTouchListener);
+
+            Button btnSubmit = v.findViewById(R.id.btnSubmit);
+            btnSubmit.setOnClickListener(submitListener);
+
+            etPODate.setOnClickListener(datePOClickListener);
+            etDateReceive.setOnClickListener(dateDRClickListener);
+
+            etCustomer.setOnClickListener(customerClickListener);
+            etEngineModel.setOnClickListener(engineModelClickListener);
+
+            Button btnPhoto = v.findViewById(R.id.btnPhoto);
+            btnPhoto.setOnClickListener(photoListener);
+
+            Button btnPhotoPrev = v.findViewById(R.id.btnPhotoPrev);
+            btnPhotoPrev.setOnClickListener(photoPrevListener);
+
+            tvPhotoName = v.findViewById(R.id.tvPhotoName);
+            tvPhotoSize = v.findViewById(R.id.tvPhotoSize);
+
+            Button btnSign = v.findViewById(R.id.btnSign);
+            btnSign.setOnClickListener(signatureClickListner);
+
+            Button btnSignPrev = v.findViewById(R.id.btnSignPrev);
+            btnSignPrev.setOnClickListener(signPrevListener);
+
+            final ProgressDialog progress = new ProgressDialog(getActivity());
+            progress.setTitle("Initializing");
+            progress.setMessage("Preparing job order.\nPlease wait...");
+            progress.setCancelable(false);
+            progress.show();
+
+            Runnable progressRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    progress.cancel();
+                }
+            };
+
+            Handler pdCanceller = new Handler();
+            pdCanceller.postDelayed(progressRunnable, 3000);
+        } else {
+            Util.alertBox(getContext(), "Bundle is null.");
+        }
 
         return v;
     }
@@ -489,7 +517,15 @@ public class UpdateInitialJOFragment extends Fragment {
 
     private View.OnClickListener submitListener = new View.OnClickListener() {
             public void onClick(View view) {
-                updateInitialJoborder();
+                if (fileInputStream != null) {
+                    if (is_submitted) {
+                        dumpImageMetaData(fileUri, true);
+                    } else {
+                        updateInitialJoborder();
+                    }
+                } else {
+                    updateInitialJoborder();
+                }
             }
         };
 
@@ -501,67 +537,20 @@ public class UpdateInitialJOFragment extends Fragment {
             }
         };
 
-    private DatePickerDialog.OnDateSetListener dateDCListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                try {
-                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                    Date dateCommit = format.parse(year+"-"+(month+1)+"-"+dayOfMonth);
-                    String dateReceiveStr = etDateReceive.getText().toString();
-
-                    if (!dateReceiveStr.isEmpty()) {
-                        Date dateReceive = format.parse(dateReceiveStr);
-                        if (dateCommit.after(dateReceive)) {
-                            etDateCommit.setText(new StringBuilder().append(year).append("-").append(month+1)
-                                            .append("-").append(dayOfMonth));
-                        } else {
-                            Util.alertBox(getActivity(), "Date Commit should not be on or before Date Receive",
-                                    "", false);
-                        }
-                    } else {
-                        etDateCommit.setText(new StringBuilder().append(year).append("-").append(month+1)
-                                        .append("-").append(dayOfMonth));
-                    }
-                } catch (ParseException pe) {
-                    Log.e("ParseException", pe.toString() + ">>" + pe.getStackTrace()[0].toString());
-                    Toast.makeText(getActivity(), pe.toString(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        };
-
     private DatePickerDialog.OnDateSetListener dateDRListener =
         new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                try {
-                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                    Date dateReceive = format.parse(year + "-" + (month + 1) +"-"+ dayOfMonth);
-                    String dateCommitStr = etDateCommit.getText().toString();
-
-                    if (!dateCommitStr.isEmpty()) {
-                        Date dateCommit = format.parse(dateCommitStr);
-                        if (dateCommit.after(dateReceive)) {
-                            etDateReceive.setText(new StringBuilder().append(year).append("-")
-                                    .append(month + 1).append("-").append(dayOfMonth));
-                        } else {
-                            Util.alertBox(getActivity(), "Date Commit should not be on or before Date Receive",
-                                    "", false);
-                        }
-                    } else {
-                        etDateReceive.setText(new StringBuilder().append(year).append("-")
-                                .append(month + 1).append("-").append(dayOfMonth));
-                    }
-                } catch (ParseException pe) {
-                    Log.e("parse_exception", pe.toString() + ">>" + pe.getStackTrace()[0].toString());
-                    Toast.makeText(getActivity(), pe.toString(), Toast.LENGTH_SHORT).show();
-                }
+                etDateReceive.setText(new StringBuilder().append(year).append("-").append(month + 1)
+                        .append("-").append(dayOfMonth));
             }
         };
 
     private View.OnClickListener photoListener = new View.OnClickListener(){
         public void onClick(View view) {
             LayoutInflater inflater = getLayoutInflater();
-            View selectionView = inflater.inflate(R.layout.photo_select_layout, null);
+            View selectionView = inflater.inflate(R.layout.photo_select_layout, containerViewGroup,
+                    false);
 
             Button btnCameraSelection = selectionView.findViewById(R.id.btnCameraSelection);
             Button btnGallerySelection = selectionView.findViewById(R.id.btnGallerySelection);
@@ -576,29 +565,40 @@ public class UpdateInitialJOFragment extends Fragment {
             btnGallerySelection.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
-                    //Util.performFileSearch(getActivity(), READ_REQUEST_CODE);
+                    performFileSearch();
                 }
             });
 
-            Dialog builder = new Dialog(getContext());
-            builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            builder.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialog) {
-                    //  nothing
-                }
-            });
+            if (getContext() != null) {
+                Dialog builder = new Dialog(getContext());
 
-            builder.addContentView(selectionView, new RelativeLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT
-            ));
-            builder.show();
+                builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+                if (builder.getWindow() != null) {
+                    builder.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                } else {
+                    Util.shortToast(getContext(),
+                            "Window builder is null. Cannot set background drawable for dialog.");
+                }
+
+                builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        //  nothing
+                    }
+                });
+
+                builder.addContentView(selectionView, new RelativeLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
+                builder.show();
+            } else {
+                Util.shortToast(getActivity(), "Context is null. Cannot show dialog.");
+            }
         }
     };
 
-    private String displayName = null;
+    private static String displayName = null;
     private Uri fileUri = null;
     private InputStream fileInputStream;
 
@@ -608,23 +608,43 @@ public class UpdateInitialJOFragment extends Fragment {
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-            File photoFile = null;
+        if (getActivity() != null) {
+            if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                File photoFile = null;
 
-            try {
-                photoFile = Util.createImageFile(getActivity());
-            } catch (IOException ex) {
-                Util.displayStackTraceArray(ex.getStackTrace(), "android.wmdc.com.mobilecsa", "IOException", ex.toString());
-                Toast.makeText(getContext(), ex.toString(), Toast.LENGTH_SHORT).show();
-            }
+                try {
+                    photoFile = Util.createImageFile(getActivity());
+                } catch (IOException ex) {
+                    Util.displayStackTraceArray(ex.getStackTrace(), "android.wmdc.com.mobilecsa",
+                            "IOException", ex.toString());
 
-            if (photoFile != null) {
-                fileUri = FileProvider.getUriForFile(getContext(),
-                        BuildConfig.APPLICATION_ID + ".provider", photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+                    Toast.makeText(getContext(), ex.toString(), Toast.LENGTH_SHORT).show();
+                }
+
+                if (photoFile != null) {
+                    fileUri = FileProvider.getUriForFile(getActivity(),
+                            BuildConfig.APPLICATION_ID + ".provider", photoFile);
+
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                    startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+                } else {
+                    Util.shortToast(getContext(), "\"photoFile\" is null");
+                }
+            } else {
+                Util.alertBox(getActivity(), "Activity is null. Cannot take picture.");
             }
+        } else {
+            Util.alertBox(getActivity(),
+                    "Resolve Activity of picture intent is null. Cannot take picture.");
         }
+    }
+
+    private void performFileSearch() {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("image/*");
+
+        startActivityForResult(intent, READ_REQUEST_CODE);
     }
 
     @Override
@@ -633,6 +653,8 @@ public class UpdateInitialJOFragment extends Fragment {
             if (resultData != null) {
                 fileUri = resultData.getData();
                 dumpImageMetaData(fileUri, false);
+            } else {
+                Util.shortToast(getContext(), "\"photoFile\" is null");
             }
         }
         else if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
@@ -640,7 +662,7 @@ public class UpdateInitialJOFragment extends Fragment {
         }
     }
 
-    public void dumpImageMetaData(final Uri uri, final boolean toSubmit) {
+    private void dumpImageMetaData(final Uri uri, final boolean toSubmit) {
         final ProgressDialog pd = new ProgressDialog(getActivity());
         pd.setMessage("Dumping image. Please wait...");
         pd.setCancelable(false);
@@ -649,58 +671,70 @@ public class UpdateInitialJOFragment extends Fragment {
         Runnable pdRun = new Runnable() {
             @Override
             public void run() {
-                Cursor cursor = getActivity().getContentResolver().query(uri, null, null, null,
-                        null, null);
+                if (getActivity() != null) {
 
-                try {
-                    if (cursor != null && cursor.moveToFirst()) {
-                        displayName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                    try (Cursor cursor = getActivity().getContentResolver().query(uri, null, null,
+                            null, null, null)) {
 
-                        int sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE);
-                        String size;
+                        if (cursor != null && cursor.moveToFirst()) {
 
-                        if (!cursor.isNull(sizeIndex)) {
-                            size = cursor.getString(sizeIndex);
-                        } else {
-                            Toast.makeText(getActivity(), "Size unknown", Toast.LENGTH_LONG).show();
-                            return;
+                            displayName = cursor.getString(cursor.getColumnIndex(
+                                    OpenableColumns.DISPLAY_NAME));
+
+                            int sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE);
+                            String size;
+
+                            if (!cursor.isNull(sizeIndex)) {
+                                size = cursor.getString(sizeIndex);
+                            } else {
+                                Util.shortToast(getActivity(), "Unknown size.");
+                                return;
+                            }
+
+                            int intSize = Integer.parseInt(size);
+                            String small_file_size = "";
+
+                            if (intSize > 512_000) {
+                                File file = Util.createImageFile(getActivity());
+
+                                Util.copyInputStreamToFile(Util.getStreamFromUri(uri,
+                                        getActivity()), file, getContext());
+
+                                File small_file = Util.reduceBitmapFile(file);
+
+                                if (small_file != null) {
+                                    small_file_size = small_file.length() + "";
+                                    fileInputStream = new FileInputStream(small_file);
+                                } else {
+                                    Util.shortToast(getActivity(), "Small file is null.");
+                                }
+                            } else {
+                                fileInputStream = Util.getStreamFromUri(uri, getActivity());
+                                small_file_size = size;
+                            }
+
+                            pd.cancel();
+
+                            if (toSubmit) {
+                                updateInitialJoborder();
+                            } else {
+                                textPhoto = Integer.parseInt(size) / 1000 + "KB. " +
+                                        Integer.parseInt(small_file_size) / 1000 + "KB.";
+
+                                tvPhotoName.setText(displayName);
+                                tvPhotoSize.setText(textPhoto);
+                            }
                         }
-
-                        int intSize = Integer.parseInt(size);
-                        String small_file_size;
-
-                        if (intSize > 512_000) {
-                            File file = Util.createImageFile(getActivity());
-                            Util.copyInputStreamToFile(Util.getStreamFromUri(uri, getActivity()),
-                                    file, getContext());
-
-                            File smallFile = Util.reduceBitmapFile(file);
-                            small_file_size = smallFile.length()+"";
-                            fileInputStream = new FileInputStream(smallFile);
-                        } else {
-                            fileInputStream = Util.getStreamFromUri(uri, getActivity());
-                            small_file_size = size;
-                        }
-
+                    } catch (IOException ie) {
                         pd.cancel();
 
-                        if (toSubmit) {
-                            updateInitialJoborder();
-                        } else {
-                            textPhoto = Integer.parseInt(size)/1000+"KB. "+
-                                    Integer.parseInt(small_file_size)/1000+"KB.";
-                            tvPhotoName.setText(displayName);
-                            tvPhotoSize.setText(textPhoto);
-                        }
-                    }
-                } catch (IOException ie) {
-                    pd.cancel();
+                        Util.displayStackTraceArray(ie.getStackTrace(), Variables.MOBILECSA_PACKAGE,
+                                "IOException", ie.toString());
 
-                    Util.displayStackTraceArray(ie.getStackTrace(), Variables.MOBILECSA_PACKAGE,
-                            "IOException", ie.toString());
-                    Toast.makeText(getContext(), ie.toString(), Toast.LENGTH_SHORT).show();
-                } finally {
-                    cursor.close();
+                        Util.alertBox(getActivity(), ie.toString());
+                    }
+                } else {
+                    Util.alertBox(getActivity(), "Activity is null. Cannot dump image meta data.");
                 }
             }
         };
@@ -709,19 +743,21 @@ public class UpdateInitialJOFragment extends Fragment {
         pdHandler.postDelayed(pdRun, 2000);
     }
 
-    String textPhoto;
+    private String textPhoto;
     private HashMap<String, String> params = new HashMap<>();
 
     private void updateInitialJoborder() {
         try {
-            int customerId = Variables.customerIdForJO;
+            int customerId = Integer.parseInt(textViewCustomerId.getText().toString());
+            int modelId = Integer.parseInt(textViewModelId.getText().toString());
+
+            String source = textViewSource.getText().toString();
             String customer = etCustomer.getText().toString();
             String mobile = etMobile.getText().toString();
             String purchaseOrder = etPurchaseOrder.getText().toString();
             String poDate = etPODate.getText().toString();
             String serialNo = etSerialNo.getText().toString();
             String dateReceive = etDateReceive.getText().toString();
-            String dateCommit = etDateCommit.getText().toString();
             String refNo = etRefNo.getText().toString();
             String remarks = etRemarks.getText().toString();
             String joSignature = joborderSignature;
@@ -732,7 +768,7 @@ public class UpdateInitialJOFragment extends Fragment {
             String cat;
 
             if (makeCat.isEmpty()) {
-                Toast.makeText(getActivity(), "Engine Model required.", customerId).show();
+                Util.shortToast(getActivity(), "Engine Model required.");
                 return;
             } else {
                 String[] splitMakeCat = etMakeCat.getText().toString().split("/");
@@ -740,129 +776,135 @@ public class UpdateInitialJOFragment extends Fragment {
                 cat = splitMakeCat[1];
             }
 
-            if (joNumber == null) {
-                Toast.makeText(getActivity(), "Include JO Number.", customerId).show();
+            if (joNumber.isEmpty()) {
+                Util.shortToast(getActivity(), "Include JO Number.");
                 return;
-            } else {
-                if (joNumber.isEmpty()) {
-                    Toast.makeText(getActivity(), "Include JO Number.", customerId).show();
-                    return;
-                }
             }
 
-            if (customer == null) {
-                Toast.makeText(getActivity(), "Customer is required.", customerId).show();
+            if (customer.isEmpty()) {
+                Util.shortToast(getActivity(), "Customer is required.");
                 return;
-            } else {
-                if (customer.isEmpty()) {
-                    Toast.makeText(getActivity(), "Customer is required.", customerId).show();
-                    return;
-                }
             }
 
-            if (refNo == null) {
-                Toast.makeText(getActivity(), "Reference number is required.", customerId).show();
+            if (refNo.isEmpty()) {
+                Util.shortToast(getActivity(), "Reference number is required.");
                 return;
-            } else {
-                if (refNo.isEmpty()) {
-                    Toast.makeText(getActivity(), "Reference number is required.", customerId).show();
-                    return;
-                }
             }
 
-            if (purchaseOrder == null) {
-                Toast.makeText(getActivity(), "Purchase Order is required.", customerId).show();
+            if (purchaseOrder.isEmpty()) {
+                Util.shortToast(getActivity(), "Purchase Order is required.");
                 return;
-            } else {
-                if (purchaseOrder.isEmpty()) {
-                    Toast.makeText(getActivity(), "Purchase Order is required.", customerId).show();
-                    return;
-                }
             }
 
             if (customerId < 0) {
-                Toast.makeText(getActivity(), "Customer is required.", customerId).show();
+                Util.shortToast(getActivity(), "Customer is required.");
                 return;
             }
+
+            if (modelId < 0) {
+                Util.shortToast(getActivity(), "Model is required.");
+                return;
+            }
+
             if (mobile.isEmpty()) {
-                Toast.makeText(getActivity(), "Mobile is required", Toast.LENGTH_SHORT).show();
+                Util.shortToast(getActivity(), "Mobile is required.");
                 return;
             }
             if (serialNo.isEmpty()) {
-                Toast.makeText(getActivity(), "Serial Number is required", Toast.LENGTH_SHORT).show();
+                Util.shortToast(getActivity(), "Serial Number is required");
                 return;
             }
             if (remarks.isEmpty()) {
-                Toast.makeText(getActivity(), "Remarks is required", Toast.LENGTH_SHORT).show();
+                Util.shortToast(getActivity(), "Remarks is required");
                 return;
             }
             if (poDate.isEmpty()) {
-                Toast.makeText(getActivity(), "PO date is required", Toast.LENGTH_SHORT).show();
+                Util.shortToast(getActivity(), "PO date is required");
                 return;
             }
             if (dateReceive.isEmpty()) {
-                Toast.makeText(getActivity(), "Date Receive is required", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            if (dateCommit.isEmpty()) {
-                Toast.makeText(getActivity(), "Date Commit is required", Toast.LENGTH_SHORT).show();
+                Util.shortToast(getActivity(), "Date Receive is required");
                 return;
             }
             if (engineModel.isEmpty()) {
-                Toast.makeText(getActivity(),
-                        "Include Engine Model or \ntype \"none\" for machining.", Toast.LENGTH_SHORT).show();
+                Util.shortToast(getActivity(),
+                        "Include Engine Model or \ntype \"none\" for machining.");
                 return;
             }
 
             remarks = Util.filterSpecialChars(remarks);
 
             params.put("initialJoborderId", String.valueOf(initialJoborderId));
-            params.put("customerId", Util.val(customerId));
+            params.put("customerId", String.valueOf(customerId));
             params.put("customer", customer);
-            params.put("source", localSource);
+            params.put("source", source);
             params.put("mobile", mobile);
             params.put("purchaseOrder", purchaseOrder);
             params.put("poDate", poDate);
             params.put("make", make);
             params.put("cat", cat);
-            params.put("modelId", Variables.modelId);
+            params.put("modelId", String.valueOf(modelId));
             params.put("serialNo", serialNo);
             params.put("dateReceive", dateReceive);
-            params.put("dateCommit", dateCommit);
+            params.put("dateCommit", dateReceive);
             params.put("refNo", refNo);
             params.put("remarks", remarks);
             params.put("preparedBy", Util.val(sharedPreferences.getInt("csaId", 0)));
-            params.put("imageType", "jpg");
             params.put("joSignature", (joSignature == null) ? "" : joSignature);
             params.put("joNumber", joNumber);
 
-            AlertDialog.Builder confirmBox = new AlertDialog.Builder(getActivity());
-            confirmBox.setMessage("Confirm to update job order");
-            confirmBox.setTitle("Confirm");
-            confirmBox.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    new UpdateInitialJoborderTask().execute();
-                }
-            });
-            confirmBox.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
+            if (getActivity() != null) {
+                AlertDialog.Builder confirmBox = new AlertDialog.Builder(getActivity());
+                confirmBox.setMessage("Confirm to update job order");
+                confirmBox.setTitle("Confirm");
+                confirmBox.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        new UpdateInitialJoborderTask(getActivity(), fileInputStream, params)
+                                .execute();
+                    }
+                });
+                confirmBox.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
 
-            confirmBox.show();
+                confirmBox.show();
+            } else {
+                Util.alertBox(getContext(), "Activity is null. Cannot build Alert Dialog.");
+            }
         } catch (Exception e) {
-            Log.e("Exception", e.toString());
-            Util.alertBox(getContext(), e.toString(), "", false);
+            Util.alertBox(getContext(), e.toString());
         }
     }
 
-    private class UpdateInitialJoborderTask extends AsyncTask<String, String, String> {
-        ProgressDialog progressDialog = new ProgressDialog(getActivity());
-        HttpURLConnection conn = null;
-        URL url = null;
+    private static boolean is_submitted = false;
+
+    private static class UpdateInitialJoborderTask extends AsyncTask<String, String, String> {
+
+        private ProgressDialog progressDialog;
+
+        private WeakReference<FragmentActivity> activityWeakReference;
+
+        private SharedPreferences taskPrefs;
+
+        private HttpURLConnection conn = null;
+
+        private InputStream fileStream;
+
+        private HashMap<String, String> parameters;
+
+        private UpdateInitialJoborderTask(FragmentActivity activity, InputStream fileStream,
+                                          HashMap<String, String> parameters) {
+
+            activityWeakReference = new WeakReference<>(activity);
+            progressDialog = new ProgressDialog(activity);
+            taskPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
+            this.fileStream = fileStream;
+            this.parameters = parameters;
+        }
 
         @Override
         protected void onPreExecute() {
@@ -875,8 +917,7 @@ public class UpdateInitialJOFragment extends Fragment {
         @Override
         protected String doInBackground(String[] parameters) {
             try {
-                url = new URL(sharedPreferences.getString("domain", null)+
-                        "updateinitialjoborder");
+                URL url = new URL(taskPrefs.getString("domain", null)+"updateinitialjoborder");
 
                 String lineEnd = "\r\n";
                 String twoHypens = "--";
@@ -898,7 +939,8 @@ public class UpdateInitialJOFragment extends Fragment {
                 conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
                 conn.setRequestProperty("Connection", "Keep-Alive");
                 conn.setRequestProperty("Content-Type", "multipart/form-data;boundary="+boundary);
-                conn.setRequestProperty("Cookie", "JSESSIONID="+sharedPreferences.getString("sessionId", null));
+                conn.setRequestProperty("Cookie",
+                        "JSESSIONID="+taskPrefs.getString("sessionId", null));
                 conn.setRequestProperty("Host", "localhost:8080");
                 conn.setRequestProperty("Referer", "newquotation-android");
                 conn.setRequestProperty("X-Requested-Width", "XMLHttpRequest");
@@ -908,41 +950,41 @@ public class UpdateInitialJOFragment extends Fragment {
 
                 DataOutputStream outputStream = new DataOutputStream(conn.getOutputStream());
 
-                if (fileInputStream != null) {
-                    outputStream.writeBytes(twoHypens+boundary+lineEnd);
-                    outputStream.writeBytes("Content-Disposition: form-data; name\"reference\""+lineEnd);
+                if (fileStream != null) {
+
+                    outputStream.writeBytes(twoHypens + boundary + lineEnd);
+                    outputStream.writeBytes("Content-Disposition: form-data; name\"reference\"" + lineEnd);
                     outputStream.writeBytes(lineEnd);
                     outputStream.writeBytes("my_reference_text");
                     outputStream.writeBytes(lineEnd);
-                    outputStream.writeBytes(twoHypens+boundary+lineEnd);
+                    outputStream.writeBytes(twoHypens + boundary + lineEnd);
 
                     outputStream.writeBytes("Content-Disposition: form-data; " +
-                            "name=\"photo\";filename\""+displayName+"\""+lineEnd);
+                            "name=\"photo\";filename\"" + displayName + "\"" + lineEnd);
                     outputStream.writeBytes(lineEnd);
 
-                    bytesAvailable = fileInputStream.available();
+                    bytesAvailable = fileStream.available();
                     bufferSize = Math.min(bytesAvailable, maxBufferSize);
                     buffer = new byte[bufferSize];
-                    bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+                    bytesRead = fileStream.read(buffer, 0, bufferSize);
 
                     while (bytesRead > 0) {
                         outputStream.write(buffer, 0, bufferSize);
-                        bytesAvailable = fileInputStream.available();
+                        bytesAvailable = fileStream.available();
                         bufferSize = Math.min(bytesAvailable, maxBufferSize);
-                        bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+                        bytesRead = fileStream.read(buffer, 0, bufferSize);
                     }
 
                     outputStream.writeBytes(lineEnd);
                 }
 
-                Iterator<String> keys = params.keySet().iterator();
-
-                while (keys.hasNext()) {
-                    String key = keys.next();
-                    String value = params.get(key);
+                for (Map.Entry<String, String> mapEntry : this.parameters.entrySet()) {
+                    String key = mapEntry.getKey();
+                    String value = mapEntry.getValue();
 
                     outputStream.writeBytes(twoHypens+boundary+lineEnd);
-                    outputStream.writeBytes("Content-Disposition: form-data; name=\""+key+"\""+lineEnd);
+                    outputStream.writeBytes("Content-Disposition: " +
+                            "form-data; name=\""+key+"\""+lineEnd);
                     outputStream.writeBytes("Content-Type: text/plain"+lineEnd);
                     outputStream.writeBytes(lineEnd);
                     outputStream.writeBytes(value);
@@ -954,6 +996,12 @@ public class UpdateInitialJOFragment extends Fragment {
 
                 outputStream.flush();
                 outputStream.close();
+
+                if (fileStream != null) {
+                    fileStream.close();
+                }
+
+                is_submitted = true;
 
                 if (statusCode == 200) {
                     StringBuilder stringBuilder = new StringBuilder();
@@ -998,11 +1046,18 @@ public class UpdateInitialJOFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             progressDialog.dismiss();
+
+            final FragmentActivity mainActivity = activityWeakReference.get();
+
+            if (mainActivity == null || mainActivity.isFinishing()) {
+                return;
+            }
+
             try {
                 JSONObject response = new JSONObject(result);
+
                 if (response.getBoolean("success")) {
-                    AlertDialog.Builder warningBox =
-                            new AlertDialog.Builder(getActivity());
+                    AlertDialog.Builder warningBox = new AlertDialog.Builder(mainActivity);
 
                     warningBox.setTitle("Success");
                     warningBox.setMessage(response.getString("reason"));
@@ -1011,7 +1066,7 @@ public class UpdateInitialJOFragment extends Fragment {
                         public void onClick(DialogInterface dialog, int id) {
                             dialog.cancel();
 
-                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                            FragmentManager fragmentManager = mainActivity.getSupportFragmentManager();
                             fragmentManager.beginTransaction()
                                     .setCustomAnimations(R.anim.pop_enter, R.anim.pop_exit, R.anim.enter, R.anim.exit)
                                     .replace(R.id.content_main, new JOFragment())
@@ -1020,12 +1075,13 @@ public class UpdateInitialJOFragment extends Fragment {
                     });
                     warningBox.create().show();
                 } else {
-                    Util.alertBox(getActivity(), response.getString("reason"), "Failed", false);
+                    Util.alertBox(mainActivity, response.getString("reason"));
                 }
             } catch (Exception e) {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "exception", e.toString());
-                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                Util.shortToast(mainActivity, e.getMessage());
             }
         }
     }

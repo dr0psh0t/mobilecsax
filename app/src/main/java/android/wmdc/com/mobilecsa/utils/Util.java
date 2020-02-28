@@ -10,17 +10,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.text.Html;
 import android.text.InputFilter;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -65,10 +60,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -313,7 +308,7 @@ public class Util {
         return getFiltered(str);
     }
 
-    public static String getFiltered(String str) {
+    private static String getFiltered(String str) {
         str = str.replaceAll("[^A-Za-z0-9\\s+]", "");
         str = str.trim();
         str = str.replaceAll("[\\s+]{2,}", " ");
@@ -389,11 +384,15 @@ public class Util {
             inputStream.close();
 
             //  here override the original image file
-            file.createNewFile();
+            System.out.println("file.createNewFile= "+file.createNewFile());
 
             FileOutputStream outputStream = new FileOutputStream(file);
 
-            selectedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+            if (selectedBitmap != null) {
+                selectedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+            } else {
+                System.err.println("Selected Bitmap is null. Cannot compress to JPEG format.");
+            }
 
             return file;
         } catch (Exception e) {
@@ -416,9 +415,13 @@ public class Util {
     }
 
     public static File createImageFile(FragmentActivity fragmentActivity) throws IOException {
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault())
+                .format(new Date());
+
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = fragmentActivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
         return File.createTempFile(imageFileName, ".jpg", storageDir);
     }
 

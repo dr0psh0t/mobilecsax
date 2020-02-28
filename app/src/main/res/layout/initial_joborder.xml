@@ -2,6 +2,7 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerInParent="true">
@@ -34,16 +35,6 @@
                 app:backgroundTint="@color/default_tint" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/btnCheckJo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:drawableLeft="@drawable/ic_action_check_circle_black"
-            android:text="@string/check"
-            app:layout_constraintBottom_toBottomOf="@+id/tilJoNumber"
-            app:layout_constraintStart_toEndOf="@+id/tilJoNumber" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilCustomer"
@@ -457,6 +448,34 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/signConstraintLayout" />
+
+        <TextView
+            android:id="@+id/textViewCustomerId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="@string/customerId"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewModelId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/modelId"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
+            app:layout_constraintStart_toEndOf="@+id/textViewCustomerId" />
+
+        <TextView
+            android:id="@+id/textViewSource"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/source"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
+            app:layout_constraintStart_toEndOf="@+id/textViewModelId" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
