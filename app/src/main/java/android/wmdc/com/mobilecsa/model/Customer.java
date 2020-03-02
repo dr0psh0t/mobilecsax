@@ -4,11 +4,11 @@ import androidx.annotation.NonNull;
 
 /**
  * Created by wmdcprog on 12/26/2017.
- *
  * this class generically represents contacts and customers
  */
 
 public class Customer {
+
     private String name;
     private String imageUrl;
     private String csa;

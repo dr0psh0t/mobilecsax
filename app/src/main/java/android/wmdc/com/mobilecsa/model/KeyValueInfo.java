@@ -9,8 +9,7 @@ public class KeyValueInfo {
     private String key;
     private String value;
 
-    public KeyValueInfo(String key, String value)
-    {
+    public KeyValueInfo(String key, String value) {
         this.key = key;
         this.value = value;
     }

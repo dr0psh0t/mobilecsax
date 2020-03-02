@@ -874,9 +874,14 @@ public class AddCustomerFragment extends Fragment {
                     InputStream is = new BufferedInputStream(conn.getInputStream());
                     BufferedReader br = new BufferedReader(new InputStreamReader(is));
                     String inputLine;
+
                     while ((inputLine = br.readLine()) != null) {
                         stringBuilder.append(inputLine);
                     }
+
+                    is.close();
+                    br.close();
+
                     if (stringBuilder.toString().isEmpty()) {
                         return "{\"success\": false, \"reason\": \"No response from server.\"}";
                     } else {

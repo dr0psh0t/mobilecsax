@@ -135,9 +135,14 @@ public class SecurityKeyFragment extends Fragment {
                     BufferedReader reader = new BufferedReader(new InputStreamReader(input));
                     StringBuilder stringBuilder = new StringBuilder();
                     String line;
+
                     while ((line = reader.readLine()) != null) {
                         stringBuilder.append(line);
                     }
+
+                    input.close();
+                    reader.close();
+
                     if (stringBuilder.toString().isEmpty()) {
                         return "{\"success\": false, \"reason\": \"No response from server.\"}";
                     } else {

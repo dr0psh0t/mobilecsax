@@ -113,6 +113,10 @@ public class SearchJOTask extends AsyncTask<String, String, String> {
                 while ((line = bufferedReader.readLine()) != null) {
                     stringBuilder.append(line);
                 }
+
+                connInputStream.close();
+                bufferedReader.close();
+
                 if (stringBuilder.toString().isEmpty()) {
                     return "{\"success\": false, \"reason\": \"No response from server.\"}";
                 } else {

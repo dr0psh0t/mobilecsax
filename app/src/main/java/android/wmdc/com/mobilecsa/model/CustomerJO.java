@@ -10,8 +10,7 @@ public class CustomerJO {
     private String source;
     private String customer;
 
-    public CustomerJO(int cId, String source, String customer)
-    {
+    public CustomerJO(int cId, String source, String customer) {
         this.cId = cId;
         this.source = source;
         this.customer = customer;

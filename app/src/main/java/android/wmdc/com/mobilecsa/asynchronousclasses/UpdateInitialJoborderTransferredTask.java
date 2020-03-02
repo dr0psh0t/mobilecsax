@@ -101,6 +101,10 @@ public class UpdateInitialJoborderTransferredTask extends AsyncTask<String, Stri
                 while ((line = reader.readLine()) != null) {
                     stringBuilder.append(line);
                 }
+
+                input.close();
+                reader.close();
+
                 if (stringBuilder.toString().isEmpty()) {
                     return "{\"success\": false, \"reason\": \"No response from server.\"}";
                 } else {

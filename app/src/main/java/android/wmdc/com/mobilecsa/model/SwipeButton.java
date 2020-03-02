@@ -390,7 +390,6 @@ public class SwipeButton extends RelativeLayout {
                 }
             });
 
-
             AnimatorSet animatorSet = new AnimatorSet();
             animatorSet.addListener(new AnimatorListenerAdapter() {
                 @Override
@@ -493,6 +492,9 @@ public class SwipeButton extends RelativeLayout {
                     while ((line = bufferedReader.readLine()) != null) {
                         stringBuilder.append(line);
                     }
+
+                    connInputStream.close();
+                    bufferedReader.close();
 
                     if (stringBuilder.toString().isEmpty()) {
                         return "{\"success\": false, \"reason\": \"No response from server.\"}";
@@ -790,6 +792,9 @@ public class SwipeButton extends RelativeLayout {
                     while ((line = bufferedReader.readLine()) != null) {
                         stringBuilder.append(line);
                     }
+
+                    connInputStream.close();
+                    bufferedReader.close();
 
                     if (stringBuilder.toString().isEmpty()) {
                         return "{\"success\": false, \"reason\": \"No response from server.\"}";

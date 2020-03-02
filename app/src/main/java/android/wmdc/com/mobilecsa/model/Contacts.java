@@ -15,9 +15,8 @@ public class Contacts {
     private int id;
     private int isTransferred;
 
-    public Contacts(String name, String imageUrl, String csa,
-                    int csaId, int id, int isTransferred) {
-
+    public Contacts(String name, String imageUrl, String csa, int csaId, int id, int isTransferred)
+    {
         this.name = name;
         this.imageUrl = imageUrl;
         this.csa = csa;

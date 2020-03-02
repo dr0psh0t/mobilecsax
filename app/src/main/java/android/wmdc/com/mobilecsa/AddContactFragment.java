@@ -861,6 +861,10 @@ public class AddContactFragment extends Fragment {
                     while ((inputLine = br.readLine()) != null) {
                         stringBuilder.append(inputLine);
                     }
+
+                    is.close();
+                    br.close();
+
                     if (stringBuilder.toString().isEmpty()) {
                         return "{\"success\": false, \"reason\": \"No response from server.\"}";
                     } else {

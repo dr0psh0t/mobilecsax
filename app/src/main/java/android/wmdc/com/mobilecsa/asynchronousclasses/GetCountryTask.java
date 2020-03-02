@@ -92,6 +92,10 @@ public class GetCountryTask extends AsyncTask<String, Void, String> {
                 while ((line = reader.readLine()) != null) {
                     stringBuilder.append(line);
                 }
+
+                input.close();
+                reader.close();
+
                 if (stringBuilder.toString().isEmpty()) {
                     return "{\"success\": false, \"reason\": \"No response from server.\"}";
                 } else {

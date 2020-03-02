@@ -4,8 +4,8 @@ package android.wmdc.com.mobilecsa.model;
  * Created by wmdcprog on 3/9/2018.
  */
 
-public class DateCommitModel
-{
+public class DateCommitModel {
+
     private int joId;
     private String joNumber;
     private String customerId;
@@ -16,8 +16,9 @@ public class DateCommitModel
     private String dateReceive;
 
     public DateCommitModel(int joId, String joNumber, String customerId, String customer,
-                           boolean isCsaApproved, boolean isPnmApproved,
-                           String dateCommit, String dateReceive) {
+                           boolean isCsaApproved, boolean isPnmApproved, String dateCommit,
+                           String dateReceive) {
+
         this.joId = joId;
         this.joNumber = joNumber;
         this.customerId = customerId;

@@ -1011,6 +1011,10 @@ public class UpdateInitialJOFragment extends Fragment {
                     while ((inputLine = bufferedReader.readLine()) != null) {
                         stringBuilder.append(inputLine);
                     }
+
+                    inputStream.close();
+                    bufferedReader.close();
+
                     if (stringBuilder.toString().isEmpty()) {
                         return "{\"success\": false, \"reason\": \"No response from server.\"}";
                     } else {

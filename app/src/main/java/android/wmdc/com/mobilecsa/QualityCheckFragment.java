@@ -261,6 +261,9 @@ public class QualityCheckFragment extends Fragment {
                     StringBuilder stringBuilder = new StringBuilder();
                     String line;
 
+                    input.close();
+                    reader.close();
+
                     while ((line = reader.readLine()) != null) {
                         stringBuilder.append(line);
                     }

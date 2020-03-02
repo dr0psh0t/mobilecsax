@@ -977,9 +977,13 @@ public class InitialJobOrder extends Fragment {
                     BufferedReader bufferedReader = new BufferedReader(
                             new InputStreamReader(inputStream));
                     String inputLine;
+
                     while ((inputLine = bufferedReader.readLine()) != null) {
                         stringBuilder.append(inputLine);
                     }
+
+                    inputStream.close();
+                    bufferedReader.close();
 
                     if (stringBuilder.toString().isEmpty()) {
                         return "{\"success\": false, \"reason\": \"No response from server.\"}";
