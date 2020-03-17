@@ -51,6 +51,13 @@ public class LoginActivity extends AppCompatActivity {
                 LoginActivity.this);
 
         SharedPreferences.Editor editor = sPrefs.edit();
+        editor.remove("dumagueteSim");
+        editor.apply();
+        editor.putString("dumagueteSim", "http://122.3.176.235:1188/mcsa/");
+        editor.apply();
+
+        /*
+        SharedPreferences.Editor editor = sPrefs.edit();
 
         if (sPrefs.getString("northWifi", null) == null
                 || sPrefs.getString("northSim", null) == null) {
@@ -89,14 +96,18 @@ public class LoginActivity extends AppCompatActivity {
             editor.apply();
             editor.putString("southWifi", "http://192.168.1.30:8080/mcsa/");
             editor.apply();
-        }
+        }*/
 
         if (sPrefs.getString("user", null) == null) {
+
             FragmentTransaction fragmentTransaction = getSupportFragmentManager()
                     .beginTransaction();
-            fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter,
-                    R.anim.pop_exit);
+
+            //fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter,
+                    //R.anim.pop_exit);
+
             fragmentTransaction.replace(R.id.content_login, new LoginFragment());
+
             fragmentTransaction.commit();
         } else {
             new SessionExpiryTask(this).execute(sPrefs.getString("user", null),
@@ -162,9 +173,12 @@ public class LoginActivity extends AppCompatActivity {
 
         private SharedPreferences sPrefs;
 
+        long startTime;
+
         private SessionExpiryTask(LoginActivity context) {
             activityWeakReference = new WeakReference<>(context);
             sPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+            startTime = System.nanoTime();
         }
 
         @Override
@@ -276,8 +290,9 @@ public class LoginActivity extends AppCompatActivity {
                     FragmentTransaction fragmentTransaction = loginActivity
                             .getSupportFragmentManager().beginTransaction();
 
-                    fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit,
-                            R.anim.pop_enter, R.anim.pop_exit);
+                    //fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit,
+                            //R.anim.pop_enter, R.anim.pop_exit);
+
                     fragmentTransaction.replace(R.id.content_login, new LoginFragment());
                     fragmentTransaction.commit();
                 }

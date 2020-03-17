@@ -66,84 +66,85 @@
 33-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:22:9-54
 34        android:supportsRtl="true"
 34-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:23:9-35
-35        android:theme="@style/AppTheme" >
-35-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:24:9-40
-36        <meta-data
-36-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:26:9-28:55
-37            android:name="com.google.android.geo.API_KEY"
-37-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:27:13-58
-38            android:value="@string/google_maps_key" />
-38-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:28:13-52
-39
-40        <!-- android:configChanges="orientation|screenSize" prevents fragment reload on orientation change -->
-41        <activity
-41-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:31:9-36:59
-42            android:name="android.wmdc.com.mobilecsa.MainActivity"
-42-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:32:13-41
-43            android:configChanges="orientation|screenSize"
-43-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:34:13-59
-44            android:label="@string/app_name"
-44-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:33:13-45
-45            android:screenOrientation="portrait"
-45-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:35:13-49
-46            android:theme="@style/AppTheme.NoActionBar" />
-46-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:36:13-56
-47        <activity android:name="android.wmdc.com.mobilecsa.LoginActivity" >
-47-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:38:9-44:20
-47-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:38:19-48
-48            <intent-filter>
-48-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:39:13-43:29
-49                <action android:name="android.intent.action.MAIN" />
-49-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:40:17-69
-49-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:40:25-66
-50
-51                <category android:name="android.intent.category.LAUNCHER" />
-51-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:42:17-77
-51-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:42:27-74
-52            </intent-filter>
-53        </activity>
-54        <activity android:name="android.wmdc.com.mobilecsa.SettingsActivity" />
-54-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:45:9-54
-54-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:45:19-51
-55        <activity android:name="android.wmdc.com.mobilecsa.MapsActivity" />
-55-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:46:9-49
-55-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:46:19-47
-56        <activity android:name="android.wmdc.com.mobilecsa.SecurityKeyActivity" />
-56-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:47:9-57
-56-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:47:19-54
-57
-58        <provider
-59            android:name="androidx.core.content.FileProvider"
-59-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:49:13-62
-60            android:authorities="android.wmdc.com.mobilecsa.provider"
-60-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:50:13-60
-61            android:exported="false"
-61-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:51:13-37
-62            android:grantUriPermissions="true" >
-62-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:52:13-47
-63            <meta-data
-63-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:53:13-55:58
-64                android:name="android.support.FILE_PROVIDER_PATHS"
-64-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:54:17-67
-65                android:resource="@xml/provider_paths" />
-65-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:55:17-55
-66        </provider>
-67
-68        <activity
-68-->[com.google.android.gms:play-services-base:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\53e57314a95363393fb041b9ae536bd4\jetified-play-services-base-11.8.0\AndroidManifest.xml:23:9-26:75
-69            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-69-->[com.google.android.gms:play-services-base:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\53e57314a95363393fb041b9ae536bd4\jetified-play-services-base-11.8.0\AndroidManifest.xml:24:13-79
-70            android:exported="false"
-70-->[com.google.android.gms:play-services-base:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\53e57314a95363393fb041b9ae536bd4\jetified-play-services-base-11.8.0\AndroidManifest.xml:25:13-37
-71            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-71-->[com.google.android.gms:play-services-base:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\53e57314a95363393fb041b9ae536bd4\jetified-play-services-base-11.8.0\AndroidManifest.xml:26:13-72
-72
-73        <meta-data
-73-->[com.google.android.gms:play-services-basement:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\e514b08aee5f5443d2b72bce12bcc7f2\jetified-play-services-basement-11.8.0\AndroidManifest.xml:23:9-25:69
-74            android:name="com.google.android.gms.version"
-74-->[com.google.android.gms:play-services-basement:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\e514b08aee5f5443d2b72bce12bcc7f2\jetified-play-services-basement-11.8.0\AndroidManifest.xml:24:13-58
-75            android:value="@integer/google_play_services_version" />
-75-->[com.google.android.gms:play-services-basement:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\e514b08aee5f5443d2b72bce12bcc7f2\jetified-play-services-basement-11.8.0\AndroidManifest.xml:25:13-66
-76    </application>
-77
-78</manifest>
+35        android:testOnly="true"
+36        android:theme="@style/AppTheme" >
+36-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:24:9-40
+37        <meta-data
+37-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:26:9-28:55
+38            android:name="com.google.android.geo.API_KEY"
+38-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:27:13-58
+39            android:value="@string/google_maps_key" />
+39-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:28:13-52
+40
+41        <!-- android:configChanges="orientation|screenSize" prevents fragment reload on orientation change -->
+42        <activity
+42-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:31:9-36:59
+43            android:name="android.wmdc.com.mobilecsa.MainActivity"
+43-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:32:13-41
+44            android:configChanges="orientation|screenSize"
+44-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:34:13-59
+45            android:label="@string/app_name"
+45-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:33:13-45
+46            android:screenOrientation="portrait"
+46-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:35:13-49
+47            android:theme="@style/AppTheme.NoActionBar" />
+47-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:36:13-56
+48        <activity android:name="android.wmdc.com.mobilecsa.LoginActivity" >
+48-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:38:9-44:20
+48-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:38:19-48
+49            <intent-filter>
+49-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:39:13-43:29
+50                <action android:name="android.intent.action.MAIN" />
+50-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:40:17-69
+50-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:40:25-66
+51
+52                <category android:name="android.intent.category.LAUNCHER" />
+52-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:42:17-77
+52-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:42:27-74
+53            </intent-filter>
+54        </activity>
+55        <activity android:name="android.wmdc.com.mobilecsa.SettingsActivity" />
+55-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:45:9-54
+55-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:45:19-51
+56        <activity android:name="android.wmdc.com.mobilecsa.MapsActivity" />
+56-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:46:9-49
+56-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:46:19-47
+57        <activity android:name="android.wmdc.com.mobilecsa.SecurityKeyActivity" />
+57-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:47:9-57
+57-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:47:19-54
+58
+59        <provider
+60            android:name="androidx.core.content.FileProvider"
+60-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:49:13-62
+61            android:authorities="android.wmdc.com.mobilecsa.provider"
+61-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:50:13-60
+62            android:exported="false"
+62-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:51:13-37
+63            android:grantUriPermissions="true" >
+63-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:52:13-47
+64            <meta-data
+64-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:53:13-55:58
+65                android:name="android.support.FILE_PROVIDER_PATHS"
+65-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:54:17-67
+66                android:resource="@xml/provider_paths" />
+66-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:55:17-55
+67        </provider>
+68
+69        <activity
+69-->[com.google.android.gms:play-services-base:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\53e57314a95363393fb041b9ae536bd4\jetified-play-services-base-11.8.0\AndroidManifest.xml:23:9-26:75
+70            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+70-->[com.google.android.gms:play-services-base:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\53e57314a95363393fb041b9ae536bd4\jetified-play-services-base-11.8.0\AndroidManifest.xml:24:13-79
+71            android:exported="false"
+71-->[com.google.android.gms:play-services-base:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\53e57314a95363393fb041b9ae536bd4\jetified-play-services-base-11.8.0\AndroidManifest.xml:25:13-37
+72            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+72-->[com.google.android.gms:play-services-base:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\53e57314a95363393fb041b9ae536bd4\jetified-play-services-base-11.8.0\AndroidManifest.xml:26:13-72
+73
+74        <meta-data
+74-->[com.google.android.gms:play-services-basement:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\e514b08aee5f5443d2b72bce12bcc7f2\jetified-play-services-basement-11.8.0\AndroidManifest.xml:23:9-25:69
+75            android:name="com.google.android.gms.version"
+75-->[com.google.android.gms:play-services-basement:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\e514b08aee5f5443d2b72bce12bcc7f2\jetified-play-services-basement-11.8.0\AndroidManifest.xml:24:13-58
+76            android:value="@integer/google_play_services_version" />
+76-->[com.google.android.gms:play-services-basement:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\e514b08aee5f5443d2b72bce12bcc7f2\jetified-play-services-basement-11.8.0\AndroidManifest.xml:25:13-66
+77    </application>
+78
+79</manifest>

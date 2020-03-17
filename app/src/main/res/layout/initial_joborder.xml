@@ -23,6 +23,7 @@
 
             <EditText
                 android:id="@+id/etJONumber"
+                android:drawableEnd="@drawable/ic_action_check_circle_black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"

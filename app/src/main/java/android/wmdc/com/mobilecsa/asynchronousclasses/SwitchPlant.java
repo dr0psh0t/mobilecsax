@@ -20,17 +20,17 @@ import java.net.URL;
 
 public class SwitchPlant {
 
-    private static String sim;
+    private static String wifi;
     private static FragmentActivity fragAct;
     private static String branch;
 
     public SwitchPlant(String wifiArg, String simArg, String branchArg, FragmentActivity fragActArg)
     {
-        sim = simArg;
+        wifi = wifiArg;
         branch = branchArg;
         fragAct = fragActArg;
 
-        new WifiTask().execute(wifiArg);
+        new SimTask().execute(simArg);
     }
 
     static class WifiTask extends AsyncTask<String, String, String> {
@@ -110,15 +110,16 @@ public class SwitchPlant {
 
                     fragAct.setTitle(branch);
 
-                    Toast.makeText(fragAct, "You are now connected to "+branch+".",
-                            Toast.LENGTH_SHORT).show();
+                    Util.shortToast(fragAct, "You are now connected to "+branch+".");
+
                 } else {
-                    new SimTask().execute(sim);
+                    Util.alertBox(fragAct, resJson.getString("reason"));
                 }
             } catch (Exception je) {
-                Util.displayStackTraceArray(je.getStackTrace(),
-                        Variables.ASYNCHRONOUS_PACKAGE, "Exception", je.toString());
-                Util.alertBox(fragAct, je.getMessage(), "Error", false);
+                Util.displayStackTraceArray(je.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
+                        "Exception", je.toString());
+
+                Util.alertBox(fragAct, je.getMessage());
             }
         }
     }
@@ -199,15 +200,16 @@ public class SwitchPlant {
 
                     fragAct.setTitle(branch);
 
-                    Toast.makeText(fragAct, "You are now connected to "+branch+".",
-                            Toast.LENGTH_SHORT).show();
+                    Util.longToast(fragAct, "You are now connected to "+branch+".");
+
                 } else {
-                    Util.alertBox(fragAct, resJson.getString("reason"), "", false);
+                    new WifiTask().execute(wifi);
                 }
             } catch (Exception je) {
-                Util.displayStackTraceArray(je.getStackTrace(),
-                        Variables.ASYNCHRONOUS_PACKAGE, "Exception", je.toString());
-                Util.alertBox(fragAct, je.getMessage(), "Error", false);
+                Util.displayStackTraceArray(je.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
+                        "Exception", je.toString());
+
+                Util.alertBox(fragAct, je.getMessage());
             }
         }
     }

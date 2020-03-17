@@ -242,6 +242,7 @@ public class QualityCheckFragment extends Fragment {
                         .appendQueryParameter("cid", params[0])
                         .appendQueryParameter("source", params[1])
                         .appendQueryParameter("page", params[2]);
+
                 String query = builder.build().getEncodedQuery();
 
                 OutputStream os = conn.getOutputStream();
@@ -255,18 +256,19 @@ public class QualityCheckFragment extends Fragment {
                 conn.connect();
 
                 int statusCode = conn.getResponseCode();
+
                 if (statusCode == HttpURLConnection.HTTP_OK) {
                     InputStream input = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(input));
                     StringBuilder stringBuilder = new StringBuilder();
+
                     String line;
-
-                    input.close();
-                    reader.close();
-
                     while ((line = reader.readLine()) != null) {
                         stringBuilder.append(line);
                     }
+
+                    input.close();
+                    reader.close();
 
                     if (stringBuilder.toString().isEmpty()) {
                         return "{\"success\": false, \"reason\": \"No response from server.\"}";
@@ -342,9 +344,6 @@ public class QualityCheckFragment extends Fragment {
 
                     qcAdapter.replaceAdapterList(qcDataModels);
 
-                    //String txt = Variables.currentPage+" of "+Variables.lastPage;
-
-                    //tvPage.setText(txt);
                 } else {
                     Util.alertBox(mainActivity, "Empty List");
                 }
@@ -367,8 +366,5 @@ public class QualityCheckFragment extends Fragment {
                 return true;
             }
         });
-
-        MenuItem searchAction = menu.findItem(R.id.action_search);
-        searchAction.setVisible(true);
     }
 }

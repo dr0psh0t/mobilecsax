@@ -1,7 +1,6 @@
 package android.wmdc.com.mobilecsa.adapter;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;

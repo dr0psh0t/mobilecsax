@@ -46,6 +46,9 @@ public class ApprovalFragment extends Fragment {
 
                 qcTask.execute(String.valueOf(sharedPreferences.getInt("csaId", 0)),
                         "mcsa", String.valueOf(Variables.currentPage));
+
+                //qcTask.execute(String.valueOf(sharedPreferences.getInt("csaId", 0)),
+                        //"mcsa", "4");
             }
         });
 
