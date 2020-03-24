@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.wmdc.com.mobilecsa.QCJOInfoFragment;
 import android.wmdc.com.mobilecsa.adapter.WorkOrderAdapter;
 import android.wmdc.com.mobilecsa.model.WorkOrderModel;
 import android.wmdc.com.mobilecsa.utils.Util;
@@ -49,14 +50,17 @@ public class GetWorkOrderQCList extends AsyncTask<String, String, String> {
 
     private ArrayList<WorkOrderModel> workOrderList;
 
+    private QCJOInfoFragment fragment;
+
     public GetWorkOrderQCList(FragmentActivity activity, RecyclerView workOrderRecyclerView,
-                              ArrayList<WorkOrderModel> workOrderList) {
+                              ArrayList<WorkOrderModel> workOrderList, QCJOInfoFragment fragment) {
 
         this.weakReference = new WeakReference<>(activity);
         this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
         this.progressDialog = new ProgressDialog(activity);
         this.workOrderList = workOrderList;
         this.woRecWeakReference = new WeakReference<>(workOrderRecyclerView);
+        this.fragment = fragment;
     }
 
     @Override
@@ -170,6 +174,7 @@ public class GetWorkOrderQCList extends AsyncTask<String, String, String> {
 
             for (int x = 0; x < workOrderArray.length(); ++x) {
                 JSONObject workOrderInd = (JSONObject) workOrderArray.get(x);
+
                 workOrderList.add(new WorkOrderModel(
                         workOrderInd.getString("scopeOfWork"),
                         workOrderInd.getBoolean("isSupervisorId"),
@@ -178,11 +183,9 @@ public class GetWorkOrderQCList extends AsyncTask<String, String, String> {
                         joid,
                         workOrderInd.getInt("isCompleted")
                 ));
-                //workOrderRecyclerView.setAdapter(new WorkOrderAdapter(context, workOrderList));
-                //workOrderRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
                 woRecWeakReference.get().setAdapter(new WorkOrderAdapter(mainActivity,
-                        workOrderList));
+                        workOrderList, fragment));
 
                 woRecWeakReference.get().setItemAnimator(new DefaultItemAnimator());
             }

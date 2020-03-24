@@ -75,17 +75,19 @@ public class SwipeButton extends RelativeLayout {
     private String source;
     private int joid;
     private int woid;
+    private InputStream photoStream;
 
     private DateCommitAdapter dateCommitAdapter;
     private ArrayList<DateCommitModel> dcData;
     private int dcJoborderId;
     private FragmentActivity fragmentActivity;
 
-    public void setParameters(int cid, String source, int joid, int woid) {
+    public void setParameters(int cid, String source, int joid, int woid, InputStream photoStream) {
         this.cid = cid;
         this.source = source;
         this.joid = joid;
         this.woid = woid;
+        this.photoStream = photoStream;
     }
 
     public void setFragmentActivity(FragmentActivity fragmentActivity) {

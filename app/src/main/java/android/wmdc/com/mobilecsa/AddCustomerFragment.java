@@ -537,6 +537,8 @@ public class AddCustomerFragment extends Fragment {
                             int intSize = Integer.parseInt(size);
                             String smallFileSize = "";
 
+                            System.out.println("intSize= "+intSize);
+
                             if (intSize > 512_000) {
                                 File file = Util.createImageFile(getActivity());
 

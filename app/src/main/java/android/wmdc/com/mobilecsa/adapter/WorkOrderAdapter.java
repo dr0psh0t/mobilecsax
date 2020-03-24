@@ -1,17 +1,15 @@
 package android.wmdc.com.mobilecsa.adapter;
 
-import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.wmdc.com.mobilecsa.QCJOInfoFragment;
 import android.wmdc.com.mobilecsa.R;
-import android.wmdc.com.mobilecsa.model.SwipeButton;
 import android.wmdc.com.mobilecsa.model.WorkOrderModel;
 
 import androidx.annotation.NonNull;
@@ -26,11 +24,14 @@ public class WorkOrderAdapter extends RecyclerView.Adapter<WorkOrderAdapter.Work
 
     private FragmentActivity activity;
     private ArrayList<WorkOrderModel> workOrderList;
+    private QCJOInfoFragment fragment;
     private SharedPreferences sharedPreferences;
 
-    public WorkOrderAdapter(FragmentActivity activity, ArrayList<WorkOrderModel> workOrderList) {
+    public WorkOrderAdapter(FragmentActivity activity, ArrayList<WorkOrderModel> workOrderList,
+                            QCJOInfoFragment fragment) {
         this.activity = activity;
         this.workOrderList = workOrderList;
+        this.fragment = fragment;
         this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
     }
 
@@ -99,23 +100,14 @@ public class WorkOrderAdapter extends RecyclerView.Adapter<WorkOrderAdapter.Work
 
             itemView.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View view) {
-                    final Dialog dialog = new Dialog(activity);
 
-                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    dialog.setContentView(R.layout.slide_layout);
-
-                    SwipeButton swipeButton = dialog.findViewById(R.id.swipe_btn_qc);
-                    swipeButton.setItemStat(iconItemDC);
-                    swipeButton.setDialogContainer(dialog);
-                    swipeButton.setFragmentActivity(activity);
-
-                    swipeButton.setParameters(sharedPreferences.getInt("csaId", 0), "mcsa",
+                    fragment.dispatchTakePictureIntent(
+                            iconItemDC,
+                            sharedPreferences.getInt("csaId", 0),
                             workOrderList.get(index).getJoId(),
-                            workOrderList.get(index).getWorkOrderId());
-
-                    if (!workOrderList.get(index).getIsCsaQc()) {
-                        dialog.show();
-                    }
+                            workOrderList.get(index).getWorkOrderId(),
+                            workOrderList.get(index).getIsCsaQc()
+                    );
                 }
             });
         }
