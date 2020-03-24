@@ -104,7 +104,7 @@ public class DCJOInfoFragment extends Fragment {
 
                         SwipeButton swipeButton = v.findViewById(R.id.swipe_btn);
                         swipeButton.setParameters(sPrefs.getInt("csaId", 0), "mcsa",
-                                resJson.getInt("joId"), 0);
+                                resJson.getInt("joId"), 0, null, null);
 
                         swipeButton.setDateCommitAdapter(dateCommitAdapter);
                         swipeButton.setDateCommitList(dcData);

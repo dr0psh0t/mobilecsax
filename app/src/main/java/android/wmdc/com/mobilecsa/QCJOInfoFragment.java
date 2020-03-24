@@ -163,6 +163,7 @@ public class QCJOInfoFragment extends Fragment {
         return v;
     }
 
+    private String photoName;
     private Uri fileUri = null;
     private static final int REQUEST_TAKE_PHOTO = 1;
     private InputStream fileInputStream;
@@ -247,8 +248,8 @@ public class QCJOInfoFragment extends Fragment {
 
                         if (cursor != null && cursor.moveToFirst()) {
 
-                            //String displayName = cursor.getString(cursor.getColumnIndex(
-                                    //OpenableColumns.DISPLAY_NAME));
+                            photoName = cursor.getString(cursor.getColumnIndex(
+                                    OpenableColumns.DISPLAY_NAME));
 
                             int sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE);
                             String size;
@@ -325,7 +326,8 @@ public class QCJOInfoFragment extends Fragment {
             swipeButton.setDialogContainer(dialog);
             swipeButton.setFragmentActivity(getActivity());
 
-            swipeButton.setParameters(csaId[0], "mcsa", joId[0], workorderId[0], fileInputStream);
+            swipeButton.setParameters(csaId[0], "mcsa", joId[0], workorderId[0], fileInputStream,
+                    photoName);
 
             if (!isCsaQC[0]) {
                 dialog.show();

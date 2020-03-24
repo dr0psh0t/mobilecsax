@@ -537,8 +537,6 @@ public class AddCustomerFragment extends Fragment {
                             int intSize = Integer.parseInt(size);
                             String smallFileSize = "";
 
-                            System.out.println("intSize= "+intSize);
-
                             if (intSize > 512_000) {
                                 File file = Util.createImageFile(getActivity());
 
@@ -571,6 +569,7 @@ public class AddCustomerFragment extends Fragment {
                                 tvPhotoSize.setText(txt);
                             }
                         }
+
                     } catch (IOException ie) {
                         pd.cancel();
 
@@ -579,6 +578,7 @@ public class AddCustomerFragment extends Fragment {
 
                         Util.shortToast(getContext(), ie.toString());
                     }
+
                 } else {
                     Util.longToast(getContext(),
                             "\"getActivity()\" is null. Cannot dump image meta data.");

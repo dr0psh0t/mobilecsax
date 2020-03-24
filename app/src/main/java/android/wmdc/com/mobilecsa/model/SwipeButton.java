@@ -39,8 +39,10 @@ import androidx.fragment.app.FragmentActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -53,6 +55,8 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by wmdcprog on 3/24/2018.
@@ -76,18 +80,21 @@ public class SwipeButton extends RelativeLayout {
     private int joid;
     private int woid;
     private InputStream photoStream;
+    private String photoName;
 
     private DateCommitAdapter dateCommitAdapter;
     private ArrayList<DateCommitModel> dcData;
     private int dcJoborderId;
     private FragmentActivity fragmentActivity;
 
-    public void setParameters(int cid, String source, int joid, int woid, InputStream photoStream) {
+    public void setParameters(int cid, String source, int joid, int woid, InputStream photoStream,
+                              String photoName) {
         this.cid = cid;
         this.source = source;
         this.joid = joid;
         this.woid = woid;
         this.photoStream = photoStream;
+        this.photoName = photoName;
     }
 
     public void setFragmentActivity(FragmentActivity fragmentActivity) {
@@ -221,9 +228,9 @@ public class SwipeButton extends RelativeLayout {
 
                                 if (ivItemStatQC != null) {
                                     new ApproveQCTask(fragmentActivity, dialogContainer,
-                                            ivItemStatQC, SwipeButton.this).execute(
+                                            ivItemStatQC, SwipeButton.this, photoStream).execute(
                                                     String.valueOf(joid),String.valueOf(cid),
-                                            source, String.valueOf(woid));
+                                            source, String.valueOf(woid), photoName);
                                 } else {
                                     new ApproveDCTask(fragmentActivity, SwipeButton.this).execute(
                                             String.valueOf(joid), String.valueOf(cid), source);
@@ -355,14 +362,21 @@ public class SwipeButton extends RelativeLayout {
 
         private WeakReference<SwipeButton> swipeButtonWeakReference;
 
+        private InputStream photoStream;
+
+        private HashMap<String, String> parameters;
+
         private ApproveQCTask(FragmentActivity activity, Dialog dialogContainer,
-                              ImageView ivItemStatQC, SwipeButton swipeButton) {
+                              ImageView ivItemStatQC, SwipeButton swipeButton,
+                              InputStream photoStream) {
 
             activityWeakReference = new WeakReference<>(activity);
             dialogWeakReference = new WeakReference<>(dialogContainer);
             ivItemStatQCWeakReference = new WeakReference<>(ivItemStatQC);
             swipeButtonWeakReference = new WeakReference<>(swipeButton);
             taskPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
+            this.photoStream = photoStream;
+            parameters = new HashMap<>();
         }
 
         private void expandButton() {
@@ -443,19 +457,30 @@ public class SwipeButton extends RelativeLayout {
         @Override
         protected String doInBackground(String[] params) {
             try {
+                parameters.put("joid", params[0]);
+                parameters.put("cid", params[1]);
+                parameters.put("source", params[2]);
+                parameters.put("woid", params[3]);
+
                 URL url = new URL(taskPrefs.getString("domain", null)+"approvemcsaqc");
+
+                String lineEnd = "\r\n";
+                String twoHyphens = "--";
+                String boundary = "*****";
+
+                int bytesRead, bytesAvailable, bufferSize;
+                int maxBufferSize = 1024 * 1024;
+                byte[] buffer;
 
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(5000);
                 conn.setConnectTimeout(5000);
                 conn.setRequestMethod("POST");
-
                 conn.setRequestProperty("Accept", "*/*");
                 conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
                 conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
                 conn.setRequestProperty("Connection", "keep-alive");
-                conn.setRequestProperty("Content-Type",
-                        "application/x-www-form-urlencoded; charset=utf-8");
+                conn.setRequestProperty("Content-Type", "multipart/form-data;boundary="+boundary);
                 conn.setRequestProperty("Cookie",
                         "JSESSIONID="+taskPrefs.getString("sessionId", null));
                 conn.setRequestProperty("Host", "localhost:8080");
@@ -463,39 +488,74 @@ public class SwipeButton extends RelativeLayout {
                 conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1: Win64; x64; " +
                         "rv:59.0) Gecko/20100101 Firefox/59.0");
                 conn.setRequestProperty("X-Requested-Width", "XMLHttpRequest");
-
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
+                conn.setUseCaches(false);
 
-                Uri.Builder build = new Uri.Builder()
-                        .appendQueryParameter("joid", params[0])
-                        .appendQueryParameter("cid", params[1])
-                        .appendQueryParameter("source", params[2])
-                        .appendQueryParameter("woid", params[3]);
+                DataOutputStream outputStream = new DataOutputStream(conn.getOutputStream());
+                outputStream.writeBytes(twoHyphens+boundary+lineEnd);
+                outputStream.writeBytes("Content-Disposition: form-data; name=\"reference\""
+                        +lineEnd);
+                outputStream.writeBytes(lineEnd);
+                outputStream.writeBytes("my_reference_text");
+                outputStream.writeBytes(lineEnd);
+                outputStream.writeBytes(twoHyphens + boundary + lineEnd);
+                outputStream.writeBytes("Content-Disposition: " +
+                        "form-data; name=\"wophoto\";filename=\"" +params[4]+ "\"" + lineEnd);
+                outputStream.writeBytes(lineEnd);
 
-                OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os,
-                        StandardCharsets.UTF_8));
+                bytesAvailable = photoStream.available();
+                bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                buffer = new byte[bufferSize];
 
-                writer.write(build.build().getEncodedQuery());
-                writer.flush();
-                writer.close();
-                os.close();
-                conn.connect();
+                bytesRead = photoStream.read(buffer, 0, bufferSize);
 
-                if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                    InputStream connInputStream = conn.getInputStream();
+                while (bytesRead > 0) {
+                    outputStream.write(buffer, 0, bufferSize);
+                    bytesAvailable = photoStream.available();
+                    bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                    bytesRead = photoStream.read(buffer, 0, bufferSize);
+                }
 
-                    BufferedReader bufferedReader = new BufferedReader(
-                            new InputStreamReader(connInputStream));
+                outputStream.writeBytes(lineEnd);
+
+                for (Map.Entry<String, String> mapEntry : parameters.entrySet()) {
+                    String key = mapEntry.getKey();
+                    String value = mapEntry.getValue();
+
+                    System.out.println(key+"-"+value);
+
+                    outputStream.writeBytes(twoHyphens + boundary + lineEnd);
+                    outputStream.writeBytes("Content-Disposition: form-data; name=\""+key+"\""
+                            + lineEnd);
+                    outputStream.writeBytes("Content-Type: text/plain" + lineEnd);
+                    outputStream.writeBytes(lineEnd);
+                    outputStream.writeBytes(value);
+                    outputStream.writeBytes(lineEnd);
+                }
+
+                outputStream.writeBytes(twoHyphens+boundary+twoHyphens+lineEnd);
+                int statusCode = conn.getResponseCode();
+
+                outputStream.flush();
+                outputStream.close();
+
+                if (photoStream != null) {
+                    photoStream.close();
+                }
+
+                if (statusCode == HttpURLConnection.HTTP_OK) {
                     StringBuilder stringBuilder = new StringBuilder();
-                    String line;
+                    InputStream inputStream = new BufferedInputStream(conn.getInputStream());
+                    BufferedReader bufferedReader = new BufferedReader(
+                            new InputStreamReader(inputStream));
+                    String inputLine;
 
-                    while ((line = bufferedReader.readLine()) != null) {
-                        stringBuilder.append(line);
+                    while ((inputLine = bufferedReader.readLine()) != null) {
+                        stringBuilder.append(inputLine);
                     }
 
-                    connInputStream.close();
+                    inputStream.close();
                     bufferedReader.close();
 
                     if (stringBuilder.toString().isEmpty()) {
@@ -503,10 +563,9 @@ public class SwipeButton extends RelativeLayout {
                     } else {
                         return stringBuilder.toString();
                     }
-
                 } else {
                     return "{\"success\": false, \"reason\": \"Request did not succeed. " +
-                            "Status Code: "+conn.getResponseCode()+"\"}";
+                            "Status Code: "+statusCode+"\"}";
                 }
 
             } catch (MalformedURLException | ConnectException | SocketTimeoutException e) {
