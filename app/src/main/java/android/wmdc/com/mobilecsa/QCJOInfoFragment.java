@@ -329,6 +329,8 @@ public class QCJOInfoFragment extends Fragment {
             swipeButton.setParameters(csaId[0], "mcsa", joId[0], workorderId[0], fileInputStream,
                     photoName);
 
+            //swipeButton.setParameters(csaId[0], "mcsa", joId[0], workorderId[0], null, "TEST");
+
             if (!isCsaQC[0]) {
                 dialog.show();
             }

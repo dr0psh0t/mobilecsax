@@ -1,15 +1,18 @@
 package android.wmdc.com.mobilecsa.adapter;
 
+import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.wmdc.com.mobilecsa.QCJOInfoFragment;
 import android.wmdc.com.mobilecsa.R;
+import android.wmdc.com.mobilecsa.model.SwipeButton;
 import android.wmdc.com.mobilecsa.model.WorkOrderModel;
 
 import androidx.annotation.NonNull;

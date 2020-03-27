@@ -229,7 +229,7 @@ public class SwipeButton extends RelativeLayout {
                                 if (ivItemStatQC != null) {
                                     new ApproveQCTask(fragmentActivity, dialogContainer,
                                             ivItemStatQC, SwipeButton.this, photoStream).execute(
-                                                    String.valueOf(joid),String.valueOf(cid),
+                                            String.valueOf(joid),String.valueOf(cid),
                                             source, String.valueOf(woid), photoName);
                                 } else {
                                     new ApproveDCTask(fragmentActivity, SwipeButton.this).execute(
@@ -523,8 +523,6 @@ public class SwipeButton extends RelativeLayout {
                     String key = mapEntry.getKey();
                     String value = mapEntry.getValue();
 
-                    System.out.println(key+"-"+value);
-
                     outputStream.writeBytes(twoHyphens + boundary + lineEnd);
                     outputStream.writeBytes("Content-Disposition: form-data; name=\""+key+"\""
                             + lineEnd);
@@ -626,11 +624,11 @@ public class SwipeButton extends RelativeLayout {
 
                                 alertBox.setPositiveButton("OK",
                                         new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialogWeakReference.get().cancel();
-                                    }
-                                });
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialogWeakReference.get().cancel();
+                                            }
+                                        });
 
                                 AlertDialog dialog = alertBox.create();
                                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -673,10 +671,10 @@ public class SwipeButton extends RelativeLayout {
 
                                 alertBox.setPositiveButton("OK",
                                         new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                    }
-                                });
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                            }
+                                        });
 
                                 AlertDialog dialog = alertBox.create();
                                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -753,7 +751,6 @@ public class SwipeButton extends RelativeLayout {
                     swipeButtonWeakReference.get().slidingButton.setLayoutParams(params);
                 }
             });
-
 
             AnimatorSet animatorSet = new AnimatorSet();
             animatorSet.addListener(new AnimatorListenerAdapter() {
@@ -922,22 +919,22 @@ public class SwipeButton extends RelativeLayout {
 
                                 alertBox.setPositiveButton("OK",
                                         new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        for (DateCommitModel dateCommitModel
-                                                : swipeButtonWeakReference.get().dcData) {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                for (DateCommitModel dateCommitModel
+                                                        : swipeButtonWeakReference.get().dcData) {
 
-                                            if (dateCommitModel.getJoId() ==
-                                                    swipeButtonWeakReference.get().dcJoborderId) {
+                                                    if (dateCommitModel.getJoId() ==
+                                                            swipeButtonWeakReference.get().dcJoborderId) {
 
-                                                dateCommitModel.setCsaApproved(true);
-                                                swipeButtonWeakReference.get()
-                                                        .dateCommitAdapter.notifyDataSetChanged();
-                                                break;
+                                                        dateCommitModel.setCsaApproved(true);
+                                                        swipeButtonWeakReference.get()
+                                                                .dateCommitAdapter.notifyDataSetChanged();
+                                                        break;
+                                                    }
+                                                }
                                             }
-                                        }
-                                    }
-                                });
+                                        });
 
                                 alertBox.create().show();
                                 expandButton();
@@ -961,9 +958,9 @@ public class SwipeButton extends RelativeLayout {
 
                                 alertBox.setPositiveButton("OK",
                                         new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {}
-                                });
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {}
+                                        });
 
                                 alertBox.create().show();
                             }

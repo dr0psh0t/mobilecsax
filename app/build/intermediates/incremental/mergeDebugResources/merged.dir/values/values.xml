@@ -795,7 +795,7 @@
     <string name="user">Username</string>
     <string name="user_email">android.studio@android.com</string>
     <string name="value">Value</string>
-    <string name="version">03-16-2020</string>
+    <string name="version">03-27-2020</string>
     <string name="website">Website</string>
     <string name="zip_code_req">Zip Code *</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>

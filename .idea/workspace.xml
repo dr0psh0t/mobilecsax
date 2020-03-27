@@ -17,17 +17,23 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/debug.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/bundle_manifest/debug/processDebugManifest/bundle-manifest/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/bundle_manifest/debug/processDebugManifest/bundle-manifest/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeDexDebug/out/classes.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeDexDebug/out/classes.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddCustomerFragment$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/AddCustomerFragment$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/DCJOInfoFragment.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/DCJOInfoFragment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/QCJOInfoFragment$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/QCJOInfoFragment$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/zip-cache/1HmteBf+8OnmnMwT502ucyseZ7o=" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/zip-cache/1HmteBf+8OnmnMwT502ucyseZ7o=" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/instant_app_manifest/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/instant_app_manifest/debug/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/QCJOInfoFragment.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/QCJOInfoFragment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/SecurityKeyFragment$SecurityKeyTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/SecurityKeyFragment$SecurityKeyTask.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/WorkOrderAdapter$WorkOrderViewHolder$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/WorkOrderAdapter$WorkOrderViewHolder$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/WorkOrderAdapter$WorkOrderViewHolder.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/WorkOrderAdapter$WorkOrderViewHolder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/WorkOrderAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/adapter/WorkOrderAdapter.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveDCTask$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveDCTask$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveDCTask$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveDCTask$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveDCTask$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveDCTask$3.class" afterDir="false" />
@@ -36,23 +42,19 @@
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveDCTask$5$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveDCTask$5$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveDCTask$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveDCTask$5.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveDCTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveDCTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$4.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$5$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$5$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$5$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$5$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$5.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/android/wmdc/com/mobilecsa/model/SwipeButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddCustomerFragment$13.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/AddCustomerFragment$13.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/DCJOInfoFragment.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/DCJOInfoFragment.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/QCJOInfoFragment$2.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/QCJOInfoFragment$2.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/processed_res/debug/processDebugResources/out/resources-debug.ap_" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/processed_res/debug/processDebugResources/out/resources-debug.ap_" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values_values.arsc.flat" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values_values.arsc.flat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/QCJOInfoFragment.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/QCJOInfoFragment.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/SecurityKeyFragment$SecurityKeyTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/SecurityKeyFragment$SecurityKeyTask.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/WorkOrderAdapter$WorkOrderViewHolder$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/WorkOrderAdapter$WorkOrderViewHolder$1.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/WorkOrderAdapter$WorkOrderViewHolder.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/WorkOrderAdapter$WorkOrderViewHolder.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$2.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$2.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/WorkOrderAdapter.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/adapter/WorkOrderAdapter.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveDCTask$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveDCTask$1.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveDCTask$2.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveDCTask$2.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveDCTask$3.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveDCTask$3.dex" afterDir="false" />
@@ -61,20 +63,18 @@
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveDCTask$5$2.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveDCTask$5$2.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveDCTask$5.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveDCTask$5.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveDCTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveDCTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$1.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$2.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$2.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$3.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$3.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$4.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$4.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$5$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$5$1.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$5$2.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$5$2.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$5.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask$5.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton$ApproveQCTask.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/android/wmdc/com/mobilecsa/model/SwipeButton.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/AddCustomerFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/AddCustomerFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/DCJOInfoFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/DCJOInfoFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/QCJOInfoFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/QCJOInfoFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/SecurityKeyFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/SecurityKeyFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/WorkOrderAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/WorkOrderAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/model/SwipeButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/model/SwipeButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -85,7 +85,6 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="3056d8997d95" />
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -101,26 +100,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/QCJOInfoFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="319" selection-start-line="319" selection-end-line="319" />
+            <state relative-caret-position="205">
+              <caret line="318" column="60" selection-start-line="318" selection-start-column="60" selection-end-line="318" selection-end-column="60" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5108#5592#0" expanded="true" />
-                <element signature="e#5591#5592#0" expanded="true" />
-                <element signature="e#9238#11979#0" expanded="true" />
-                <element signature="e#11978#11979#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/InitialJobOrder.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/WorkOrderAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
-              <caret line="910" column="16" selection-start-line="910" selection-start-column="16" selection-end-line="910" selection-end-column="98" />
+            <state relative-caret-position="190">
+              <caret line="97" column="40" selection-start-line="97" selection-start-column="40" selection-end-line="97" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#3169#3170#0" expanded="true" />
+                <element signature="e#3212#3213#0" expanded="true" />
+                <element signature="e#3969#4464#0" expanded="true" />
+                <element signature="e#4463#4464#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -129,10 +128,16 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/model/SwipeButton.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="481" column="68" lean-forward="true" selection-start-line="481" selection-start-column="68" selection-end-line="481" selection-end-column="68" />
+            <state relative-caret-position="501">
+              <caret line="494" column="32" selection-start-line="494" selection-start-column="16" selection-end-line="494" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#3307#3308#0" expanded="true" />
+                <element signature="e#3343#3344#0" expanded="true" />
+                <element signature="e#3531#3532#0" expanded="true" />
+                <element signature="e#3579#3580#0" expanded="true" />
+                <element signature="e#4008#4009#0" expanded="true" />
+                <element signature="e#4056#4057#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -188,7 +193,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetCityTask.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetCountryCodeTask.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetCountryTask.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetDCJOListTask.java" />
@@ -210,7 +214,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/CreatePassword.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/InitialJobOrder.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/SecurityKeyActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/SecurityKeyFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/UpdateInitialJOFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/ContactsAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/CustomerAdapter.java" />
@@ -228,23 +231,25 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/login_fragment.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/ApprovalFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/QualityCheckFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/observers/MyObservable.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/interfaces/OnIntentReceived.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/asynchronousclasses/GetWorkOrderQCList.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/WorkOrderAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/QCJOInfoFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/AddCustomerFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/DCJOInfoFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/SecurityKeyFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/WorkOrderAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/QCJOInfoFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/model/SwipeButton.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="278" />
-    <option name="width" value="1098" />
+    <option name="x" value="635" />
+    <option name="width" value="741" />
     <option name="height" value="745" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -253,6 +258,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane" />
       <pane id="Scope" />
       <pane id="AndroidView">
@@ -277,7 +283,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -395,7 +400,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.4992224" visible="true" weight="0.2057101" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.4992224" visible="true" weight="0.20644216" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" sideWeight="0.5007776" side_tool="true" weight="0.19619326" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -407,10 +412,10 @@
       <window_info anchor="bottom" id="Logcat" order="1" />
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Terminal" order="3" weight="0.32970452" />
-      <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.5014641" side_tool="true" weight="0.44012442" />
-      <window_info anchor="bottom" id="Build" order="5" sideWeight="0.49926794" weight="0.25660965" />
-      <window_info anchor="bottom" id="Android Profiler" order="6" />
-      <window_info anchor="bottom" id="Run" order="7" sideWeight="0.49853587" weight="0.2037325" />
+      <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.5014641" side_tool="true" weight="0.18040435" />
+      <window_info anchor="bottom" id="Build" order="5" sideWeight="0.49926794" weight="0.21461898" />
+      <window_info anchor="bottom" id="Android Profiler" order="6" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="7" sideWeight="0.49853587" weight="0.24572317" />
       <window_info anchor="bottom" id="Debug" order="8" />
       <window_info anchor="bottom" id="Find" order="9" weight="0.2332815" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
@@ -425,23 +430,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/AddCompanyFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-11931">
-          <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/AddContactFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-10877">
-          <caret line="80" column="13" selection-start-line="80" selection-start-column="13" selection-end-line="80" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/ApprovalFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-95">
@@ -519,13 +507,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/InitialJoborderFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3110">
-          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/InitialJoborderList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-575">
@@ -544,13 +525,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-470">
           <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/JOResultFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-305">
-          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -617,20 +591,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/SecurityKeyFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/UpdateInitialJOFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="88" column="13" selection-start-line="88" selection-start-column="13" selection-end-line="88" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -724,13 +684,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/utils/Util.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-90">
-          <caret line="77" column="54" lean-forward="true" selection-start-line="77" selection-start-column="54" selection-end-line="77" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/QCValueInfoAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="655">
@@ -770,20 +723,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/WorkOrderAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1090">
-          <caret line="109" column="22" selection-start-line="109" selection-start-column="22" selection-end-line="109" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3061#3062#0" expanded="true" />
-            <element signature="e#3104#3105#0" expanded="true" />
-            <element signature="e#3861#5211#0" expanded="true" />
-            <element signature="e#5210#5211#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/DCJOInfoFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="910">
@@ -791,45 +730,104 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/InitialJoborderFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/JOResultFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/UpdateInitialJOFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2457">
+          <caret line="911" column="44" selection-start-line="911" selection-start-column="44" selection-end-line="911" selection-end-column="44" />
+          <folding>
+            <element signature="e#34574#34898#0" expanded="true" />
+            <element signature="e#34897#34898#0" expanded="true" />
+            <element signature="e#34952#35180#0" expanded="true" />
+            <element signature="e#35179#35180#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="55" column="38" lean-forward="true" selection-start-line="55" selection-start-column="38" selection-end-line="55" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/InitialJobOrder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="982" column="21" lean-forward="true" selection-start-line="982" selection-start-column="21" selection-end-line="982" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#41450#41840#0" expanded="true" />
+            <element signature="e#41839#41840#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/SecurityKeyFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="795">
+          <caret line="68" column="8" lean-forward="true" selection-start-line="68" selection-start-column="8" selection-end-line="68" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1800#2359#0" expanded="true" />
+            <element signature="e#2358#2359#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/utils/Util.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="84" column="33" selection-start-line="84" selection-start-column="33" selection-end-line="84" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="538">
+          <caret line="133" column="31" selection-start-line="133" selection-start-column="31" selection-end-line="133" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/AddCustomerFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="873" column="40" selection-start-line="873" selection-start-column="40" selection-end-line="873" selection-end-column="40" />
+        <state relative-caret-position="273">
+          <caret line="846" lean-forward="true" selection-start-line="846" selection-end-line="846" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/adapter/WorkOrderAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="97" column="40" selection-start-line="97" selection-start-column="40" selection-end-line="97" selection-end-column="40" />
           <folding>
-            <element signature="e#17469#17825#0" expanded="true" />
-            <element signature="e#17824#17825#0" expanded="true" />
-            <element signature="e#17877#18084#0" expanded="true" />
-            <element signature="e#18083#18084#0" expanded="true" />
-            <element signature="e#18136#18280#0" expanded="true" />
-            <element signature="e#18279#18280#0" expanded="true" />
-            <element signature="e#20168#23346#0" expanded="true" />
-            <element signature="e#23345#23346#0" expanded="true" />
-            <element signature="e#49096#49383#0" expanded="true" />
-            <element signature="e#49382#49383#0" expanded="true" />
-            <element signature="e#49437#49665#0" expanded="true" />
-            <element signature="e#49664#49665#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#3169#3170#0" expanded="true" />
+            <element signature="e#3212#3213#0" expanded="true" />
+            <element signature="e#3969#4464#0" expanded="true" />
+            <element signature="e#4463#4464#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/QCJOInfoFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="319" selection-start-line="319" selection-end-line="319" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5108#5592#0" expanded="true" />
-            <element signature="e#5591#5592#0" expanded="true" />
-            <element signature="e#9238#11979#0" expanded="true" />
-            <element signature="e#11978#11979#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/InitialJobOrder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="910" column="16" selection-start-line="910" selection-start-column="16" selection-end-line="910" selection-end-column="98" />
+        <state relative-caret-position="205">
+          <caret line="318" column="60" selection-start-line="318" selection-start-column="60" selection-end-line="318" selection-end-column="60" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -838,10 +836,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/model/SwipeButton.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="481" column="68" lean-forward="true" selection-start-line="481" selection-start-column="68" selection-end-line="481" selection-end-column="68" />
+        <state relative-caret-position="501">
+          <caret line="494" column="32" selection-start-line="494" selection-start-column="16" selection-end-line="494" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#3307#3308#0" expanded="true" />
+            <element signature="e#3343#3344#0" expanded="true" />
+            <element signature="e#3531#3532#0" expanded="true" />
+            <element signature="e#3579#3580#0" expanded="true" />
+            <element signature="e#4008#4009#0" expanded="true" />
+            <element signature="e#4056#4057#0" expanded="true" />
           </folding>
         </state>
       </provider>

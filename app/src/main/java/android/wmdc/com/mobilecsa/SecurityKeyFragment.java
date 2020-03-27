@@ -97,6 +97,7 @@ public class SecurityKeyFragment extends Fragment {
         protected String doInBackground(String[] params) {
             try {
                 URL url = new URL(taskPrefs.getString("domain", null)+"securitykey");
+
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(10_000);
                 conn.setConnectTimeout(10_000);
