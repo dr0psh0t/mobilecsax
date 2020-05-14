@@ -4,24 +4,7 @@
             "outputFile": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-uz\\values-uz.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\wmdcprog\\.gradle\\caches\\transforms-2\\files-2.1\\53e57314a95363393fb041b9ae536bd4\\jetified-play-services-base-11.8.0\\res\\values-uz\\values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
-                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-                        "startOffsets": "281,384,566,693,800,1004,1135,1281,1412,1643,1749,1939,2069,2282,2470,2562,2649",
-                        "endColumns": "102,181,126,106,203,130,145,130,230,105,189,129,212,187,91,86,104",
-                        "endOffsets": "383,565,692,799,1003,1134,1280,1411,1642,1748,1938,2068,2281,2469,2561,2648,2753"
-                    },
-                    "to": {
-                        "startLines": "29,30,31,32,33,34,35,36,38,39,40,41,42,43,44,45,46",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "2805,2912,3094,3225,3336,3540,3675,3825,4169,4400,4510,4700,4834,5047,5239,5335,5426",
-                        "endColumns": "106,181,130,110,203,134,149,134,230,109,189,133,212,191,95,90,108",
-                        "endOffsets": "2907,3089,3220,3331,3535,3670,3820,3955,4395,4505,4695,4829,5042,5234,5330,5421,5530"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\wmdcprog\\.gradle\\caches\\transforms-2\\files-2.1\\7df26908078c74ff4eeaf46e7b6b476c\\appcompat-1.0.0\\res\\values-uz\\values-uz.xml",
+                    "source": "C:\\Users\\wmdcprog\\.gradle\\caches\\transforms-2\\files-2.1\\173de8c433dc5f4aca0638778cb887e6\\appcompat-1.0.0\\res\\values-uz\\values-uz.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -38,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\wmdcprog\\.gradle\\caches\\transforms-2\\files-2.1\\e514b08aee5f5443d2b72bce12bcc7f2\\jetified-play-services-basement-11.8.0\\res\\values-uz\\values.xml",
+                    "source": "C:\\Users\\wmdcprog\\.gradle\\caches\\transforms-2\\files-2.1\\633bd683563eac9986c3e01ae8fd76be\\jetified-play-services-basement-11.8.0\\res\\values-uz\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -55,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\wmdcprog\\.gradle\\caches\\transforms-2\\files-2.1\\246153fc0686d4ff78c8961ca91329b7\\core-1.0.0\\res\\values-uz\\values-uz.xml",
+                    "source": "C:\\Users\\wmdcprog\\.gradle\\caches\\transforms-2\\files-2.1\\799659d157cba173c3391744d4f4133c\\core-1.0.0\\res\\values-uz\\values-uz.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -69,6 +52,23 @@
                         "startOffsets": "5619",
                         "endColumns": "100",
                         "endOffsets": "5715"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\wmdcprog\\.gradle\\caches\\transforms-2\\files-2.1\\6347122ab7ac3a9900a89279823029bb\\jetified-play-services-base-11.8.0\\res\\values-uz\\values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
+                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+                        "startOffsets": "281,384,566,693,800,1004,1135,1281,1412,1643,1749,1939,2069,2282,2470,2562,2649",
+                        "endColumns": "102,181,126,106,203,130,145,130,230,105,189,129,212,187,91,86,104",
+                        "endOffsets": "383,565,692,799,1003,1134,1280,1411,1642,1748,1938,2068,2281,2469,2561,2648,2753"
+                    },
+                    "to": {
+                        "startLines": "29,30,31,32,33,34,35,36,38,39,40,41,42,43,44,45,46",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "2805,2912,3094,3225,3336,3540,3675,3825,4169,4400,4510,4700,4834,5047,5239,5335,5426",
+                        "endColumns": "106,181,130,110,203,134,149,134,230,109,189,133,212,191,95,90,108",
+                        "endOffsets": "2907,3089,3220,3331,3535,3670,3820,3955,4395,4505,4695,4829,5042,5234,5330,5421,5530"
                     }
                 }
             ]

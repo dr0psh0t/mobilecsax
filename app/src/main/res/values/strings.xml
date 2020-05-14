@@ -124,7 +124,7 @@
     <string name="search_crm">Search Crm</string>
     <string name="search_init">Search Initial</string>
     <string name="check">Check</string>
-    <string name="version">03-27-2020</string>
+    <string name="version">04-25-2020</string>
     <string name="photo_prob">Problem occured in displaying photo</string>
     <string name="relogin">Relogin to continue</string>
     <string name="customerId">Customer Id</string>
@@ -133,6 +133,8 @@
     <string name="slide">SLIDE</string>
     <string name="qc_approve_msg">Quality Check has been approved.</string>
     <string name="dc_approve_msg">Date Commit has been approved.</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

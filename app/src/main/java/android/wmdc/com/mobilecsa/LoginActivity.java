@@ -50,13 +50,12 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sPrefs = PreferenceManager.getDefaultSharedPreferences(
                 LoginActivity.this);
 
+        /*
         SharedPreferences.Editor editor = sPrefs.edit();
         editor.remove("dumagueteSim");
         editor.apply();
         editor.putString("dumagueteSim", "http://122.3.176.235:1188/mcsa/");
         editor.apply();
-
-        /*
         SharedPreferences.Editor editor = sPrefs.edit();
 
         if (sPrefs.getString("northWifi", null) == null
@@ -109,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
             fragmentTransaction.replace(R.id.content_login, new LoginFragment());
 
             fragmentTransaction.commit();
+
         } else {
             new SessionExpiryTask(this).execute(sPrefs.getString("user", null),
                     sPrefs.getString("sessionId", null), String.valueOf(sPrefs.getInt("csaId", 0)));

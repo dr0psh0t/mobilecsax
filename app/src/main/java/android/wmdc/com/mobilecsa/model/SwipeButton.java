@@ -7,6 +7,7 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -81,6 +82,7 @@ public class SwipeButton extends RelativeLayout {
     private int woid;
     private InputStream photoStream;
     private String photoName;
+    private WorkOrderModel workOrderModel;
 
     private DateCommitAdapter dateCommitAdapter;
     private ArrayList<DateCommitModel> dcData;
@@ -88,13 +90,14 @@ public class SwipeButton extends RelativeLayout {
     private FragmentActivity fragmentActivity;
 
     public void setParameters(int cid, String source, int joid, int woid, InputStream photoStream,
-                              String photoName) {
+                              String photoName, WorkOrderModel workOrderModel) {
         this.cid = cid;
         this.source = source;
         this.joid = joid;
         this.woid = woid;
         this.photoStream = photoStream;
         this.photoName = photoName;
+        this.workOrderModel = workOrderModel;
     }
 
     public void setFragmentActivity(FragmentActivity fragmentActivity) {
@@ -185,14 +188,16 @@ public class SwipeButton extends RelativeLayout {
     boolean skipped;
 
     private OnTouchListener getButtonTouchListener() {
-        return  new OnTouchListener() {
+        return new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
+
                         skipped = !(slidingButton.getWidth() >= event.getX());
                         return true;
                     case MotionEvent.ACTION_MOVE:
+
                         if (!skipped) {
                             if (initialX == 0) {
                                 initialX = slidingButton.getX();
@@ -223,20 +228,21 @@ public class SwipeButton extends RelativeLayout {
                         }
                         return true;
                     case MotionEvent.ACTION_UP:
+
                         if (!active) {
                             if ((slidingButton.getX() + slidingButton.getWidth()) > getWidth() * 0.99) {
 
                                 if (ivItemStatQC != null) {
+
                                     new ApproveQCTask(fragmentActivity, dialogContainer,
-                                            ivItemStatQC, SwipeButton.this, photoStream).execute(
+                                            ivItemStatQC, SwipeButton.this, workOrderModel).execute(
                                             String.valueOf(joid),String.valueOf(cid),
                                             source, String.valueOf(woid), photoName);
+
                                 } else {
+
                                     new ApproveDCTask(fragmentActivity, SwipeButton.this).execute(
                                             String.valueOf(joid), String.valueOf(cid), source);
-                                    /*
-                                    new ApproveDCTask().execute(String.valueOf(joid),
-                                            String.valueOf(cid), source);*/
                                 }
                             } else {
                                 moveButtonBack();
@@ -362,23 +368,27 @@ public class SwipeButton extends RelativeLayout {
 
         private WeakReference<SwipeButton> swipeButtonWeakReference;
 
-        private InputStream photoStream;
-
         private HashMap<String, String> parameters;
+
+        private ProgressDialog progressDialog;
+
+        private WeakReference<WorkOrderModel> woModel;
 
         private ApproveQCTask(FragmentActivity activity, Dialog dialogContainer,
                               ImageView ivItemStatQC, SwipeButton swipeButton,
-                              InputStream photoStream) {
+                              WorkOrderModel woModel) {
 
+            this.woModel = new WeakReference<>(woModel);
             activityWeakReference = new WeakReference<>(activity);
             dialogWeakReference = new WeakReference<>(dialogContainer);
             ivItemStatQCWeakReference = new WeakReference<>(ivItemStatQC);
             swipeButtonWeakReference = new WeakReference<>(swipeButton);
             taskPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
-            this.photoStream = photoStream;
             parameters = new HashMap<>();
+            progressDialog = new ProgressDialog(activity);
         }
 
+        /*
         private void expandButton() {
             final ValueAnimator positionAnimator = ValueAnimator.ofFloat(
                     swipeButtonWeakReference.get().slidingButton.getX(), 0);
@@ -420,8 +430,9 @@ public class SwipeButton extends RelativeLayout {
 
             animatorSet.playTogether(positionAnimator, widthAnimator);
             animatorSet.start();
-        }
+        }*/
 
+        /*
         private void moveButtonBack() {
             final ValueAnimator positionAnimator = ValueAnimator.ofFloat(
                     swipeButtonWeakReference.get().slidingButton.getX(), 0);
@@ -443,14 +454,17 @@ public class SwipeButton extends RelativeLayout {
             AnimatorSet animatorSet = new AnimatorSet();
             animatorSet.playTogether(objectAnimator, positionAnimator);
             animatorSet.start();
-        }
+        }*/
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
 
             dialogWeakReference.get().dismiss();
-            Util.progressBarMain.setVisibility(View.VISIBLE);
+            //Util.progressBarMain.setVisibility(View.VISIBLE);
+            progressDialog.setMessage("Please wait...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
         }
 
 
@@ -464,14 +478,6 @@ public class SwipeButton extends RelativeLayout {
 
                 URL url = new URL(taskPrefs.getString("domain", null)+"approvemcsaqc");
 
-                String lineEnd = "\r\n";
-                String twoHyphens = "--";
-                String boundary = "*****";
-
-                int bytesRead, bytesAvailable, bufferSize;
-                int maxBufferSize = 1024 * 1024;
-                byte[] buffer;
-
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(5000);
                 conn.setConnectTimeout(5000);
@@ -480,7 +486,7 @@ public class SwipeButton extends RelativeLayout {
                 conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
                 conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
                 conn.setRequestProperty("Connection", "keep-alive");
-                conn.setRequestProperty("Content-Type", "multipart/form-data;boundary="+boundary);
+                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
                 conn.setRequestProperty("Cookie",
                         "JSESSIONID="+taskPrefs.getString("sessionId", null));
                 conn.setRequestProperty("Host", "localhost:8080");
@@ -490,57 +496,23 @@ public class SwipeButton extends RelativeLayout {
                 conn.setRequestProperty("X-Requested-Width", "XMLHttpRequest");
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
-                conn.setUseCaches(false);
 
-                DataOutputStream outputStream = new DataOutputStream(conn.getOutputStream());
-                outputStream.writeBytes(twoHyphens+boundary+lineEnd);
-                outputStream.writeBytes("Content-Disposition: form-data; name=\"reference\""
-                        +lineEnd);
-                outputStream.writeBytes(lineEnd);
-                outputStream.writeBytes("my_reference_text");
-                outputStream.writeBytes(lineEnd);
-                outputStream.writeBytes(twoHyphens + boundary + lineEnd);
-                outputStream.writeBytes("Content-Disposition: " +
-                        "form-data; name=\"wophoto\";filename=\"" +params[4]+ "\"" + lineEnd);
-                outputStream.writeBytes(lineEnd);
+                Uri.Builder build = new Uri.Builder()
+                        .appendQueryParameter("joid", params[0])
+                        .appendQueryParameter("cid", params[1])
+                        .appendQueryParameter("source", params[2])
+                        .appendQueryParameter("woid", params[3]);
 
-                bytesAvailable = photoStream.available();
-                bufferSize = Math.min(bytesAvailable, maxBufferSize);
-                buffer = new byte[bufferSize];
+                OutputStream os = conn.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8));
 
-                bytesRead = photoStream.read(buffer, 0, bufferSize);
+                writer.write(build.build().getEncodedQuery());
+                writer.flush();
+                writer.close();
+                os.close();
+                conn.connect();
 
-                while (bytesRead > 0) {
-                    outputStream.write(buffer, 0, bufferSize);
-                    bytesAvailable = photoStream.available();
-                    bufferSize = Math.min(bytesAvailable, maxBufferSize);
-                    bytesRead = photoStream.read(buffer, 0, bufferSize);
-                }
-
-                outputStream.writeBytes(lineEnd);
-
-                for (Map.Entry<String, String> mapEntry : parameters.entrySet()) {
-                    String key = mapEntry.getKey();
-                    String value = mapEntry.getValue();
-
-                    outputStream.writeBytes(twoHyphens + boundary + lineEnd);
-                    outputStream.writeBytes("Content-Disposition: form-data; name=\""+key+"\""
-                            + lineEnd);
-                    outputStream.writeBytes("Content-Type: text/plain" + lineEnd);
-                    outputStream.writeBytes(lineEnd);
-                    outputStream.writeBytes(value);
-                    outputStream.writeBytes(lineEnd);
-                }
-
-                outputStream.writeBytes(twoHyphens+boundary+twoHyphens+lineEnd);
                 int statusCode = conn.getResponseCode();
-
-                outputStream.flush();
-                outputStream.close();
-
-                if (photoStream != null) {
-                    photoStream.close();
-                }
 
                 if (statusCode == HttpURLConnection.HTTP_OK) {
                     StringBuilder stringBuilder = new StringBuilder();
@@ -600,13 +572,15 @@ public class SwipeButton extends RelativeLayout {
                 Runnable progressRunnable = new Runnable() {
                     @Override
                     public void run() {
-                        Util.progressBarMain.setVisibility(View.GONE);
+                        progressDialog.dismiss();
 
                         try {
                             if (resJson.getBoolean("success")) {
                                 Variables.attemptedApproves++;
 
-                                expandButton();
+                                woModel.get().setCsaQcToDone();
+
+                                //expandButton();   commented because swipeButtonWeakReference.get().slidingButton causes null
                                 ivItemStatQCWeakReference.get().setImageResource(
                                         R.drawable.ic_action_check_colored_round);
 
@@ -618,10 +592,9 @@ public class SwipeButton extends RelativeLayout {
 
                                 AlertDialog.Builder alertBox = new AlertDialog.Builder(
                                         activityWeakReference.get());
+
                                 alertBox.setView(text);
                                 alertBox.setTitle("Approved");
-                                alertBox.setCancelable(false);
-
                                 alertBox.setPositiveButton("OK",
                                         new DialogInterface.OnClickListener() {
                                             @Override
@@ -645,7 +618,7 @@ public class SwipeButton extends RelativeLayout {
                                 }
 
                             } else {
-                                moveButtonBack();
+                                //moveButtonBack(); commented because swipeButtonWeakReference.get().slidingButton it causes null
 
                                 String errMsg;
 
@@ -667,8 +640,6 @@ public class SwipeButton extends RelativeLayout {
 
                                 alertBox.setView(text);
                                 alertBox.setTitle("Failed");
-                                alertBox.setCancelable(false);
-
                                 alertBox.setPositiveButton("OK",
                                         new DialogInterface.OnClickListener() {
                                             @Override
@@ -700,9 +671,9 @@ public class SwipeButton extends RelativeLayout {
                 Handler pdCanceller = new Handler();
                 pdCanceller.postDelayed(progressRunnable, 1000);
 
-            } catch (JSONException je) {
+            } catch (Exception je) {
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.MODEL_PACKAGE,
-                        "json_exception", je.toString());
+                        "exception", je.toString());
 
                 Util.longToast(activityWeakReference.get(), je.toString());
             }
@@ -794,7 +765,6 @@ public class SwipeButton extends RelativeLayout {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
             Util.progressBarMain.setVisibility(View.VISIBLE);
         }
 

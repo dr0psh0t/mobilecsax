@@ -48,18 +48,18 @@
 23-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:17:5-70
 23-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:17:19-67
 24    <uses-feature
-24-->[com.google.android.gms:play-services-maps:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\232262dbd37ea634c1250178c8c6054f\jetified-play-services-maps-11.8.0\AndroidManifest.xml:26:5-28:35
+24-->[com.google.android.gms:play-services-maps:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\72c45b9bdee191547957589492b74865\jetified-play-services-maps-11.8.0\AndroidManifest.xml:26:5-28:35
 25        android:glEsVersion="0x00020000"
-25-->[com.google.android.gms:play-services-maps:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\232262dbd37ea634c1250178c8c6054f\jetified-play-services-maps-11.8.0\AndroidManifest.xml:27:9-41
+25-->[com.google.android.gms:play-services-maps:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\72c45b9bdee191547957589492b74865\jetified-play-services-maps-11.8.0\AndroidManifest.xml:27:9-41
 26        android:required="true" />
-26-->[com.google.android.gms:play-services-maps:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\232262dbd37ea634c1250178c8c6054f\jetified-play-services-maps-11.8.0\AndroidManifest.xml:28:9-32
+26-->[com.google.android.gms:play-services-maps:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\72c45b9bdee191547957589492b74865\jetified-play-services-maps-11.8.0\AndroidManifest.xml:28:9-32
 27
 28    <application
 28-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:19:5-58:19
 29        android:allowBackup="true"
 29-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:20:9-35
 30        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-30-->[androidx.core:core:1.0.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\246153fc0686d4ff78c8961ca91329b7\core-1.0.0\AndroidManifest.xml:22:18-86
+30-->[androidx.core:core:1.0.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\799659d157cba173c3391744d4f4133c\core-1.0.0\AndroidManifest.xml:22:18-86
 31        android:debuggable="true"
 32        android:icon="@mipmap/ic_launcher_app_icon"
 32-->D:\wmdcdev_projects\StudioProjects\Mobilecsa\app\src\main\AndroidManifest.xml:21:9-52
@@ -134,20 +134,20 @@
 68        </provider>
 69
 70        <activity
-70-->[com.google.android.gms:play-services-base:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\53e57314a95363393fb041b9ae536bd4\jetified-play-services-base-11.8.0\AndroidManifest.xml:23:9-26:75
+70-->[com.google.android.gms:play-services-base:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\6347122ab7ac3a9900a89279823029bb\jetified-play-services-base-11.8.0\AndroidManifest.xml:23:9-26:75
 71            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-71-->[com.google.android.gms:play-services-base:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\53e57314a95363393fb041b9ae536bd4\jetified-play-services-base-11.8.0\AndroidManifest.xml:24:13-79
+71-->[com.google.android.gms:play-services-base:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\6347122ab7ac3a9900a89279823029bb\jetified-play-services-base-11.8.0\AndroidManifest.xml:24:13-79
 72            android:exported="false"
-72-->[com.google.android.gms:play-services-base:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\53e57314a95363393fb041b9ae536bd4\jetified-play-services-base-11.8.0\AndroidManifest.xml:25:13-37
+72-->[com.google.android.gms:play-services-base:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\6347122ab7ac3a9900a89279823029bb\jetified-play-services-base-11.8.0\AndroidManifest.xml:25:13-37
 73            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-73-->[com.google.android.gms:play-services-base:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\53e57314a95363393fb041b9ae536bd4\jetified-play-services-base-11.8.0\AndroidManifest.xml:26:13-72
+73-->[com.google.android.gms:play-services-base:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\6347122ab7ac3a9900a89279823029bb\jetified-play-services-base-11.8.0\AndroidManifest.xml:26:13-72
 74
 75        <meta-data
-75-->[com.google.android.gms:play-services-basement:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\e514b08aee5f5443d2b72bce12bcc7f2\jetified-play-services-basement-11.8.0\AndroidManifest.xml:23:9-25:69
+75-->[com.google.android.gms:play-services-basement:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\633bd683563eac9986c3e01ae8fd76be\jetified-play-services-basement-11.8.0\AndroidManifest.xml:23:9-25:69
 76            android:name="com.google.android.gms.version"
-76-->[com.google.android.gms:play-services-basement:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\e514b08aee5f5443d2b72bce12bcc7f2\jetified-play-services-basement-11.8.0\AndroidManifest.xml:24:13-58
+76-->[com.google.android.gms:play-services-basement:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\633bd683563eac9986c3e01ae8fd76be\jetified-play-services-basement-11.8.0\AndroidManifest.xml:24:13-58
 77            android:value="@integer/google_play_services_version" />
-77-->[com.google.android.gms:play-services-basement:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\e514b08aee5f5443d2b72bce12bcc7f2\jetified-play-services-basement-11.8.0\AndroidManifest.xml:25:13-66
+77-->[com.google.android.gms:play-services-basement:11.8.0] C:\Users\wmdcprog\.gradle\caches\transforms-2\files-2.1\633bd683563eac9986c3e01ae8fd76be\jetified-play-services-basement-11.8.0\AndroidManifest.xml:25:13-66
 78    </application>
 79
 80</manifest>

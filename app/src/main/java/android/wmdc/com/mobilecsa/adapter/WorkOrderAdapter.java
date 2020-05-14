@@ -1,18 +1,15 @@
 package android.wmdc.com.mobilecsa.adapter;
 
-import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.wmdc.com.mobilecsa.QCJOInfoFragment;
 import android.wmdc.com.mobilecsa.R;
-import android.wmdc.com.mobilecsa.model.SwipeButton;
 import android.wmdc.com.mobilecsa.model.WorkOrderModel;
 
 import androidx.annotation.NonNull;
@@ -28,14 +25,14 @@ public class WorkOrderAdapter extends RecyclerView.Adapter<WorkOrderAdapter.Work
     private FragmentActivity activity;
     private ArrayList<WorkOrderModel> workOrderList;
     private QCJOInfoFragment fragment;
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences sPrefs;
 
     public WorkOrderAdapter(FragmentActivity activity, ArrayList<WorkOrderModel> workOrderList,
                             QCJOInfoFragment fragment) {
         this.activity = activity;
         this.workOrderList = workOrderList;
         this.fragment = fragment;
-        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
+        this.sPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
     }
 
     @Override
@@ -47,7 +44,7 @@ public class WorkOrderAdapter extends RecyclerView.Adapter<WorkOrderAdapter.Work
     }
 
     @Override
-    public void onBindViewHolder(WorkOrderViewHolder workOrderViewHolder, int i) {
+    public void onBindViewHolder(@NonNull WorkOrderViewHolder workOrderViewHolder, int i) {
         workOrderViewHolder.index = i;
 
         if (i % 2 != 0) {
@@ -104,13 +101,37 @@ public class WorkOrderAdapter extends RecyclerView.Adapter<WorkOrderAdapter.Work
             itemView.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View view) {
 
+                    /*
                     fragment.dispatchTakePictureIntent(
                             iconItemDC,
                             sharedPreferences.getInt("csaId", 0),
                             workOrderList.get(index).getJoId(),
                             workOrderList.get(index).getWorkOrderId(),
                             workOrderList.get(index).getIsCsaQc()
-                    );
+                    );*/
+
+                    /*
+                    fragment.showSwipe(
+                        sPrefs.getInt("csaId", 0),
+                        workOrderList.get(index).getJoId(),
+                        workOrderList.get(index).getWorkOrderId(),
+                        iconItemDC
+                    );*/
+
+                    //boolean isCsaQc = workOrderList.get(index).getIsCsaQc();
+                    //int isCompleted = workOrderList.get(index).getIsCompleted();
+
+                    if (workOrderList.get(index).getIsCompleted() == 1) {   //  if its done
+                        if (!workOrderList.get(index).getIsCsaQc()) {
+                            fragment.showSwipe(
+                                    sPrefs.getInt("csaId", 0),
+                                    workOrderList.get(index).getJoId(),
+                                    workOrderList.get(index).getWorkOrderId(),
+                                    iconItemDC,
+                                    workOrderList.get(index)
+                            );
+                        }
+                    }
                 }
             });
         }

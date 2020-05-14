@@ -110,8 +110,7 @@ public class QCAdapter extends RecyclerView.Adapter<QCAdapter.QCViewHolder> {
                     final Fragment frag = new QCJOInfoFragment();
                     JSONObject object = new JSONObject();
 
-                    try
-                    {
+                    try {
                         object.put("joNumber", qcData.get(index).getJoNumber());
                         object.put("customerID", qcData.get(index).getCustomerId());
                         object.put("customer", qcData.get(index).getCustomer());
@@ -122,15 +121,15 @@ public class QCAdapter extends RecyclerView.Adapter<QCAdapter.QCViewHolder> {
                         object.put("dateReceived", qcData.get(index).getDateReceived());
                         object.put("dateCommit", qcData.get(index).getDateCommit());
                         object.put("success", true);
+
                     } catch (JSONException je) {
+
                         Util.displayStackTraceArray(je.getStackTrace(),
                                 Variables.ADAPTER_PACKAGE, "JSONException", je.toString());
 
                         try {
                             object.put("success", false);
-                        }
-                        catch (JSONException jee)
-                        {
+                        } catch (JSONException jee) {
                             Util.displayStackTraceArray(jee.getStackTrace(),
                                     Variables.ADAPTER_PACKAGE, "JSONException", jee.toString());
                         }

@@ -39,6 +39,10 @@ public class WorkOrderModel {
         return isCsaQc;
     }
 
+    public void setCsaQcToDone() {
+        isCsaQc = true;
+    }
+
     public int getWorkOrderId() {
         return workOrderId;
     }

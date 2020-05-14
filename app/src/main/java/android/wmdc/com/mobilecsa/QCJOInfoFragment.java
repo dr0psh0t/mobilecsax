@@ -218,7 +218,7 @@ public class QCJOInfoFragment extends Fragment {
             }
 
         } else {    //  workorder has a picture already. proceed to swipe.
-            showSwipe();
+            //showSwipe();
         }
     }
 
@@ -291,7 +291,7 @@ public class QCJOInfoFragment extends Fragment {
                                 workorderId[0] = workorderId[1];
                                 isCsaQC[0] = isCsaQC[1];
 
-                                showSwipe();
+                                //showSwipe();
                             }
                         }
                     } catch (IOException ie) {
@@ -313,7 +313,8 @@ public class QCJOInfoFragment extends Fragment {
         pdHandler.postDelayed(pdRun, 2000);
     }
 
-    private void showSwipe() {
+    /*
+    public void showSwipe() {
 
         if (getActivity() != null) {
             final Dialog dialog = new Dialog(getActivity());
@@ -328,8 +329,54 @@ public class QCJOInfoFragment extends Fragment {
 
             swipeButton.setParameters(csaId[0], "mcsa", joId[0], workorderId[0], fileInputStream,
                     photoName);
-
             //swipeButton.setParameters(csaId[0], "mcsa", joId[0], workorderId[0], null, "TEST");
+
+            if (!isCsaQC[0]) {
+                dialog.show();
+            }
+        } else {
+            Util.longToast(getContext(), "Activity is null. Cannot show dialog swipe.");
+        }
+    }*/
+
+    public void showSwipe(int csaId, int joId, int workorderId, ImageView ivItemStatQC,
+                          WorkOrderModel workOrderModel) {
+
+        /*
+        if (getActivity() != null) {
+            new AlertDialog.Builder(getActivity())
+                    .setTitle("Quality Check")
+                    .setMessage("Approve quality check on this workorder?")
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    })
+                    .show();
+
+        }*/
+
+        /* disable slide, because it has errors.*/
+        if (getActivity() != null) {
+            final Dialog dialog = new Dialog(getActivity());
+
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.slide_layout);
+
+            SwipeButton swipeButton = dialog.findViewById(R.id.swipe_btn_qc);
+            swipeButton.setItemStat(iconItemDC[0]);
+            swipeButton.setDialogContainer(dialog);
+            swipeButton.setFragmentActivity(getActivity());
+
+            swipeButton.setParameters(csaId, "mcsa", joId, workorderId, null, "", workOrderModel);
+            swipeButton.setItemStat(ivItemStatQC);
 
             if (!isCsaQC[0]) {
                 dialog.show();
