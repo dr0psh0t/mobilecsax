@@ -1833,6 +1833,7 @@ id tvPage
 id tvPercentComple
 id tvPhotoName
 id tvPhotoSize
+id tvPictureInfo
 id tvRemarks
 id tvScope
 id tvSerial

@@ -116,6 +116,7 @@ public class DateCommitAdapter extends RecyclerView.Adapter<DateCommitAdapter.DC
 
             itemView.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v) {
+
                     JSONObject object = new JSONObject();
 
                     try {

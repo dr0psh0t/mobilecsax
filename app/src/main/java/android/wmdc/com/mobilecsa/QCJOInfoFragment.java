@@ -6,18 +6,22 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
+import android.renderscript.ScriptGroup;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.wmdc.com.mobilecsa.adapter.QCValueInfoAdapter;
 import android.wmdc.com.mobilecsa.asynchronousclasses.GetWorkOrderQCList;
 import android.wmdc.com.mobilecsa.model.KeyValueInfo;
@@ -39,6 +43,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -53,6 +59,8 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class QCJOInfoFragment extends Fragment {
+
+    private String pictureInfo = "";
 
     private final ArrayList<String> QC_KEY = new ArrayList<>(Arrays.asList("JO Number",
             "Customer ID", "Model", "Make", "Category", "Serial", "Date Received", "Date Committed",
@@ -163,69 +171,61 @@ public class QCJOInfoFragment extends Fragment {
         return v;
     }
 
-    private String photoName;
     private Uri fileUri = null;
     private static final int REQUEST_TAKE_PHOTO = 1;
     private InputStream fileInputStream;
+    private InputStream fileInputStream2;
 
-    private ImageView[] iconItemDC = new ImageView[2];
-    private int[] csaId = new int[2];
-    private int[] joId = new int[2];
-    private int[] workorderId = new int[2];
-    private boolean[] isCsaQC = new boolean[2];
+    private ImageView iconItemDC;
+    private int csaId;
+    private int joId;
+    private int workorderId;
+    private boolean isCsaQC;
+    private WorkOrderModel workOrderModel;
 
     public void dispatchTakePictureIntent(ImageView icon, int id, int jid, int woid,
-                                          boolean isCsaQcLocal) {
+                                          boolean isCsaQcLocal, WorkOrderModel woModel) {
 
-        iconItemDC[1] = icon;
-        csaId[1] = id;
-        joId[1] = jid;
-        workorderId[1] = woid;
-        isCsaQC[1] = isCsaQcLocal;
+        iconItemDC = icon;
+        csaId = id;
+        joId = jid;
+        workorderId = woid;
+        isCsaQC = isCsaQcLocal;
+        workOrderModel = woModel;
 
-        //  new workorder detected. so take picture first.
-        if (workorderId[0] < 1 || workorderId[0] != workorderId[1]) {
+        if (getActivity() != null) {
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-            if (getActivity() != null) {
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                File photoFile = null;
 
-                if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-                    File photoFile = null;
+                try {
+                    photoFile = Util.createImageFile(getActivity());
 
-                    try {
-                        photoFile = Util.createImageFile(getActivity());
+                } catch (IOException ex) {
+                    Util.displayStackTraceArray(ex.getStackTrace(),
+                            "android.wmdc.com.mobilecsa", "IOException", ex.toString());
 
-                    } catch (IOException ex) {
-                        Util.displayStackTraceArray(ex.getStackTrace(),
-                                "android.wmdc.com.mobilecsa", "IOException", ex.toString());
-
-                        Util.shortToast(getContext(), ex.toString());
-                    }
-
-                    if (photoFile != null) {
-                        fileUri = FileProvider.getUriForFile(getActivity(),
-                                BuildConfig.APPLICATION_ID+ ".provider", photoFile);
-
-                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-
-                        startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
-
-                        System.out.println("TEST3");
-                    }
+                    Util.shortToast(getContext(), ex.toString());
                 }
-            } else {
-                Util.alertBox(getContext(), "Activity is null. Cannot open camera.");
-            }
 
-        } else {    //  workorder has a picture already. proceed to swipe.
-            //showSwipe();
+                if (photoFile != null) {
+                    fileUri = FileProvider.getUriForFile(getActivity(),
+                            BuildConfig.APPLICATION_ID+ ".provider", photoFile);
+
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+
+                    startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+                }
+            }
+        } else {
+            Util.alertBox(getContext(), "Activity is null. Cannot open camera.");
         }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
         if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
-            //System.out.println("TEST2");
             dumpImageMetaData(fileUri);
         }
     }
@@ -248,7 +248,7 @@ public class QCJOInfoFragment extends Fragment {
 
                         if (cursor != null && cursor.moveToFirst()) {
 
-                            photoName = cursor.getString(cursor.getColumnIndex(
+                            String photoName = cursor.getString(cursor.getColumnIndex(
                                     OpenableColumns.DISPLAY_NAME));
 
                             int sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE);
@@ -272,28 +272,36 @@ public class QCJOInfoFragment extends Fragment {
                                 File smallFile = Util.reduceBitmapFile(file);
 
                                 if (smallFile != null) {
+                                    pictureInfo = String.valueOf(smallFile.length());
                                     fileInputStream = new FileInputStream(smallFile);
+                                    fileInputStream2 = new FileInputStream(smallFile);
                                 } else {
                                     Util.shortToast(getActivity(), "Small file is null.");
                                 }
+
                             } else {
                                 fileInputStream = Util.getStreamFromUri(uri, getActivity());
+                                fileInputStream2 = Util.getStreamFromUri(uri, getActivity());
+                                pictureInfo = size;
+                            }
+
+                            Bitmap bmp = getBmpFromStream(fileInputStream2);
+
+                            if ((bmp.getWidth() * bmp.getHeight()) > 480000) {
+                                //  reduce height and width
+                                fileInputStream = getStreamFromBmp(scaleBitmap(bmp));
                             }
 
                             pd.cancel();
 
                             if (fileInputStream == null) {
-                                System.err.println("The fileInputStream for workorder is null");
+                                Util.longToast(getContext(),
+                                        "The input stream for qc photo file is null. Try again.");
                             } else {
-                                iconItemDC[0] = iconItemDC[1];
-                                csaId[0] = csaId[1];
-                                joId[0] = joId[1];
-                                workorderId[0] = workorderId[1];
-                                isCsaQC[0] = isCsaQC[1];
-
-                                //showSwipe();
+                                showSwipe(csaId, joId, workorderId, iconItemDC, workOrderModel);
                             }
                         }
+
                     } catch (IOException ie) {
                         pd.cancel();
 
@@ -302,6 +310,7 @@ public class QCJOInfoFragment extends Fragment {
 
                         Util.shortToast(getContext(), ie.toString());
                     }
+
                 } else {
                     Util.longToast(getContext(),
                             "\"getActivity()\" is null. Cannot dump image meta data.");
@@ -313,76 +322,72 @@ public class QCJOInfoFragment extends Fragment {
         pdHandler.postDelayed(pdRun, 2000);
     }
 
-    /*
-    public void showSwipe() {
-
-        if (getActivity() != null) {
-            final Dialog dialog = new Dialog(getActivity());
-
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setContentView(R.layout.slide_layout);
-
-            SwipeButton swipeButton = dialog.findViewById(R.id.swipe_btn_qc);
-            swipeButton.setItemStat(iconItemDC[0]);
-            swipeButton.setDialogContainer(dialog);
-            swipeButton.setFragmentActivity(getActivity());
-
-            swipeButton.setParameters(csaId[0], "mcsa", joId[0], workorderId[0], fileInputStream,
-                    photoName);
-            //swipeButton.setParameters(csaId[0], "mcsa", joId[0], workorderId[0], null, "TEST");
-
-            if (!isCsaQC[0]) {
-                dialog.show();
-            }
-        } else {
-            Util.longToast(getContext(), "Activity is null. Cannot show dialog swipe.");
-        }
-    }*/
-
-    public void showSwipe(int csaId, int joId, int workorderId, ImageView ivItemStatQC,
+    private void showSwipe(int csaId, int joId, int workorderId, ImageView ivItemStatQC,
                           WorkOrderModel workOrderModel) {
 
-        /*
-        if (getActivity() != null) {
-            new AlertDialog.Builder(getActivity())
-                    .setTitle("Quality Check")
-                    .setMessage("Approve quality check on this workorder?")
-                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    })
-                    .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    })
-                    .show();
-
-        }*/
-
-        /* disable slide, because it has errors.*/
         if (getActivity() != null) {
             final Dialog dialog = new Dialog(getActivity());
 
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.setContentView(R.layout.slide_layout);
 
+            TextView tvPictureInfo = dialog.findViewById(R.id.tvPictureInfo);
+            pictureInfo = (Integer.parseInt(pictureInfo)/1000) + "KB";
+            tvPictureInfo.setText(pictureInfo);
+
             SwipeButton swipeButton = dialog.findViewById(R.id.swipe_btn_qc);
-            swipeButton.setItemStat(iconItemDC[0]);
+            swipeButton.setItemStat(iconItemDC);
             swipeButton.setDialogContainer(dialog);
             swipeButton.setFragmentActivity(getActivity());
 
-            swipeButton.setParameters(csaId, "mcsa", joId, workorderId, null, "", workOrderModel);
+            //  qc without photo
+            //swipeButton.setParameters(csaId, "mcsa", joId, workorderId, null, "", workOrderModel);
+
+            //  qc with photo
+            swipeButton.setParameters(csaId, "mcsa", joId, workorderId, fileInputStream, "",
+                    workOrderModel);
+
             swipeButton.setItemStat(ivItemStatQC);
 
-            if (!isCsaQC[0]) {
+            if (!isCsaQC) {
                 dialog.show();
             }
         } else {
             Util.longToast(getContext(), "Activity is null. Cannot show dialog swipe.");
         }
+    }
+
+    private Bitmap getBmpFromStream(InputStream inputStream) {
+        return BitmapFactory.decodeStream(inputStream);
+    }
+
+    private Bitmap scaleBitmap(Bitmap bmp) {
+
+        int oWidth = bmp.getWidth();
+        int oHeight = bmp.getHeight();
+
+        int nWidth = oWidth;
+        int nHeight = oHeight;
+
+        int tPixels = oWidth * oHeight;
+
+        while (tPixels > 480000) {
+            nWidth = (int)(nWidth - (nWidth * 0.05));
+            nHeight = (int)(nHeight - (oHeight * 0.05));
+
+            tPixels = nWidth * nHeight;
+        }
+
+        return Bitmap.createScaledBitmap(bmp, nWidth, nHeight, false);
+    }
+
+    private InputStream getStreamFromBmp(Bitmap bmp) {
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 0 /*ignored for PNG*/, bos);
+        byte[] bitmapdata = bos.toByteArray();
+        ByteArrayInputStream bs = new ByteArrayInputStream(bitmapdata);
+
+        return bs;
     }
 }

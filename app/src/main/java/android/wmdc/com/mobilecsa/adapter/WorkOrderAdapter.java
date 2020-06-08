@@ -16,7 +16,18 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 import java.util.ArrayList;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**Created by wmdcprog on 5/7/2018.*/
 
@@ -90,6 +101,10 @@ public class WorkOrderAdapter extends RecyclerView.Adapter<WorkOrderAdapter.Work
         private TextView tvItemDC;
         private int index;
 
+        public MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+        OkHttpClient client = new OkHttpClient();
+
         private WorkOrderViewHolder(View itemView) {
             super(itemView);
             this.rootLayItemInfo = itemView.findViewById(R.id.rootLayItemInfo);
@@ -101,39 +116,62 @@ public class WorkOrderAdapter extends RecyclerView.Adapter<WorkOrderAdapter.Work
             itemView.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View view) {
 
-                    /*
-                    fragment.dispatchTakePictureIntent(
-                            iconItemDC,
-                            sharedPreferences.getInt("csaId", 0),
-                            workOrderList.get(index).getJoId(),
-                            workOrderList.get(index).getWorkOrderId(),
-                            workOrderList.get(index).getIsCsaQc()
-                    );*/
+                    boolean isCsaQc = workOrderList.get(index).getIsCsaQc();
+                    int isCompleted = workOrderList.get(index).getIsCompleted();
+                    int csaId = sPrefs.getInt("csaId", 0);
+                    int joId = workOrderList.get(index).getJoId();
+                    int workorderId = workOrderList.get(index).getWorkOrderId();
 
-                    /*
-                    fragment.showSwipe(
-                        sPrefs.getInt("csaId", 0),
-                        workOrderList.get(index).getJoId(),
-                        workOrderList.get(index).getWorkOrderId(),
-                        iconItemDC
-                    );*/
+                    if (isCompleted == 1) {   //  if its done
+                        if (!isCsaQc) {
 
-                    //boolean isCsaQc = workOrderList.get(index).getIsCsaQc();
-                    //int isCompleted = workOrderList.get(index).getIsCompleted();
+                            fragment.dispatchTakePictureIntent(iconItemDC, csaId, joId,
+                                    workorderId, isCsaQc, workOrderList.get(index));
 
-                    if (workOrderList.get(index).getIsCompleted() == 1) {   //  if its done
-                        if (!workOrderList.get(index).getIsCsaQc()) {
+                            //  this call is used for qc without photo.
+                            /*
                             fragment.showSwipe(
                                     sPrefs.getInt("csaId", 0),
                                     workOrderList.get(index).getJoId(),
                                     workOrderList.get(index).getWorkOrderId(),
                                     iconItemDC,
                                     workOrderList.get(index)
-                            );
+                            );*/
+
+                            /*
+                            post("http://192.168.1.30:8080/mcsa/testparams",
+                                    "{\"fname\": \"daryll david\"}",
+                                    new Callback() {
+                                        @Override
+                                        public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+                                        }
+
+                                        @Override
+                                        public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                                            System.out.println(response.body().string());
+                                        }
+                                    });
+                             */
+
+                        } else {
+                            System.out.println("else");
                         }
                     }
                 }
             });
+        }
+
+        Call post(String url, String json, Callback callback) {
+            RequestBody body = RequestBody.create(JSON, json);
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(body)
+                    .build();
+
+            Call call = client.newCall(request);
+            call.enqueue(callback);
+            return call;
         }
     }
 }

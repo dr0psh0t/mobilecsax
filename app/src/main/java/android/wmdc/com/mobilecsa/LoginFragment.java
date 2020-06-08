@@ -131,11 +131,41 @@ public class LoginFragment extends Fragment {
                     }
                 }
             });
+			
+			setTitle(getActivity());
         } else {
             Util.alertBox(getContext(), "Activity is null. Cannot render login page.");
         }
 
         return v;
+    }
+	
+	public void setTitle(FragmentActivity fragmentActivity) {
+        String domain = sPrefs.getString("domain", null);
+
+        if (domain != null) {
+
+            switch (domain) {
+                case "http://122.3.176.235:1959/mcsa/":
+                case "http://192.168.1.150:8080/mcsa/":
+                    fragmentActivity.setTitle("North");
+                    break;
+                case "http://122.52.48.202:3316/mcsa/":
+                case "http://192.168.1.149:8080/mcsa/":
+                    fragmentActivity.setTitle("Central");
+                    break;
+                case "http://122.52.155.109:1116/mcsa/":
+                case "http://":
+                    fragmentActivity.setTitle("South");
+                    break;
+                case "http://122.3.176.235:1188/mcsa/":
+                    fragmentActivity.setTitle("Dumaguete");
+                    break;
+            }
+
+        } else {
+            Util.longToast(fragmentActivity, "The domain for this app is not set.");
+        }
     }
 
     @Override

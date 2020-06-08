@@ -18,6 +18,7 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -43,6 +44,7 @@ import org.json.JSONObject;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataOutput;
 import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -226,7 +228,9 @@ public class SwipeButton extends RelativeLayout {
                                 slidingButton.setX(0);
                             }
                         }
+
                         return true;
+
                     case MotionEvent.ACTION_UP:
 
                         if (!active) {
@@ -234,10 +238,13 @@ public class SwipeButton extends RelativeLayout {
 
                                 if (ivItemStatQC != null) {
 
-                                    new ApproveQCTask(fragmentActivity, dialogContainer,
-                                            ivItemStatQC, SwipeButton.this, workOrderModel).execute(
-                                            String.valueOf(joid),String.valueOf(cid),
-                                            source, String.valueOf(woid), photoName);
+                                    new ApproveQCTask(
+                                            fragmentActivity, dialogContainer, ivItemStatQC,
+                                            SwipeButton.this, workOrderModel, photoStream
+                                    ).execute(
+                                            String.valueOf(joid), String.valueOf(cid), source,
+                                            String.valueOf(woid), photoName
+                                    );
 
                                 } else {
 
@@ -331,8 +338,8 @@ public class SwipeButton extends RelativeLayout {
         animatorSet.start();
     }*/
 
-    private void moveButtonBack()
-    {
+    private void moveButtonBack() {
+
         final ValueAnimator positionAnimator = ValueAnimator.ofFloat(slidingButton.getX(), 0);
 
         positionAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
@@ -374,9 +381,11 @@ public class SwipeButton extends RelativeLayout {
 
         private WeakReference<WorkOrderModel> woModel;
 
+        private WeakReference<InputStream> photoStreamWeakRef;
+
         private ApproveQCTask(FragmentActivity activity, Dialog dialogContainer,
                               ImageView ivItemStatQC, SwipeButton swipeButton,
-                              WorkOrderModel woModel) {
+                              WorkOrderModel woModel, InputStream stream) {
 
             this.woModel = new WeakReference<>(woModel);
             activityWeakReference = new WeakReference<>(activity);
@@ -386,75 +395,8 @@ public class SwipeButton extends RelativeLayout {
             taskPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
             parameters = new HashMap<>();
             progressDialog = new ProgressDialog(activity);
+            photoStreamWeakRef = new WeakReference<>(stream);
         }
-
-        /*
-        private void expandButton() {
-            final ValueAnimator positionAnimator = ValueAnimator.ofFloat(
-                    swipeButtonWeakReference.get().slidingButton.getX(), 0);
-
-            positionAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    float x = (Float) positionAnimator.getAnimatedValue();
-                    swipeButtonWeakReference.get().slidingButton.setX(x);
-                }
-            });
-
-            final ValueAnimator widthAnimator = ValueAnimator.ofInt(
-                    swipeButtonWeakReference.get().slidingButton.getWidth(),
-                    swipeButtonWeakReference.get().getWidth());
-
-            widthAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    ViewGroup.LayoutParams params = swipeButtonWeakReference.get().slidingButton
-                            .getLayoutParams();
-
-                    params.width = (Integer) widthAnimator.getAnimatedValue();
-                    swipeButtonWeakReference.get().slidingButton.setLayoutParams(params);
-                }
-            });
-
-            AnimatorSet animatorSet = new AnimatorSet();
-            animatorSet.addListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    super.onAnimationEnd(animation);
-
-                    swipeButtonWeakReference.get().active = true;
-                    swipeButtonWeakReference.get().slidingButton.setImageDrawable(
-                            swipeButtonWeakReference.get().enabledDrawable);
-                }
-            });
-
-            animatorSet.playTogether(positionAnimator, widthAnimator);
-            animatorSet.start();
-        }*/
-
-        /*
-        private void moveButtonBack() {
-            final ValueAnimator positionAnimator = ValueAnimator.ofFloat(
-                    swipeButtonWeakReference.get().slidingButton.getX(), 0);
-
-            positionAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-            positionAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    float x = (Float) positionAnimator.getAnimatedValue();
-                    swipeButtonWeakReference.get().slidingButton.setX(x);
-                }
-            });
-
-            ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(
-                    swipeButtonWeakReference.get().centerText, "alpha", 1);
-
-            positionAnimator.setDuration(200);
-
-            AnimatorSet animatorSet = new AnimatorSet();
-            animatorSet.playTogether(objectAnimator, positionAnimator);
-            animatorSet.start();
-        }*/
 
         @Override
         protected void onPreExecute() {
@@ -467,7 +409,148 @@ public class SwipeButton extends RelativeLayout {
             progressDialog.show();
         }
 
+        @Override
+        protected String doInBackground(String[] params) {
 
+            try {
+                parameters.put("joid",params [0]);
+                parameters.put("cid", params[1]);
+                parameters.put("source", params[2]);
+                parameters.put("woid", params[3]);
+
+                URL url = new URL(taskPrefs.getString("domain", null)+"approvemcsaqc");
+                //URL url = new URL("http://192.168.1.30:8080/mcsa/loggers");
+
+                String lineEnd = "\r\n";
+                String twoHyphens = "--";
+                String boundary = "*****";
+
+                int bytesRead, bytesAvailable, bufferSize;
+                int maxBufferSize = 1024 * 1024;
+
+                byte[] buffer;
+
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setReadTimeout(20000);
+                conn.setConnectTimeout(20000);
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Accept", "*/*");
+                conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
+                conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+                conn.setRequestProperty("Connection", "keep-alive");
+                //conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+                conn.setRequestProperty("Content-Type", "multipart/form-data;boundary="+boundary);
+                conn.setRequestProperty("Cookie",
+                        "JSESSIONID="+taskPrefs.getString("sessionId", null));
+                conn.setRequestProperty("Host", "localhost:8080");
+                conn.setRequestProperty("Referer", "approvemcsaqc");
+                conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1: Win64; x64; " +
+                        "rv:59.0) Gecko/20100101 Firefox/59.0");
+                conn.setRequestProperty("X-Requested-Width", "XMLHttpRequest");
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+                conn.setUseCaches(false);
+
+                DataOutputStream outputStream;
+                outputStream = new DataOutputStream(conn.getOutputStream());
+                outputStream.writeBytes(twoHyphens+boundary+lineEnd);
+                outputStream.writeBytes("Content-Type: image/jpeg");
+                outputStream.writeBytes(lineEnd);
+                outputStream.writeBytes(twoHyphens + boundary + lineEnd);
+                outputStream.writeBytes("Content-Disposition: " +
+                        "form-data; name=\"wophoto\";filename=\"wophotofilename\"" + lineEnd);
+                outputStream.writeBytes(lineEnd);
+
+                bytesAvailable = photoStreamWeakRef.get().available();
+                bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                buffer = new byte[bufferSize];
+
+                bytesRead = photoStreamWeakRef.get().read(buffer, 0, bufferSize);
+
+                while (bytesRead > 0) {
+                    outputStream.write(buffer, 0, bufferSize);
+                    bytesAvailable = photoStreamWeakRef.get().available();
+                    bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                    bytesRead =  photoStreamWeakRef.get().read(buffer, 0, bufferSize);
+                }
+
+                outputStream.writeBytes(lineEnd);
+
+                for (Map.Entry<String, String> mapEntry : parameters.entrySet()) {
+
+                    String key = mapEntry.getKey();
+                    String value = mapEntry.getValue();
+
+                    outputStream.writeBytes(twoHyphens + boundary + lineEnd);
+                    outputStream.writeBytes("Content-Disposition: form-data; name=\""+key+"\""
+                            +lineEnd);
+                    outputStream.writeBytes("Content-Type: text/plain" + lineEnd);
+                    outputStream.writeBytes(lineEnd);
+                    outputStream.writeBytes(value);
+                    outputStream.writeBytes(lineEnd);
+                }
+
+                outputStream.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+                int statusCode = conn.getResponseCode();
+
+                outputStream.flush();
+                outputStream.close();
+
+                if (photoStreamWeakRef.get() != null) {
+                    photoStreamWeakRef.get().close();
+                }
+
+                if (statusCode == HttpURLConnection.HTTP_OK) {
+                    StringBuilder stringBuilder = new StringBuilder();
+                    InputStream inputStream = new BufferedInputStream(conn.getInputStream());
+                    BufferedReader bufferedReader = new BufferedReader(
+                            new InputStreamReader(inputStream));
+                    String inputLine;
+
+                    while ((inputLine = bufferedReader.readLine()) != null) {
+                        stringBuilder.append(inputLine);
+                    }
+
+                    inputStream.close();
+                    bufferedReader.close();
+
+                    if (stringBuilder.toString().isEmpty()) {
+                        return "{\"success\": false, \"reason\": \"No response from server.\"}";
+                    } else {
+                        return stringBuilder.toString();
+                    }
+                } else {
+                    return "{\"success\": false, \"reason\": \"Request did not succeed. " +
+                            "Status Code: "+statusCode+"\"}";
+                }
+
+            } catch (MalformedURLException | ConnectException | SocketTimeoutException e) {
+                Util.displayStackTraceArray(e.getStackTrace(), Variables.MODEL_PACKAGE,
+                        "network_exception", e.toString());
+
+                if (e instanceof MalformedURLException) {
+                    return "{\"success\": false, \"reason\": \"Malformed URL.\"}";
+                } else if (e instanceof ConnectException) {
+                    return "{\"success\": false, \"reason\": \"Cannot connect to server. " +
+                            "Check wifi or mobile data and check if server is available.\"}";
+                } else {
+                    return "{\"success\": false, \"reason\": \"Connection timed out. " +
+                            "The server is taking too long to reply.\"}";
+                }
+
+            } catch (Exception e) {
+                Util.displayStackTraceArray(e.getStackTrace(), Variables.MODEL_PACKAGE,
+                        "exception", e.toString());
+                return "{\"success\": false, \"reason\": \""+e.getMessage()+"\"}";
+
+            } finally {
+                if (conn != null) {
+                    conn.disconnect();
+                }
+            }
+        }
+
+        /* this doInBackground method is used for qc without photo
         @Override
         protected String doInBackground(String[] params) {
             try {
@@ -482,7 +565,7 @@ public class SwipeButton extends RelativeLayout {
                 conn.setReadTimeout(5000);
                 conn.setConnectTimeout(5000);
                 conn.setRequestMethod("POST");
-                conn.setRequestProperty("Accept", "*/*");
+
                 conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
                 conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
                 conn.setRequestProperty("Connection", "keep-alive");
@@ -562,10 +645,11 @@ public class SwipeButton extends RelativeLayout {
                     conn.disconnect();
                 }
             }
-        }
+        }*/
 
         @Override
         protected void onPostExecute(String result) {
+
             try {
                 final JSONObject resJson = new JSONObject(result);
 
@@ -599,7 +683,9 @@ public class SwipeButton extends RelativeLayout {
                                         new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                                dialogWeakReference.get().cancel();
+                                                if (dialogWeakReference.get() != null) {
+                                                    dialogWeakReference.get().cancel();
+                                                }
                                             }
                                         });
 
@@ -672,6 +758,8 @@ public class SwipeButton extends RelativeLayout {
                 pdCanceller.postDelayed(progressRunnable, 1000);
 
             } catch (Exception je) {
+                progressDialog.dismiss();   //  dismiss dialog when json exception occurs.
+
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.MODEL_PACKAGE,
                         "exception", je.toString());
 

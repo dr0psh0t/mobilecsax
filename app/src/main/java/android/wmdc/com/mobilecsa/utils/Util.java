@@ -384,7 +384,7 @@ public class Util {
             inputStream.close();
 
             //  here override the original image file
-            System.out.println("file.createNewFile= "+file.createNewFile());
+            System.out.println("file.createNewFile status= "+file.createNewFile());
 
             FileOutputStream outputStream = new FileOutputStream(file);
 
@@ -420,7 +420,9 @@ public class Util {
                 .format(new Date());
 
         String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = fragmentActivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        //File storageDir = fragmentActivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        //File storageDir = fragmentActivity.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
 
         return File.createTempFile(imageFileName, ".jpg", storageDir);
     }

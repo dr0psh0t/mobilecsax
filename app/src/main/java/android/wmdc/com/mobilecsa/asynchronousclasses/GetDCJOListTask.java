@@ -189,6 +189,7 @@ public class GetDCJOListTask extends AsyncTask<String, String, String> {
                     R.anim.pop_exit);
             fragmentTransaction.replace(R.id.content_main, dcFrag);
             fragmentTransaction.commit();
+
         } catch (JSONException je) {
             Util.displayStackTraceArray(je.getStackTrace(),
                     Variables.ASYNCHRONOUS_PACKAGE, "JSONException", je.toString());

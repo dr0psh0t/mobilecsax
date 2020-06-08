@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-cs\\values-cs.xml",
+            "outputFile": "C:\\Users\\wmdcprog\\Documents\\Mobilecsa\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-cs\\values-cs.xml",
             "map": [
                 {
                     "source": "C:\\Users\\wmdcprog\\.gradle\\caches\\transforms-2\\files-2.1\\633bd683563eac9986c3e01ae8fd76be\\jetified-play-services-basement-11.8.0\\res\\values-cs\\values.xml",

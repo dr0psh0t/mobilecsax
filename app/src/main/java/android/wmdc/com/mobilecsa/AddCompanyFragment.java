@@ -632,7 +632,7 @@ public class AddCompanyFragment extends Fragment {
                                 File smallFile = Util.reduceBitmapFile(file);
 
                                 if (smallFile != null) {
-                                    smallFileSize = smallFile.length() + "";
+                                    smallFileSize = String.valueOf(smallFile.length());
                                     fileInputStream = new FileInputStream(smallFile);
                                 } else {
                                     Util.shortToast(getActivity(), "Small file is null.");
@@ -811,10 +811,12 @@ public class AddCompanyFragment extends Fragment {
                     } else {
                         return stringBuilder.toString();
                     }
+
                 } else {
                     return "{\"success\": false, \"reason\": \"Request did not succeed. " +
                             "Status Code: "+statusCode+"\"}";
                 }
+
             } catch (MalformedURLException | ConnectException | SocketTimeoutException e) {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "NetworkException", e.toString());
@@ -922,10 +924,10 @@ public class AddCompanyFragment extends Fragment {
             String mf = spinMFComp.getSelectedItem().toString();
             String calib = spinCalibComp.getSelectedItem().toString();
             String spareParts = spinSparePartsComp.getSelectedItem().toString();
-            String lat = "" + gpsTracker.getLatitude();
-            String lng = "" + gpsTracker.getLongitude();
             String csaId = sharedPreferences.getInt("csaId", 0) + "";
             String signature = companySignature;
+            String lat = (gpsTracker.getLatitude() > 0) ? String.valueOf(gpsTracker.getLatitude()) : "10.311106";
+            String lng = (gpsTracker.getLongitude() > 0) ? String.valueOf(gpsTracker.getLongitude()) : "123.893051";
 
             if (spinIndComp.getSelectedItem() == null) {
                 Util.longToast(getActivity(), "Select Industry"); return;

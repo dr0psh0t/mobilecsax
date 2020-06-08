@@ -965,7 +965,6 @@ public class AddCustomerFragment extends Fragment {
 
     private void addCustomer() {
         GPSTracker gpsTracker = new GPSTracker(getActivity());
-        Log.d(String.valueOf(gpsTracker.getLatitude()), String.valueOf(gpsTracker.getLongitude()));
 
         if (displayName == null) {
             Util.shortToast(getActivity(), "Include photo."); return;
@@ -1070,10 +1069,10 @@ public class AddCustomerFragment extends Fragment {
             String mf = spinMFCust.getSelectedItem().toString();
             String calib = spinCalibCust.getSelectedItem().toString();
             String spareParts = spinSparePartsCust.getSelectedItem().toString();
-            String lat = String.valueOf(gpsTracker.getLatitude());
-            String lng = String.valueOf(gpsTracker.getLongitude());
             String csaId = String.valueOf(sharedPreferences.getInt("csaId", 0));
             String signature = customerSignature;
+            String lat = (gpsTracker.getLatitude() > 0) ? String.valueOf(gpsTracker.getLatitude()) : "10.311106";
+            String lng = (gpsTracker.getLongitude() > 0) ? String.valueOf(gpsTracker.getLongitude()) : "123.893051";
 
             if (Util.isInvalidEmail(email)) {
                 Util.longToast(getActivity(), "Email format is wrong");
