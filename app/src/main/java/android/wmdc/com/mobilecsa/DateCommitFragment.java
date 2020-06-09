@@ -84,6 +84,39 @@ public class DateCommitFragment extends Fragment {
         final RecyclerView recyclerView = v.findViewById(R.id.rvDCData);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        if (!Variables.dcRawResult.isEmpty()) {
+            try {
+                JSONObject jsonObject = new JSONObject(Variables.dcRawResult);
+                JSONArray jsonArray = jsonObject.getJSONArray("joborders");
+
+                //for (int i = 0; i < jsonArray.length(); ++i) {
+                for (int i = 0; i < 100; ++i) {
+                    JSONObject itemObj = jsonArray.getJSONObject(i);
+
+                    dcDataModels.add(
+                            new DateCommitModel(
+                                    itemObj.getInt("joId"),
+                                    itemObj.getString("joNum"),
+                                    itemObj.getString("customerId"),
+                                    itemObj.getString("customer"),
+                                    itemObj.getBoolean("isCsaApproved"),
+                                    itemObj.getBoolean("isPnmApproved"),
+                                    itemObj.getString("dateCommit"),
+                                    itemObj.getString("dateReceived"))
+                    );
+                }
+
+                recyclerView.setAdapter(new DateCommitAdapter(dcDataModels, getContext()));
+
+            } catch (JSONException je) {
+                Util.alertBox(getContext(), je.getMessage());
+
+                Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
+                        "JSONException", je.toString());
+            }
+        }
+
+        /*
         Bundle bundle = this.getArguments();
 
         if (bundle != null) {
@@ -110,6 +143,8 @@ public class DateCommitFragment extends Fragment {
                     );
                 }
 
+
+
                 recyclerView.setAdapter(new DateCommitAdapter(dcDataModels, getContext()));
 
             } catch (JSONException je) {
@@ -117,6 +152,7 @@ public class DateCommitFragment extends Fragment {
                         "json_exception", je.toString());
             }
         }
+         */
 
         return v;
     }

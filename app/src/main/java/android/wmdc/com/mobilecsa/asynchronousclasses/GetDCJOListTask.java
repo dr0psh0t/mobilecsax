@@ -174,14 +174,17 @@ public class GetDCJOListTask extends AsyncTask<String, String, String> {
 
         try {
             DateCommitFragment dcFrag = new DateCommitFragment();
-            Bundle bundle = new Bundle();
-            JSONObject jsonObject = new JSONObject(result);
 
-            Variables.dcStore = jsonObject;
+            //  commented. using bundle to store large data will throw too large exception
+            //Bundle bundle = new Bundle();
+            //JSONObject jsonObject = new JSONObject(result);
+            //Variables.dcStore = jsonObject;
+            //bundle.putString("searchResult", jsonObject.toString());
+            //dcFrag.setArguments(bundle);
+            //Variables.currentPage = -1;
 
-            bundle.putString("searchResult", jsonObject.toString());
-            dcFrag.setArguments(bundle);
-            Variables.currentPage = -1;
+            //  1 way is to use static variables instead of bundles
+            Variables.dcRawResult = result;
 
             FragmentManager fragmentManager = mainActivity.getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -190,9 +193,10 @@ public class GetDCJOListTask extends AsyncTask<String, String, String> {
             fragmentTransaction.replace(R.id.content_main, dcFrag);
             fragmentTransaction.commit();
 
-        } catch (JSONException je) {
-            Util.displayStackTraceArray(je.getStackTrace(),
-                    Variables.ASYNCHRONOUS_PACKAGE, "JSONException", je.toString());
+        //} catch (JSONException je) {
+        } catch (Exception e) {
+            Util.displayStackTraceArray(e.getStackTrace(),
+                    Variables.ASYNCHRONOUS_PACKAGE, "Exception", e.toString());
         }
     }
 }

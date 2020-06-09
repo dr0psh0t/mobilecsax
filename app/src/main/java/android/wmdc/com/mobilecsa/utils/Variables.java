@@ -2,24 +2,17 @@ package android.wmdc.com.mobilecsa.utils;
 
 import org.json.JSONObject;
 
-import java.io.InputStream;
-
 /**
  * Created by wmdcprog on 12/2/2017.
  */
 
 public class Variables {
 
-    public static String modelId;
-
-    public static boolean sesionExpired = true;
-
     public static CharSequence headerTitle = "";
 
     public static JSONObject qcStore;
     public static JSONObject dcStore;
 
-    public static int customerIdForJO;
     public static String source;
 
     public static int attemptedApproves = 0;
@@ -33,5 +26,5 @@ public class Variables {
     public static int totalCount = 0;
     public static int lastPage = 0;
 
-    public static InputStream filestream;
+    public static String dcRawResult = "";
 }
