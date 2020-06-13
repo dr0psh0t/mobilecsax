@@ -316,6 +316,10 @@ public class InitialJobOrder extends Fragment {
                         } else if (trimmedQuery.length() >= 2) {
                             customerList.clear();
 
+                            if (customerJOAdapter != null) {
+                                customerJOAdapter.notifyDataSetChanged();
+                            }
+
                             customerJOAdapter = new CustomerJOAdapter(customerList, getActivity(),
                                     etCustomer, dialog, textViewCustomerId, textViewSource);
 

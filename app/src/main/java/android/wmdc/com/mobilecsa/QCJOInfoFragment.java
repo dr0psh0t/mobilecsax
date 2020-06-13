@@ -285,6 +285,12 @@ public class QCJOInfoFragment extends Fragment {
                                 pictureInfo = size;
                             }
 
+
+                            /*
+                            * This section here is to reduce the pixel under or equal to 480000
+                            * even though the reduced size of the image is under 256 KB and is
+                            * still clear.
+                            * */
                             Bitmap bmp = getBmpFromStream(fileInputStream2);
 
                             if ((bmp.getWidth() * bmp.getHeight()) > 480000) {
@@ -361,6 +367,12 @@ public class QCJOInfoFragment extends Fragment {
         return BitmapFactory.decodeStream(inputStream);
     }
 
+    /*
+    * The joborder system has an extremely demanding requirement of uploaded pictures.
+    * Here, this method reduces the total pixels not to exceed 480000. However, the result of
+    * the image is overly pixelated. This is what you get for manipulating pictures,
+    * especially pixels.
+    * */
     private Bitmap scaleBitmap(Bitmap bmp) {
 
         int oWidth = bmp.getWidth();

@@ -161,19 +161,25 @@ public class SearchCustomerTaskFromJO extends AsyncTask<String, String, String> 
 
         try {
             JSONObject jsonObject = new JSONObject(result);
+
             if (jsonObject.getInt("totalCount") > 0) {
                 JSONArray customerArray = jsonObject.getJSONArray("customers");
+
                 int arrayLength = customerArray.length();
                 int i;
 
+                customerJOList.clear();
+
                 for (i = 0; i < arrayLength; ++i) {
                     JSONObject eachCustomer = customerArray.getJSONObject(i);
+
                     customerJOList.add(new CustomerJO(
                             eachCustomer.getInt("cId"),
                             eachCustomer.getString("source"),
                             eachCustomer.getString("customer")
                     ));
                 }
+
             } else {
                 Log.e("FAILED", jsonObject.toString());
             }
@@ -181,6 +187,7 @@ public class SearchCustomerTaskFromJO extends AsyncTask<String, String, String> 
             recViewWeakReference.get().setLayoutManager(new LinearLayoutManager(mainActivity));
             recViewWeakReference.get().setAdapter(customerJOAdapter);
             recViewWeakReference.get().setItemAnimator(new DefaultItemAnimator());
+
         } catch (JSONException je) {
             Util.displayStackTraceArray(je.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                     "JSONException", je.toString());

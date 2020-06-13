@@ -162,6 +162,8 @@ public class SearchEngineTaskFromJO extends AsyncTask<String, String, String> {
                 int i;
                 int modelArrayLength = modelArray.length();
 
+                engineList.clear();
+
                 for (i = 0; i < modelArrayLength; ++i) {
                     JSONObject eachObj = modelArray.getJSONObject(i);
                     engineList.add(
