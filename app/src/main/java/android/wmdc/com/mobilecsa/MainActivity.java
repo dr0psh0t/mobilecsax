@@ -17,7 +17,6 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-//import android.wmdc.com.mobilecsa.adapter.WorkOrderAdapter;
 import android.wmdc.com.mobilecsa.asynchronousclasses.SearchContactTask;
 import android.wmdc.com.mobilecsa.asynchronousclasses.SearchCustomerTask;
 import android.wmdc.com.mobilecsa.asynchronousclasses.SearchJONumberDCTask;
@@ -36,6 +35,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
+
+/**
+ * Created by wmdcprog on 7/2/2018.
+ */
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

@@ -419,7 +419,7 @@ public class SwipeButton extends RelativeLayout {
                 parameters.put("woid", params[3]);
 
                 URL url = new URL(taskPrefs.getString("domain", null)+"approvemcsaqc");
-                //URL url = new URL("http://192.168.1.30:8080/mcsa/loggers");
+                //URL url = new URL("http://192.168.1.30:8080/mcsa/savephoto");
 
                 String lineEnd = "\r\n";
                 String twoHyphens = "--";

@@ -56,6 +56,7 @@ public class JoSearchInfoFragment extends Fragment {
             recyclerView.setLayoutParams(params);
 
             try {
+
                 JSONObject object = new JSONObject(bundle.getString("result"));
 
                 if (getActivity() != null) {

@@ -14,7 +14,6 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
-import android.renderscript.ScriptGroup;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -275,6 +274,7 @@ public class QCJOInfoFragment extends Fragment {
                                     pictureInfo = String.valueOf(smallFile.length());
                                     fileInputStream = new FileInputStream(smallFile);
                                     fileInputStream2 = new FileInputStream(smallFile);
+
                                 } else {
                                     Util.shortToast(getActivity(), "Small file is null.");
                                 }
@@ -284,7 +284,6 @@ public class QCJOInfoFragment extends Fragment {
                                 fileInputStream2 = Util.getStreamFromUri(uri, getActivity());
                                 pictureInfo = size;
                             }
-
 
                             /*
                             * This section here is to reduce the pixel under or equal to 480000
@@ -358,6 +357,7 @@ public class QCJOInfoFragment extends Fragment {
             if (!isCsaQC) {
                 dialog.show();
             }
+
         } else {
             Util.longToast(getContext(), "Activity is null. Cannot show dialog swipe.");
         }
@@ -398,8 +398,7 @@ public class QCJOInfoFragment extends Fragment {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 0 /*ignored for PNG*/, bos);
         byte[] bitmapdata = bos.toByteArray();
-        ByteArrayInputStream bs = new ByteArrayInputStream(bitmapdata);
 
-        return bs;
+        return new ByteArrayInputStream(bitmapdata);
     }
 }

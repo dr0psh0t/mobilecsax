@@ -15,6 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+/**
+ * Created by wmdcprog on 7/2/2018.
+ */
+
 public class SettingsActivity extends AppCompatActivity {
 
     @Override

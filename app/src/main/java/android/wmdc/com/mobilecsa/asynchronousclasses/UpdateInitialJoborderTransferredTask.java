@@ -29,6 +29,10 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Created by wmdcprog on 7/2/2018.
+ */
+
 public class UpdateInitialJoborderTransferredTask extends AsyncTask<String, String, String> {
 
     private WeakReference<FragmentActivity> weakReference;

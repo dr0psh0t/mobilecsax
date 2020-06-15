@@ -18,6 +18,10 @@ import com.github.chrisbanes.photoview.PhotoView;
 
 import java.lang.ref.WeakReference;
 
+/**
+ * Created by wmdcprog on 7/2/2018.
+ */
+
 public class DialogImageUriTask extends AsyncTask<Uri, String, Uri> {
 
     private WeakReference<FragmentActivity> weakReference;

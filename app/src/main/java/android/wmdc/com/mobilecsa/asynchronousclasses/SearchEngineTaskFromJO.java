@@ -34,7 +34,9 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-/**Created by wmdcprog on 7/2/2018.*/
+/**
+ * Created by wmdcprog on 7/2/2018.
+ * */
 
 public class SearchEngineTaskFromJO extends AsyncTask<String, String, String> {
 
@@ -156,6 +158,7 @@ public class SearchEngineTaskFromJO extends AsyncTask<String, String, String> {
 
         try {
             JSONObject jsonObject = new JSONObject(result);
+
             if (jsonObject.getInt("totalCount") > 0) {
                 JSONArray modelArray = jsonObject.getJSONArray("models");
 
@@ -166,6 +169,7 @@ public class SearchEngineTaskFromJO extends AsyncTask<String, String, String> {
 
                 for (i = 0; i < modelArrayLength; ++i) {
                     JSONObject eachObj = modelArray.getJSONObject(i);
+
                     engineList.add(
                         new Engine(
                             eachObj.getString("makeId"),
@@ -176,12 +180,15 @@ public class SearchEngineTaskFromJO extends AsyncTask<String, String, String> {
                             eachObj.getString("make")
                         ));
                 }
+
             } else {
                 Log.e("FAILED", jsonObject.toString());
             }
+
             recViewWeakReference.get().setLayoutManager(new LinearLayoutManager(mainActivity));
             recViewWeakReference.get().setAdapter(engineJOAdapter);
             recViewWeakReference.get().setItemAnimator(new DefaultItemAnimator());
+
         } catch (JSONException je) {
             Util.displayStackTraceArray(je.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                     "JSONException", je.toString());
