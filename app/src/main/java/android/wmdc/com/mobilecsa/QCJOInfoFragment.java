@@ -247,8 +247,8 @@ public class QCJOInfoFragment extends Fragment {
 
                         if (cursor != null && cursor.moveToFirst()) {
 
-                            String photoName = cursor.getString(cursor.getColumnIndex(
-                                    OpenableColumns.DISPLAY_NAME));
+                            //String photoName = cursor.getString(cursor.getColumnIndex(
+                                    //OpenableColumns.DISPLAY_NAME));
 
                             int sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE);
                             String size;
@@ -286,9 +286,9 @@ public class QCJOInfoFragment extends Fragment {
                             }
 
                             /*
-                            * This section here is to reduce the pixel under or equal to 480000
-                            * even though the reduced size of the image is under 256 KB and is
-                            * still clear.
+                            * This section here is to reduce the pixel to under or equal to 480000.
+                            * comment this pixel-reduce code if you want to then remove
+                            * fileInputStream2 identifier from this file.
                             * */
                             Bitmap bmp = getBmpFromStream(fileInputStream2);
 
@@ -296,6 +296,7 @@ public class QCJOInfoFragment extends Fragment {
                                 //  reduce height and width
                                 fileInputStream = getStreamFromBmp(scaleBitmap(bmp));
                             }
+                            //  end pixel reducing
 
                             pd.cancel();
 
@@ -327,8 +328,43 @@ public class QCJOInfoFragment extends Fragment {
         pdHandler.postDelayed(pdRun, 2000);
     }
 
+    private Bitmap getBmpFromStream(InputStream inputStream) {
+        return BitmapFactory.decodeStream(inputStream);
+    }
+
+    //  The joborder system has an extremely demanding requirement of uploaded pictures.
+    //  Here, this method reduces the total pixels <= 480000.
+    private Bitmap scaleBitmap(Bitmap bmp) {
+
+        int oWidth = bmp.getWidth();
+        int oHeight = bmp.getHeight();
+
+        int nWidth = oWidth;
+        int nHeight = oHeight;
+
+        int tPixels = oWidth * oHeight;
+
+        while (tPixels > 480000) {
+            nWidth = (int)(nWidth - (nWidth * 0.05));
+            nHeight = (int)(nHeight - (oHeight * 0.05));
+
+            tPixels = nWidth * nHeight;
+        }
+
+        return Bitmap.createScaledBitmap(bmp, nWidth, nHeight, true);
+    }
+
+    private InputStream getStreamFromBmp(Bitmap bmp) {
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 0 /*ignored for PNG*/, bos);
+        byte[] bitmapdata = bos.toByteArray();
+
+        return new ByteArrayInputStream(bitmapdata);
+    }
+
     private void showSwipe(int csaId, int joId, int workorderId, ImageView ivItemStatQC,
-                          WorkOrderModel workOrderModel) {
+                           WorkOrderModel workOrderModel) {
 
         if (getActivity() != null) {
             final Dialog dialog = new Dialog(getActivity());
@@ -361,44 +397,5 @@ public class QCJOInfoFragment extends Fragment {
         } else {
             Util.longToast(getContext(), "Activity is null. Cannot show dialog swipe.");
         }
-    }
-
-    private Bitmap getBmpFromStream(InputStream inputStream) {
-        return BitmapFactory.decodeStream(inputStream);
-    }
-
-    /*
-    * The joborder system has an extremely demanding requirement of uploaded pictures.
-    * Here, this method reduces the total pixels not to exceed 480000. However, the result of
-    * the image is overly pixelated. This is what you get for manipulating pictures,
-    * especially pixels.
-    * */
-    private Bitmap scaleBitmap(Bitmap bmp) {
-
-        int oWidth = bmp.getWidth();
-        int oHeight = bmp.getHeight();
-
-        int nWidth = oWidth;
-        int nHeight = oHeight;
-
-        int tPixels = oWidth * oHeight;
-
-        while (tPixels > 480000) {
-            nWidth = (int)(nWidth - (nWidth * 0.05));
-            nHeight = (int)(nHeight - (oHeight * 0.05));
-
-            tPixels = nWidth * nHeight;
-        }
-
-        return Bitmap.createScaledBitmap(bmp, nWidth, nHeight, false);
-    }
-
-    private InputStream getStreamFromBmp(Bitmap bmp) {
-
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 0 /*ignored for PNG*/, bos);
-        byte[] bitmapdata = bos.toByteArray();
-
-        return new ByteArrayInputStream(bitmapdata);
     }
 }

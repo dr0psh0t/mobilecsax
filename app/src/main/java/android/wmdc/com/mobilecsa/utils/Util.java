@@ -358,7 +358,6 @@ public class Util {
             prior to construction (and memory allocation) of the bitmap.
              */
             options.inJustDecodeBounds = true;
-
             options.inSampleSize = 6;
 
             FileInputStream inputStream = new FileInputStream(file);
@@ -366,7 +365,11 @@ public class Util {
             inputStream.close();
 
             //  the new size we want to scale to
-            final int REQUIRED_SIZE = 75;
+            //  final int REQUIRED_SIZE = 75; //    75 too large.
+            /*  55 works great in oppo a83. it averages 140 KB from 3 MB of original average. great camera.
+            *   beware of low quality camera apps. they output to above 250 KB.
+            * */
+            final int REQUIRED_SIZE = 55;
 
             //  find the correct scale value. it should be the power of 2.
             int scale = 1;
@@ -384,7 +387,7 @@ public class Util {
             inputStream.close();
 
             //  here override the original image file
-            System.out.println("file.createNewFile status= "+file.createNewFile());
+            Log.d("createNewFile status", String.valueOf(file.createNewFile()));
 
             FileOutputStream outputStream = new FileOutputStream(file);
 

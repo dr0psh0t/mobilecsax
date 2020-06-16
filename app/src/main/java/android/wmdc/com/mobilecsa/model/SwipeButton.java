@@ -885,7 +885,8 @@ public class SwipeButton extends RelativeLayout {
                 Uri.Builder build = new Uri.Builder()
                         .appendQueryParameter("joid", params[0])
                         .appendQueryParameter("cid", params[1])
-                        .appendQueryParameter("source", params[2]);
+                        .appendQueryParameter("source", params[2])
+                        .appendQueryParameter("akey", taskPrefs.getString("apiKey", null));
 
                 OutputStream os = conn.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os,

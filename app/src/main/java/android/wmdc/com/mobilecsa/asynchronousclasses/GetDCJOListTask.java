@@ -73,7 +73,9 @@ public class GetDCJOListTask extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String[] params) {
         try {
-            URL url = new URL(sharedPreferences.getString("domain", null)+"getdclist");
+
+            URL url = new URL(sharedPreferences.getString("domain", null)+"getdclist"); //  GetDateCommitList
+
             conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(Util.READ_TIMEOUT);
             conn.setConnectTimeout(Util.CONNECTION_TIMEOUT);
@@ -94,7 +96,9 @@ public class GetDCJOListTask extends AsyncTask<String, String, String> {
 
             Uri.Builder builder = new Uri.Builder()
                     .appendQueryParameter("cid", params[0])
-                    .appendQueryParameter("source", params[1]);
+                    .appendQueryParameter("source", params[1])
+                    .appendQueryParameter("akey", sharedPreferences.getString("apiKey", null));
+
             String query = builder.build().getEncodedQuery();
 
             OutputStream os = conn.getOutputStream();
@@ -173,7 +177,7 @@ public class GetDCJOListTask extends AsyncTask<String, String, String> {
 
             //  commented. using bundle to store large data will throw too large exception
             //Bundle bundle = new Bundle();
-            //JSONObject jsonObject = new JSONObject(result);
+            //JSONObject jsonObject = new  JSONObject(result);
             //Variables.dcStore = jsonObject;
             //bundle.putString("searchResult", jsonObject.toString());
             //dcFrag.setArguments(bundle);
