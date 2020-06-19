@@ -1,6 +1,9 @@
 package android.wmdc.com.mobilecsa;
 
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,11 +19,15 @@ import androidx.fragment.app.FragmentTransaction;
 /**Created by wmdcprog on 4/13/2018.*/
 
 public class HomeFragment extends Fragment {
+    private String usedUrl;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle instanceState) {
         View v = inflater.inflate(R.layout.home_fragment, container, false);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        usedUrl = prefs.getString("domain", null);
 
         if (getActivity() != null) {
             getActivity().setTitle("Home");
@@ -53,6 +60,10 @@ public class HomeFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+
+        if (!usedUrl.equals("http://192.168.1.150:8080/mcsa/") && !usedUrl.equals("http://122.3.176.235:1959/mcsa/")) {
+            btnCRM.setVisibility(View.INVISIBLE);
+        }
 
         return v;
     }

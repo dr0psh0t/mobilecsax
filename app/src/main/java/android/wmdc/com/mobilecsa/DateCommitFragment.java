@@ -89,8 +89,9 @@ public class DateCommitFragment extends Fragment {
                 JSONObject jsonObject = new JSONObject(Variables.dcRawResult);
                 JSONArray jsonArray = jsonObject.getJSONArray("joborders");
 
-                //for (int i = 0; i < jsonArray.length(); ++i) {
-                for (int i = 0; i < 100; ++i) {
+                int loopLen = Math.min(jsonArray.length(), 100);
+
+                for (int i = 0; i < loopLen; ++i) {
                     JSONObject itemObj = jsonArray.getJSONObject(i);
 
                     dcDataModels.add(
@@ -115,44 +116,6 @@ public class DateCommitFragment extends Fragment {
                         "JSONException", je.toString());
             }
         }
-
-        /*
-        Bundle bundle = this.getArguments();
-
-        if (bundle != null) {
-            String searchResult = bundle.getString("searchResult");
-            dcDataModels.clear();
-
-            try {
-                JSONObject jsonObject = new JSONObject(searchResult);
-                JSONArray jsonArray = jsonObject.getJSONArray("joborders");
-
-                for (int i = 0; i < jsonArray.length(); ++i) {
-                    JSONObject itemObj = jsonArray.getJSONObject(i);
-
-                    dcDataModels.add(
-                        new DateCommitModel(
-                            itemObj.getInt("joId"),
-                            itemObj.getString("joNum"),
-                            itemObj.getString("customerId"),
-                            itemObj.getString("customer"),
-                            itemObj.getBoolean("isCsaApproved"),
-                            itemObj.getBoolean("isPnmApproved"),
-                            itemObj.getString("dateCommit"),
-                            itemObj.getString("dateReceived"))
-                    );
-                }
-
-
-
-                recyclerView.setAdapter(new DateCommitAdapter(dcDataModels, getContext()));
-
-            } catch (JSONException je) {
-                Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
-                        "json_exception", je.toString());
-            }
-        }
-         */
 
         return v;
     }

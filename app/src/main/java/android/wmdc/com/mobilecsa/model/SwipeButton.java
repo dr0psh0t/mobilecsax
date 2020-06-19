@@ -18,7 +18,6 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -549,103 +548,6 @@ public class SwipeButton extends RelativeLayout {
                 }
             }
         }
-
-        /* this doInBackground method is used for qc without photo
-        @Override
-        protected String doInBackground(String[] params) {
-            try {
-                parameters.put("joid", params[0]);
-                parameters.put("cid", params[1]);
-                parameters.put("source", params[2]);
-                parameters.put("woid", params[3]);
-
-                URL url = new URL(taskPrefs.getString("domain", null)+"approvemcsaqc");
-
-                conn = (HttpURLConnection) url.openConnection();
-                conn.setReadTimeout(5000);
-                conn.setConnectTimeout(5000);
-                conn.setRequestMethod("POST");
-
-                conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
-                conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
-                conn.setRequestProperty("Connection", "keep-alive");
-                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-                conn.setRequestProperty("Cookie",
-                        "JSESSIONID="+taskPrefs.getString("sessionId", null));
-                conn.setRequestProperty("Host", "localhost:8080");
-                conn.setRequestProperty("Referer", "Approve-Date-Commit");
-                conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1: Win64; x64; " +
-                        "rv:59.0) Gecko/20100101 Firefox/59.0");
-                conn.setRequestProperty("X-Requested-Width", "XMLHttpRequest");
-                conn.setDoInput(true);
-                conn.setDoOutput(true);
-
-                Uri.Builder build = new Uri.Builder()
-                        .appendQueryParameter("joid", params[0])
-                        .appendQueryParameter("cid", params[1])
-                        .appendQueryParameter("source", params[2])
-                        .appendQueryParameter("woid", params[3]);
-
-                OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8));
-
-                writer.write(build.build().getEncodedQuery());
-                writer.flush();
-                writer.close();
-                os.close();
-                conn.connect();
-
-                int statusCode = conn.getResponseCode();
-
-                if (statusCode == HttpURLConnection.HTTP_OK) {
-                    StringBuilder stringBuilder = new StringBuilder();
-                    InputStream inputStream = new BufferedInputStream(conn.getInputStream());
-                    BufferedReader bufferedReader = new BufferedReader(
-                            new InputStreamReader(inputStream));
-                    String inputLine;
-
-                    while ((inputLine = bufferedReader.readLine()) != null) {
-                        stringBuilder.append(inputLine);
-                    }
-
-                    inputStream.close();
-                    bufferedReader.close();
-
-                    if (stringBuilder.toString().isEmpty()) {
-                        return "{\"success\": false, \"reason\": \"No response from server.\"}";
-                    } else {
-                        return stringBuilder.toString();
-                    }
-                } else {
-                    return "{\"success\": false, \"reason\": \"Request did not succeed. " +
-                            "Status Code: "+statusCode+"\"}";
-                }
-
-            } catch (MalformedURLException | ConnectException | SocketTimeoutException e) {
-                Util.displayStackTraceArray(e.getStackTrace(), Variables.MODEL_PACKAGE,
-                        "network_exception", e.toString());
-
-                if (e instanceof MalformedURLException) {
-                    return "{\"success\": false, \"reason\": \"Malformed URL.\"}";
-                } else if (e instanceof ConnectException) {
-                    return "{\"success\": false, \"reason\": \"Cannot connect to server. " +
-                            "Check wifi or mobile data and check if server is available.\"}";
-                } else {
-                    return "{\"success\": false, \"reason\": \"Connection timed out. " +
-                            "The server is taking too long to reply.\"}";
-                }
-
-            } catch (Exception e) {
-                Util.displayStackTraceArray(e.getStackTrace(), Variables.MODEL_PACKAGE,
-                        "exception", e.toString());
-                return "{\"success\": false, \"reason\": \""+e.getMessage()+"\"}";
-
-            } finally {
-                if (conn != null) {
-                    conn.disconnect();
-                }
-            }
-        }*/
 
         @Override
         protected void onPostExecute(String result) {

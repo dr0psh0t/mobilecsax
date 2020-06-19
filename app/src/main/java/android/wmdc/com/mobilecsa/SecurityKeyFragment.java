@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -199,11 +198,6 @@ public class SecurityKeyFragment extends Fragment {
                     spEditor.putString("user", responseJson.getString("username"));
                     spEditor.putInt("csaId", responseJson.getInt("csaId"));
                     spEditor.putString("csaFullName", responseJson.getString("csaFullName"));
-                    spEditor.putString("publicAddressNorth",
-                            responseJson.getString("publicAddressNorth"));
-                    spEditor.putString("localAddressNorth",
-                            responseJson.getString("localAddressNorth"));
-                    spEditor.putString("apiKey", responseJson.getString("apiKey"));
                     spEditor.apply();
 
                     securityActivity.startActivity(new Intent(securityActivity,
