@@ -62,7 +62,7 @@ public class HomeFragment extends Fragment {
         });
 
         if (!usedUrl.equals("http://192.168.1.150:8080/mcsa/") && !usedUrl.equals("http://122.3.176.235:1959/mcsa/")) {
-            btnCRM.setVisibility(View.INVISIBLE);
+            //btnCRM.setVisibility(View.INVISIBLE);
         }
 
         return v;
