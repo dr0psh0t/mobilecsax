@@ -991,8 +991,6 @@ public class InitialJobOrder extends Fragment {
                     inputStream.close();
                     bufferedReader.close();
 
-                    Log.d("result", stringBuilder.toString());
-
                     if (stringBuilder.toString().isEmpty()) {
                         return "{\"success\": false, \"reason\": \"No response from server.\"}";
                     } else {
