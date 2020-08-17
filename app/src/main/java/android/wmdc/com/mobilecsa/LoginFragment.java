@@ -99,6 +99,7 @@ public class LoginFragment extends Fragment {
             loginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     String userStr = user.getText().toString();
                     String passStr = pass.getText().toString();
                     String address = sPrefs.getString("domain", null);
@@ -143,23 +144,34 @@ public class LoginFragment extends Fragment {
 	public void setTitle(FragmentActivity fragmentActivity) {
         String domain = sPrefs.getString("domain", null);
 
+        System.out.println("domain= "+domain);
+
         if (domain != null) {
 
             switch (domain) {
                 case "http://122.3.176.235:1959/mcsa/":
+                    fragmentActivity.setTitle("North-sim");
+                    break;
                 case "http://192.168.1.150:8080/mcsa/":
-                    fragmentActivity.setTitle("North");
+                    fragmentActivity.setTitle("North-wifi");
                     break;
                 case "http://122.52.48.202:3316/mcsa/":
+                    fragmentActivity.setTitle("Central-sim");
+                    break;
                 case "http://192.168.1.149:8080/mcsa/":
-                    fragmentActivity.setTitle("Central");
+                    fragmentActivity.setTitle("Central-wifi");
                     break;
                 case "http://122.52.155.109:1116/mcsa/":
-                case "http://":
-                    fragmentActivity.setTitle("South");
+                    fragmentActivity.setTitle("South-sim");
+                    break;
+                case "http://192.168.2.99:8080/mcsa/":
+                    fragmentActivity.setTitle("South-wifi");
                     break;
                 case "http://122.3.176.235:1188/mcsa/":
-                    fragmentActivity.setTitle("Dumaguete");
+                    fragmentActivity.setTitle("Dumaguete-sim");
+                    break;
+                case "http://192.168.1.158:8080/mcsa/":
+                    fragmentActivity.setTitle("Dumaguete-wifi");
                     break;
             }
 

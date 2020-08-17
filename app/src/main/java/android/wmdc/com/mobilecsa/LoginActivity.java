@@ -102,20 +102,15 @@ public class LoginActivity extends AppCompatActivity {
         }*/
 
         if (sPrefs.getString("user", null) == null) {
-
             FragmentTransaction fragmentTransaction = getSupportFragmentManager()
                     .beginTransaction();
-
-            //fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter,
-                    //R.anim.pop_exit);
-
             fragmentTransaction.replace(R.id.content_login, new LoginFragment());
-
             fragmentTransaction.commit();
 
         } else {
-            new SessionExpiryTask(this).execute(sPrefs.getString("user", null),
-                    sPrefs.getString("sessionId", null), String.valueOf(sPrefs.getInt("csaId", 0)));
+            new SessionExpiryTask(this).execute(
+                    sPrefs.getString("user", null), sPrefs.getString("sessionId", null),
+                    String.valueOf(sPrefs.getInt("csaId", 0)));
         }
 
         //  CHECKING OF PERMISSION

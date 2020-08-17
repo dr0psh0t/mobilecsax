@@ -63,9 +63,10 @@ public class GetQCJOListTask extends AsyncTask<String, String, String> {
     protected String doInBackground(String[] params) {
         try {
             URL url = new URL(sharedPreferences.getString("domain", null)+"getqclist");
+
             conn = (HttpURLConnection) url.openConnection();
-            conn.setReadTimeout(60_000);
-            conn.setConnectTimeout(60_000);
+            conn.setReadTimeout(Util.READ_TIMEOUT);
+            conn.setConnectTimeout(Util.CONNECTION_TIMEOUT);
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Accept", "*/*");
             conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
@@ -144,6 +145,7 @@ public class GetQCJOListTask extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String result) {
+
         progressDialog.dismiss();
 
         FragmentActivity mainActivity = weakReference.get();
@@ -158,7 +160,8 @@ public class GetQCJOListTask extends AsyncTask<String, String, String> {
             Variables.totalCount = jsonObject.getInt("totalCount");
             Variables.lastPage = Variables.totalCount / 36;
 
-            if (jsonObject.getBoolean("success")) {
+            if (jsonObject.getInt("totalCount") > 0) {
+
                 QualityCheckFragment qcFrag = new QualityCheckFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("searchResult", jsonObject.toString());
@@ -172,6 +175,7 @@ public class GetQCJOListTask extends AsyncTask<String, String, String> {
                         R.anim.pop_exit);
                 fragmentTransaction.replace(R.id.content_main, qcFrag);
                 fragmentTransaction.commit();
+
             } else {
                 Util.alertBox(mainActivity, jsonObject.getString("reason"));
             }

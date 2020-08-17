@@ -45,6 +45,8 @@ public class MapsActivity extends AppCompatActivity implements
     private double lat;
     private double lng;
 
+    //
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

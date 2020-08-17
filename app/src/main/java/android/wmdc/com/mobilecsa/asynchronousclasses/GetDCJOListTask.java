@@ -73,8 +73,7 @@ public class GetDCJOListTask extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String[] params) {
         try {
-
-            URL url = new URL(sharedPreferences.getString("domain", null)+"getdclist"); //  GetDateCommitList
+            URL url = new URL(sharedPreferences.getString("domain", null)+"getdclist");
 
             conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(Util.READ_TIMEOUT);
@@ -96,8 +95,7 @@ public class GetDCJOListTask extends AsyncTask<String, String, String> {
 
             Uri.Builder builder = new Uri.Builder()
                     .appendQueryParameter("cid", params[0])
-                    .appendQueryParameter("source", params[1])
-                    .appendQueryParameter("akey", sharedPreferences.getString("apiKey", null));
+                    .appendQueryParameter("source", params[1]);
 
             String query = builder.build().getEncodedQuery();
 

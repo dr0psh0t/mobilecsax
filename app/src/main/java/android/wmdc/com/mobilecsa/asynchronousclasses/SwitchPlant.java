@@ -111,7 +111,7 @@ public class SwitchPlant {
                     editor.putString("branch", branch);
                     editor.apply();
 
-                    fragAct.setTitle(branch);
+                    fragAct.setTitle(branch+"-Wifi");
 
                     Util.shortToast(fragAct, "You are now connected to "+branch+".");
 
@@ -201,7 +201,7 @@ public class SwitchPlant {
                     editor.putString("branch", branch);
                     editor.apply();
 
-                    fragAct.setTitle(branch);
+                    fragAct.setTitle(branch+"-Sim");
 
                     Util.longToast(fragAct, "You are now connected to "+branch+".");
 

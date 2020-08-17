@@ -22,14 +22,14 @@
     <string name="title_activity_security_key">SecurityKeyActivity</string>
     <string name="security_key">Security Key</string>
     <string name="ok">OK</string>
-    <string name="select_industry">Industry:</string>
+    <string name="select_industry">Industry *:</string>
     <string name="select_plant">Plant:</string>
     <string name="select_city">City:</string>
     <string name="select_province">Province:</string>
     <string name="select_country">Country:</string>
     <string name="fax">Fax</string>
     <string name="tele">Telephone</string>
-    <string name="mobile">Mobile</string>
+    <string name="mobile">Mobile *</string>
     <string name="email">Email</string>
     <string name="website">Website</string>
     <string name="emergency">Emergency</string>
@@ -124,7 +124,7 @@
     <string name="search_crm">Search Crm</string>
     <string name="search_init">Search Initial</string>
     <string name="check">Check</string>
-    <string name="version">07-15-2020</string>
+    <string name="version">08-15-2020</string>
     <string name="photo_prob">Problem occured in displaying photo</string>
     <string name="relogin">Relogin to continue</string>
     <string name="customerId">Customer Id</string>

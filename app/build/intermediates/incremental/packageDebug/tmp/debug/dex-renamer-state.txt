@@ -1,4 +1,4 @@
-#Wed Jul 15 10:14:35 CST 2020
+#Sat Aug 15 10:26:18 CST 2020
 base.0=D\:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\dex\\debug\\out\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

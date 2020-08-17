@@ -89,7 +89,8 @@ public class DateCommitFragment extends Fragment {
                 JSONObject jsonObject = new JSONObject(Variables.dcRawResult);
                 JSONArray jsonArray = jsonObject.getJSONArray("joborders");
 
-                int loopLen = Math.min(jsonArray.length(), 100);
+                int loopLen = Math.min(jsonArray.length(), 50);
+                //int loopLen = jsonArray.length() - 1;
 
                 for (int i = 0; i < loopLen; ++i) {
                     JSONObject itemObj = jsonArray.getJSONObject(i);

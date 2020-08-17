@@ -64,7 +64,7 @@ public class QualityCheckFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        setPage(Variables.currentPage, tvPage);
+        //setPage(Variables.currentPage, tvPage);
     }
 
     @Nullable
@@ -108,8 +108,8 @@ public class QualityCheckFragment extends Fragment {
         });
 
         tvPage = v.findViewById(R.id.tvPage);
-        String txt = Variables.currentPage+" of "+Variables.lastPage;
-        tvPage.setText(txt);
+        //String txt = Variables.currentPage+" of "+Variables.lastPage;
+        tvPage.setText(String.valueOf(Variables.currentPage));
 
         final RecyclerView recyclerView = v.findViewById(R.id.rvQCData);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -179,11 +179,11 @@ public class QualityCheckFragment extends Fragment {
     }
 
     private void setPage(int currentPage, TextView tvPage) {
-        String txt = Variables.currentPage+" of "+Variables.lastPage;
-        tvPage.setText(txt);
 
-        new SetPageTask(getActivity()).execute(String.valueOf(sharedPreferences.getInt("csaId", 0)),
-                "mcsa", String.valueOf(currentPage));
+        new SetPageTask(getActivity(), tvPage).execute(
+                String.valueOf(sharedPreferences.getInt("csaId", 0)),
+                "mcsa",
+                String.valueOf(currentPage));
     }
 
     private static class SetPageTask extends AsyncTask<String, String, String> {
@@ -196,13 +196,13 @@ public class QualityCheckFragment extends Fragment {
 
         private HttpURLConnection conn = null;
 
-        //private TextView tvPage;
+        private WeakReference<TextView> tvPageWeakReference;
 
-        private SetPageTask(FragmentActivity activity/*, TextView tvPage*/) {
+        private SetPageTask(FragmentActivity activity, TextView tvPage) {
             activityWeakReference = new WeakReference<>(activity);
             this.taskPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
             this.progressDialog = new ProgressDialog(activity);
-            //this.tvPage = tvPage;
+            this.tvPageWeakReference = new WeakReference<>(tvPage);
         }
 
         @Override
@@ -239,6 +239,7 @@ public class QualityCheckFragment extends Fragment {
                 conn.setDoOutput(true);
 
                 Uri.Builder builder = new Uri.Builder()
+                        .appendQueryParameter("akey", taskPrefs.getString("aKey", null))
                         .appendQueryParameter("cid", params[0])
                         .appendQueryParameter("source", params[1])
                         .appendQueryParameter("page", params[2]);
@@ -305,6 +306,8 @@ public class QualityCheckFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
+            System.out.println("result= "+result);
+
             progressDialog.dismiss();
 
             FragmentActivity mainActivity = activityWeakReference.get();
@@ -316,6 +319,7 @@ public class QualityCheckFragment extends Fragment {
             try {
                 JSONObject jsonObject = new JSONObject(result);
                 Variables.qcStore = jsonObject;
+
                 JSONArray jsonArray = jsonObject.getJSONArray("joborders");
                 int jobordersArrayLength = jsonArray.length();
 
@@ -344,12 +348,14 @@ public class QualityCheckFragment extends Fragment {
 
                     qcAdapter.replaceAdapterList(qcDataModels);
 
+                    tvPageWeakReference.get().setText(String.valueOf(Variables.currentPage));
+
                 } else {
-                    Util.alertBox(mainActivity, "Empty List");
+                    Util.alertBox(mainActivity, "End of page");
                 }
+
             } catch (JSONException je) {
-                Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
-                        "JSONException", je.toString());
+                Util.alertBox(activityWeakReference.get(), je.getMessage());
             }
         }
     }

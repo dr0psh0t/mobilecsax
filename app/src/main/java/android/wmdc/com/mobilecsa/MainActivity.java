@@ -302,6 +302,7 @@ public class MainActivity extends AppCompatActivity
                     public void run() {
                         progress2.cancel();
                         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        //intent.putExtra("logoutStatus", 1);
                         startActivity(intent);
                         finish();
                     }

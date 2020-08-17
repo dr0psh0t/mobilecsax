@@ -716,7 +716,7 @@
     <string name="mf">MF (%):</string>
     <string name="mi_req">MI *</string>
     <string name="mob_req">Mobile *</string>
-    <string name="mobile">Mobile</string>
+    <string name="mobile">Mobile *</string>
     <string name="modelId">Model Id</string>
     <string name="more">More</string>
     <string name="mtrl_chip_close_icon_content_description">Remove %1$s</string>
@@ -771,7 +771,7 @@
     <string name="security_key">Security Key</string>
     <string name="select_city">City:</string>
     <string name="select_country">Country:</string>
-    <string name="select_industry">Industry:</string>
+    <string name="select_industry">Industry *:</string>
     <string name="select_plant">Plant:</string>
     <string name="select_province">Province:</string>
     <string name="serial_no_req">Serial No *</string>
@@ -796,7 +796,7 @@
     <string name="user">Username</string>
     <string name="user_email">android.studio@android.com</string>
     <string name="value">Value</string>
-    <string name="version">07-15-2020</string>
+    <string name="version">08-15-2020</string>
     <string name="website">Website</string>
     <string name="yes">Yes</string>
     <string name="zip_code_req">Zip Code *</string>

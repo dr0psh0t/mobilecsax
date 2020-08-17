@@ -132,7 +132,6 @@ public class Util {
         AlertDialog.Builder warningBox = new AlertDialog.Builder(context);
 
         warningBox.setMessage(msg);
-        warningBox.setCancelable(false);
 
         warningBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
