@@ -19,7 +19,7 @@ import androidx.fragment.app.FragmentTransaction;
 /**Created by wmdcprog on 4/13/2018.*/
 
 public class HomeFragment extends Fragment {
-    private String usedUrl;
+    //private String usedUrl;
 
     @Nullable
     @Override
@@ -27,7 +27,7 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.home_fragment, container, false);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-        usedUrl = prefs.getString("domain", null);
+        String usedUrl = prefs.getString("domain", null);
 
         if (getActivity() != null) {
             getActivity().setTitle("Home");

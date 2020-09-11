@@ -570,41 +570,6 @@ public class SwipeButton extends RelativeLayout {
                                 ivItemStatQCWeakReference.get().setImageResource(
                                         R.drawable.ic_action_check_colored_round);
 
-                                TextView text = new TextView(activityWeakReference.get());
-                                text.setText(R.string.qc_approve_msg);
-                                text.setTextSize(17);
-                                text.setPadding(20, 0, 10, 0);
-                                text.setGravity(Gravity.CENTER_HORIZONTAL);
-
-                                AlertDialog.Builder alertBox = new AlertDialog.Builder(
-                                        activityWeakReference.get());
-
-                                alertBox.setView(text);
-                                alertBox.setTitle("Approved");
-                                alertBox.setPositiveButton("OK",
-                                        new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                if (dialogWeakReference.get() != null) {
-                                                    dialogWeakReference.get().cancel();
-                                                }
-                                            }
-                                        });
-
-                                AlertDialog dialog = alertBox.create();
-                                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-                                if (dialog.getWindow() != null) {
-                                    WindowManager.LayoutParams wmlp = dialog.getWindow()
-                                            .getAttributes();
-
-                                    wmlp.gravity = Gravity.TOP;
-                                    wmlp.y = 200;
-                                    dialog.show();
-                                } else {
-                                    Util.alertBox(activityWeakReference.get(), "Can't open dialog");
-                                }
-
                             } else {
                                 //moveButtonBack(); commented because swipeButtonWeakReference.get().slidingButton it causes null
 
@@ -866,38 +831,19 @@ public class SwipeButton extends RelativeLayout {
                             if (resJson.getBoolean("success")) {
                                 DCValueInfoAdapter.setIconOnApprovedDC();
 
-                                TextView text = new TextView(activityWeakReference.get());
-                                text.setText(R.string.dc_approve_msg);
-                                text.setTextSize(17);
-                                text.setPadding(20, 0, 10, 0);
-                                text.setGravity(Gravity.CENTER_HORIZONTAL);
+                                for (DateCommitModel dateCommitModel
+                                        : swipeButtonWeakReference.get().dcData) {
 
-                                AlertDialog.Builder alertBox = new AlertDialog.Builder(
-                                        activityWeakReference.get());
-                                alertBox.setView(text);
-                                alertBox.setTitle("Approved");
-                                alertBox.setCancelable(false);
+                                    if (dateCommitModel.getJoId() ==
+                                            swipeButtonWeakReference.get().dcJoborderId) {
 
-                                alertBox.setPositiveButton("OK",
-                                        new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                for (DateCommitModel dateCommitModel
-                                                        : swipeButtonWeakReference.get().dcData) {
+                                        dateCommitModel.setCsaApproved(true);
+                                        swipeButtonWeakReference.get()
+                                                .dateCommitAdapter.notifyDataSetChanged();
+                                        break;
+                                    }
+                                }
 
-                                                    if (dateCommitModel.getJoId() ==
-                                                            swipeButtonWeakReference.get().dcJoborderId) {
-
-                                                        dateCommitModel.setCsaApproved(true);
-                                                        swipeButtonWeakReference.get()
-                                                                .dateCommitAdapter.notifyDataSetChanged();
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                        });
-
-                                alertBox.create().show();
                                 expandButton();
 
                             } else {
