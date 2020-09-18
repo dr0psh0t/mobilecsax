@@ -85,9 +85,11 @@ public class EngineJOAdapter extends RecyclerView.Adapter<EngineJOAdapter.Engine
 
                         etMakeCat.setText(txt);
 
-                        textViewModelIdWeakReference.get().setText(engineList.get(index).getModelId());
+                        textViewModelIdWeakReference.get().setText(
+                                String.valueOf(engineList.get(index).getModelId()));
 
                         dialog.cancel();
+
                     } catch (Exception e) {
                         Util.displayStackTraceArray(e.getStackTrace(), Variables.ADAPTER_PACKAGE,
                                 "Exception", e.toString());

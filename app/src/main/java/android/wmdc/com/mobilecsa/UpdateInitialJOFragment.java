@@ -242,7 +242,7 @@ public class UpdateInitialJOFragment extends Fragment {
                             engineJOAdapter = new EngineJOAdapter(engineList, getActivity(),
                                     etEngineModel, etMakeCat, dialog, textViewModelId);
 
-                            engineList.add(new Engine("0", "0", "0", "0", "0", "0"));
+                            engineList.add(new Engine(0, 0, 0, "0", "0", "0"));
 
                             recyclerViewEngine.setLayoutManager(new LinearLayoutManager(
                                     getContext()));

@@ -150,6 +150,7 @@ public class SearchEngineTaskFromJO extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String result) {
+        Log.d("result", result);
         FragmentActivity mainActivity = weakReference.get();
 
         if (mainActivity == null || mainActivity.isFinishing()) {
@@ -172,9 +173,9 @@ public class SearchEngineTaskFromJO extends AsyncTask<String, String, String> {
 
                     engineList.add(
                         new Engine(
-                            eachObj.getString("makeId"),
-                            eachObj.getString("modelId"),
-                            eachObj.getString("year"),
+                            eachObj.getInt("makeId"),
+                            eachObj.getInt("modelId"),
+                            eachObj.getInt("year"),
                             eachObj.getString("model"),
                             eachObj.getString("category"),
                             eachObj.getString("make")

@@ -118,78 +118,6 @@ public class InitialJobOrder extends Fragment {
     private EngineJOAdapter engineJOAdapter;
     private CustomerJOAdapter customerJOAdapter;
 
-    private View.OnClickListener datePOClickListener = new View.OnClickListener() {
-        public void onClick(View view) {
-
-            if (getActivity() != null) {
-                new DatePickerDialog(getActivity(), R.style.DialogTheme, datePOListener, year,
-                        month, day).show();
-            } else {
-                Util.alertBox(getActivity(), "Activity is null. Cannot open date.");
-            }
-        }
-    };
-
-    private View.OnClickListener dateDRClickListener = new View.OnClickListener() {
-        public void onClick(View view) {
-
-            if (getActivity() != null) {
-                new DatePickerDialog(getActivity(), R.style.DialogTheme, dateDRListener, year,
-                        month, day).show();
-            } else {
-                Util.alertBox(getActivity(), "Activity is null. Cannot open date.");
-            }
-        }
-    };
-
-    private void displaySignatureDialog() {
-        if (getActivity() != null) {
-            signatureDialog = new Dialog(getActivity());
-
-            signatureDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            signatureDialog.setContentView(R.layout.dialog_signature);
-            signatureDialog.setCancelable(false);
-
-            LinearLayout mContent = signatureDialog.findViewById(R.id.linearLayout);
-            mSignature = new Signature(getActivity().getApplicationContext(), null, mContent);
-            mSignature.setBackgroundColor(Color.WHITE);
-
-            mContent.addView(mSignature, ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT);
-
-            Button mClear = signatureDialog.findViewById(R.id.btnSignClear);
-            Button mGetSign = signatureDialog.findViewById(R.id.btn_sign_save);
-            Button mCancel = signatureDialog.findViewById(R.id.btnSignCancel);
-
-            signatureview = mContent;
-
-            mClear.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    mSignature.clear();
-                }
-            });
-
-            mGetSign.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    signatureview.setDrawingCacheEnabled(true);
-                    joborderSignature = mSignature.save(signatureview);
-                    signatureDialog.dismiss();
-                }
-            });
-
-            mCancel.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    mSignature.clear();
-                    signatureDialog.dismiss();
-                }
-            });
-
-            signatureDialog.show();
-        } else {
-            Util.alertBox(getActivity(), "Activity is null. Cannot open signature.");
-        }
-    }
-
     private View.OnClickListener engineModelClickListener = new View.OnClickListener() {
         public void onClick(View view) {
 
@@ -243,7 +171,7 @@ public class InitialJobOrder extends Fragment {
                             engineJOAdapter = new EngineJOAdapter(engineList, getActivity(),
                                     etEngineModel, etMakeCat, dialog, null);
 
-                            engineList.add(new Engine("0", "0", "0", "0", "0", "0"));
+                            engineList.add(new Engine(0, 0, 0, "0", "0", "0"));
 
                             recyclerViewEngine.setLayoutManager(new LinearLayoutManager(
                                     getContext()));
@@ -331,8 +259,7 @@ public class InitialJobOrder extends Fragment {
                     }
 
                     @Override
-                    public void afterTextChanged(Editable s) {
-                    }
+                    public void afterTextChanged(Editable s) {}
                 });
 
                 dialog.setContentView(searchView);
@@ -1060,6 +987,78 @@ public class InitialJobOrder extends Fragment {
 
                 Util.longToast(mainActivity, e.getMessage());
             }
+        }
+    }
+
+    private View.OnClickListener datePOClickListener = new View.OnClickListener() {
+        public void onClick(View view) {
+
+            if (getActivity() != null) {
+                new DatePickerDialog(getActivity(), R.style.DialogTheme, datePOListener, year,
+                        month, day).show();
+            } else {
+                Util.alertBox(getActivity(), "Activity is null. Cannot open date.");
+            }
+        }
+    };
+
+    private View.OnClickListener dateDRClickListener = new View.OnClickListener() {
+        public void onClick(View view) {
+
+            if (getActivity() != null) {
+                new DatePickerDialog(getActivity(), R.style.DialogTheme, dateDRListener, year,
+                        month, day).show();
+            } else {
+                Util.alertBox(getActivity(), "Activity is null. Cannot open date.");
+            }
+        }
+    };
+
+    private void displaySignatureDialog() {
+        if (getActivity() != null) {
+            signatureDialog = new Dialog(getActivity());
+
+            signatureDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            signatureDialog.setContentView(R.layout.dialog_signature);
+            signatureDialog.setCancelable(false);
+
+            LinearLayout mContent = signatureDialog.findViewById(R.id.linearLayout);
+            mSignature = new Signature(getActivity().getApplicationContext(), null, mContent);
+            mSignature.setBackgroundColor(Color.WHITE);
+
+            mContent.addView(mSignature, ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT);
+
+            Button mClear = signatureDialog.findViewById(R.id.btnSignClear);
+            Button mGetSign = signatureDialog.findViewById(R.id.btn_sign_save);
+            Button mCancel = signatureDialog.findViewById(R.id.btnSignCancel);
+
+            signatureview = mContent;
+
+            mClear.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    mSignature.clear();
+                }
+            });
+
+            mGetSign.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    signatureview.setDrawingCacheEnabled(true);
+                    joborderSignature = mSignature.save(signatureview);
+                    signatureDialog.dismiss();
+                }
+            });
+
+            mCancel.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    mSignature.clear();
+                    signatureDialog.dismiss();
+                }
+            });
+
+            signatureDialog.show();
+        } else {
+            Util.alertBox(getActivity(), "Activity is null. Cannot open signature.");
         }
     }
 }

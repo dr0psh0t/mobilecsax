@@ -6,14 +6,14 @@ package android.wmdc.com.mobilecsa.model;
 
 public class Engine {
 
-    private String makeId;
-    private String modelId;
-    private String year;
+    private int makeId;
+    private int modelId;
+    private int year;
     private String model;
     private String category;
     private String make;
 
-    public Engine(String makeId, String modelId, String year, String model, String category,
+    public Engine(int makeId, int modelId, int year, String model, String category,
                   String make) {
 
         this.makeId = makeId;
@@ -24,15 +24,15 @@ public class Engine {
         this.make = make;
     }
 
-    public String getMakeId() {
+    public int getMakeId() {
         return makeId;
     }
 
-    public String getModelId() {
+    public int getModelId() {
         return modelId;
     }
 
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
