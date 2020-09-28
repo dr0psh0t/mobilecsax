@@ -46,8 +46,8 @@ public class EngineJOAdapter extends RecyclerView.Adapter<EngineJOAdapter.Engine
     @NonNull
     @Override
     public EngineViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(activityWeakReference.get()).inflate(R.layout.engine_row_item, viewGroup,
-                false);
+        View view = LayoutInflater.from(activityWeakReference.get()).inflate(
+                R.layout.engine_row_item, viewGroup, false);
         return new EngineViewHolder(view);
     }
 

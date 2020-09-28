@@ -144,7 +144,9 @@ public class QualityCheckFragment extends Fragment {
                 int jobordersArrayLength = jsonArray.length();
 
                 if (jobordersArrayLength > 0) {
+
                     int i;
+                    qcDataModels.clear();
 
                     for (i = 1; i <= jobordersArrayLength; ++i) {
                         JSONObject itemObj = jsonArray.getJSONObject(i - 1);

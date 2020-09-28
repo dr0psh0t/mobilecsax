@@ -155,7 +155,9 @@ public class GetQCJOListTask extends AsyncTask<String, String, String> {
         }
 
         try {
+
             JSONObject jsonObject = new JSONObject(result);
+
             Variables.qcStore = jsonObject;
             Variables.totalCount = jsonObject.getInt("totalCount");
             Variables.lastPage = Variables.totalCount / 36;
