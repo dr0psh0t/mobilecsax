@@ -308,8 +308,6 @@ public class QualityCheckFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
-            System.out.println("result= "+result);
-
             progressDialog.dismiss();
 
             FragmentActivity mainActivity = activityWeakReference.get();

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.wmdc.com.mobilecsa.asynchronousclasses.CheckExpiryTask;
 import android.wmdc.com.mobilecsa.asynchronousclasses.SearchJOTask;
 import android.wmdc.com.mobilecsa.model.EmojiExcludeFilter;
 import android.wmdc.com.mobilecsa.utils.Util;
@@ -64,6 +65,8 @@ public class SearchJOFragment extends Fragment {
 
         btnSearchJO.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                new CheckExpiryTask(getActivity()).execute();
+
                 String query = etSearchJO.getText().toString();
                 String cid = String.valueOf(sPrefs.getInt("csaId", 0));
 

@@ -12,12 +12,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.wmdc.com.mobilecsa.DCJOInfoFragment;
 import android.wmdc.com.mobilecsa.R;
+import android.wmdc.com.mobilecsa.asynchronousclasses.CheckExpiryTask;
 import android.wmdc.com.mobilecsa.model.DateCommitModel;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,18 +36,18 @@ import java.util.ArrayList;
 public class DateCommitAdapter extends RecyclerView.Adapter<DateCommitAdapter.DCViewHolder> {
 
     private ArrayList<DateCommitModel> dcData;
-    private Context context;
+    private FragmentActivity activity;
     private boolean heightSet = false;
 
-    public DateCommitAdapter(ArrayList<DateCommitModel> dcData, Context context) {
+    public DateCommitAdapter(ArrayList<DateCommitModel> dcData, FragmentActivity act) {
         this.dcData = dcData;
-        this.context = context;
+        activity = act;
     }
 
     @NonNull
     @Override
     public DCViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.row_item_dc, viewGroup, false);
+        View view = LayoutInflater.from(activity).inflate(R.layout.row_item_dc, viewGroup, false);
 
         if (!heightSet) {
             final LinearLayout rootLay = view.findViewById(R.id.rowItemDCRelLay);
@@ -116,7 +118,6 @@ public class DateCommitAdapter extends RecyclerView.Adapter<DateCommitAdapter.DC
 
             itemView.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v) {
-
                     JSONObject object = new JSONObject();
 
                     try {
@@ -132,14 +133,14 @@ public class DateCommitAdapter extends RecyclerView.Adapter<DateCommitAdapter.DC
                     } catch (JSONException je) {
                         Util.displayStackTraceArray(je.getStackTrace(),
                                 Variables.ADAPTER_PACKAGE, "JSONException", je.toString());
-                        Toast.makeText(context, je.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, je.toString(), Toast.LENGTH_SHORT).show();
 
                         try {
                             object.put("success", false);
                         } catch (JSONException jee) {
                             Util.displayStackTraceArray(jee.getStackTrace(),
                                     Variables.ADAPTER_PACKAGE, "JSONException", jee.toString());
-                            Toast.makeText(context, jee.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity, jee.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -153,7 +154,7 @@ public class DateCommitAdapter extends RecyclerView.Adapter<DateCommitAdapter.DC
                     dateCommitFragment.setDcJoborderId(dcData.get(index).getJoId());
                     dateCommitFragment.setArguments(bundle);
 
-                    FragmentManager fragmentManager = ((AppCompatActivity) context)
+                    FragmentManager fragmentManager = ((AppCompatActivity) activity)
                             .getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 

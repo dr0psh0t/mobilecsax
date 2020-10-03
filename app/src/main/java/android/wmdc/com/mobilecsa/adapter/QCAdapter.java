@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.wmdc.com.mobilecsa.QCJOInfoFragment;
 import android.wmdc.com.mobilecsa.R;
+import android.wmdc.com.mobilecsa.asynchronousclasses.CheckExpiryTask;
 import android.wmdc.com.mobilecsa.model.QCDataModel;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
@@ -19,6 +20,7 @@ import android.wmdc.com.mobilecsa.utils.Variables;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,12 +36,12 @@ import java.util.ArrayList;
 
 public class QCAdapter extends RecyclerView.Adapter<QCAdapter.QCViewHolder> {
     private ArrayList<QCDataModel> qcData;
-    private Context context;
+    private FragmentActivity activity;
     private boolean heightSet = false;
 
-    public QCAdapter(ArrayList<QCDataModel> qcData, Context context) {
+    public QCAdapter(ArrayList<QCDataModel> qcData, FragmentActivity act) {
         this.qcData = qcData;
-        this.context = context;
+        activity = act;
     }
 
     public void replaceAdapterList(ArrayList<QCDataModel> qcData) {
@@ -51,7 +53,7 @@ public class QCAdapter extends RecyclerView.Adapter<QCAdapter.QCViewHolder> {
     @Override
     @NonNull
     public QCViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.row_item_qc, viewGroup, false);
+        View view = LayoutInflater.from(activity).inflate(R.layout.row_item_qc, viewGroup, false);
 
         if (!heightSet) {
             final LinearLayout rootLay = view.findViewById(R.id.rowItemQCLinLay);
@@ -123,7 +125,6 @@ public class QCAdapter extends RecyclerView.Adapter<QCAdapter.QCViewHolder> {
                         object.put("success", true);
 
                     } catch (JSONException je) {
-
                         Util.displayStackTraceArray(je.getStackTrace(),
                                 Variables.ADAPTER_PACKAGE, "JSONException", je.toString());
 
@@ -141,14 +142,14 @@ public class QCAdapter extends RecyclerView.Adapter<QCAdapter.QCViewHolder> {
 
                     frag.setArguments(bundle);
 
-                    FragmentManager fragmentManager = ((AppCompatActivity) context)
+                    FragmentManager fragmentManager = ((AppCompatActivity) activity)
                             .getSupportFragmentManager();
                     final FragmentTransaction fragmentTransaction =
                             fragmentManager.beginTransaction();
 
                     //  -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-                    final ProgressDialog progress = new ProgressDialog(context);
+                    final ProgressDialog progress = new ProgressDialog(activity);
                     progress.setMessage("Loading...");
                     progress.setCancelable(false);
                     progress.show();

@@ -127,6 +127,20 @@ public class CheckExpiryTask extends AsyncTask<String, Void, String> {
             JSONObject responseJson = new JSONObject(result);
 
             if (!responseJson.getBoolean("success")) {
+
+                Util.longToast(activity, "You've been away for long. You must login again.");
+                sPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
+                SharedPreferences.Editor editor = sPrefs.edit();
+
+                editor.remove("csaId");
+                editor.remove("csaFullname");
+                editor.remove("sessionId");
+                editor.apply();
+
+                activity.startActivity(new Intent(activity, LoginActivity.class));
+                activity.finish();
+
+                /*
                 AlertDialog.Builder warningBox = new AlertDialog.Builder(activity);
 
                 TextView errMsg = new TextView(activity);
@@ -154,7 +168,7 @@ public class CheckExpiryTask extends AsyncTask<String, Void, String> {
                         activity.finish();
                     }
                 });
-                warningBox.create().show();
+                warningBox.create().show();*/
             }
         } catch (JSONException je) {
             Util.displayStackTraceArray(je.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,

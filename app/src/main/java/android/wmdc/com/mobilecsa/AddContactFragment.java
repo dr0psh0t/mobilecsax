@@ -33,6 +33,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.wmdc.com.mobilecsa.asynchronousclasses.CheckExpiryTask;
 import android.wmdc.com.mobilecsa.asynchronousclasses.DialogImageUriTask;
 import android.wmdc.com.mobilecsa.asynchronousclasses.DialogSignatureTask;
 import android.wmdc.com.mobilecsa.asynchronousclasses.GetAreaCodeTask;
@@ -328,6 +329,8 @@ public class AddContactFragment extends Fragment {
 
     private View.OnClickListener submitListener = new View.OnClickListener() {
         public void onClick(View view) {
+            new CheckExpiryTask(getActivity()).execute();
+
             if (is_submitted) {
                 dumpImageMetaData(fileUri, true);
             } else {

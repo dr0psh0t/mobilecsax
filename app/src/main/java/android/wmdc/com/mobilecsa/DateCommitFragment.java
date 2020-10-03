@@ -108,7 +108,7 @@ public class DateCommitFragment extends Fragment {
                     );
                 }
 
-                recyclerView.setAdapter(new DateCommitAdapter(dcDataModels, getContext()));
+                recyclerView.setAdapter(new DateCommitAdapter(dcDataModels, getActivity()));
 
             } catch (JSONException je) {
                 Util.alertBox(getContext(), je.getMessage());

@@ -1,10 +1,12 @@
 package android.wmdc.com.mobilecsa.asynchronousclasses;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.wmdc.com.mobilecsa.LoginActivity;
 import android.wmdc.com.mobilecsa.adapter.EngineJOAdapter;
 import android.wmdc.com.mobilecsa.model.Engine;
 import android.wmdc.com.mobilecsa.utils.Util;
@@ -150,7 +152,6 @@ public class SearchEngineTaskFromJO extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        Log.d("result", result);
         FragmentActivity mainActivity = weakReference.get();
 
         if (mainActivity == null || mainActivity.isFinishing()) {
@@ -160,30 +161,51 @@ public class SearchEngineTaskFromJO extends AsyncTask<String, String, String> {
         try {
             JSONObject jsonObject = new JSONObject(result);
 
-            if (jsonObject.getInt("totalCount") > 0) {
-                JSONArray modelArray = jsonObject.getJSONArray("models");
+            if (jsonObject.getBoolean("success")) {
 
-                int i;
-                int modelArrayLength = modelArray.length();
+                if (jsonObject.getInt("totalCount") > 0) {
+                    JSONArray modelArray = jsonObject.getJSONArray("models");
 
-                engineList.clear();
+                    int i;
+                    int modelArrayLength = modelArray.length();
 
-                for (i = 0; i < modelArrayLength; ++i) {
-                    JSONObject eachObj = modelArray.getJSONObject(i);
+                    engineList.clear();
 
-                    engineList.add(
-                        new Engine(
-                            eachObj.getInt("makeId"),
-                            eachObj.getInt("modelId"),
-                            eachObj.getInt("year"),
-                            eachObj.getString("model"),
-                            eachObj.getString("category"),
-                            eachObj.getString("make")
-                        ));
+                    for (i = 0; i < modelArrayLength; ++i) {
+                        JSONObject eachObj = modelArray.getJSONObject(i);
+
+                        engineList.add(
+                            new Engine(
+                                eachObj.getInt("makeId"),
+                                eachObj.getInt("modelId"),
+                                eachObj.getInt("year"),
+                                eachObj.getString("model"),
+                                eachObj.getString("category"),
+                                eachObj.getString("make")
+                            )
+                        );
+                    }
                 }
 
             } else {
-                Log.e("FAILED", jsonObject.toString());
+
+                //  show toast and goto login page.
+                if (jsonObject.getString("reason").equals("Login first.")) {
+                    Util.longToast(mainActivity, "MCSA timed out. Login first.");
+
+                    sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mainActivity);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                    editor.remove("csaId");
+                    editor.remove("csaFullname");
+                    editor.remove("sessionId");
+                    editor.apply();
+
+                    mainActivity.startActivity(new Intent(mainActivity, LoginActivity.class));
+                    mainActivity.finish();
+                } else {
+                    Util.longToast(mainActivity, jsonObject.getString("reason"));
+                }
             }
 
             recViewWeakReference.get().setLayoutManager(new LinearLayoutManager(mainActivity));

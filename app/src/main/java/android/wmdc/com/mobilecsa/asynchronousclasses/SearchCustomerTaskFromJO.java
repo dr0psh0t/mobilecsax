@@ -1,10 +1,12 @@
 package android.wmdc.com.mobilecsa.asynchronousclasses;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.wmdc.com.mobilecsa.LoginActivity;
 import android.wmdc.com.mobilecsa.adapter.CustomerJOAdapter;
 import android.wmdc.com.mobilecsa.model.CustomerJO;
 import android.wmdc.com.mobilecsa.utils.Util;
@@ -153,6 +155,8 @@ public class SearchCustomerTaskFromJO extends AsyncTask<String, String, String> 
 
     @Override
     protected void onPostExecute(String result) {
+        Log.d("result", result);
+
         FragmentActivity mainActivity = weakReference.get();
 
         if (mainActivity == null || mainActivity.isFinishing()) {
@@ -162,26 +166,49 @@ public class SearchCustomerTaskFromJO extends AsyncTask<String, String, String> 
         try {
             JSONObject jsonObject = new JSONObject(result);
 
-            if (jsonObject.getInt("totalCount") > 0) {
-                JSONArray customerArray = jsonObject.getJSONArray("customers");
+            //  check json key "success"
+            if (jsonObject.has("success")) {
 
-                int arrayLength = customerArray.length();
-                int i;
+                //  check if false
+                if (!jsonObject.getBoolean("success")) {
+                    if (jsonObject.getString("reason").equals("Login first.")) {
+                        Util.longToast(mainActivity, "You've been away for long. You must login again.");
 
-                customerJOList.clear();
+                        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mainActivity);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                for (i = 0; i < arrayLength; ++i) {
-                    JSONObject eachCustomer = customerArray.getJSONObject(i);
+                        editor.remove("csaId");
+                        editor.remove("csaFullname");
+                        editor.remove("sessionId");
+                        editor.apply();
 
-                    customerJOList.add(new CustomerJO(
-                            eachCustomer.getInt("cId"),
-                            eachCustomer.getString("source"),
-                            eachCustomer.getString("customer")
-                    ));
+                        mainActivity.startActivity(new Intent(mainActivity, LoginActivity.class));
+                        mainActivity.finish();
+                    } else {
+                        Util.longToast(mainActivity, jsonObject.getString("reason"));
+                    }
                 }
 
             } else {
-                Log.e("FAILED", jsonObject.toString());
+
+                if (jsonObject.getInt("totalCount") > 0) {
+                    JSONArray customerArray = jsonObject.getJSONArray("customers");
+
+                    int arrayLength = customerArray.length();
+                    int i;
+
+                    customerJOList.clear();
+
+                    for (i = 0; i < arrayLength; ++i) {
+                        JSONObject eachCustomer = customerArray.getJSONObject(i);
+
+                        customerJOList.add(new CustomerJO(
+                                eachCustomer.getInt("cId"),
+                                eachCustomer.getString("source"),
+                                eachCustomer.getString("customer")
+                        ));
+                    }
+                }
             }
 
             recViewWeakReference.get().setLayoutManager(new LinearLayoutManager(mainActivity));

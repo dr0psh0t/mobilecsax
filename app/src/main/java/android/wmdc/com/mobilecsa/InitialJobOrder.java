@@ -21,6 +21,7 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,7 @@ import android.widget.Scroller;
 import android.widget.TextView;
 import android.wmdc.com.mobilecsa.adapter.CustomerJOAdapter;
 import android.wmdc.com.mobilecsa.adapter.EngineJOAdapter;
+import android.wmdc.com.mobilecsa.asynchronousclasses.CheckExpiryTask;
 import android.wmdc.com.mobilecsa.asynchronousclasses.DialogImageUriTask;
 import android.wmdc.com.mobilecsa.asynchronousclasses.DialogSignatureTask;
 import android.wmdc.com.mobilecsa.asynchronousclasses.SearchCustomerTaskFromJO;
@@ -387,6 +389,8 @@ public class InitialJobOrder extends Fragment {
 
     private View.OnClickListener submitListener = new View.OnClickListener() {
         public void onClick(View view) {
+            new CheckExpiryTask(getActivity()).execute();
+
             if (is_submitted) {
                 dumpImageMetaData(fileUri, true);
             } else {
@@ -614,10 +618,23 @@ public class InitialJobOrder extends Fragment {
     private String textPhoto;
 
     private void newQuotation() {
+        int customerId, modelId;
 
         try {
-            int customerId = Integer.parseInt(textViewCustomerId.getText().toString());
-            int modelId = Integer.parseInt(textViewModelId.getText().toString());
+            customerId = Integer.parseInt(textViewCustomerId.getText().toString());
+        } catch (NumberFormatException nfe) {
+            Util.longToast(getActivity(), "Select a customer.");
+            return;
+        }
+
+        try {
+            modelId = Integer.parseInt(textViewModelId.getText().toString());
+        } catch (NumberFormatException nfe2) {
+            Util.longToast(getActivity(), "Select engine model.");
+            return;
+        }
+
+        try {
 
             if (displayName == null) {
                 Util.shortToast(getActivity(), "Include photo.");
@@ -779,6 +796,7 @@ public class InitialJobOrder extends Fragment {
                 Util.alertBox(getContext(), "Activity is null. Cannot build Alert Dialog.");
             }
         } catch (Exception e) {
+            e.printStackTrace();
             Util.alertBox(getContext(), e.toString());
         }
     }

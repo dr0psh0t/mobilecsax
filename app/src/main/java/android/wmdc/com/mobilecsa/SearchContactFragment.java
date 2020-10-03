@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.wmdc.com.mobilecsa.asynchronousclasses.CheckExpiryTask;
 import android.wmdc.com.mobilecsa.asynchronousclasses.SearchContactTask;
 import android.wmdc.com.mobilecsa.model.EmojiExcludeFilter;
 import android.wmdc.com.mobilecsa.utils.Util;
@@ -44,6 +45,8 @@ public class SearchContactFragment extends Fragment {
         btnSearchCont.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                new CheckExpiryTask(getActivity()).execute();
+
                 if (etSearchCont.getText().toString().length() < 2) {
                     Util.longToast(getActivity(), "Too short.");
                 } else {
