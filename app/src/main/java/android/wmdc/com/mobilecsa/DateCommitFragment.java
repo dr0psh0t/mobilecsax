@@ -85,6 +85,51 @@ public class DateCommitFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         if (!Variables.dcRawResult.isEmpty()) {
+
+            //  begin replaced
+            JSONObject jsonObject = null;
+            JSONArray jsonArray;
+
+            try {
+                jsonObject = new JSONObject(Variables.dcRawResult);
+                Variables.qcStore = jsonObject;
+
+            } catch (JSONException je) {
+                Util.alertBox(getActivity(), "Invalid DC data received. " +
+                        "The server might be loading. Try again later.");
+            }
+
+            if (jsonObject != null) {
+                try {
+                    jsonArray = jsonObject.getJSONArray("joborders");
+
+                    int loopLen = Math.min(jsonArray.length(), 50);
+
+                    for (int i = 0; i < loopLen; ++i) {
+                        JSONObject itemObj = jsonArray.getJSONObject(i);
+
+                        dcDataModels.add(
+                                new DateCommitModel(
+                                        itemObj.getInt("joId"),
+                                        itemObj.getString("joNum"),
+                                        itemObj.getString("customerId"),
+                                        itemObj.getString("customer"),
+                                        itemObj.getBoolean("isCsaApproved"),
+                                        itemObj.getBoolean("isPnmApproved"),
+                                        itemObj.getString("dateCommit"),
+                                        itemObj.getString("dateReceived"))
+                        );
+                    }
+
+                    recyclerView.setAdapter(new DateCommitAdapter(dcDataModels, getActivity()));
+
+                } catch (JSONException je) {
+                    Util.alertBox(getActivity(), "Cannot build the list. " +
+                            "The server might be loading. Try again later.");
+                }
+            }
+
+            /*
             try {
                 JSONObject jsonObject = new JSONObject(Variables.dcRawResult);
                 JSONArray jsonArray = jsonObject.getJSONArray("joborders");
@@ -115,7 +160,7 @@ public class DateCommitFragment extends Fragment {
 
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "JSONException", je.toString());
-            }
+            }*/
         }
 
         return v;

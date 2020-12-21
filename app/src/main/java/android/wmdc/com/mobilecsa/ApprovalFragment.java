@@ -19,9 +19,7 @@ import androidx.fragment.app.Fragment;
 
 public class ApprovalFragment extends Fragment {
 
-    private SharedPreferences sharedPreferences;
-    private GetQCJOListTask qcTask;
-    private GetDCJOListTask dcTask;
+    private SharedPreferences sp;
 
     @Nullable
     @Override
@@ -30,34 +28,33 @@ public class ApprovalFragment extends Fragment {
 
         if (getActivity() != null) {
             getActivity().setTitle("Approval");
-            sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+            Button btnQC = v.findViewById(R.id.btnQC);
+            Button btnDateComm = v.findViewById(R.id.btnDateComm);
+
+            btnQC.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    Variables.currentPage = 1;
+
+                    new GetQCJOListTask(getActivity())
+                            .execute(String.valueOf(sp.getInt("csaId", 0)), "mcsa", 1+"");
+                }
+            });
+
+            btnDateComm.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    new GetDCJOListTask(getActivity(), null, true)
+                            .execute(String.valueOf(sp.getInt("csaId", 0)), "mcsa");
+                }
+            });
+
         } else {
             Util.longToast(getContext(),
                     "Activity is null. Cannot set fragment title and preferences.");
         }
 
-        Button btnQC = v.findViewById(R.id.btnQC);
-        Button btnDateComm = v.findViewById(R.id.btnDateComm);
 
-        btnQC.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Variables.currentPage = 1;
-                qcTask = new GetQCJOListTask(getActivity());
-
-                qcTask.execute(String.valueOf(sharedPreferences.getInt("csaId", 0)),
-                        "mcsa", String.valueOf(Variables.currentPage));
-
-                //qcTask.execute(String.valueOf(sharedPreferences.getInt("csaId", 0)),
-                        //"mcsa", "4");
-            }
-        });
-
-        btnDateComm.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                dcTask = new GetDCJOListTask(getActivity(), null, true);
-                dcTask.execute(String.valueOf(sharedPreferences.getInt("csaId", 0)), "mcsa");
-            }
-        });
 
         return v;
     }

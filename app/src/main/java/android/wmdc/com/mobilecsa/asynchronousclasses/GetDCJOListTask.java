@@ -192,6 +192,7 @@ public class GetDCJOListTask extends AsyncTask<String, String, String> {
             fragmentTransaction.commit();
 
         //} catch (JSONException je) {
+
         } catch (Exception e) {
             Util.displayStackTraceArray(e.getStackTrace(),
                     Variables.ASYNCHRONOUS_PACKAGE, "Exception", e.toString());

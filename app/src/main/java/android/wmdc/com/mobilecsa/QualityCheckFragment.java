@@ -1,12 +1,15 @@
 package android.wmdc.com.mobilecsa;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,10 +18,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.wmdc.com.mobilecsa.adapter.QCAdapter;
+import android.wmdc.com.mobilecsa.asynchronousclasses.GetQCJOListTask;
 import android.wmdc.com.mobilecsa.model.QCDataModel;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
@@ -58,8 +63,10 @@ public class QualityCheckFragment extends Fragment {
 
     private static ArrayList<QCDataModel> qcDataModels = new ArrayList<>();
     private static QCAdapter qcAdapter;
+    private RecyclerView recyclerView;
+    private JSONArray jsonArray;
 
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences sp;
 
     @Override
     public void onResume() {
@@ -79,7 +86,7 @@ public class QualityCheckFragment extends Fragment {
         }
 
         setHasOptionsMenu(true);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        sp = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         LinearLayout qcHeaderLinLay = v.findViewById(R.id.qcTitleLL);
         qcHeaderLinLay.setOnClickListener(new View.OnClickListener(){
@@ -108,17 +115,17 @@ public class QualityCheckFragment extends Fragment {
         });
 
         tvPage = v.findViewById(R.id.tvPage);
-        //String txt = Variables.currentPage+" of "+Variables.lastPage;
         tvPage.setText(String.valueOf(Variables.currentPage));
 
-        final RecyclerView recyclerView = v.findViewById(R.id.rvQCData);
+        recyclerView = v.findViewById(R.id.rvQCData);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         ImageButton next = v.findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
                 if (Variables.currentPage < Variables.lastPage) {
-                    setPage(++Variables.currentPage, tvPage);
+                    new GetQCJOListTask(getActivity()).execute(String.valueOf(
+                            sp.getInt("csaId", 0)), "mcsa", (++Variables.currentPage)+"");
                 }
             }
         });
@@ -127,7 +134,8 @@ public class QualityCheckFragment extends Fragment {
         prev.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
                 if (Variables.currentPage > 1) {
-                    setPage(--Variables.currentPage, tvPage);
+                    new GetQCJOListTask(getActivity()).execute(String.valueOf(
+                            sp.getInt("csaId", 0)), "mcsa", (--Variables.currentPage)+"");
                 }
             }
         });
@@ -139,7 +147,7 @@ public class QualityCheckFragment extends Fragment {
 
             try {
                 final JSONObject jsonObject = new JSONObject(searchResult);
-                final JSONArray jsonArray = jsonObject.getJSONArray("joborders");
+                jsonArray = jsonObject.getJSONArray("joborders");
 
                 int jobordersArrayLength = jsonArray.length();
 
@@ -168,6 +176,7 @@ public class QualityCheckFragment extends Fragment {
 
                     qcAdapter = new QCAdapter(qcDataModels, getActivity());
                     recyclerView.setAdapter(qcAdapter);
+
                 } else {
                     Util.alertBox(getContext(), "Empty List", "Joborders", false);
                 }
@@ -180,12 +189,10 @@ public class QualityCheckFragment extends Fragment {
         return v;
     }
 
+    /*
     private void setPage(int currentPage, TextView tvPage) {
-
-        new SetPageTask(getActivity(), tvPage).execute(
-                String.valueOf(sharedPreferences.getInt("csaId", 0)),
-                "mcsa",
-                String.valueOf(currentPage));
+        new SetPageTask(getActivity(), tvPage, qcAdapter, qcDataModels)
+                .execute(String.valueOf(sp.getInt("csaId", 0)), "mcsa", currentPage+"");
     }
 
     private static class SetPageTask extends AsyncTask<String, String, String> {
@@ -200,11 +207,19 @@ public class QualityCheckFragment extends Fragment {
 
         private WeakReference<TextView> tvPageWeakReference;
 
-        private SetPageTask(FragmentActivity activity, TextView tvPage) {
+        private WeakReference<ArrayList<QCDataModel>> qcDataModelsWf;
+
+        private WeakReference<QCAdapter> qcAdapterWf;
+
+        private SetPageTask(FragmentActivity activity, TextView tvPage, QCAdapter qcAdapterParam,
+                            ArrayList<QCDataModel> qcDataModelsParam) {
+
             activityWeakReference = new WeakReference<>(activity);
             this.taskPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
             this.progressDialog = new ProgressDialog(activity);
             this.tvPageWeakReference = new WeakReference<>(tvPage);
+            qcDataModelsWf = new WeakReference<>(qcDataModelsParam);
+            qcAdapterWf = new WeakReference<>(qcAdapterParam);
         }
 
         @Override
@@ -225,7 +240,6 @@ public class QualityCheckFragment extends Fragment {
                 conn.setReadTimeout(60_000);
                 conn.setConnectTimeout(60_000);
                 conn.setRequestMethod("POST");
-                conn.setRequestProperty("Accept", "*/*");
                 conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
                 conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
                 conn.setRequestProperty("Connection", "keep-alive");
@@ -278,10 +292,12 @@ public class QualityCheckFragment extends Fragment {
                     } else {
                         return stringBuilder.toString();
                     }
+
                 } else {
                     return "{\"success\": false, \"reason\": \"Request did not succeed. " +
                             "Status Code: "+statusCode+"\"}";
                 }
+
             } catch (MalformedURLException | ConnectException | SocketTimeoutException e) {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                         "network_exception", e.toString());
@@ -311,6 +327,8 @@ public class QualityCheckFragment extends Fragment {
             progressDialog.dismiss();
 
             FragmentActivity mainActivity = activityWeakReference.get();
+            ArrayList<QCDataModel> qcDataModelsLocal = qcDataModelsWf.get();
+            QCAdapter qcAdapterLocal = qcAdapterWf.get();
 
             if (mainActivity == null || mainActivity.isFinishing()) {
                 return;
@@ -321,17 +339,18 @@ public class QualityCheckFragment extends Fragment {
                 Variables.qcStore = jsonObject;
 
                 JSONArray jsonArray = jsonObject.getJSONArray("joborders");
-                int jobordersArrayLength = jsonArray.length();
+                int length = jsonArray.length();
 
-                qcDataModels.clear();
+                //qcDataModels.clear();
+                qcDataModelsLocal.clear();
 
-                if (jobordersArrayLength > 0) {
+                if (length > 0) {
                     int i;
 
-                    for (i = 1; i <= jobordersArrayLength; ++i) {
+                    for (i = 1; i <= length; ++i) {
                         JSONObject itemObj = jsonArray.getJSONObject(i-1);
 
-                        qcDataModels.add(new QCDataModel(
+                        qcDataModelsLocal.add(new QCDataModel(
                             itemObj.getInt("joId"),
                             itemObj.getString("serialNum"),
                             itemObj.getString("dateCommit"),
@@ -346,7 +365,9 @@ public class QualityCheckFragment extends Fragment {
                         ));
                     }
 
-                    qcAdapter.replaceAdapterList(qcDataModels);
+                    //qcAdapter.replaceAdapterList(qcDataModels);
+                    //qcAdapter.notifyDataSetChanged();
+                    qcAdapterLocal.notifyDataSetChanged();
 
                     tvPageWeakReference.get().setText(String.valueOf(Variables.currentPage));
 
@@ -358,19 +379,91 @@ public class QualityCheckFragment extends Fragment {
                 Util.alertBox(activityWeakReference.get(), je.getMessage());
             }
         }
-    }
+    }*/
 
     @Override
-    public void onPrepareOptionsMenu(Menu menu) {
+    public void onPrepareOptionsMenu(final Menu menu) {
         MenuItem refreshAction = menu.findItem(R.id.action_refresh);
         refreshAction.setVisible(true);
-
         refreshAction.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                setPage(Variables.currentPage, tvPage);
+                new GetQCJOListTask(getActivity()).execute(String.valueOf(sp.getInt("csaId", 0)),
+                        "mcsa", Variables.currentPage+"");
                 return true;
             }
         });
+
+        MenuItem searchAction2 = menu.findItem(R.id.action_search2);
+        searchAction2.setVisible(true);
+        searchAction2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                LayoutInflater layoutInflater = LayoutInflater.from(getContext());
+                View mView = layoutInflater.inflate(R.layout.user_input_dialog, null);
+
+                AlertDialog.Builder adBuilder = new AlertDialog.Builder(getContext());
+                adBuilder.setView(mView);
+
+                final EditText editText = mView.findViewById(R.id.userInputDialog);
+                adBuilder.setCancelable(true);
+                adBuilder.setPositiveButton("Search", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String joQuery = editText.getText().toString();
+                        int length = jsonArray.length();
+                        int x;
+                        JSONObject object;
+
+                        ArrayList<QCDataModel> qcDataModels2 = new ArrayList<>();
+
+                        for (x = 0; x < length; ++x) {
+                            try {
+                                object = jsonArray.getJSONObject(x);
+
+                                if (object.getString("joNum").equals(joQuery)) {
+                                    System.out.println(object.getString("joNum")+"-"+(joQuery));
+
+                                    qcDataModels2.add(new QCDataModel(
+                                        object.getInt("joId"),
+                                        object.getString("serialNum"),
+                                        object.getString("dateCommit"),
+                                        object.getString("dateReceived"),
+                                        object.getString("joNum"),
+                                        object.getString("customerId"),
+                                        object.getString("model"),
+                                        object.getString("category"),
+                                        object.getString("make"),
+                                        object.getString("customer"),
+                                        object.getBoolean("isPending")
+                                    ));
+
+                                    break;
+                                }
+
+                            } catch (JSONException je) {
+                                Util.longToast(getContext(), je.toString());
+                                break;
+                            }
+                        }
+
+                        if (!qcDataModels2.isEmpty()) {
+                            qcDataModels.clear();
+                            qcDataModels.addAll(qcDataModels2);
+                            qcAdapter.notifyDataSetChanged();
+                        } else {
+                            Util.longToast(getContext(), joQuery+" not found. Try other pages.");
+                        }
+                    }
+                });
+
+                adBuilder.create().show();
+
+                return true;
+            }
+        });
+
+        MenuItem actionBackNav = menu.findItem(R.id.action_back_nav);
+        actionBackNav.setVisible(false);
     }
 }

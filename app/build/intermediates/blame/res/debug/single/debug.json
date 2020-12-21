@@ -1,11 +1,11 @@
 [
     {
-        "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_action_photo.png.flat",
-        "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\drawable-xxhdpi\\ic_action_photo.png"
-    },
-    {
         "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_action_photo_preview.png.flat",
         "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\drawable-mdpi\\ic_action_photo_preview.png"
+    },
+    {
+        "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_action_photo.png.flat",
+        "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\drawable-xxhdpi\\ic_action_photo.png"
     },
     {
         "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_action_x_colored.png.flat",
@@ -64,24 +64,24 @@
         "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\layout\\toolbar.xml"
     },
     {
-        "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\layout_approval_fragment.xml.flat",
-        "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\layout\\approval_fragment.xml"
-    },
-    {
         "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_action_industry.png.flat",
         "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\drawable-hdpi\\ic_action_industry.png"
+    },
+    {
+        "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\layout_approval_fragment.xml.flat",
+        "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\layout\\approval_fragment.xml"
     },
     {
         "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_action_date.png.flat",
         "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\drawable-xxhdpi\\ic_action_date.png"
     },
     {
-        "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_action_fast_rewind.png.flat",
-        "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\drawable-xxhdpi\\ic_action_fast_rewind.png"
-    },
-    {
         "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_rec_name.png.flat",
         "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\drawable-xxhdpi\\ic_rec_name.png"
+    },
+    {
+        "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_action_fast_rewind.png.flat",
+        "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\drawable-xxhdpi\\ic_action_fast_rewind.png"
     },
     {
         "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\drawable_shape_rounded.xml.flat",
@@ -248,12 +248,12 @@
         "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\drawable\\login_selector.xml"
     },
     {
-        "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_action_location.png.flat",
-        "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\drawable-xxhdpi\\ic_action_location.png"
-    },
-    {
         "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_action_frag_person_add.png.flat",
         "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\drawable-mdpi\\ic_action_frag_person_add.png"
+    },
+    {
+        "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_action_location.png.flat",
+        "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\drawable-xxhdpi\\ic_action_location.png"
     },
     {
         "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_action_check_circle_black.png.flat",
@@ -264,24 +264,24 @@
         "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\drawable-mdpi\\ic_action_access_time_white.png"
     },
     {
-        "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_action_clear.png.flat",
-        "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\drawable-xxhdpi\\ic_action_clear.png"
-    },
-    {
         "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher_app_icon_round.png.flat",
         "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_app_icon_round.png"
+    },
+    {
+        "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_action_clear.png.flat",
+        "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\drawable-xxhdpi\\ic_action_clear.png"
     },
     {
         "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_action_add_photo.png.flat",
         "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\drawable-hdpi\\ic_action_add_photo.png"
     },
     {
-        "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_app_icon.png.flat",
-        "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_app_icon.png"
-    },
-    {
         "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21_ic_menu_camera.xml.flat",
         "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\drawable-v21\\ic_menu_camera.xml"
+    },
+    {
+        "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_app_icon.png.flat",
+        "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_app_icon.png"
     },
     {
         "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_action_check.png.flat",
@@ -340,12 +340,12 @@
         "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\drawable-mdpi\\ic_action_check_colored_round.png"
     },
     {
-        "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_action_nav_menu_power.png.flat",
-        "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\drawable-hdpi\\ic_action_nav_menu_power.png"
-    },
-    {
         "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_action_edit.png.flat",
         "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\drawable-xhdpi\\ic_action_edit.png"
+    },
+    {
+        "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_action_nav_menu_power.png.flat",
+        "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\drawable-hdpi\\ic_action_nav_menu_power.png"
     },
     {
         "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_action_transfer.png.flat",
@@ -1722,6 +1722,10 @@
     {
         "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\layout_login_fragment.xml.flat",
         "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\layout\\login_fragment.xml"
+    },
+    {
+        "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\layout_user_input_dialog.xml.flat",
+        "source": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\src\\main\\res\\layout\\user_input_dialog.xml"
     },
     {
         "merged": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_action_nav_menu_home.png.flat",

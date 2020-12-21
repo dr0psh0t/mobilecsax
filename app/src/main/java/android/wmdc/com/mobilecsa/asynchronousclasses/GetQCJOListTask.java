@@ -46,7 +46,11 @@ public class GetQCJOListTask extends AsyncTask<String, String, String> {
 
     public GetQCJOListTask(FragmentActivity activity) {
         this.weakReference = new WeakReference<>(activity);
-        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(weakReference.get());
+
+        System.out.println("-------");
+        System.out.println(activity == null);
+
+        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
         this.progressDialog = new ProgressDialog(weakReference.get());
     }
 
@@ -145,15 +149,54 @@ public class GetQCJOListTask extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String result) {
-
         progressDialog.dismiss();
 
         FragmentActivity mainActivity = weakReference.get();
-
         if (mainActivity == null || mainActivity.isFinishing()) {
             return;
         }
 
+        //  begin replaced
+        JSONObject jsonObject;
+
+        try {
+            jsonObject = new JSONObject(result);
+            Variables.qcStore = jsonObject;
+        } catch (JSONException je) {
+            Util.alertBox(mainActivity, "Invalid QC data received. The server might be loading. " +
+                    "Try again later.");
+            return;
+        }
+
+        try {
+            Variables.totalCount = jsonObject.getInt("totalCount");
+            Variables.lastPage = Variables.totalCount / 36;
+        } catch (JSONException je) {
+            Util.alertBox(mainActivity, "Cannot build the list. " +
+                    "The server might be loading. Try again later.");
+            return;
+        }
+
+        if (Variables.totalCount > 0) {
+
+            QualityCheckFragment qcFrag = new QualityCheckFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("searchResult", jsonObject.toString());
+            qcFrag.setArguments(bundle);
+
+            FragmentManager fragmentManager = mainActivity.getSupportFragmentManager();
+
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter,
+                    R.anim.pop_exit);
+            fragmentTransaction.replace(R.id.content_main, qcFrag);
+            fragmentTransaction.commit();
+
+        } else {
+            Util.alertBox(mainActivity, "QC data list is empty.");
+        }//  end replaced
+
+        /*
         try {
 
             JSONObject jsonObject = new JSONObject(result);
@@ -168,7 +211,6 @@ public class GetQCJOListTask extends AsyncTask<String, String, String> {
                 Bundle bundle = new Bundle();
                 bundle.putString("searchResult", jsonObject.toString());
                 qcFrag.setArguments(bundle);
-                Variables.currentPage = 1;
 
                 FragmentManager fragmentManager = mainActivity.getSupportFragmentManager();
 
@@ -189,6 +231,6 @@ public class GetQCJOListTask extends AsyncTask<String, String, String> {
             Util.displayStackTraceArray(e.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                     "Exception", e.toString());
             Util.alertBox(mainActivity, e.toString());
-        }
+        }*/
     }
 }

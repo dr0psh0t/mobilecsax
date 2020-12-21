@@ -1290,6 +1290,7 @@ id action_mode_bar_stub
 id action_mode_close_button
 id action_refresh
 id action_search
+id action_search2
 id action_settings
 id action_text
 id action_transfer
@@ -1855,6 +1856,7 @@ id uniform
 id unlabeled
 id up
 id useLogo
+id userInputDialog
 id view_offset_helper
 id visible
 id wide
@@ -2011,6 +2013,7 @@ layout slide_layout
 layout support_simple_spinner_dropdown_item
 layout toolbar
 layout update_jo_fragment
+layout user_input_dialog
 layout work_extension_input_dialog
 layout work_order_info_fragment
 layout work_order_status_row
