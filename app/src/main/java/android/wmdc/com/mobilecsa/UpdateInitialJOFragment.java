@@ -613,7 +613,7 @@ public class UpdateInitialJOFragment extends Fragment {
                 File photoFile = null;
 
                 try {
-                    photoFile = Util.createImageFile(getActivity());
+                    photoFile = Util.createImageFile();
                 } catch (IOException ex) {
                     Util.displayStackTraceArray(ex.getStackTrace(), "android.wmdc.com.mobilecsa",
                             "IOException", ex.toString());
@@ -695,7 +695,7 @@ public class UpdateInitialJOFragment extends Fragment {
                             String small_file_size = "";
 
                             if (intSize > 512_000) {
-                                File file = Util.createImageFile(getActivity());
+                                File file = Util.createImageFile();
 
                                 Util.copyInputStreamToFile(Util.getStreamFromUri(uri,
                                         getActivity()), file, getContext());

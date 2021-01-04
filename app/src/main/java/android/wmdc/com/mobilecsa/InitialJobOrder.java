@@ -21,7 +21,6 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -485,7 +484,8 @@ public class InitialJobOrder extends Fragment {
                 File photoFile = null;
 
                 try {
-                    photoFile = Util.createImageFile(getActivity());
+                    photoFile = Util.createImageFile();
+                    System.out.println(photoFile.getAbsolutePath());
                 } catch (IOException ex) {
                     Util.displayStackTraceArray(ex.getStackTrace(), "android.wmdc.com.mobilecsa",
                             "IOException", ex.toString());
@@ -567,7 +567,7 @@ public class InitialJobOrder extends Fragment {
                             String small_file_size = "";
 
                             if (intSize > 512_000) {
-                                File file = Util.createImageFile(getActivity());
+                                File file = Util.createImageFile();
 
                                 Util.copyInputStreamToFile(Util.getStreamFromUri(uri,
                                         getActivity()), file, getContext());
@@ -780,7 +780,7 @@ public class InitialJobOrder extends Fragment {
                 confirmBox.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        new InitialJoborderTask(getActivity(), fileInputStream, params).execute();
+                        new InitialJoborderTask(getActivity(), fileInputStream, params, fileUri.getPath()).execute();
                     }
                 });
 
@@ -817,14 +817,17 @@ public class InitialJobOrder extends Fragment {
 
         private HashMap<String, String> parameters;
 
+        private String filePath;
+
         private InitialJoborderTask(FragmentActivity activity, InputStream fileStream,
-                                    HashMap<String, String> parameters) {
+                                    HashMap<String, String> parameters, String path) {
 
             activityWeakReference = new WeakReference<>(activity);
             progressDialog = new ProgressDialog(activity);
             taskPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
             this.fileStream = fileStream;
             this.parameters = parameters;
+            filePath = path;
         }
 
         @Override
@@ -981,6 +984,8 @@ public class InitialJobOrder extends Fragment {
                 JSONObject response = new JSONObject(result);
 
                 if (response.getBoolean("success")) {
+
+                    //Util.deleteFile(filePath);
                     AlertDialog.Builder warningBox = new AlertDialog.Builder(mainActivity);
 
                     warningBox.setTitle("Success");

@@ -417,15 +417,17 @@ public class Util {
         }
     }
 
-    public static File createImageFile(FragmentActivity fragmentActivity) throws IOException {
+    public static File createImageFile() throws IOException {
 
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault())
                 .format(new Date());
 
         String imageFileName = "JPEG_" + timeStamp + "_";
-        //File storageDir = fragmentActivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        //File storageDir = fragmentActivity.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+
+        //  or Environment.DIRECTORY_PICTURES
         File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+
+
 
         return File.createTempFile(imageFileName, ".jpg", storageDir);
     }
@@ -469,5 +471,18 @@ public class Util {
     public static InputStream getStreamFromUri(Uri uri, FragmentActivity fragmentActivity)
             throws IOException {
         return fragmentActivity.getContentResolver().openInputStream(uri);
+    }
+
+    public static void deleteFile(String filePath) {
+        if (filePath != null) {
+            if (!filePath.isEmpty()) {
+                File fdelete = new File(filePath);
+                System.out.println("file exists => "+fdelete.exists());
+
+                if (fdelete.exists()) {
+                    System.out.println("file deleted => "+fdelete.delete());
+                }
+            }
+        }
     }
 }

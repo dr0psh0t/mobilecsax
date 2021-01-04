@@ -200,6 +200,12 @@ public class SecurityKeyFragment extends Fragment {
                     spEditor.putString("csaFullName", responseJson.getString("csaFullName"));
                     spEditor.apply();
 
+                    /*  uncomment this if mcsa web app is updated
+                    spEditor.remove("sessionId");
+                    spEditor.apply();
+                    spEditor.putString("sessionId", responseJson.getString("sessionId"));
+                    spEditor.apply();*/
+
                     securityActivity.startActivity(new Intent(securityActivity,
                             MainActivity.class));
 
