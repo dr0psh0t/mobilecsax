@@ -133,10 +133,11 @@ public class SearchJONumberQCTask extends AsyncTask<String, String, JSONObject> 
             } else {
                 Util.alertBox(mainActivity, obj.getString("reason"));
             }
+
         } catch (JSONException je) {
             Util.displayStackTraceArray(je.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                     "JSONException", je.toString());
-            Util.alertBox(mainActivity, je.toString());
+            Util.alertBox(mainActivity, "Parse error");
         }
     }
 }

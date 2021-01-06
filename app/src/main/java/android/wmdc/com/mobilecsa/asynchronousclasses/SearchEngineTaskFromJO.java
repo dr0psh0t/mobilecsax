@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.wmdc.com.mobilecsa.LoginActivity;
 import android.wmdc.com.mobilecsa.adapter.EngineJOAdapter;
 import android.wmdc.com.mobilecsa.model.Engine;
@@ -215,11 +214,12 @@ public class SearchEngineTaskFromJO extends AsyncTask<String, String, String> {
         } catch (JSONException je) {
             Util.displayStackTraceArray(je.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                     "JSONException", je.toString());
-            Util.longToast(mainActivity, je.getMessage());
+            Util.longToast(mainActivity, "Parse error");
+
         } catch (Exception e) {
             Util.displayStackTraceArray(e.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                     "Exception", e.toString());
-            Util.longToast(mainActivity, e.getMessage());
+            Util.longToast(mainActivity, "Error");
         }
     }
 }

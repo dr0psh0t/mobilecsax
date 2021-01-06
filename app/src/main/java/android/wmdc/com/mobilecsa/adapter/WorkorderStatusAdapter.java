@@ -61,7 +61,7 @@ public class WorkorderStatusAdapter extends
         return workorderStatusList.size();
     }
 
-    class WorkorderStatusViewHolder extends RecyclerView.ViewHolder {
+    static class WorkorderStatusViewHolder extends RecyclerView.ViewHolder {
 
         private LinearLayout workorderStatusLinLay;
         private TextView tvWorkItem;

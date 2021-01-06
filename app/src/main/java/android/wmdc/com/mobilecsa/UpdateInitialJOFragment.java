@@ -21,6 +21,7 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -120,7 +121,8 @@ public class UpdateInitialJOFragment extends Fragment {
                 new DatePickerDialog(getActivity(), R.style.DialogTheme, datePOListener, year,
                         month, day).show();
             } else {
-                Util.alertBox(getContext(), "Activity is null. Cannot open date.");
+                Util.alertBox(getContext(), "Cannot open date.");
+                Log.e("Null", "Activity is null. Cannot open date.");
             }
         }
     };
@@ -131,7 +133,8 @@ public class UpdateInitialJOFragment extends Fragment {
                 new DatePickerDialog(getActivity(), R.style.DialogTheme, dateDRListener, year,
                         month, day).show();
             } else {
-                Util.alertBox(getContext(), "Activity is null. Cannot open date.");
+                Util.alertBox(getContext(), "Cannot open date.");
+                Log.e("Null", "Activity is null. Cannot open date.");
             }
         }
     };
@@ -183,8 +186,10 @@ public class UpdateInitialJOFragment extends Fragment {
                 }
             });
             signatureDialog.show();
+
         } else {
-            Util.alertBox(getContext(), "Activity is null. Cannot open signature.");
+            Util.alertBox(getContext(), "Cannot open signature.");
+            Log.e("Null", "Activity is null. Cannot open signature.");
         }
     }
 
@@ -267,11 +272,12 @@ public class UpdateInitialJOFragment extends Fragment {
 
                     dialog.show();
                 } else {
-                    Util.alertBox(getActivity(),
-                            "Activity is null. Cannot set layout params to dialog.");
+                    Util.alertBox(getActivity(), "Cannot show engines as of now.");
+                    Log.e("Null", "Activity is null. Cannot set layout params to dialog. Cannot show engines.");
                 }
             } else {
-                Util.alertBox(getContext(), "Activity is null. Cannot open engine model dialog.");
+                Util.alertBox(getActivity(), "Cannot show engines as of now.");
+                Log.e("Null", "Activity is null. Cannot show engines.");
             }
         }
     };
@@ -312,6 +318,7 @@ public class UpdateInitialJOFragment extends Fragment {
 
                         if (trimmedQuery.length() < 1) {
                             customerList.clear();
+
                             if (customerJOAdapter != null) {
                                 customerJOAdapter.notifyDataSetChanged();
                             }
@@ -341,12 +348,14 @@ public class UpdateInitialJOFragment extends Fragment {
                     wmlp.y = 200;
 
                     dialog.show();
+
                 } else {
-                    Util.alertBox(getActivity(),
-                            "Activity is null. Cannot set layout params to dialog.");
+                    Util.alertBox(getActivity(), "Dialog error. Cannot show customers");
+                    Log.e("Null", "Activity is null. Cannot set layout params to dialog.");
                 }
             } else {
-                Util.alertBox(getActivity(), "Activity is null. Cannot open customer dialog.");
+                Util.alertBox(getActivity(), "Cannot show customers.");
+                Log.e("Null", "Activity is null. Cannot open customer dialog.");
             }
         }
     };
@@ -368,7 +377,8 @@ public class UpdateInitialJOFragment extends Fragment {
         if (getActivity() != null) {
             getActivity().setTitle("Update Joborder");
         } else {
-            Util.alertBox(getContext(), "Activity is null. Cannot set title of this fragment.");
+            Util.alertBox(getContext(), "Title error");
+            Log.e("Null", "Activity is null. Cannot set title of this fragment.");
         }
 
         setHasOptionsMenu(true);
@@ -423,7 +433,7 @@ public class UpdateInitialJOFragment extends Fragment {
                 Util.displayStackTraceArray(e.getStackTrace(), "android.wmdc.com.mobilecsa",
                         "JSONException", e.toString());
 
-                Util.alertBox(getContext(), e.getMessage());
+                Util.alertBox(getContext(), "Parsing error");
             }
 
             etRemarks.setScroller(new Scroller(getActivity()));
@@ -577,8 +587,7 @@ public class UpdateInitialJOFragment extends Fragment {
                 if (builder.getWindow() != null) {
                     builder.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 } else {
-                    Util.shortToast(getContext(),
-                            "Window builder is null. Cannot set background drawable for dialog.");
+                    Log.e("Null", "Window builder is null. Cannot set background drawable for dialog.");
                 }
 
                 builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -593,7 +602,8 @@ public class UpdateInitialJOFragment extends Fragment {
 
                 builder.show();
             } else {
-                Util.shortToast(getActivity(), "Context is null. Cannot show dialog.");
+                Util.shortToast(getActivity(), "Cannot show dialog");
+                Log.e("Null", "Context is null. Cannot show dialog.");
             }
         }
     };
@@ -614,28 +624,38 @@ public class UpdateInitialJOFragment extends Fragment {
 
                 try {
                     photoFile = Util.createImageFile();
+
+                    if (photoFile != null) {
+                        fileUri = FileProvider.getUriForFile(getActivity(), BuildConfig.APPLICATION_ID
+                                + ".provider", photoFile);
+
+                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                        startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+
+                    } else {
+                        Util.shortToast(getContext(), "Cannot capture picture as of now. Try again later.");
+                        Log.e("Null", "photoFile = Util.createImageFile(); results in null");
+                    }
+
                 } catch (IOException ex) {
                     Util.displayStackTraceArray(ex.getStackTrace(), "android.wmdc.com.mobilecsa",
                             "IOException", ex.toString());
+                    Util.shortToast(getContext(), "Cannot capture picture as of now. Try again later.");
 
-                    Toast.makeText(getContext(), ex.toString(), Toast.LENGTH_SHORT).show();
+                } finally {
+                    if (photoFile != null) {
+                        photoFile.deleteOnExit();
+                    }
                 }
 
-                if (photoFile != null) {
-                    fileUri = FileProvider.getUriForFile(getActivity(),
-                            BuildConfig.APPLICATION_ID + ".provider", photoFile);
-
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-                    startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
-                } else {
-                    Util.shortToast(getContext(), "\"photoFile\" is null");
-                }
             } else {
-                Util.alertBox(getActivity(), "Activity is null. Cannot take picture.");
+                Util.shortToast(getContext(), "Cannot capture picture as of now. Try again later.");
+                Log.e("Null", "takePictureIntent is null.");
             }
+
         } else {
-            Util.alertBox(getActivity(),
-                    "Resolve Activity of picture intent is null. Cannot take picture.");
+            Util.shortToast(getContext(), "Cannot capture picture as of now. Try again later.");
+            Log.e("Null", "getActivity() is null.");
         }
     }
 
@@ -654,7 +674,8 @@ public class UpdateInitialJOFragment extends Fragment {
                 fileUri = resultData.getData();
                 dumpImageMetaData(fileUri, false);
             } else {
-                Util.shortToast(getContext(), "\"photoFile\" is null");
+                Util.shortToast(getContext(), "Cannot get photo data.");
+                Log.e("Null", "resultData is null");
             }
         }
         else if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
@@ -664,6 +685,7 @@ public class UpdateInitialJOFragment extends Fragment {
 
     private void dumpImageMetaData(final Uri uri, final boolean toSubmit) {
         final ProgressDialog pd = new ProgressDialog(getActivity());
+
         pd.setMessage("Dumping image. Please wait...");
         pd.setCancelable(false);
         pd.show();
@@ -687,7 +709,7 @@ public class UpdateInitialJOFragment extends Fragment {
                             if (!cursor.isNull(sizeIndex)) {
                                 size = cursor.getString(sizeIndex);
                             } else {
-                                Util.shortToast(getActivity(), "Unknown size.");
+                                Util.shortToast(getActivity(), "Unknown photo size.");
                                 return;
                             }
 
@@ -705,9 +727,12 @@ public class UpdateInitialJOFragment extends Fragment {
                                 if (small_file != null) {
                                     small_file_size = small_file.length() + "";
                                     fileInputStream = new FileInputStream(small_file);
+
                                 } else {
-                                    Util.shortToast(getActivity(), "Small file is null.");
+                                    Util.shortToast(getActivity(), "No photo file created.");
+                                    Log.e("Null", "small_file is null.");
                                 }
+
                             } else {
                                 fileInputStream = Util.getStreamFromUri(uri, getActivity());
                                 small_file_size = size;
@@ -725,16 +750,19 @@ public class UpdateInitialJOFragment extends Fragment {
                                 tvPhotoSize.setText(textPhoto);
                             }
                         }
+
                     } catch (IOException ie) {
                         pd.cancel();
 
                         Util.displayStackTraceArray(ie.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                                 "IOException", ie.toString());
 
-                        Util.alertBox(getActivity(), ie.toString());
+                        Util.alertBox(getActivity(), "Unable to dump meta data of an image. Try again later");
                     }
+
                 } else {
-                    Util.alertBox(getActivity(), "Activity is null. Cannot dump image meta data.");
+                    Util.alertBox(getActivity(), "Unable to dump meta data of an image. Try again later");
+                    Log.e("Null", "getActivity() is null");
                 }
             }
         };
@@ -873,10 +901,13 @@ public class UpdateInitialJOFragment extends Fragment {
 
                 confirmBox.show();
             } else {
-                Util.alertBox(getContext(), "Activity is null. Cannot build Alert Dialog.");
+                Util.alertBox(getContext(), "Cannot Alert Dialog.");
+                Log.e("Null", "Activity is null. Cannot build Alert Dialog.");
             }
+
         } catch (Exception e) {
-            Util.alertBox(getContext(), e.toString());
+            Log.e("Exception", e.toString());
+            Util.alertBox(getContext(), "Error");
         }
     }
 
@@ -1085,8 +1116,14 @@ public class UpdateInitialJOFragment extends Fragment {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "exception", e.toString());
 
-                Util.shortToast(mainActivity, e.getMessage());
+                Util.shortToast(mainActivity, "Parsing error");
             }
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Util.deleteContents();
     }
 }

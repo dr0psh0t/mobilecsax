@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -83,18 +84,22 @@ public class ContactsResultFragment extends Fragment {
                         ContactsAdapter contactsAdapter = new ContactsAdapter(getActivity(),
                                 contactPages);
                         recyclerView.setAdapter(contactsAdapter);
+
                     } else {
                         Util.alertBox(getContext(), "Empty List");
                     }
+
                 } catch (JSONException je) {
                     Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                             "json_exception", je.toString());
 
-                    Util.alertBox(getActivity(), je.getMessage());
+                    Util.alertBox(getActivity(), "Parse error");
                 }
             }
+
         } else {
-            Util.alertBox(getContext(), "Activity is null. Cannot load search result");
+            Util.alertBox(getContext(), "Error");
+            Log.e("Null", "Activity is null. Cannot load search result");
         }
 
         return v;

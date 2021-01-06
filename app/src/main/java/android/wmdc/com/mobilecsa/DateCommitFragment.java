@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -45,7 +46,8 @@ public class DateCommitFragment extends Fragment {
         if (getActivity() != null) {
             getActivity().setTitle("Date Commit");
         } else {
-            Util.shortToast(getContext(), "\"getActivity()\" is null. " +
+            Util.shortToast(getContext(), "Title error");
+            Log.e("Null", "\"getActivity()\" is null. " +
                     "Cannot set title of this fragment.");
         }
 
@@ -73,10 +75,12 @@ public class DateCommitFragment extends Fragment {
 
                         dialog.show();
                     } else {
-                        Util.alertBox(getActivity(), "Window is null. Cannot open dialog.");
+                        Util.alertBox(getActivity(), "Cannot open dialog.");
+                        Log.e("Null", "dialog.getWindow() is null. Cannot open dialog.");
                     }
                 } else {
-                    Util.alertBox(getActivity(), "Activity is null. Cannot open dialog.");
+                    Util.alertBox(getActivity(), "Cannot open dialog.");
+                    Log.e("Null", "getActivity() is null. Cannot open dialog.");
                 }
             }
         });

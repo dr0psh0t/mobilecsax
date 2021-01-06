@@ -99,6 +99,7 @@ public class GetIndustryTask extends AsyncTask<String, Void, String> {
                 } else {
                     return stringBuilder.toString();
                 }
+
             } else {
                 return "{\"success\": false, \"reason\": \"Request did not succeed. Status Code: "
                         +statusCode+"\"}";
@@ -161,9 +162,11 @@ public class GetIndustryTask extends AsyncTask<String, Void, String> {
         } catch (JSONException je) {
             Util.displayStackTraceArray(je.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                     "JSONException", je.toString());
+
         } catch (Exception e) {
             Util.displayStackTraceArray(e.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                     "Exception", e.toString());
+
         }
     }
 }

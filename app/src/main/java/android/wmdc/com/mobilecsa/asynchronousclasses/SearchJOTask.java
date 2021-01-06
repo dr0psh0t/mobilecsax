@@ -196,7 +196,7 @@ public class SearchJOTask extends AsyncTask<String, String, String> {
         } catch (Exception e) {
             Util.displayStackTraceArray(e.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                     "Exception", e.toString());
-            Util.longToast(mainActivity, e.getMessage());
+            Util.longToast(mainActivity, "Error");
         } finally {
             if (btnSearchJO != null) {
                 btnSearchJO.setEnabled(true);

@@ -419,17 +419,27 @@ public class Util {
 
     public static File createImageFile() throws IOException {
 
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault())
-                .format(new Date());
-
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
 
-        //  or Environment.DIRECTORY_PICTURES
-        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        //  storageDir specified path:  \Internal shared storage\WellmadeTemp
+        //  File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File storageDir = Environment.getExternalStoragePublicDirectory("WellmadeTemp");
 
+        //  if "WellmadeTemp" folder does not exist, create the directory
+        //  "\Internal shared storage\WellmadeTemp" to avoid IOException: No such file or directory
 
+        if (!storageDir.exists()) {
 
-        return File.createTempFile(imageFileName, ".jpg", storageDir);
+            if (storageDir.mkdirs()) {
+                return File.createTempFile(imageFileName, ".jpg", storageDir);
+            } else {
+                return null;
+            }
+
+        } else {
+            return File.createTempFile(imageFileName, ".jpg", storageDir);
+        }
     }
 
     /*
@@ -473,16 +483,14 @@ public class Util {
         return fragmentActivity.getContentResolver().openInputStream(uri);
     }
 
-    public static void deleteFile(String filePath) {
-        if (filePath != null) {
-            if (!filePath.isEmpty()) {
-                File fdelete = new File(filePath);
-                System.out.println("file exists => "+fdelete.exists());
+    //  gets called when you go to other fragments or activity
+    //  must delete the contents of WellmadeTemp
+    public static void deleteContents() {
+        File storageDir = Environment.getExternalStoragePublicDirectory("WellmadeTemp");
+        File[] files = storageDir.listFiles();
 
-                if (fdelete.exists()) {
-                    System.out.println("file deleted => "+fdelete.delete());
-                }
-            }
+        for (File f : files) {
+            System.out.println(f.getName()+" delete: "+f.delete());
         }
     }
 }

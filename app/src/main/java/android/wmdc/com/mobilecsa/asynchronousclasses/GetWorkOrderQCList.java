@@ -192,7 +192,7 @@ public class GetWorkOrderQCList extends AsyncTask<String, String, String> {
         } catch (JSONException je) {
             Util.displayStackTraceArray(je.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                     "JSONException", je.toString());
-            Util.alertBox(mainActivity, je.toString());
+            Util.alertBox(mainActivity, "Parse error");
         }
     }
 }

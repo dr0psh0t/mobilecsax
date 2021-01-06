@@ -1,6 +1,5 @@
 package android.wmdc.com.mobilecsa.adapter;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,13 +11,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.wmdc.com.mobilecsa.DCJOInfoFragment;
 import android.wmdc.com.mobilecsa.R;
-import android.wmdc.com.mobilecsa.asynchronousclasses.CheckExpiryTask;
 import android.wmdc.com.mobilecsa.model.DateCommitModel;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -130,17 +127,18 @@ public class DateCommitAdapter extends RecyclerView.Adapter<DateCommitAdapter.DC
                         object.put("csaApproved", dcData.get(index).getCsaApproved());
                         object.put("pmApproved", dcData.get(index).getPnmApproved());
                         object.put("success", true);
+
                     } catch (JSONException je) {
                         Util.displayStackTraceArray(je.getStackTrace(),
                                 Variables.ADAPTER_PACKAGE, "JSONException", je.toString());
-                        Toast.makeText(activity, je.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, "Parse error", Toast.LENGTH_SHORT).show();
 
                         try {
                             object.put("success", false);
                         } catch (JSONException jee) {
                             Util.displayStackTraceArray(jee.getStackTrace(),
                                     Variables.ADAPTER_PACKAGE, "JSONException", jee.toString());
-                            Toast.makeText(activity, jee.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity, "Parse error", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -154,8 +152,7 @@ public class DateCommitAdapter extends RecyclerView.Adapter<DateCommitAdapter.DC
                     dateCommitFragment.setDcJoborderId(dcData.get(index).getJoId());
                     dateCommitFragment.setArguments(bundle);
 
-                    FragmentManager fragmentManager = ((AppCompatActivity) activity)
-                            .getSupportFragmentManager();
+                    FragmentManager fragmentManager = activity.getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
                     fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit,

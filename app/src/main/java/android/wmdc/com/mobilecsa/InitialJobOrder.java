@@ -21,6 +21,7 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -155,6 +156,7 @@ public class InitialJobOrder extends Fragment {
                             if (engineJOAdapter != null) {
                                 engineJOAdapter.notifyDataSetChanged();
                             }
+
                         } else {
                             engineList.clear();
 
@@ -196,11 +198,13 @@ public class InitialJobOrder extends Fragment {
 
                     dialog.show();
                 } else {
-                    Util.alertBox(getActivity(),
-                            "Activity is null. Cannot set layout params to dialog.");
+                    Util.alertBox(getActivity(), "Cannot display engine list as of now.");
+                    Log.e("Null", "dialog.getWindow() is null. Cannot set layout params to dialog.");
                 }
+
             } else {
-                Util.alertBox(getActivity(), "Activity is null. Cannot open engine model dialog.");
+                Util.alertBox(getActivity(), "Cannot display engine list as of now.");
+                Log.e("Null", "getActivity() is null");
             }
         }
     };
@@ -272,11 +276,13 @@ public class InitialJobOrder extends Fragment {
 
                     dialog.show();
                 } else {
-                    Util.alertBox(getActivity(),
-                            "Activity is null. Cannot set layout params to dialog.");
+                    Util.alertBox(getActivity(), "Cannot display customers as of now.");
+                    Log.e("Null", "dialog.getWindow() is null. Cannot set layout params to dialog.");
                 }
+
             } else {
-                Util.alertBox(getActivity(), "Activity is null. Cannot open customer dialog.");
+                Util.alertBox(getActivity(), "Cannot display customers as of now.");
+                Log.e("Null", "getActivity() is null");
             }
         }
     };
@@ -293,7 +299,7 @@ public class InitialJobOrder extends Fragment {
         if (getActivity() != null) {
             getActivity().setTitle("Initial Job Order");
         } else {
-            Util.alertBox(getContext(), "Activity is null. Cannot set title of this fragment.");
+            Log.e("Null", "Activity is null. Cannot set title of this fragment.");
         }
 
         textViewCustomerId = v.findViewById(R.id.textViewCustomerId);
@@ -433,8 +439,7 @@ public class InitialJobOrder extends Fragment {
                 if (builder.getWindow() != null) {
                     builder.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 } else {
-                    Util.alertBox(getActivity(),
-                            "Builder Window is null. Cannot set background drawable of dialog.");
+                    Log.e("Null", "Builder Window is null. Cannot set background drawable of dialog.");
                 }
 
                 builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -463,8 +468,9 @@ public class InitialJobOrder extends Fragment {
                         builder.dismiss();
                     }
                 });
+
             } else {
-                Util.alertBox(getActivity(), "Context is null. Cannot show dialog.");
+                Log.e("Null", "Context is null. Cannot show dialog.");
             }
         }
     };
@@ -485,29 +491,38 @@ public class InitialJobOrder extends Fragment {
 
                 try {
                     photoFile = Util.createImageFile();
-                    System.out.println(photoFile.getAbsolutePath());
+
+                    if (photoFile != null) {
+                        fileUri = FileProvider.getUriForFile(getActivity(), BuildConfig.APPLICATION_ID
+                                + ".provider", photoFile);
+
+                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                        startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+
+                    } else {
+                        Util.shortToast(getContext(), "Cannot capture picture as of now. Try again later.");
+                        Log.e("Null", "photoFile = Util.createImageFile(); results in null");
+                    }
+
                 } catch (IOException ex) {
                     Util.displayStackTraceArray(ex.getStackTrace(), "android.wmdc.com.mobilecsa",
                             "IOException", ex.toString());
+                    Util.shortToast(getContext(), "Cannot capture picture as of now. Try again later.");
 
-                    Util.shortToast(getContext(), ex.toString());
+                } finally {
+                    if (photoFile != null) {
+                        photoFile.deleteOnExit();
+                    }
                 }
 
-                if (photoFile != null) {
-                    fileUri = FileProvider.getUriForFile(getActivity(), BuildConfig.APPLICATION_ID
-                            + ".provider", photoFile);
-
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-                    startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
-                } else {
-                    Util.shortToast(getContext(), "\"photoFile\" is null");
-                }
             } else {
-                Util.alertBox(getActivity(), "Activity is null. Cannot take picture.");
+                Util.shortToast(getContext(), "Cannot capture picture as of now. Try again later.");
+                Log.e("Null", "takePictureIntent is null.");
             }
+
         } else {
-            Util.alertBox(getActivity(),
-                    "Resolve Activity of picture intent is null. Cannot take picture.");
+            Util.shortToast(getContext(), "Cannot capture picture as of now. Try again later.");
+            Log.e("Null", "getActivity() is null.");
         }
     }
 
@@ -526,7 +541,8 @@ public class InitialJobOrder extends Fragment {
                 fileUri = resultData.getData();
                 dumpImageMetaData(fileUri, false);
             } else {
-                Util.shortToast(getContext(), "\"photoFile\" is null");
+                Util.shortToast(getContext(), "Cannot get photo data.");
+                Log.e("Null", "resultData is null");
             }
         } else if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
             dumpImageMetaData(fileUri, false);
@@ -559,7 +575,7 @@ public class InitialJobOrder extends Fragment {
                             if (!cursor.isNull(sizeIndex)) {
                                 size = cursor.getString(sizeIndex);
                             } else {
-                                Util.shortToast(getActivity(), "Unknown size.");
+                                Util.shortToast(getActivity(), "Unknown photo size.");
                                 return;
                             }
 
@@ -577,9 +593,12 @@ public class InitialJobOrder extends Fragment {
                                 if (small_file != null) {
                                     small_file_size = small_file.length() + "";
                                     fileInputStream = new FileInputStream(small_file);
+
                                 } else {
-                                    Util.shortToast(getActivity(), "Small file is null.");
+                                    Util.shortToast(getActivity(), "No photo file created.");
+                                    Log.e("Null", "small_file is null.");
                                 }
+
                             } else {
                                 fileInputStream = Util.getStreamFromUri(uri, getActivity());
                                 small_file_size = size;
@@ -597,16 +616,19 @@ public class InitialJobOrder extends Fragment {
                                 tvPhotoSize.setText(textPhoto);
                             }
                         }
+
                     } catch (IOException ie) {
                         pd.cancel();
 
                         Util.displayStackTraceArray(ie.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                                 "IOException", ie.toString());
 
-                        Util.alertBox(getActivity(), ie.toString());
+                        Util.alertBox(getActivity(), "Unable to dump meta data of an image. Try again later");
                     }
+
                 } else {
-                    Util.alertBox(getActivity(), "Activity is null. Cannot dump image meta data.");
+                    Util.alertBox(getActivity(), "Unable to dump meta data of an image. Try again later");
+                    Log.e("Null", "getActivity() is null");
                 }
             }
         };
@@ -780,7 +802,7 @@ public class InitialJobOrder extends Fragment {
                 confirmBox.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        new InitialJoborderTask(getActivity(), fileInputStream, params, fileUri.getPath()).execute();
+                        new InitialJoborderTask(getActivity(), fileInputStream, params).execute();
                     }
                 });
 
@@ -793,11 +815,15 @@ public class InitialJobOrder extends Fragment {
 
                 confirmBox.show();
             } else {
-                Util.alertBox(getContext(), "Activity is null. Cannot build Alert Dialog.");
+                Util.alertBox(getContext(), "Dialog error");
+                Log.e("Null", "Activity is null. Cannot build Alert Dialog.");
             }
+
         } catch (Exception e) {
-            e.printStackTrace();
-            Util.alertBox(getContext(), e.toString());
+            Util.displayStackTraceArray(e.getStackTrace(), Variables.MOBILECSA_PACKAGE,
+                    "EException", e.toString());
+
+            Util.alertBox(getContext(), "Error");
         }
     }
 
@@ -817,17 +843,14 @@ public class InitialJobOrder extends Fragment {
 
         private HashMap<String, String> parameters;
 
-        private String filePath;
-
         private InitialJoborderTask(FragmentActivity activity, InputStream fileStream,
-                                    HashMap<String, String> parameters, String path) {
+                                    HashMap<String, String> parameters) {
 
             activityWeakReference = new WeakReference<>(activity);
             progressDialog = new ProgressDialog(activity);
             taskPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
             this.fileStream = fileStream;
             this.parameters = parameters;
-            filePath = path;
         }
 
         @Override
@@ -1000,14 +1023,16 @@ public class InitialJobOrder extends Fragment {
                         }
                     });
                     warningBox.create().show();
+
                 } else {
                     Util.alertBox(mainActivity, response.getString("reason"));
                 }
+
             } catch (Exception e) {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "exception", e.toString());
 
-                Util.longToast(mainActivity, e.getMessage());
+                Util.longToast(mainActivity, "Error");
             }
         }
     }
@@ -1019,7 +1044,8 @@ public class InitialJobOrder extends Fragment {
                 new DatePickerDialog(getActivity(), R.style.DialogTheme, datePOListener, year,
                         month, day).show();
             } else {
-                Util.alertBox(getActivity(), "Activity is null. Cannot open date.");
+                Util.alertBox(getActivity(), "Date error");
+                Log.e("Null", "Activity is null. Cannot open date.");
             }
         }
     };
@@ -1031,7 +1057,8 @@ public class InitialJobOrder extends Fragment {
                 new DatePickerDialog(getActivity(), R.style.DialogTheme, dateDRListener, year,
                         month, day).show();
             } else {
-                Util.alertBox(getActivity(), "Activity is null. Cannot open date.");
+                Util.alertBox(getActivity(), "Date error");
+                Log.e("Null", "Activity is null. Cannot open date.");
             }
         }
     };
@@ -1080,7 +1107,14 @@ public class InitialJobOrder extends Fragment {
 
             signatureDialog.show();
         } else {
-            Util.alertBox(getActivity(), "Activity is null. Cannot open signature.");
+            Util.alertBox(getActivity(), "Cannot open signature.");
+            Log.e("Null", "Activity is null. Cannot open signature.");
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Util.deleteContents();
     }
 }

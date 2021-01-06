@@ -137,7 +137,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
                         new GetCustomerTask(fragmentActivity).execute(tvId.getText().toString(),
                                 String.valueOf(customers.get(index).isAPerson()));
                     } else {
-                        Util.alertBox(fragmentActivity, "Not your customer.", "Not Allowed", false);
+                        Util.alertBox(fragmentActivity, "Denied");
                     }
                 }
             });

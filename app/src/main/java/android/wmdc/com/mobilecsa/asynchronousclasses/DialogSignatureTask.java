@@ -8,10 +8,10 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.util.Base64;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.RelativeLayout;
-import android.wmdc.com.mobilecsa.utils.Util;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -54,15 +54,12 @@ public class DialogSignatureTask extends AsyncTask<String, String, Bitmap> {
             if (builder.getWindow() != null) {
                 builder.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             } else {
-                Util.longToast(weakReference.get(),
-                        "Builder Window is null. Cannot set background drawable to dialog.");
+                Log.e("Null", "Builder Window is null. Cannot set background drawable to dialog.");
             }
 
             builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
-                public void onDismiss(DialogInterface dialog) {
-
-                }
+                public void onDismiss(DialogInterface dialog) {}
             });
             builder.addContentView(signPhotoView, new RelativeLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,

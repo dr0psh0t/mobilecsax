@@ -191,7 +191,7 @@ public class WorkOrdersAdapter extends
         return workOrders.size();
     }
 
-    class WorkOrdersViewHolder extends RecyclerView.ViewHolder {
+    static class WorkOrdersViewHolder extends RecyclerView.ViewHolder {
         private TextView tvScope;
         private TextView tvStatus;
         private LinearLayout rootLayWorkOrders;
@@ -323,7 +323,7 @@ public class WorkOrdersAdapter extends
                 JSONObject resJson = new JSONObject(result);
                 Util.shortToast(mainActivity, resJson.getString("reason"));
             } catch (Exception e) {
-                Util.shortToast(mainActivity, e.toString());
+                Util.shortToast(mainActivity, "Error");
             }
         }
     }

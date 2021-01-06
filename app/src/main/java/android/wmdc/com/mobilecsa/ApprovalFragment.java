@@ -3,6 +3,7 @@ package android.wmdc.com.mobilecsa;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,11 +51,9 @@ public class ApprovalFragment extends Fragment {
             });
 
         } else {
-            Util.longToast(getContext(),
-                    "Activity is null. Cannot set fragment title and preferences.");
+            Util.longToast(getContext(), "Error");
+            Log.e("Null", "Activity is null. Cannot set fragment title and preferences.");
         }
-
-
 
         return v;
     }

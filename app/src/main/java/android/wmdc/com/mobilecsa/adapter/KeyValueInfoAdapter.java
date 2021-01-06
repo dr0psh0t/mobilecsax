@@ -342,7 +342,7 @@ public class KeyValueInfoAdapter extends
             } catch (Exception e) {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.ADAPTER_PACKAGE,
                         "Exception", e.toString());
-                Util.longToast(mainActivity, e.getMessage());
+                Util.longToast(mainActivity, "Error");
             }
         }
     }

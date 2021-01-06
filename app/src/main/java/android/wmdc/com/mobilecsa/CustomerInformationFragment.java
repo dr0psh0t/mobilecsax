@@ -2,6 +2,7 @@ package android.wmdc.com.mobilecsa;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -118,14 +119,16 @@ public class CustomerInformationFragment extends Fragment {
                         AlertDialog alertDialog = builder.create();
                         alertDialog.show();
                     }
+
                 } else {
-                    Util.alertBox(getContext(),
-                            "Activity is null. Cannot show customer information");
+                    Util.alertBox(getContext(), "Cannot show customer information");
+                    Log.e("Null", "getActivity() is null. Cannot show customer information");
                 }
+
             } catch (JSONException je) {
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "JSONException", je.toString());
-                Util.alertBox(getActivity(), je.getMessage());
+                Util.alertBox(getActivity(), "Parse error");
             }
         }
 

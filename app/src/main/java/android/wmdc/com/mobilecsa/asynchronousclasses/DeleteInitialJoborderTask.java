@@ -173,7 +173,7 @@ public class DeleteInitialJoborderTask extends AsyncTask<String, String, String>
                 aBox.create().show();
             }
         } catch (JSONException je) {
-            Util.alertBox(mainActivity, je.getMessage());
+            Util.alertBox(mainActivity, "Parse error");
 
             Util.displayStackTraceArray(je.getStackTrace(),
                     Variables.ASYNCHRONOUS_PACKAGE, "JSONException", je.toString());

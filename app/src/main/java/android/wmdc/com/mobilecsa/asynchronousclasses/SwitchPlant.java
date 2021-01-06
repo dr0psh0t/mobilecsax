@@ -122,7 +122,7 @@ public class SwitchPlant {
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                         "Exception", je.toString());
 
-                Util.alertBox(fragAct, je.getMessage());
+                Util.alertBox(fragAct, "Error occurred. General or Parse.");
             }
         }
     }
@@ -212,7 +212,7 @@ public class SwitchPlant {
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                         "Exception", je.toString());
 
-                Util.alertBox(fragAct, je.getMessage());
+                Util.alertBox(fragAct, "Error occurred. General or Parse.");
             }
         }
     }

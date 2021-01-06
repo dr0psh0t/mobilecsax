@@ -218,11 +218,11 @@ public class SearchCustomerTaskFromJO extends AsyncTask<String, String, String> 
         } catch (JSONException je) {
             Util.displayStackTraceArray(je.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                     "JSONException", je.toString());
-            Util.longToast(mainActivity, je.getMessage());
+            Util.longToast(mainActivity, "Parse error");
         } catch (Exception e) {
             Util.displayStackTraceArray(e.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                     "Exception", e.toString());
-            Util.longToast(mainActivity, e.getMessage());
+            Util.longToast(mainActivity, "Error");
         }
     }
 }

@@ -126,7 +126,7 @@ public class CheckValidDomainTask extends AsyncTask<String, Void, String> {
         } catch (JSONException je) {
             Util.displayStackTraceArray(je.getStackTrace(),
                     Variables.ASYNCHRONOUS_PACKAGE, "JSONException", je.toString());
-            Util.alertBox(activity, je.getMessage());
+            Util.alertBox(activity, "Parse error");
         }
     }
 }

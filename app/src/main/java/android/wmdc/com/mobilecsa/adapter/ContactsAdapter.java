@@ -130,7 +130,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
                             "csaFullName", null))) {
                         new GetContactsTask(fragmentActivity).execute(tvId.getText().toString());
                     } else {
-                        Util.alertBox(fragmentActivity, "Restricted not yours.", "Denied.", false);
+                        Util.alertBox(fragmentActivity, "Denied");
                     }
                 }
             });
@@ -275,12 +275,13 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
                     fragmentTransaction.replace(R.id.content_main, contactsInformationFragment)
                             .addToBackStack(null).commit();   //  required
                 } else {
-                    Util.alertBox(mainActivity, resJson.getString("reason"), "Error", false);
+                    Util.alertBox(mainActivity, resJson.getString("reason"));
                 }
+
             } catch (JSONException je) {
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.ADAPTER_PACKAGE, "",
                         je.toString());
-                Util.alertBox(mainActivity, je.getMessage(), "", false);
+                Util.alertBox(mainActivity, "Parse error");
             }
         }
     }

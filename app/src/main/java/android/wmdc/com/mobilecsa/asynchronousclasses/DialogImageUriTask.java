@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.RelativeLayout;
@@ -49,8 +50,7 @@ public class DialogImageUriTask extends AsyncTask<Uri, String, Uri> {
             if (builder.getWindow() != null) {
                 builder.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             } else {
-                Util.longToast(weakReference.get(),
-                        "Builder Window is null. Cannot set background drawable to dialog.");
+                Log.e("Null", "Builder Window is null. Cannot set background drawable to dialog.");
             }
 
             builder.addContentView(photoView, new RelativeLayout.LayoutParams(

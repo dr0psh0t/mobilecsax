@@ -166,7 +166,7 @@ public class UpdateInitialJoborderTransferredTask extends AsyncTask<String, Stri
         } catch (JSONException je) {
             Util.displayStackTraceArray(je.getStackTrace(),
                     Variables.ASYNCHRONOUS_PACKAGE, "JSONException", je.toString());
-            Util.alertBox(weakReference.get(), je.toString());
+            Util.alertBox(weakReference.get(), "Parse error");
         }
     }
 }

@@ -147,8 +147,8 @@ public class AddContactFragment extends Fragment {
         if (getActivity() != null) {
             getActivity().setTitle("Add Contact");
         } else {
-            Util.longToast(getContext(),
-                    "\"getActivity()\" is null. Cannot set title of this fragment");
+            Util.longToast(getContext(), "Title error");
+            Log.e("Null", "\"getActivity()\" is null. Cannot set title of this fragment");
         }
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -281,7 +281,8 @@ public class AddContactFragment extends Fragment {
                     new DatePickerDialog(getActivity(), R.style.DialogTheme, dateListener, year,
                             month, day).show();
                 } else {
-                    Util.alertBox(getContext(), "Activity is null. Cannot open date.");
+                    Util.alertBox(getContext(), "Cannot open date.");
+                    Log.e("Null", "Activity is null. Cannot open date.");
                 }
             }
         });
@@ -307,15 +308,14 @@ public class AddContactFragment extends Fragment {
 
                         if (getActivity() != null) {
                             Util.handleBackPress(currFrag, getActivity());
-                        } else {
-                            Util.longToast(getContext(), "Activity is null.");
                         }
 
                         Util.alertBox(getActivity(), "Connection was not established." +
                                 "\nCheck data/wifi internet connectivity." +
                                 "\nCheck server availability.", "Resource Empty", false);
                     } else {
-                        Util.longToast(getActivity(), "Fragment Manager is null.");
+                        Util.longToast(getActivity(), "Industr error");
+                        Log.e("Null", "Fragment Manager is null.");
                     }
                 }
             }
@@ -417,7 +417,8 @@ public class AddContactFragment extends Fragment {
 
             dialog.show();
         } else {
-            Util.alertBox(getContext(), "Activity is null. Cannot open signature.");
+            Util.alertBox(getContext(), "Cannot open signature.");
+            Log.e("Null", "Activity is null. Cannot open signature.");
         }
     }
 
@@ -454,7 +455,8 @@ public class AddContactFragment extends Fragment {
             spinnerCalibration.setAdapter(numberAdapter);
             spinnerSpareParts.setAdapter(numberAdapter);
         } else {
-            Util.shortToast(getContext(), "Number Adapter not initialized. Cannot load options.");
+            Util.shortToast(getContext(), "Cannot load options.");
+            Log.e("Null", "numberAdapter not initialized because getActivity is null.");
         }
     }
 
@@ -497,22 +499,38 @@ public class AddContactFragment extends Fragment {
 
                 try {
                     photoFile = Util.createImageFile();
+
+                    if (photoFile != null) {
+                        fileUri = FileProvider.getUriForFile(getActivity(), BuildConfig.APPLICATION_ID
+                                + ".provider", photoFile);
+
+                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                        startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+
+                    } else {
+                        Util.shortToast(getContext(), "Cannot capture picture as of now. Try again later.");
+                        Log.e("Null", "photoFile = Util.createImageFile(); results in null");
+                    }
+
                 } catch (IOException ex) {
                     Util.displayStackTraceArray(ex.getStackTrace(), "android.wmdc.com.mobilecsa",
                             "IOException", ex.toString());
-                    Util.shortToast(getContext(), ex.toString());
+                    Util.shortToast(getContext(), "Cannot capture picture as of now. Try again later.");
+
+                } finally {
+                    if (photoFile != null) {
+                        photoFile.deleteOnExit();
+                    }
                 }
 
-                if (photoFile != null) {
-                    fileUri = FileProvider.getUriForFile(getActivity(), BuildConfig.APPLICATION_ID +
-                            ".provider", photoFile);
-
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-                    startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
-                }
+            } else {
+                Util.shortToast(getContext(), "Cannot capture picture as of now. Try again later.");
+                Log.e("Null", "takePictureIntent is null.");
             }
+
         } else {
-            Util.alertBox(getContext(), "Activity is null. Cannot open camera.");
+            Util.shortToast(getContext(), "Cannot capture picture as of now. Try again later.");
+            Log.e("Null", "getActivity() is null.");
         }
     }
 
@@ -533,7 +551,6 @@ public class AddContactFragment extends Fragment {
         Runnable pdRun = new Runnable() {
             @Override
             public void run() {
-
                 if (getActivity() != null) {
 
                     try (Cursor cursor = getActivity().getContentResolver().query(uri, null, null,
@@ -549,7 +566,7 @@ public class AddContactFragment extends Fragment {
                             if (!cursor.isNull(sizeIndex)) {
                                 size = cursor.getString(sizeIndex);
                             } else {
-                                Util.shortToast(getActivity(), "Unknown size.");
+                                Util.shortToast(getActivity(), "Unknown photo size.");
                                 return;
                             }
 
@@ -565,11 +582,14 @@ public class AddContactFragment extends Fragment {
                                 File smallFile = Util.reduceBitmapFile(file);
 
                                 if (smallFile != null) {
-                                    smallFileSize = smallFile.length() + "";
+                                    smallFileSize = String.valueOf(smallFile.length());
                                     fileInputStream = new FileInputStream(smallFile);
+
                                 } else {
-                                    Util.shortToast(getActivity(), "Small file is null.");
+                                    Util.shortToast(getActivity(), "No photo file created.");
+                                    Log.e("Null", "small_file is null.");
                                 }
+
                             } else {
                                 fileInputStream = Util.getStreamFromUri(uri, getActivity());
                                 smallFileSize = size;
@@ -582,7 +602,7 @@ public class AddContactFragment extends Fragment {
                             } else {
                                 tvPhotoName.setText(displayName);
 
-                                String txt = Integer.parseInt(size) / 1000 + " KB." +
+                                String txt = Integer.parseInt(size) / 1000 + "KB. " +
                                         Integer.parseInt(smallFileSize) / 1000 + "KB.";
 
                                 tvPhotoSize.setText(txt);
@@ -594,11 +614,11 @@ public class AddContactFragment extends Fragment {
                         Util.displayStackTraceArray(ie.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                                 "IOException", ie.toString());
 
-                        Util.shortToast(getContext(), ie.toString());
+                        Util.alertBox(getActivity(), "Unable to dump meta data of an image. Try again later");
                     }
                 } else {
-                    Util.longToast(getContext(),
-                            "\"getActivity()\" is null. Cannot dump image meta data.");
+                    Util.alertBox(getActivity(), "Unable to dump meta data of an image. Try again later");
+                    Log.e("Null", "getActivity() is null");
                 }
             }
         };
@@ -941,7 +961,7 @@ public class AddContactFragment extends Fragment {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "Exception", e.toString());
 
-                Util.longToast(mainActivity, e.getMessage());
+                Util.longToast(mainActivity, "Parsing error");
             }
         }
     }
@@ -1180,12 +1200,13 @@ public class AddContactFragment extends Fragment {
                 });
                 confirmBox.show();
             } else {
-                Util.alertBox(getContext(), "\"getActivity()\" is null. Cannot build alertdialog.");
+                Util.alertBox(getContext(), "Cannot build dialog");
+                Log.e("Null", "\"getActivity()\" is null. Cannot build alertdialog.");
             }
         } catch (Exception e) {
             Log.e("Exception", e.toString());
 
-            Util.alertBox(getContext(), e.toString());
+            Util.alertBox(getContext(), "Error");
         }
     }
 
@@ -1203,5 +1224,11 @@ public class AddContactFragment extends Fragment {
                 viewFocused.clearFocus();
             }
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Util.deleteContents();
     }
 }

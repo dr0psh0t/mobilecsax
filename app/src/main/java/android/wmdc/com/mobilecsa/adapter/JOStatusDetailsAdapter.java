@@ -68,7 +68,7 @@ public class JOStatusDetailsAdapter extends
         return joborderStatusDetails.size();
     }
 
-    class DetailsViewHolder extends RecyclerView.ViewHolder {
+    static class DetailsViewHolder extends RecyclerView.ViewHolder {
         private ImageView joIcon;
         private TextView tvKey;
         private TextView tvValue;

@@ -1,18 +1,14 @@
 package android.wmdc.com.mobilecsa.asynchronousclasses;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
-import android.view.Gravity;
-import android.widget.TextView;
 import android.wmdc.com.mobilecsa.LoginActivity;
-import android.wmdc.com.mobilecsa.R;
+
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
 import org.json.JSONException;

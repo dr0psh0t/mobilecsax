@@ -132,14 +132,16 @@ public class ContactsInformationFragment extends Fragment {
                         AlertDialog alertDialog = builder.create();
                         alertDialog.show();
                     }
+
                 } else {
                     Util.alertBox(getContext(), "Activity is null. Cannot set fragment title, " +
                             "create adapter and add item decoration to recycler view.");
                 }
+
             } catch (JSONException je) {
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "json_exception", je.toString());
-                Util.alertBox(getActivity(), je.getMessage());
+                Util.alertBox(getActivity(), "Parse error");
             }
         }
 

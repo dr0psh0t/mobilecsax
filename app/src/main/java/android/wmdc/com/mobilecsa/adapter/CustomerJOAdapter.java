@@ -87,13 +87,12 @@ public class CustomerJOAdapter extends
                         textViewCustomerIdWeakReference.get().setText(String.valueOf(customerList.get(index).getcId()));
                         textViewSourceWeakReference.get().setText(customerList.get(index).getSource());
 
-                        //Variables.source = customerList.get(index).getSource();
-
                         dialog.cancel();
+
                     } catch (Exception e) {
                         Util.displayStackTraceArray(e.getStackTrace(), Variables.ADAPTER_PACKAGE,
                                 "Exception", e.toString());
-                        Util.longToast(activityWeakReference.get(), e.getMessage());
+                        Util.longToast(activityWeakReference.get(), "Error");
                     }
                 }
             });

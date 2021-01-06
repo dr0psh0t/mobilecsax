@@ -93,7 +93,7 @@ public class EngineJOAdapter extends RecyclerView.Adapter<EngineJOAdapter.Engine
                     } catch (Exception e) {
                         Util.displayStackTraceArray(e.getStackTrace(), Variables.ADAPTER_PACKAGE,
                                 "Exception", e.toString());
-                        Util.longToast(activityWeakReference.get(), e.getMessage());
+                        Util.longToast(activityWeakReference.get(), "Error");
                     }
                 }
             });

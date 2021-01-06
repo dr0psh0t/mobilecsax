@@ -1,7 +1,6 @@
 package android.wmdc.com.mobilecsa.adapter;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -12,13 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.wmdc.com.mobilecsa.QCJOInfoFragment;
 import android.wmdc.com.mobilecsa.R;
-import android.wmdc.com.mobilecsa.asynchronousclasses.CheckExpiryTask;
 import android.wmdc.com.mobilecsa.model.QCDataModel;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -44,11 +41,12 @@ public class QCAdapter extends RecyclerView.Adapter<QCAdapter.QCViewHolder> {
         activity = act;
     }
 
+    /*
     public void replaceAdapterList(ArrayList<QCDataModel> qcData) {
         this.qcData = null;
         this.qcData = qcData;
         this.notifyDataSetChanged();
-    }
+    }*/
 
     @Override
     @NonNull
@@ -142,8 +140,7 @@ public class QCAdapter extends RecyclerView.Adapter<QCAdapter.QCViewHolder> {
 
                     frag.setArguments(bundle);
 
-                    FragmentManager fragmentManager = ((AppCompatActivity) activity)
-                            .getSupportFragmentManager();
+                    FragmentManager fragmentManager = activity.getSupportFragmentManager();
                     final FragmentTransaction fragmentTransaction =
                             fragmentManager.beginTransaction();
 

@@ -2,11 +2,10 @@ package android.wmdc.com.mobilecsa;
 
 import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -139,7 +138,8 @@ public class CustomerFragment extends Fragment {
 
             new CheckExpiryTask(getActivity()).execute();
         } else {
-            Util.alertBox(getContext(), "Activity is null. Some actions cannot be executed.");
+            Util.alertBox(getContext(), "Some actions cannot be executed.");
+            Log.e("Null", "getActivity() is null");
         }
 
         return v;

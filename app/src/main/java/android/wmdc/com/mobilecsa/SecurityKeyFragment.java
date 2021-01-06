@@ -200,11 +200,15 @@ public class SecurityKeyFragment extends Fragment {
                     spEditor.putString("csaFullName", responseJson.getString("csaFullName"));
                     spEditor.apply();
 
-                    /*  uncomment this if mcsa web app is updated
+                    /*  uncomment this if mcsa web app is updated or if your testing mobilecsa app
+                        along with mcsa web app. usually mobilecsa app is always updated along with
+                        mcsa web app. dont forget to comment back if SecurityKey.java in web app
+                        hasn't updated its sessionid security.*/
+
                     spEditor.remove("sessionId");
                     spEditor.apply();
                     spEditor.putString("sessionId", responseJson.getString("sessionId"));
-                    spEditor.apply();*/
+                    spEditor.apply();
 
                     securityActivity.startActivity(new Intent(securityActivity,
                             MainActivity.class));
@@ -213,6 +217,7 @@ public class SecurityKeyFragment extends Fragment {
                 } else {
                     Util.alertBox(securityActivity, responseJson.getString("reason"));
                 }
+
             } catch (Exception e) {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "Exception", e.toString());

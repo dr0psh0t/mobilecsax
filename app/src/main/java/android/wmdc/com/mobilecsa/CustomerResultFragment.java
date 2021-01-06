@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,8 +52,7 @@ public class CustomerResultFragment extends Fragment {
             recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),
                     LinearLayoutManager.VERTICAL));
         } else {
-            Util.longToast(getContext(),
-                    "Activity is null. Cannot add item decoration to recycler view.");
+            Log.e("Null", "Activity is null. Cannot add item decoration to recycler view.");
         }
 
         if (bundle != null) {
@@ -93,7 +93,8 @@ public class CustomerResultFragment extends Fragment {
                         "exception", je.toString());
             }
         } else {
-            Util.alertBox(getContext(), "A bundle containing the result is empty.");
+            Util.alertBox(getContext(), "No bundle information.");
+            Log.e("Null", "A bundle containing the result is empty.");
         }
 
         return v;
