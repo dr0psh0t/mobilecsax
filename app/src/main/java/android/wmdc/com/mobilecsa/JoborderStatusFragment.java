@@ -1,6 +1,7 @@
 package android.wmdc.com.mobilecsa;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,8 @@ public class JoborderStatusFragment extends Fragment {
             recyclerJoDetails.addItemDecoration(new DividerItemDecoration(getActivity(),
                     LinearLayoutManager.VERTICAL));
         } else {
-            Util.alertBox(getActivity(), "Activity is null. Cannot set divider for recycler view.");
+            Util.alertBox(getActivity(), "Title error");
+            Log.e("Null", "Activity is null. Cannot set divider for recycler view.");
         }
 
         workOrderStatuses.add(new WorkOrderStatus("Sample Work Item 1", false));

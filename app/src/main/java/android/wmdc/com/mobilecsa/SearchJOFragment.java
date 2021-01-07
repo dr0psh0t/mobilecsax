@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.InputFilter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,8 @@ public class SearchJOFragment extends Fragment {
         if (getActivity() != null) {
             getActivity().setTitle("Search Job Order");
         } else {
-            Util.longToast(getContext(), "Activity is null. Cannot set title of the fragment.");
+            Util.longToast(getContext(), "Title error");
+            Log.e("Null", "Activity is null. Cannot set title of the fragment.");
         }
 
         sPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());

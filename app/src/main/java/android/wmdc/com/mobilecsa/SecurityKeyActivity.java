@@ -206,7 +206,7 @@ public class SecurityKeyActivity extends AppCompatActivity {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "Exception", e.toString());
 
-                Util.longToast(securityActivity, e.getMessage());
+                Util.longToast(securityActivity, "Error");
             }
         }
     }

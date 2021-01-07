@@ -222,7 +222,7 @@ public class SecurityKeyFragment extends Fragment {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "Exception", e.toString());
 
-                Util.longToast(securityActivity, e.getMessage());
+                Util.longToast(securityActivity, "Error");
             }
         }
     }

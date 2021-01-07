@@ -1,9 +1,9 @@
 package android.wmdc.com.mobilecsa;
 
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,7 +32,8 @@ public class HomeFragment extends Fragment {
         if (getActivity() != null) {
             getActivity().setTitle("Home");
         } else {
-            Util.longToast(getContext(), "Activity is null. Cannot set title of this fragment.");
+            Util.longToast(getContext(), "Title error");
+            Log.e("Null", "Activity is null. Cannot set title of this fragment.");
         }
 
         setHasOptionsMenu(true);

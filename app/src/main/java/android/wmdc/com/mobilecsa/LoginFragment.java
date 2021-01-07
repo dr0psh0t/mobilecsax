@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -135,7 +136,8 @@ public class LoginFragment extends Fragment {
 			
 			setTitle(getActivity());
         } else {
-            Util.alertBox(getContext(), "Activity is null. Cannot render login page.");
+            Util.alertBox(getContext(), "Login error");
+            Log.e("Null", "Activity is null. Cannot render login page.");
         }
 
         return v;
@@ -176,7 +178,7 @@ public class LoginFragment extends Fragment {
             }
 
         } else {
-            Util.longToast(fragmentActivity, "The domain for this app is not set.");
+            Util.longToast(fragmentActivity, "Set the URL.");
         }
     }
 
@@ -224,7 +226,8 @@ public class LoginFragment extends Fragment {
                         });
                         builder.show();
                     } else {
-                        Util.alertBox(getActivity(), "Acivity is null. Cannot go to settings");
+                        Util.alertBox(getActivity(), "Cannot go to settings");
+                        Log.e("Null", "Activity is null. Cannot go to settings");
                     }
                 } else {
                     startActivity(new Intent(getContext(), SettingsActivity.class));
@@ -448,19 +451,18 @@ public class LoginFragment extends Fragment {
                                     .setCustomAnimations(R.anim.enter, R.anim.exit,
                                             R.anim.pop_enter, R.anim.pop_exit).commit();
                         } else {
-                            Util.alertBox(loginActivity, resJson.getString("reason"), "Error",
-                                    false);
+                            Util.alertBox(loginActivity, resJson.getString("reason"));
                         }
                     } catch (JSONException e) {
                         Util.displayStackTraceArray(e.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                                 "json_exception", e.toString());
-                        Util.alertBox(loginActivity, resJson.getString("reason"));
+                        Util.alertBox(loginActivity, "Parse error");
                     }
                 }
             } catch (Exception e) {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "exception", e.toString());
-                Util.longToast(loginActivity, e.getMessage());
+                Util.longToast(loginActivity, "Error");
             }
         }
     }
@@ -486,7 +488,8 @@ public class LoginFragment extends Fragment {
                 return false;
             }
         } else {
-            Util.shortToast(getActivity(), "Context is null. Cannot get data enabled status.");
+            Util.shortToast(getActivity(), "Error");
+            Log.e("Null", "Context is null. Cannot get data enabled status.");
             return false;
         }
     }
@@ -497,7 +500,8 @@ public class LoginFragment extends Fragment {
                     Context.CONNECTIVITY_SERVICE);
             return cm.getActiveNetworkInfo() != null;
         } else {
-            Util.shortToast(getActivity(), "Activity is null. Can't get network connected status.");
+            Util.shortToast(getActivity(), "Error");
+            Log.e("Null", "Activity is null. Can't get network connected status.");
             return false;
         }
     }

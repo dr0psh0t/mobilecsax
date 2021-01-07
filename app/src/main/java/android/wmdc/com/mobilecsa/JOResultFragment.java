@@ -71,7 +71,7 @@ public class JOResultFragment extends Fragment {
                 recyclerViewForJO.setAdapter(joResAdapter);
 
             } catch (JSONException je) {
-                Util.alertBox(getContext(), "JSON Error occured", "Joborder", false);
+                Util.alertBox(getContext(), "Parse error");
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "JSONException", je.toString());
             }

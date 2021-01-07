@@ -2,11 +2,8 @@ package android.wmdc.com.mobilecsa;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -30,27 +27,12 @@ import android.wmdc.com.mobilecsa.utils.Variables;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.lang.ref.WeakReference;
-import java.net.ConnectException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**
@@ -59,13 +41,9 @@ import java.util.ArrayList;
 
 public class QualityCheckFragment extends Fragment {
 
-    private TextView tvPage;
-
     private static ArrayList<QCDataModel> qcDataModels = new ArrayList<>();
     private static QCAdapter qcAdapter;
-    private RecyclerView recyclerView;
     private JSONArray jsonArray;
-
     private SharedPreferences sp;
 
     @Override
@@ -82,8 +60,12 @@ public class QualityCheckFragment extends Fragment {
         if (getActivity() != null) {
             getActivity().setTitle("Quality Check");
         } else {
-            Util.shortToast(getContext(), "Activity is null. Cannot set title of this fragment.");
+            Util.shortToast(getContext(), "Title error");
+            Log.e("Null", "Activity is null. Cannot set title of this fragment.");
         }
+
+        TextView tvPage;
+        RecyclerView recyclerView;
 
         setHasOptionsMenu(true);
         sp = PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -106,10 +88,13 @@ public class QualityCheckFragment extends Fragment {
 
                         dialog.show();
                     } else {
-                        Util.alertBox(getContext(), "Dialog window is null. Cannot open dialog.");
+                        Util.alertBox(getContext(), "Error");
+                        Log.e("Null", "Dialog window is null. Cannot open dialog.");
                     }
+
                 } else {
-                    Util.alertBox(getContext(), "Activity is null. Cannot open dialog.");
+                    Util.alertBox(getContext(), "Error");
+                    Log.e("Null", "Activity is null. Cannot open dialog.");
                 }
             }
         });
@@ -178,7 +163,7 @@ public class QualityCheckFragment extends Fragment {
                     recyclerView.setAdapter(qcAdapter);
 
                 } else {
-                    Util.alertBox(getContext(), "Empty List", "Joborders", false);
+                    Util.alertBox(getContext(), "Empty List");
                 }
             } catch (JSONException je) {
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
@@ -442,7 +427,7 @@ public class QualityCheckFragment extends Fragment {
                                 }
 
                             } catch (JSONException je) {
-                                Util.longToast(getContext(), je.toString());
+                                Util.longToast(getContext(), "Parse error");
                                 break;
                             }
                         }

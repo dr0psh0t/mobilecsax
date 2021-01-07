@@ -3,6 +3,7 @@ package android.wmdc.com.mobilecsa;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,8 @@ public class JOFragment extends Fragment {
         if (getActivity() != null) {
             getActivity().setTitle("Job Order");
         } else {
-            Util.longToast(getContext(), "Activity is null. Cannot set title of this fragment.");
+            Util.longToast(getContext(), "Title error");
+            Log.e("Null", "Activity is null. Cannot set title of this fragment.");
         }
 
         setHasOptionsMenu(true);
@@ -54,7 +56,8 @@ public class JOFragment extends Fragment {
                             R.anim.exit, R.anim.pop_enter, R.anim.pop_exit).replace(
                                     R.id.content_main, new InitialJobOrder()).commit();
                 } else {
-                    Util.alertBox(getContext(), "Fragment Manager is null. Cannot add joborder.");
+                    Util.alertBox(getContext(), "Error");
+                    Log.e("Null", "Fragment Manager is null. Cannot add joborder.");
                 }
             }
         });
@@ -66,8 +69,8 @@ public class JOFragment extends Fragment {
                             R.anim.exit, R.anim.pop_enter, R.anim.pop_exit).replace(
                                     R.id.content_main, new SearchJOFragment()).commit();
                 } else {
-                    Util.alertBox(getContext(),
-                            "Fragment Manager is null. Cannot search joborder.");
+                    Util.alertBox(getContext(), "Error");
+                    Log.e("Null", "Fragment Manager is null. Cannot search joborder.");
                 }
             }
         });
@@ -80,8 +83,8 @@ public class JOFragment extends Fragment {
                                     R.anim.pop_exit).replace(R.id.content_main,
                             new ApprovalFragment()).commit();
                 } else {
-                    Util.alertBox(getContext(),
-                            "Fragment Manager is null. Cannot go to Approval.");
+                    Util.alertBox(getContext(), "Error");
+                    Log.e("Null", "Fragment Manager is null. Cannot go to Approval.");
                 }
             }
         });

@@ -74,7 +74,7 @@ public class QCJOInfoFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d("DESTROY", "FRAGMENT IS DESTROYED");
+        Util.deleteContents();
     }
 
     private Toolbar toolbar;
@@ -90,7 +90,8 @@ public class QCJOInfoFragment extends Fragment {
             toolbar = getActivity().findViewById(R.id.toolbar);
             toolbar.setLogo(R.drawable.ic_action_white_domain);
         } else {
-            Util.longToast(getContext(), "Activity is null. Cannot inflate toolbar.");
+            Util.longToast(getContext(), "Title error");
+            Log.e("Null", "Activity is null. Cannot inflate toolbar");
         }
 
         Bundle thisBundle = this.getArguments();
@@ -135,8 +136,6 @@ public class QCJOInfoFragment extends Fragment {
                         public void onClick(DialogInterface dialog, int which) {
                             if (getActivity() != null) {
                                 Util.handleBackPress(null, getActivity());
-                            } else {
-                                Util.longToast(getContext(), "Activity is null.");
                             }
                         }
                     });
@@ -201,24 +200,37 @@ public class QCJOInfoFragment extends Fragment {
                 try {
                     photoFile = Util.createImageFile();
 
+                    if (photoFile != null) {
+                        fileUri = FileProvider.getUriForFile(getActivity(),
+                                BuildConfig.APPLICATION_ID+ ".provider", photoFile);
+
+                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                        startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+
+                    } else {
+                        Util.shortToast(getContext(), "Cannot capture picture as of now. Try again later.");
+                        Log.e("Null", "photoFile = Util.createImageFile(); results in null");
+                    }
+
                 } catch (IOException ex) {
                     Util.displayStackTraceArray(ex.getStackTrace(),
                             "android.wmdc.com.mobilecsa", "IOException", ex.toString());
+                    Util.shortToast(getContext(), "Cannot capture picture as of now. Try again later.");
 
-                    Util.shortToast(getContext(), ex.toString());
+                } finally {
+                    if (photoFile != null) {
+                        photoFile.deleteOnExit();
+                    }
                 }
 
-                if (photoFile != null) {
-                    fileUri = FileProvider.getUriForFile(getActivity(),
-                            BuildConfig.APPLICATION_ID+ ".provider", photoFile);
-
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-
-                    startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
-                }
+            } else {
+                Util.shortToast(getContext(), "Cannot capture picture as of now. Try again later.");
+                Log.e("Null", "takePictureIntent is null.");
             }
+
         } else {
-            Util.alertBox(getContext(), "Activity is null. Cannot open camera.");
+            Util.shortToast(getContext(), "Cannot capture picture as of now. Try again later.");
+            Log.e("Null", "getActivity() is null.");
         }
     }
 
@@ -256,7 +268,7 @@ public class QCJOInfoFragment extends Fragment {
                             if (!cursor.isNull(sizeIndex)) {
                                 size = cursor.getString(sizeIndex);
                             } else {
-                                Util.shortToast(getActivity(), "Unknown size.");
+                                Util.shortToast(getActivity(), "Unknown photo size.");
                                 return;
                             }
 
@@ -276,7 +288,8 @@ public class QCJOInfoFragment extends Fragment {
                                     fileInputStream2 = new FileInputStream(smallFile);
 
                                 } else {
-                                    Util.shortToast(getActivity(), "Small file is null.");
+                                    Util.shortToast(getActivity(), "No photo file created.");
+                                    Log.e("Null", "small_file is null.");
                                 }
 
                             } else {
@@ -301,8 +314,9 @@ public class QCJOInfoFragment extends Fragment {
                             pd.cancel();
 
                             if (fileInputStream == null) {
-                                Util.longToast(getContext(),
-                                        "The input stream for qc photo file is null. Try again.");
+                                Util.longToast(getContext(), "No photo stream");
+                                Log.e("Null", "The input stream for qc photo file is null. Try again");
+
                             } else {
                                 showSwipe(csaId, joId, workorderId, iconItemDC, workOrderModel);
                             }
@@ -314,12 +328,12 @@ public class QCJOInfoFragment extends Fragment {
                         Util.displayStackTraceArray(ie.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                                 "IOException", ie.toString());
 
-                        Util.shortToast(getContext(), ie.toString());
+                        Util.shortToast(getContext(), "Photo dump error");
                     }
 
                 } else {
-                    Util.longToast(getContext(),
-                            "\"getActivity()\" is null. Cannot dump image meta data.");
+                    Util.longToast(getContext(), "Photo dump error");
+                    Log.e("Null", "\"getActivity()\" is null. Cannot dump image meta data");
                 }
             }
         };
@@ -395,7 +409,8 @@ public class QCJOInfoFragment extends Fragment {
             }
 
         } else {
-            Util.longToast(getContext(), "Activity is null. Cannot show dialog swipe.");
+            Util.longToast(getContext(), "Swipe error");
+            Log.e("Null", "Activity is null. Cannot show dialog swipe");
         }
     }
 }

@@ -1,6 +1,7 @@
 package android.wmdc.com.mobilecsa;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,8 +63,8 @@ public class JoSearchInfoFragment extends Fragment {
                 if (getActivity() != null) {
                     getActivity().setTitle(object.getString("customer"));
                 } else {
-                    Util.longToast(getContext(),
-                            "Activity is null. Cannot set title of this fragment.");
+                    Util.longToast(getContext(), "Title error");
+                    Log.e("Null", "Activity is null. Cannot set title of this fragment.");
                 }
 
                 for (int i = 0; i < LENGTH; ++i) {

@@ -125,8 +125,6 @@ public class DCJOInfoFragment extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 if (getActivity() != null) {
                                     Util.handleBackPress(null, getActivity());
-                                } else {
-                                    Util.longToast(getContext(), "Activity is null.");
                                 }
                             }
                         });
@@ -134,10 +132,12 @@ public class DCJOInfoFragment extends Fragment {
                         AlertDialog alertDialog = builder.create();
                         alertDialog.show();
                     }
+
                 } else {
-                    Util.alertBox(getContext(),
-                            "Activity is null. Cannot adapter, recycler view and swipe button");
+                    Util.alertBox(getContext(), "Error");
+                    Log.e("Null", "Activity is null. Cannot open adapter, recycler view and swipe button");
                 }
+
             } catch (JSONException je) {
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "JSONException", je.toString());

@@ -298,7 +298,7 @@ public class LoginActivity extends AppCompatActivity {
             } catch (Exception e) {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "Exception", e.toString());
-                Util.longToast(loginActivity, e.getMessage());
+                Util.longToast(loginActivity, "Error");
             }
         }
     }

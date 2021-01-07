@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,8 +45,8 @@ public class InitialJoborderFragment extends Fragment {
             if (getActivity() != null) {
                 getActivity().setTitle("");
             } else {
-                Util.longToast(getContext(),
-                        "Activity is null. Cannot set title of this fragment.");
+                Util.longToast(getContext(), "Title error");
+                Log.e("Null", "Activity is null. Cannot set title of this fragment.");
             }
 
             RecyclerView initJoRecView = v.findViewById(R.id.rvInitialJOInfo);
@@ -127,10 +128,12 @@ public class InitialJoborderFragment extends Fragment {
             } catch (JSONException je) {
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "json_exception", je.toString());
-                Util.alertBox(getActivity(), je.getMessage(), "Error", false);
+                Util.alertBox(getActivity(), "Parse error");
             }
+
         } else {
-            Util.alertBox(getActivity(), "Bundle is null. Cannot get data of initial joborder.");
+            Util.alertBox(getActivity(), "No initial joborder data");
+            Log.e("Null", "Bundle is null. Cannot get data of initial joborder");
         }
 
         return v;
@@ -186,7 +189,7 @@ public class InitialJoborderFragment extends Fragment {
                                         objects.getInt("initialJoborderId"));
                                 new DeleteInitialJoborderTask(getActivity()).execute(initialJoId);
                             } catch (JSONException je) {
-                                Util.alertBox(getContext(), je.toString());
+                                Util.alertBox(getContext(), "Parse error");
                             }
                         }
                     });
@@ -201,7 +204,8 @@ public class InitialJoborderFragment extends Fragment {
                     aBox.create().show();
 
                 } else {
-                    Util.alertBox(getActivity(), "Context is null. Cannot open dialog");
+                    Util.alertBox(getActivity(), "Error");
+                    Log.e("Null", "Context is null. Cannot open dialog");
                 }
 
                 return false;
@@ -237,8 +241,8 @@ public class InitialJoborderFragment extends Fragment {
                                     .replace(R.id.content_main, updateInitialJOFragment)
                                     .addToBackStack(null) .commit();
                         } else {
-                            Util.longToast(getActivity(),
-                                    "Fragment Manager is null. Cannot update joborder");
+                            Util.longToast(getActivity(), "Error");
+                            Log.e("Null", "Fragment Manager is null. Cannot update joborder");
                         }
                     }
                 };
@@ -273,7 +277,7 @@ public class InitialJoborderFragment extends Fragment {
                                         String.valueOf(objects.getInt("initialJoborderId")));
 
                             } catch (JSONException je) {
-                                Util.alertBox(getContext(), je.getMessage());
+                                Util.alertBox(getContext(), "Parse error");
                             }
                         }
                     });
@@ -286,7 +290,8 @@ public class InitialJoborderFragment extends Fragment {
 
                     aBox.create().show();
                 } else {
-                    Util.alertBox(getActivity(), "Activity is null. Cannot open dialog.");
+                    Util.alertBox(getActivity(), "Error");
+                    Log.e("Null", "Activity is null. Cannot open dialog.");
                 }
 
                 return false;

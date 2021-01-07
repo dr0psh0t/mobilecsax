@@ -3,6 +3,7 @@ package android.wmdc.com.mobilecsa;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,7 +41,8 @@ public class InitialJoborderList extends Fragment {
         if (getActivity() != null) {
             getActivity().setTitle("Initial Joborder List");
         } else {
-            Util.shortToast(getContext(), "Activity is null. Cannot set title of this fragment.");
+            Util.shortToast(getContext(), "Title error");
+            Log.e("Null", "Activity is null. Cannot set title of this fragment.");
         }
 
         setHasOptionsMenu(true);
@@ -79,10 +81,11 @@ public class InitialJoborderList extends Fragment {
                             getActivity(), joList);
                     quotationRecyclerView.setAdapter(initJoListAdapter);
                 }
+
             } catch (JSONException je) {
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "json_exception", je.toString());
-                Util.alertBox(getActivity(), je.getMessage());
+                Util.alertBox(getActivity(), "Parse error");
             }
         }
         return v;
