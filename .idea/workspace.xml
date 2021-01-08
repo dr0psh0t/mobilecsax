@@ -9,23 +9,7 @@
     <list default="true" id="9fe61f61-99fe-4969-a8a1-a98d6ecd4ff6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/DCJOInfoFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/DCJOInfoFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/HomeFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/InitialJoborderFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/InitialJoborderFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/InitialJoborderList.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/InitialJoborderList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/JOFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/JOFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/JOResultFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/JOResultFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/JoSearchInfoFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/JoSearchInfoFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/JoborderStatusFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/JoborderStatusFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/LoginActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/LoginFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/LoginFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/QCJOInfoFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/QCJOInfoFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/QualityCheckFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/QualityCheckFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/SearchContactFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/SearchContactFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/SearchCustomerFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/SearchCustomerFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/SearchJOFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/SearchJOFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/SecurityKeyActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/SecurityKeyActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/SecurityKeyFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/android/wmdc/com/mobilecsa/SecurityKeyFragment.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,6 +17,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="3056d8997d95" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />

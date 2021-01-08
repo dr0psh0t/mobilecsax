@@ -429,7 +429,9 @@ public class LoginFragment extends Fragment {
                         });
                         warningBox.create().show();
                     }
+
                 } else {
+
                     try {
                         if (resJson.getBoolean("isLocked")) {
                             taskSpEditor.putString("sessionId", resJson.getString("sessionId"));
@@ -450,15 +452,13 @@ public class LoginFragment extends Fragment {
                             fragmentTransaction.replace(R.id.content_login, createPassword)
                                     .setCustomAnimations(R.anim.enter, R.anim.exit,
                                             R.anim.pop_enter, R.anim.pop_exit).commit();
-                        } else {
-                            Util.alertBox(loginActivity, resJson.getString("reason"));
                         }
+
                     } catch (JSONException e) {
-                        Util.displayStackTraceArray(e.getStackTrace(), Variables.MOBILECSA_PACKAGE,
-                                "json_exception", e.toString());
-                        Util.alertBox(loginActivity, "Parse error");
+                        Util.alertBox(loginActivity, resJson.getString("reason"));
                     }
                 }
+
             } catch (Exception e) {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.MOBILECSA_PACKAGE,
                         "exception", e.toString());
