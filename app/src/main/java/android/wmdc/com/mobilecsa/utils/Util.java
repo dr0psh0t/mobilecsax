@@ -486,11 +486,16 @@ public class Util {
     //  gets called when you go to other fragments or activity
     //  must delete the contents of WellmadeTemp
     public static void deleteContents() {
-        File storageDir = Environment.getExternalStoragePublicDirectory("WellmadeTemp");
-        File[] files = storageDir.listFiles();
+        try {
+            File storageDir = Environment.getExternalStoragePublicDirectory("WellmadeTemp");
+            File[] files = storageDir.listFiles();
 
-        for (File f : files) {
-            System.out.println(f.getName()+" delete: "+f.delete());
+            for (File f : files) {
+                System.out.println(f.getName() + " delete: " + f.delete());
+            }
+
+        } catch (Exception e) {
+            Log.e("Exception", e.toString());
         }
     }
 }

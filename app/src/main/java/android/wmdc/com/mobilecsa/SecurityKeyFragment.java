@@ -203,12 +203,12 @@ public class SecurityKeyFragment extends Fragment {
                     /*  uncomment this if mcsa web app is updated or if your testing mobilecsa app
                         along with mcsa web app. usually mobilecsa app is always updated along with
                         mcsa web app. dont forget to comment back if SecurityKey.java in web app
-                        hasn't updated its sessionid security.*/
+                        hasn't updated its sessionid security.
 
                     spEditor.remove("sessionId");
                     spEditor.apply();
                     spEditor.putString("sessionId", responseJson.getString("sessionId"));
-                    spEditor.apply();
+                    spEditor.apply();*/
 
                     securityActivity.startActivity(new Intent(securityActivity,
                             MainActivity.class));

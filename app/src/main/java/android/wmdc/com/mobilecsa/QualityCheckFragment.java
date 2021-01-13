@@ -34,6 +34,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by wmdcprog on 4/13/2018.
@@ -158,6 +159,9 @@ public class QualityCheckFragment extends Fragment {
                             itemObj.getBoolean("isPending")
                         ));
                     }
+
+                    //  sort list by number
+                    Collections.sort(qcDataModels);
 
                     qcAdapter = new QCAdapter(qcDataModels, getActivity());
                     recyclerView.setAdapter(qcAdapter);

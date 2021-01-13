@@ -322,6 +322,8 @@ public class LoginFragment extends Fragment {
             try {
                 URL url = new URL(taskPrefs.getString("domain", null)+"Login");
 
+                System.out.println(url.toString());
+
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(10_000);
                 conn.setConnectTimeout(10_000);

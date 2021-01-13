@@ -4,8 +4,8 @@ package android.wmdc.com.mobilecsa.model;
  * Created by wmdcprog on 3/9/2018.
  */
 
-public class QCDataModel
-{
+public class QCDataModel implements Comparable<QCDataModel> {
+
     private int joId;
     private String serialNum;
     private String dateCommit;
@@ -44,12 +44,34 @@ public class QCDataModel
         this.make = make;
     }
 
-    public String getSerialNum() { return serialNum; }
-    public String getDateCommit() { return dateCommit; }
-    public String getDateReceived() { return dateReceived; }
-    public String getModel() { return model; }
-    public String getCategory() { return category; }
-    public String getMake() { return make; }
+    @Override
+    public int compareTo(QCDataModel other) {
+        return other.joNumber.compareTo(joNumber);
+    }
+
+    public String getSerialNum() {
+        return serialNum;
+    }
+
+    public String getDateCommit() {
+        return dateCommit;
+    }
+
+    public String getDateReceived() {
+        return dateReceived;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getMake() {
+        return make;
+    }
 
     public String getJoNumber(){
         return joNumber;

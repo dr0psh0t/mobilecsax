@@ -162,6 +162,7 @@ public class GetQCJOListTask extends AsyncTask<String, String, String> {
         try {
             jsonObject = new JSONObject(result);
             Variables.qcStore = jsonObject;
+
         } catch (JSONException je) {
             Util.alertBox(mainActivity, "Invalid QC data received. The server might be loading. " +
                     "Try again later.");
@@ -171,6 +172,7 @@ public class GetQCJOListTask extends AsyncTask<String, String, String> {
         try {
             Variables.totalCount = jsonObject.getInt("totalCount");
             Variables.lastPage = Variables.totalCount / 36;
+
         } catch (JSONException je) {
             Util.alertBox(mainActivity, "Cannot build the list. " +
                     "The server might be loading. Try again later.");

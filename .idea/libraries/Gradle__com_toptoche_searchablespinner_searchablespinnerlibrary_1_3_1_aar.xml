@@ -1,8 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.toptoche.searchablespinner:searchablespinnerlibrary:1.3.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b07103fcdf3f6be99f72b7f2b24b1014/jetified-searchablespinnerlibrary-1.3.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b07103fcdf3f6be99f72b7f2b24b1014/jetified-searchablespinnerlibrary-1.3.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ee8139a5594fc765b0da3275de022c24/jetified-searchablespinnerlibrary-1.3.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ee8139a5594fc765b0da3275de022c24/jetified-searchablespinnerlibrary-1.3.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ee8139a5594fc765b0da3275de022c24/jetified-searchablespinnerlibrary-1.3.1/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.toptoche.searchablespinner/searchablespinnerlibrary/1.3.1/2ae7ea7094930fdd2d472d18cab03541630a0c52/searchablespinnerlibrary-1.3.1-javadoc.jar!/" />
