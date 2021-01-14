@@ -71,19 +71,12 @@ public class QCAdapter extends RecyclerView.Adapter<QCAdapter.QCViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull QCViewHolder qcViewHolder, int i) {
-        if (i % 2 != 0) {
-            qcViewHolder.rowItemQCRelLay.setBackgroundResource(
-                    R.drawable.custom_card_background_odd);
-        }
-        else {
-            qcViewHolder.rowItemQCRelLay.setBackgroundResource(
-                    R.drawable.custom_card_background_even);
-        }
 
+        qcViewHolder.rowItemQCRelLay.setBackgroundResource((i % 2 != 0) ?
+                R.drawable.custom_card_background_odd : R.drawable.custom_card_background_even);
         qcViewHolder.tvJONumberDC.setText(qcData.get(i).getJoNumber());
         qcViewHolder.tvCustomerIDQC.setText(qcData.get(i).getCustomerId());
         qcViewHolder.tvCustomerDC.setText(qcData.get(i).getCustomer());
-
         qcViewHolder.index = i;
     }
 

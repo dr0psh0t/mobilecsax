@@ -4,7 +4,7 @@ package android.wmdc.com.mobilecsa.model;
  * Created by wmdcprog on 3/9/2018.
  */
 
-public class DateCommitModel {
+public class DateCommitModel implements Comparable<DateCommitModel> {
 
     private int joId;
     private String joNumber;
@@ -27,6 +27,11 @@ public class DateCommitModel {
         this.isPnmApproved = isPnmApproved;
         this.dateCommit = dateCommit;
         this.dateReceive = dateReceive;
+    }
+
+    @Override
+    public int compareTo(DateCommitModel other) {
+        return other.joNumber.compareTo(joNumber);
     }
 
     public int getJoId() {

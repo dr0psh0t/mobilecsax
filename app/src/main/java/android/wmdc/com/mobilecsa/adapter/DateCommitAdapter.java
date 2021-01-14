@@ -65,27 +65,14 @@ public class DateCommitAdapter extends RecyclerView.Adapter<DateCommitAdapter.DC
     @Override
     public void onBindViewHolder(@NonNull DCViewHolder dcViewHolder, int i) {
 
-        if (i % 2 != 0) {
-            dcViewHolder.rowItemDCRelLay.setBackgroundResource(
-                    R.drawable.custom_card_background_odd);
-        }
-        else {
-            dcViewHolder.rowItemDCRelLay.setBackgroundResource(R.drawable.custom_card_background_even);
-        }
+        dcViewHolder.rowItemDCRelLay.setBackgroundResource((i % 2 != 0) ?
+                R.drawable.custom_card_background_odd : R.drawable.custom_card_background_even);
 
-        if (dcData.get(i).getCsaApproved()) {
-            dcViewHolder.ivCSAApprovedStatus.setImageResource(R.drawable.ic_action_check_colored_round);
-        }
-        else {
-            dcViewHolder.ivCSAApprovedStatus.setImageResource(R.drawable.ic_action_x_colored_round);
-        }
+        dcViewHolder.ivCSAApprovedStatus.setImageResource(dcData.get(i).getCsaApproved() ?
+                R.drawable.ic_action_check_colored_round : R.drawable.ic_action_x_colored_round);
 
-        if (dcData.get(i).getPnmApproved()) {
-            dcViewHolder.ivPMApprovedStatus.setImageResource(R.drawable.ic_action_check_colored_round);
-        }
-        else {
-            dcViewHolder.ivPMApprovedStatus.setImageResource(R.drawable.ic_action_x_colored_round);
-        }
+        dcViewHolder.ivPMApprovedStatus.setImageResource(dcData.get(i).getPnmApproved() ?
+                R.drawable.ic_action_check_colored_round : R.drawable.ic_action_x_colored_round);
 
         dcViewHolder.tvJoNumberDC.setText(dcData.get(i).getJoNumber());
         dcViewHolder.tvCustomerIDDC.setText(dcData.get(i).getCustomerId());

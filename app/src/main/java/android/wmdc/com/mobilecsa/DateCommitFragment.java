@@ -30,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**Created by wmdcprog on 4/13/2018.*/
 
@@ -107,7 +108,8 @@ public class DateCommitFragment extends Fragment {
                 try {
                     jsonArray = jsonObject.getJSONArray("joborders");
 
-                    int loopLen = Math.min(jsonArray.length(), 50);
+                    //int loopLen = Math.min(jsonArray.length(), 50);
+                    int loopLen = jsonArray.length();
 
                     for (int i = 0; i < loopLen; ++i) {
                         JSONObject itemObj = jsonArray.getJSONObject(i);
@@ -125,6 +127,7 @@ public class DateCommitFragment extends Fragment {
                         );
                     }
 
+                    Collections.sort(dcDataModels);
                     recyclerView.setAdapter(new DateCommitAdapter(dcDataModels, getActivity()));
 
                 } catch (JSONException je) {
@@ -132,39 +135,6 @@ public class DateCommitFragment extends Fragment {
                             "The server might be loading. Try again later.");
                 }
             }
-
-            /*
-            try {
-                JSONObject jsonObject = new JSONObject(Variables.dcRawResult);
-                JSONArray jsonArray = jsonObject.getJSONArray("joborders");
-
-                int loopLen = Math.min(jsonArray.length(), 50);
-                //int loopLen = jsonArray.length() - 1;
-
-                for (int i = 0; i < loopLen; ++i) {
-                    JSONObject itemObj = jsonArray.getJSONObject(i);
-
-                    dcDataModels.add(
-                            new DateCommitModel(
-                                    itemObj.getInt("joId"),
-                                    itemObj.getString("joNum"),
-                                    itemObj.getString("customerId"),
-                                    itemObj.getString("customer"),
-                                    itemObj.getBoolean("isCsaApproved"),
-                                    itemObj.getBoolean("isPnmApproved"),
-                                    itemObj.getString("dateCommit"),
-                                    itemObj.getString("dateReceived"))
-                    );
-                }
-
-                recyclerView.setAdapter(new DateCommitAdapter(dcDataModels, getActivity()));
-
-            } catch (JSONException je) {
-                Util.alertBox(getContext(), je.getMessage());
-
-                Util.displayStackTraceArray(je.getStackTrace(), Variables.MOBILECSA_PACKAGE,
-                        "JSONException", je.toString());
-            }*/
         }
 
         return v;
@@ -174,7 +144,6 @@ public class DateCommitFragment extends Fragment {
     public void onPrepareOptionsMenu(Menu menu) {
         MenuItem refreshAction = menu.findItem(R.id.action_refresh);
         refreshAction.setVisible(true);
-
         refreshAction.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {

@@ -44,7 +44,7 @@ public class GetDCJOListTask extends AsyncTask<String, String, String> {
 
     private HttpURLConnection conn = null;
 
-    private boolean noProgressBar;
+    private final boolean noProgressBar;
 
     public GetDCJOListTask(FragmentActivity activity, ProgressBar progressBar,
                            boolean noProgressBar) {
@@ -155,6 +155,7 @@ public class GetDCJOListTask extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String result) {
+        System.out.println(result);
 
         if (noProgressBar) {
             progressDialog.dismiss();

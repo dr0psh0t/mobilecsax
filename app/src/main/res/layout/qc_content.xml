@@ -15,8 +15,6 @@
         android:id="@+id/qcTitleLL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
         android:background="@color/fbcolor"
         android:orientation="horizontal"
         android:paddingTop="5dp"
