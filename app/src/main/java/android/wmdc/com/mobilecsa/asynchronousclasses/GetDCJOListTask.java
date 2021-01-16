@@ -155,7 +155,6 @@ public class GetDCJOListTask extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        System.out.println(result);
 
         if (noProgressBar) {
             progressDialog.dismiss();
@@ -174,7 +173,7 @@ public class GetDCJOListTask extends AsyncTask<String, String, String> {
         try {
             DateCommitFragment dcFrag = new DateCommitFragment();
 
-            //  commented. using bundle to store large data will throw too large exception
+            //  commented because using bundle to store large data will throw TooLargeException
             //Bundle bundle = new Bundle();
             //JSONObject jsonObject = new  JSONObject(result);
             //Variables.dcStore = jsonObject;
@@ -187,8 +186,7 @@ public class GetDCJOListTask extends AsyncTask<String, String, String> {
 
             FragmentManager fragmentManager = mainActivity.getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter,
-                    R.anim.pop_exit);
+            //fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
             fragmentTransaction.replace(R.id.content_main, dcFrag);
             fragmentTransaction.commit();
 

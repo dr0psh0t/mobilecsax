@@ -453,9 +453,6 @@ android/wmdc/com/mobilecsa/adapter/DateCommitAdapter.java
  android.wmdc.com.mobilecsa.adapter.DateCommitAdapter$1
  android.wmdc.com.mobilecsa.adapter.DateCommitAdapter$DCViewHolder
  android.wmdc.com.mobilecsa.adapter.DateCommitAdapter$DCViewHolder$1
-android/wmdc/com/mobilecsa/DCJOInfoFragment.java
- android.wmdc.com.mobilecsa.DCJOInfoFragment
- android.wmdc.com.mobilecsa.DCJOInfoFragment$1
 android/wmdc/com/mobilecsa/model/SwipeButton.java
  android.wmdc.com.mobilecsa.model.SwipeButton
  android.wmdc.com.mobilecsa.model.SwipeButton$1
@@ -470,6 +467,9 @@ android/wmdc/com/mobilecsa/model/SwipeButton.java
  android.wmdc.com.mobilecsa.model.SwipeButton$ApproveQCTask
  android.wmdc.com.mobilecsa.model.SwipeButton$ApproveQCTask$1
  android.wmdc.com.mobilecsa.model.SwipeButton$ApproveQCTask$1$1
+android/wmdc/com/mobilecsa/DCJOInfoFragment.java
+ android.wmdc.com.mobilecsa.DCJOInfoFragment
+ android.wmdc.com.mobilecsa.DCJOInfoFragment$1
 android/wmdc/com/mobilecsa/model/DateCommitModel.java
  android.wmdc.com.mobilecsa.model.DateCommitModel
 android/wmdc/com/mobilecsa/QualityCheckFragment.java
@@ -480,16 +480,16 @@ android/wmdc/com/mobilecsa/QualityCheckFragment.java
  android.wmdc.com.mobilecsa.QualityCheckFragment$4
  android.wmdc.com.mobilecsa.QualityCheckFragment$5
  android.wmdc.com.mobilecsa.QualityCheckFragment$5$1
-android/wmdc/com/mobilecsa/ApprovalFragment.java
- android.wmdc.com.mobilecsa.ApprovalFragment
- android.wmdc.com.mobilecsa.ApprovalFragment$1
- android.wmdc.com.mobilecsa.ApprovalFragment$2
 android/wmdc/com/mobilecsa/adapter/QCAdapter.java
  android.wmdc.com.mobilecsa.adapter.QCAdapter
  android.wmdc.com.mobilecsa.adapter.QCAdapter$1
  android.wmdc.com.mobilecsa.adapter.QCAdapter$QCViewHolder
  android.wmdc.com.mobilecsa.adapter.QCAdapter$QCViewHolder$1
  android.wmdc.com.mobilecsa.adapter.QCAdapter$QCViewHolder$1$1
+android/wmdc/com/mobilecsa/ApprovalFragment.java
+ android.wmdc.com.mobilecsa.ApprovalFragment
+ android.wmdc.com.mobilecsa.ApprovalFragment$1
+ android.wmdc.com.mobilecsa.ApprovalFragment$2
 android/wmdc/com/mobilecsa/DateCommitFragment.java
  android.wmdc.com.mobilecsa.DateCommitFragment
  android.wmdc.com.mobilecsa.DateCommitFragment$1

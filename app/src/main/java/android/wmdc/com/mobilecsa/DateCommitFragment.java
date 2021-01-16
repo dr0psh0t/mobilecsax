@@ -36,7 +36,8 @@ import java.util.Collections;
 
 public class DateCommitFragment extends Fragment {
 
-    private ArrayList<DateCommitModel> dcDataModels = new ArrayList<>();
+    private DateCommitAdapter dateCommitAdapter = null;
+    ArrayList<DateCommitModel> dcDataModels = new ArrayList<>();
     private SharedPreferences sharedPreferences;
 
     @Nullable
@@ -86,58 +87,75 @@ public class DateCommitFragment extends Fragment {
             }
         });
 
-        final RecyclerView recyclerView = v.findViewById(R.id.rvDCData);
+        RecyclerView recyclerView = v.findViewById(R.id.rvDCData);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         if (!Variables.dcRawResult.isEmpty()) {
 
-            //  begin replaced
-            JSONObject jsonObject = null;
-            JSONArray jsonArray;
+            if (dcDataModels.isEmpty()) {
 
-            try {
-                jsonObject = new JSONObject(Variables.dcRawResult);
-                Variables.qcStore = jsonObject;
+                //  begin replaced
+                JSONObject jsonObject = null;
+                JSONArray jsonArray;
 
-            } catch (JSONException je) {
-                Util.alertBox(getActivity(), "Invalid DC data received. " +
-                        "The server might be loading. Try again later.");
-            }
-
-            if (jsonObject != null) {
                 try {
-                    jsonArray = jsonObject.getJSONArray("joborders");
-
-                    //int loopLen = Math.min(jsonArray.length(), 50);
-                    int loopLen = jsonArray.length();
-
-                    for (int i = 0; i < loopLen; ++i) {
-                        JSONObject itemObj = jsonArray.getJSONObject(i);
-
-                        dcDataModels.add(
-                                new DateCommitModel(
-                                        itemObj.getInt("joId"),
-                                        itemObj.getString("joNum"),
-                                        itemObj.getString("customerId"),
-                                        itemObj.getString("customer"),
-                                        itemObj.getBoolean("isCsaApproved"),
-                                        itemObj.getBoolean("isPnmApproved"),
-                                        itemObj.getString("dateCommit"),
-                                        itemObj.getString("dateReceived"))
-                        );
-                    }
-
-                    Collections.sort(dcDataModels);
-                    recyclerView.setAdapter(new DateCommitAdapter(dcDataModels, getActivity()));
+                    jsonObject = new JSONObject(Variables.dcRawResult);
+                    Variables.dcStore = jsonObject;
 
                 } catch (JSONException je) {
-                    Util.alertBox(getActivity(), "Cannot build the list. " +
+                    Util.alertBox(getActivity(), "Invalid DC data received. " +
                             "The server might be loading. Try again later.");
+                }
+
+                if (jsonObject != null) {
+                    try {
+                        jsonArray = jsonObject.getJSONArray("joborders");
+
+                        //int loopLen = Math.min(jsonArray.length(), 50);
+                        int loopLen = jsonArray.length();
+                        dcDataModels.clear();
+
+                        for (int i = 0; i < loopLen; ++i) {
+                            JSONObject itemObj = jsonArray.getJSONObject(i);
+
+                            dcDataModels.add(
+                                    new DateCommitModel(
+                                            itemObj.getInt("joId"),
+                                            itemObj.getString("joNum"),
+                                            itemObj.getString("customerId"),
+                                            itemObj.getString("customer"),
+                                            itemObj.getBoolean("isCsaApproved"),
+                                            itemObj.getBoolean("isPnmApproved"),
+                                            itemObj.getString("dateCommit"),
+                                            itemObj.getString("dateReceived"))
+                            );
+                        }
+
+                        Collections.sort(dcDataModels);
+                        dateCommitAdapter = new DateCommitAdapter(dcDataModels, getActivity());
+                        recyclerView.setAdapter(dateCommitAdapter);
+
+                    } catch (JSONException je) {
+                        Util.alertBox(getActivity(), "Cannot build the list. " +
+                                "The server might be loading. Try again later.");
+                    }
+                }
+
+            } else {
+                if (dateCommitAdapter != null) {
+                    recyclerView.setAdapter(dateCommitAdapter);
+                    dateCommitAdapter.notifyDataSetChanged();
                 }
             }
         }
 
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //System.out.println("dc data models size: "+dcDataModels.size());
     }
 
     @Override
@@ -153,7 +171,7 @@ public class DateCommitFragment extends Fragment {
             }
         });
 
-        MenuItem searchAction = menu.findItem(R.id.action_search);
-        searchAction.setVisible(true);
+        //MenuItem searchAction = menu.findItem(R.id.action_search);
+        //searchAction.setVisible(true);
     }
 }

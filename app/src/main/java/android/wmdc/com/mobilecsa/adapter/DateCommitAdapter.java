@@ -141,9 +141,7 @@ public class DateCommitAdapter extends RecyclerView.Adapter<DateCommitAdapter.DC
 
                     FragmentManager fragmentManager = activity.getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                    fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit,
-                            R.anim.pop_enter, R.anim.pop_exit);
+                    //fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit,R.anim.pop_enter, R.anim.pop_exit);
                     fragmentTransaction.replace(R.id.content_main, dateCommitFragment);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
