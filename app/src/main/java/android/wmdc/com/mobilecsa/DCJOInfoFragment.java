@@ -34,8 +34,11 @@ import java.util.Arrays;
 
 /**
  * Created by wmdcprog on 3/12/2018.
+ * This Fragment weill not be supported starting Jan 18, 2021.
+ * Approval of date commits will take place in DateCommitAdapter.java
  */
 
+@Deprecated
 public class DCJOInfoFragment extends Fragment {
 
     private DateCommitAdapter dateCommitAdapter;

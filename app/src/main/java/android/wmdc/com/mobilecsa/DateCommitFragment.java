@@ -1,19 +1,14 @@
 package android.wmdc.com.mobilecsa;
 
-import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.LinearLayout;
 import android.wmdc.com.mobilecsa.adapter.DateCommitAdapter;
 import android.wmdc.com.mobilecsa.asynchronousclasses.GetDCJOListTask;
 import android.wmdc.com.mobilecsa.model.DateCommitModel;
@@ -36,7 +31,6 @@ import java.util.Collections;
 
 public class DateCommitFragment extends Fragment {
 
-    private DateCommitAdapter dateCommitAdapter = null;
     ArrayList<DateCommitModel> dcDataModels = new ArrayList<>();
     private SharedPreferences sharedPreferences;
 
@@ -44,78 +38,28 @@ public class DateCommitFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle instanceState) {
         final View v = inflater.inflate(R.layout.date_commit_fragment, container, false);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        setHasOptionsMenu(true);
 
         if (getActivity() != null) {
             getActivity().setTitle("Date Commit");
         } else {
             Util.shortToast(getContext(), "Title error");
-            Log.e("Null", "\"getActivity()\" is null. " +
-                    "Cannot set title of this fragment.");
+            Log.e("Null", "\"getActivity()\" is null. Cannot set title of this fragment.");
         }
 
-        setHasOptionsMenu(true);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
-        LinearLayout dcHeaderLinLay = v.findViewById(R.id.dcTitleLL);
-
-        dcHeaderLinLay.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view) {
-
-                if (getActivity() != null) {
-                    Dialog dialog = new Dialog(getActivity());
-                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    dialog.setCancelable(true);
-                    dialog.setContentView(R.layout.dc_header_layout);
-
-                    WindowManager.LayoutParams wmlp;
-
-                    if (dialog.getWindow() != null) {
-                        wmlp = dialog.getWindow().getAttributes();
-                        wmlp.width = Util.systemWidth;
-                        wmlp.gravity = Gravity.TOP;
-                        wmlp.y = 200;
-
-                        dialog.show();
-                    } else {
-                        Util.alertBox(getActivity(), "Cannot open dialog.");
-                        Log.e("Null", "dialog.getWindow() is null. Cannot open dialog.");
-                    }
-                } else {
-                    Util.alertBox(getActivity(), "Cannot open dialog.");
-                    Log.e("Null", "getActivity() is null. Cannot open dialog.");
-                }
-            }
-        });
-
-        RecyclerView recyclerView = v.findViewById(R.id.rvDCData);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         if (!Variables.dcRawResult.isEmpty()) {
-
-            if (dcDataModels.isEmpty()) {
-
-                //  begin replaced
-                JSONObject jsonObject = null;
-                JSONArray jsonArray;
-
-                try {
-                    jsonObject = new JSONObject(Variables.dcRawResult);
-                    Variables.dcStore = jsonObject;
-
-                } catch (JSONException je) {
-                    Util.alertBox(getActivity(), "Invalid DC data received. " +
-                            "The server might be loading. Try again later.");
-                }
+            try {
+                JSONObject jsonObject = new JSONObject(Variables.dcRawResult);
 
                 if (jsonObject != null) {
                     try {
-                        jsonArray = jsonObject.getJSONArray("joborders");
+                        JSONArray jsonArray = jsonObject.getJSONArray("joborders");
 
-                        //int loopLen = Math.min(jsonArray.length(), 50);
-                        int loopLen = jsonArray.length();
+                        int loopLen = Math.min(jsonArray.length(), 100);
                         dcDataModels.clear();
 
-                        for (int i = 0; i < loopLen; ++i) {
+                        for (int i = 0; i <= loopLen; ++i) {
                             JSONObject itemObj = jsonArray.getJSONObject(i);
 
                             dcDataModels.add(
@@ -132,8 +76,10 @@ public class DateCommitFragment extends Fragment {
                         }
 
                         Collections.sort(dcDataModels);
-                        dateCommitAdapter = new DateCommitAdapter(dcDataModels, getActivity());
-                        recyclerView.setAdapter(dateCommitAdapter);
+
+                        RecyclerView recyclerView = v.findViewById(R.id.rvDCData);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        recyclerView.setAdapter(new DateCommitAdapter(dcDataModels, getActivity()));
 
                     } catch (JSONException je) {
                         Util.alertBox(getActivity(), "Cannot build the list. " +
@@ -141,11 +87,9 @@ public class DateCommitFragment extends Fragment {
                     }
                 }
 
-            } else {
-                if (dateCommitAdapter != null) {
-                    recyclerView.setAdapter(dateCommitAdapter);
-                    dateCommitAdapter.notifyDataSetChanged();
-                }
+            } catch (JSONException je) {
+                Util.alertBox(getActivity(), "Invalid DC data received. " +
+                        "The server might be loading. Try again later.");
             }
         }
 
@@ -155,7 +99,6 @@ public class DateCommitFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        //System.out.println("dc data models size: "+dcDataModels.size());
     }
 
     @Override
@@ -170,8 +113,5 @@ public class DateCommitFragment extends Fragment {
                 return true;
             }
         });
-
-        //MenuItem searchAction = menu.findItem(R.id.action_search);
-        //searchAction.setVisible(true);
     }
 }

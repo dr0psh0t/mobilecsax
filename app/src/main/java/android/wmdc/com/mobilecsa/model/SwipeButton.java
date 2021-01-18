@@ -402,7 +402,6 @@ public class SwipeButton extends RelativeLayout {
             super.onPreExecute();
 
             dialogWeakReference.get().dismiss();
-            //Util.progressBarMain.setVisibility(View.VISIBLE);
             progressDialog.setMessage("Please wait...");
             progressDialog.setCancelable(false);
             progressDialog.show();
@@ -637,6 +636,8 @@ public class SwipeButton extends RelativeLayout {
 
     private static class ApproveDCTask extends AsyncTask<String, String, String> {
 
+        private ProgressDialog pDialog;
+
         private WeakReference<FragmentActivity> activityWeakReference;
 
         private HttpURLConnection conn = null;
@@ -649,6 +650,7 @@ public class SwipeButton extends RelativeLayout {
             activityWeakReference = new WeakReference<>(activity);
             taskPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
             swipeButtonWeakReference = new WeakReference<>(swipeButton);
+            pDialog = new ProgressDialog(activity);
         }
 
         private void expandButton() {
@@ -720,7 +722,9 @@ public class SwipeButton extends RelativeLayout {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            Util.progressBarMain.setVisibility(View.VISIBLE);
+            pDialog.setMessage("\tApproving...");
+            pDialog.setCancelable(false);
+            pDialog.show();
         }
 
         @Override
@@ -819,66 +823,58 @@ public class SwipeButton extends RelativeLayout {
 
         @Override
         protected void onPostExecute(String result) {
+            pDialog.dismiss();
+
             try {
-                final JSONObject resJson = new JSONObject(result);
+                JSONObject resJson = new JSONObject(result);
 
-                Runnable progressRunnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        Util.progressBarMain.setVisibility(View.GONE);
+                try {
+                    if (resJson.getBoolean("success")) {
+                        DCValueInfoAdapter.setIconOnApprovedDC();
 
-                        try {
-                            if (resJson.getBoolean("success")) {
-                                DCValueInfoAdapter.setIconOnApprovedDC();
+                        for (DateCommitModel dateCommitModel
+                                : swipeButtonWeakReference.get().dcData) {
 
-                                for (DateCommitModel dateCommitModel
-                                        : swipeButtonWeakReference.get().dcData) {
+                            if (dateCommitModel.getJoId() ==
+                                    swipeButtonWeakReference.get().dcJoborderId) {
 
-                                    if (dateCommitModel.getJoId() ==
-                                            swipeButtonWeakReference.get().dcJoborderId) {
-
-                                        dateCommitModel.setCsaApproved(true);
-                                        swipeButtonWeakReference.get()
-                                                .dateCommitAdapter.notifyDataSetChanged();
-                                        break;
-                                    }
-                                }
-
-                                expandButton();
-
-                            } else {
-                                moveButtonBack();
-
-                                String errMsg = resJson.getString("reason");
-
-                                TextView text = new TextView(activityWeakReference.get());
-                                text.setText(errMsg);
-                                text.setTextSize(17);
-                                text.setPadding(20, 0, 10, 0);
-                                text.setGravity(Gravity.CENTER_HORIZONTAL);
-
-                                AlertDialog.Builder alertBox = new AlertDialog.Builder(
-                                        activityWeakReference.get());
-                                alertBox.setView(text);
-                                alertBox.setTitle("Failed");
-                                alertBox.setCancelable(false);
-
-                                alertBox.setPositiveButton("OK",
-                                        new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {}
-                                        });
-
-                                alertBox.create().show();
+                                dateCommitModel.setCsaApproved(true);
+                                swipeButtonWeakReference.get()
+                                        .dateCommitAdapter.notifyDataSetChanged();
+                                break;
                             }
-                        } catch (JSONException je) {
-                            Util.alertBox(activityWeakReference.get(), je.toString());
                         }
-                    }
-                };
 
-                Handler pdCanceller = new Handler();
-                pdCanceller.postDelayed(progressRunnable, 1000);
+                        expandButton();
+
+                    } else {
+                        moveButtonBack();
+
+                        String errMsg = resJson.getString("reason");
+
+                        TextView text = new TextView(activityWeakReference.get());
+                        text.setText(errMsg);
+                        text.setTextSize(17);
+                        text.setPadding(20, 0, 10, 0);
+                        text.setGravity(Gravity.CENTER_HORIZONTAL);
+
+                        AlertDialog.Builder alertBox = new AlertDialog.Builder(
+                                activityWeakReference.get());
+                        alertBox.setView(text);
+                        alertBox.setTitle("Failed");
+
+                        alertBox.setPositiveButton("OK",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {}
+                                });
+
+                        alertBox.create().show();
+                    }
+
+                } catch (JSONException je) {
+                    Util.alertBox(activityWeakReference.get(), je.toString());
+                }
 
             } catch (JSONException je) {
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.MODEL_PACKAGE,

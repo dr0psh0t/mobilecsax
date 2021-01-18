@@ -1,10 +1,17 @@
 package android.wmdc.com.mobilecsa.adapter;
 
+import android.app.Dialog;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -12,6 +19,8 @@ import android.widget.Toast;
 import android.wmdc.com.mobilecsa.DCJOInfoFragment;
 import android.wmdc.com.mobilecsa.R;
 import android.wmdc.com.mobilecsa.model.DateCommitModel;
+import android.wmdc.com.mobilecsa.model.KeyValueInfo;
+import android.wmdc.com.mobilecsa.model.SwipeButton;
 import android.wmdc.com.mobilecsa.utils.Util;
 import android.wmdc.com.mobilecsa.utils.Variables;
 
@@ -19,12 +28,16 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by wmdcprog on 3/9/2018.
@@ -32,13 +45,15 @@ import java.util.ArrayList;
 
 public class DateCommitAdapter extends RecyclerView.Adapter<DateCommitAdapter.DCViewHolder> {
 
-    private ArrayList<DateCommitModel> dcData;
-    private FragmentActivity activity;
+    private final ArrayList<DateCommitModel> dcData;
+    private final FragmentActivity activity;
     private boolean heightSet = false;
+    private final SharedPreferences sPrefs;
 
     public DateCommitAdapter(ArrayList<DateCommitModel> dcData, FragmentActivity act) {
         this.dcData = dcData;
         activity = act;
+        sPrefs = PreferenceManager.getDefaultSharedPreferences(act);
     }
 
     @NonNull
@@ -81,12 +96,12 @@ public class DateCommitAdapter extends RecyclerView.Adapter<DateCommitAdapter.DC
     }
 
     class DCViewHolder extends RecyclerView.ViewHolder {
-        private LinearLayout rowItemDCRelLay;
-        private ImageView ivCSAApprovedStatus;
-        private ImageView ivPMApprovedStatus;
-        private TextView tvJoNumberDC;
-        private TextView tvCustomerIDDC;
-        private TextView tvCustomerDC;
+        private final LinearLayout rowItemDCRelLay;
+        private final ImageView ivCSAApprovedStatus;
+        private final ImageView ivPMApprovedStatus;
+        private final TextView tvJoNumberDC;
+        private final TextView tvCustomerIDDC;
+        private final TextView tvCustomerDC;
         private int index;
 
         private DCViewHolder(View itemView) {
@@ -115,20 +130,62 @@ public class DateCommitAdapter extends RecyclerView.Adapter<DateCommitAdapter.DC
                         object.put("pmApproved", dcData.get(index).getPnmApproved());
                         object.put("success", true);
 
+                        final Dialog dialog = new Dialog(activity);
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialog.setContentView(R.layout.dc_jo_info_viewholder_layout);
+
+                        TextView tvSwipe = dialog.findViewById(R.id.tvSwipe);
+                        RecyclerView recyclerView = dialog.findViewById(R.id.rvDCInfo);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+
+                        ArrayList<String> DC_KEY = new ArrayList<>(Arrays.asList("JO Number",
+                                "Customer", "Date Received", "Date Commit"));
+
+                        ArrayList<KeyValueInfo> dcInfos = new ArrayList<>();
+                        dcInfos.add(new KeyValueInfo(DC_KEY.get(0), object.getString("joNum")));
+                        dcInfos.add(new KeyValueInfo(DC_KEY.get(1), object.getString("customer")));
+                        dcInfos.add(new KeyValueInfo(DC_KEY.get(2), object.getString("dateReceive")));
+                        dcInfos.add(new KeyValueInfo(DC_KEY.get(3), object.getString("dateCommit")));
+
+                        DCValueInfoAdapter dcValueInfoAdapter = new DCValueInfoAdapter(dcInfos,
+                                activity, dcData.get(index).getJoId(),
+                                object.getBoolean("csaApproved"));
+
+                        recyclerView.setAdapter(dcValueInfoAdapter);
+                        recyclerView.setItemAnimator(new DefaultItemAnimator());
+                        recyclerView.addItemDecoration(new DividerItemDecoration(activity,
+                                LinearLayoutManager.VERTICAL));
+
+                        SwipeButton swipeButton = dialog.findViewById(R.id.swipe_btn);
+                        swipeButton.setParameters(sPrefs.getInt("csaId", 0), "mcsa",
+                                object.getInt("joId"), 0, null, null, null);
+
+                        swipeButton.setDateCommitAdapter(DateCommitAdapter.this);
+                        swipeButton.setDateCommitList(dcData);
+                        swipeButton.setDcJoborderId(dcData.get(index).getJoId());
+                        swipeButton.setFragmentActivity(activity);
+
+                        if (object.getBoolean("csaApproved")) {
+                            swipeButton.setVisibility(View.GONE);
+                            tvSwipe.setVisibility(View.GONE);
+                        }
+
+                        dialog.show();
+
                     } catch (JSONException je) {
                         Util.displayStackTraceArray(je.getStackTrace(),
                                 Variables.ADAPTER_PACKAGE, "JSONException", je.toString());
                         Toast.makeText(activity, "Parse error", Toast.LENGTH_SHORT).show();
 
-                        try {
-                            object.put("success", false);
-                        } catch (JSONException jee) {
-                            Util.displayStackTraceArray(jee.getStackTrace(),
-                                    Variables.ADAPTER_PACKAGE, "JSONException", jee.toString());
-                            Toast.makeText(activity, "Parse error", Toast.LENGTH_SHORT).show();
-                        }
+                    } catch (Exception e) {
+                        Util.displayStackTraceArray(e.getStackTrace(),
+                                Variables.ADAPTER_PACKAGE, "Exception", e.toString());
+                        Toast.makeText(activity, "Error", Toast.LENGTH_SHORT).show();
                     }
 
+                    /*
                     Bundle bundle = new Bundle();
                     bundle.putString("result", object.toString());
                     bundle.putInt("joId", dcData.get(index).getJoId());
@@ -144,7 +201,8 @@ public class DateCommitAdapter extends RecyclerView.Adapter<DateCommitAdapter.DC
                     //fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit,R.anim.pop_enter, R.anim.pop_exit);
                     fragmentTransaction.replace(R.id.content_main, dateCommitFragment);
                     fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
+                    fragmentTransaction.commit();*/
+
                 }
             });
         }

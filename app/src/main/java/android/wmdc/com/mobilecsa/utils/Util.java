@@ -73,7 +73,7 @@ import java.util.regex.Pattern;
 
 public class Util {
 
-    public static ProgressBar progressBarMain;
+    //public static ProgressBar progressBarMain;
 
     public static SharedPreferences sharedPreferences;
 

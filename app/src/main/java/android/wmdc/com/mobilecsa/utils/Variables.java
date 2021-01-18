@@ -11,7 +11,7 @@ public class Variables {
     public static CharSequence headerTitle = "";
 
     public static JSONObject qcStore;
-    public static JSONObject dcStore;
+    //public static JSONObject dcStore;
 
     public static String source;
 

@@ -19,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.wmdc.com.mobilecsa.asynchronousclasses.SearchContactTask;
 import android.wmdc.com.mobilecsa.asynchronousclasses.SearchCustomerTask;
-import android.wmdc.com.mobilecsa.asynchronousclasses.SearchJONumberDCTask;
 import android.wmdc.com.mobilecsa.asynchronousclasses.SearchJONumberQCTask;
 import android.wmdc.com.mobilecsa.model.GPSTracker;
 import android.wmdc.com.mobilecsa.utils.Util;
@@ -50,8 +49,6 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Util.progressBarMain = findViewById(R.id.progressBarMain);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
 
@@ -167,12 +164,13 @@ public class MainActivity extends AppCompatActivity
                             currFrag instanceof ContactsResultFragment) {
                         new SearchContactTask(MainActivity.this).execute(query);
                     } else if (currFrag instanceof DateCommitFragment) {
+                        /*
                         try {
                             new SearchJONumberDCTask(MainActivity.this)
                                     .execute(String.valueOf(Integer.parseInt(query)), "true");
                         } catch (NumberFormatException e) {
                             new SearchJONumberDCTask(MainActivity.this).execute(query, "false");
-                        }
+                        }*/
                     } else if (currFrag instanceof QualityCheckFragment) {
                         try {
                             new SearchJONumberQCTask(MainActivity.this).

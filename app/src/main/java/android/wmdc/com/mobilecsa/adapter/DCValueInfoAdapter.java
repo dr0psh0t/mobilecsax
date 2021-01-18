@@ -14,6 +14,7 @@ import android.wmdc.com.mobilecsa.asynchronousclasses.DialogImageTask;
 import android.wmdc.com.mobilecsa.model.KeyValueInfo;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -139,7 +140,6 @@ public class DCValueInfoAdapter extends RecyclerView.Adapter<DCValueInfoAdapter.
         private TextView tvKey;
         private TextView tvValue;
         private ImageView dcIcon;
-
         private LinearLayout rootLinLay;
 
         private DCInfoViewHolder(View itemView) {
