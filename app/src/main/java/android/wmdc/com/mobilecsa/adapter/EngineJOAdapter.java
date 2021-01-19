@@ -23,14 +23,14 @@ import java.util.ArrayList;
 
 public class EngineJOAdapter extends RecyclerView.Adapter<EngineJOAdapter.EngineViewHolder> {
 
-    private ArrayList<Engine> engineList;
-    private WeakReference<FragmentActivity> activityWeakReference;
-    private WeakReference<TextView> textViewModelIdWeakReference;
+    private final ArrayList<Engine> engineList;
+    private final WeakReference<FragmentActivity> activityWeakReference;
+    private final WeakReference<TextView> textViewModelIdWeakReference;
 
-    private EditText etEngine;
-    private EditText etMakeCat;
+    private final EditText etEngine;
+    private final EditText etMakeCat;
 
-    private Dialog dialog;
+    private final Dialog dialog;
 
     public EngineJOAdapter(ArrayList<Engine> engineList, FragmentActivity activity, EditText etEngine,
                            EditText etMakeCat, Dialog dialog, TextView textViewModelId) {
@@ -65,9 +65,9 @@ public class EngineJOAdapter extends RecyclerView.Adapter<EngineJOAdapter.Engine
     }
 
     class EngineViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvEngineJO;
+        private final TextView tvEngineJO;
         private int index;
-        private LinearLayout rowItemJOEngineLinLay;
+        private final LinearLayout rowItemJOEngineLinLay;
 
         private EngineViewHolder(View itemView) {
             super(itemView);

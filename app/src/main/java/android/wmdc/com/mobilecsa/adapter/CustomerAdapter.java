@@ -53,9 +53,9 @@ import java.util.ArrayList;
 
 public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.CustomerViewHolder> {
 
-    private FragmentActivity fragmentActivity;
-    private ArrayList<Customer> customers;
-    private SharedPreferences sharedPreferences;
+    private final FragmentActivity fragmentActivity;
+    private final ArrayList<Customer> customers;
+    private final SharedPreferences sharedPreferences;
     private boolean heightSet = false;
 
     public CustomerAdapter(FragmentActivity fragmentActivity, ArrayList<Customer> customers) {
@@ -112,11 +112,11 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
     }
 
     class CustomerViewHolder extends RecyclerView.ViewHolder {
-        private ImageView ivProfile;
-        private ImageView ivTransferred;
-        private TextView tvName;
-        private TextView tvCsa;
-        private TextView tvId;
+        private final ImageView ivProfile;
+        private final ImageView ivTransferred;
+        private final TextView tvName;
+        private final TextView tvCsa;
+        private final TextView tvId;
         private int index;
 
         private CustomerViewHolder(View itemView) {
@@ -146,13 +146,13 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
 
     private static class GetCustomerTask extends AsyncTask<String, String, String> {
 
-        private WeakReference<FragmentActivity> activityWeakReference;
+        private final WeakReference<FragmentActivity> activityWeakReference;
 
-        private SharedPreferences taskPrefs;
+        private final SharedPreferences taskPrefs;
 
         private HttpURLConnection conn = null;
 
-        private ProgressDialog progressDialog;
+        private final ProgressDialog progressDialog;
 
         private GetCustomerTask(FragmentActivity activity) {
             activityWeakReference = new WeakReference<>(activity);

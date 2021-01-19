@@ -38,7 +38,7 @@ public class SwitchPlant {
 
     static class WifiTask extends AsyncTask<String, String, String> {
 
-        private ProgressDialog pDialog;
+        private final ProgressDialog pDialog;
 
         private HttpURLConnection conn = null;
 
@@ -129,7 +129,7 @@ public class SwitchPlant {
 
     static class SimTask extends AsyncTask<String, String, String> {
 
-        private ProgressDialog pDialog;
+        private final ProgressDialog pDialog;
         private HttpURLConnection conn = null;
 
         private SimTask() {

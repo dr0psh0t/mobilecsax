@@ -308,7 +308,7 @@ public class AddCustomerFragment extends Fragment {
         return v;
     }
 
-    private View.OnClickListener submitListener = new View.OnClickListener() {
+    private final View.OnClickListener submitListener = new View.OnClickListener() {
         public void onClick(View view) {
             new CheckExpiryTask(getActivity()).execute();
 
@@ -320,7 +320,7 @@ public class AddCustomerFragment extends Fragment {
         }
     };
 
-    private View.OnClickListener signPrevListener = new View.OnClickListener() {
+    private final View.OnClickListener signPrevListener = new View.OnClickListener() {
         public void onClick(View view) {
             if (customerSignature == null) {
                 Util.longToast(getActivity(), "Include signature.");
@@ -334,7 +334,7 @@ public class AddCustomerFragment extends Fragment {
         }
     };
 
-    private View.OnClickListener photoPrevListener = new View.OnClickListener() {
+    private final View.OnClickListener photoPrevListener = new View.OnClickListener() {
         public void onClick(View view) {
             if (displayName == null) {
                 Util.shortToast(getActivity(), "Include photo.");
@@ -348,7 +348,7 @@ public class AddCustomerFragment extends Fragment {
         }
     };
 
-    private View.OnClickListener signatureClickListner = new View.OnClickListener() {
+    private final View.OnClickListener signatureClickListner = new View.OnClickListener() {
         public void onClick(View view) {
             displaySignatureDialog();
         }
@@ -443,7 +443,7 @@ public class AddCustomerFragment extends Fragment {
         }
     }
 
-    private DatePickerDialog.OnDateSetListener dateListener =
+    private final DatePickerDialog.OnDateSetListener dateListener =
             new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -452,7 +452,7 @@ public class AddCustomerFragment extends Fragment {
                 }
             };
 
-    private View.OnTouchListener touchListener = new View.OnTouchListener() {
+    private final View.OnTouchListener touchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent e) {
             hideSoftKey();
@@ -461,7 +461,7 @@ public class AddCustomerFragment extends Fragment {
         }
     };
 
-    private View.OnClickListener photoListener = new View.OnClickListener() {
+    private final View.OnClickListener photoListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             dispatchTakePictureIntent();
@@ -610,7 +610,7 @@ public class AddCustomerFragment extends Fragment {
         pdHandler.postDelayed(pdRun, 2000);
     }
 
-    private AdapterView.OnItemSelectedListener spinnerIndustryListener =
+    private final AdapterView.OnItemSelectedListener spinnerIndustryListener =
             new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
@@ -621,7 +621,7 @@ public class AddCustomerFragment extends Fragment {
                 public void onNothingSelected(AdapterView<?> parent) { }
             };
 
-    private AdapterView.OnItemSelectedListener spinnerPlantListener =
+    private final AdapterView.OnItemSelectedListener spinnerPlantListener =
             new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
@@ -632,7 +632,7 @@ public class AddCustomerFragment extends Fragment {
                 public void onNothingSelected(AdapterView<?> parent) { }
             };
 
-    private AdapterView.OnItemSelectedListener spinnerCityListener =
+    private final AdapterView.OnItemSelectedListener spinnerCityListener =
             new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
@@ -648,7 +648,7 @@ public class AddCustomerFragment extends Fragment {
                 public void onNothingSelected(AdapterView<?> parent) {}
             };
 
-    private AdapterView.OnItemSelectedListener spinnerProvinceListener =
+    private final AdapterView.OnItemSelectedListener spinnerProvinceListener =
             new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
@@ -659,7 +659,7 @@ public class AddCustomerFragment extends Fragment {
                 public void onNothingSelected(AdapterView<?> parent) { }
             };
 
-    private AdapterView.OnItemSelectedListener spinnerCountryListener =
+    private final AdapterView.OnItemSelectedListener spinnerCountryListener =
             new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -669,7 +669,7 @@ public class AddCustomerFragment extends Fragment {
                 public void onNothingSelected(AdapterView<?> parent) { }
             };
 
-    private AdapterView.OnItemSelectedListener spinnerAreaCodeListener =
+    private final AdapterView.OnItemSelectedListener spinnerAreaCodeListener =
             new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -679,7 +679,7 @@ public class AddCustomerFragment extends Fragment {
                 public void onNothingSelected(AdapterView<?> parent) { }
             };
 
-    private AdapterView.OnItemSelectedListener spinnerFaxCodeListener =
+    private final AdapterView.OnItemSelectedListener spinnerFaxCodeListener =
             new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position,
@@ -690,7 +690,7 @@ public class AddCustomerFragment extends Fragment {
                 public void onNothingSelected(AdapterView<?> parent) { }
             };
 
-    private AdapterView.OnItemSelectedListener spinnerFaxCountryCodeListener =
+    private final AdapterView.OnItemSelectedListener spinnerFaxCountryCodeListener =
             new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position,
@@ -701,7 +701,7 @@ public class AddCustomerFragment extends Fragment {
                 public void onNothingSelected(AdapterView<?> parent) { }
             };
 
-    private AdapterView.OnItemSelectedListener spinnerCountryCodeListener =
+    private final AdapterView.OnItemSelectedListener spinnerCountryCodeListener =
             new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
@@ -712,7 +712,7 @@ public class AddCustomerFragment extends Fragment {
                 public void onNothingSelected(AdapterView<?> parent) {}
             };
 
-    private AdapterView.OnItemSelectedListener spinnerERListener =
+    private final AdapterView.OnItemSelectedListener spinnerERListener =
             new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
@@ -723,7 +723,7 @@ public class AddCustomerFragment extends Fragment {
                 public void onNothingSelected(AdapterView<?> parent) { }
             };
 
-    private AdapterView.OnItemSelectedListener spinnerMFListener =
+    private final AdapterView.OnItemSelectedListener spinnerMFListener =
             new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
@@ -734,7 +734,7 @@ public class AddCustomerFragment extends Fragment {
                 public void onNothingSelected(AdapterView<?> parent) { }
             };
 
-    private AdapterView.OnItemSelectedListener spinnerCalibrationListener =
+    private final AdapterView.OnItemSelectedListener spinnerCalibrationListener =
             new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
@@ -745,7 +745,7 @@ public class AddCustomerFragment extends Fragment {
                 public void onNothingSelected(AdapterView<?> parent) { }
             };
 
-    private AdapterView.OnItemSelectedListener spinnerSparePartsListener =
+    private final AdapterView.OnItemSelectedListener spinnerSparePartsListener =
             new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
@@ -774,17 +774,17 @@ public class AddCustomerFragment extends Fragment {
 
     private static class AddCustomerTask extends AsyncTask<String, String, String> {
 
-        private ProgressDialog progressDialog;
+        private final ProgressDialog progressDialog;
 
-        private WeakReference<FragmentActivity> activityWeakReference;
+        private final WeakReference<FragmentActivity> activityWeakReference;
 
-        private SharedPreferences taskPrefs;
+        private final SharedPreferences taskPrefs;
 
         private HttpURLConnection conn = null;
 
-        private InputStream fileStream;
+        private final InputStream fileStream;
 
-        private HashMap<String, String> parameters;
+        private final HashMap<String, String> parameters;
 
         private AddCustomerTask(FragmentActivity activity, InputStream fileStream,
                                 HashMap<String, String> parameters) {
@@ -885,9 +885,7 @@ public class AddCustomerFragment extends Fragment {
                 outputStream.flush();
                 outputStream.close();
 
-                if (fileStream != null) {
-                    fileStream.close();
-                }
+                fileStream.close();
 
                 is_submitted = true;
 

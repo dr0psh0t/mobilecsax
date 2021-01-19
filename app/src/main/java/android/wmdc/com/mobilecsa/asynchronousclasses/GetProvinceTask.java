@@ -32,15 +32,15 @@ import java.util.HashMap;
 
 public class GetProvinceTask extends AsyncTask<String, Void, String> {
 
-    private WeakReference<FragmentActivity> weakReference;
+    private final WeakReference<FragmentActivity> weakReference;
 
-    private WeakReference<Spinner> spinnerProvinceWeakReference;
+    private final WeakReference<Spinner> spinnerProvinceWeakReference;
 
-    private ArrayList<String> provinceCategory;
+    private final ArrayList<String> provinceCategory;
 
-    private HashMap<String, Integer> provinceMap;
+    private final HashMap<String, Integer> provinceMap;
 
-    private SharedPreferences sharedPreferences;
+    private final SharedPreferences sharedPreferences;
 
     private HttpURLConnection conn = null;
 

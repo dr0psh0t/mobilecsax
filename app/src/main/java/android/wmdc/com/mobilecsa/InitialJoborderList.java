@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 public class InitialJoborderList extends Fragment {
 
-    private ArrayList<InitialJoborderRowModel> joList = new ArrayList<>();
+    private final ArrayList<InitialJoborderRowModel> joList = new ArrayList<>();
     private SharedPreferences sPrefs;
 
     @Nullable

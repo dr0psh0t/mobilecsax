@@ -55,11 +55,11 @@ public class PhotoFragment extends Fragment {
 
     private static class SetImageTask extends AsyncTask<String, String, Bitmap> {
 
-        private WeakReference<ImageView> imageViewWeakReference;
+        private final WeakReference<ImageView> imageViewWeakReference;
 
-        private WeakReference<FragmentActivity> activityWeakReference;
+        private final WeakReference<FragmentActivity> activityWeakReference;
 
-        private SharedPreferences taskPrefs;
+        private final SharedPreferences taskPrefs;
 
         private HttpURLConnection conn = null;
 

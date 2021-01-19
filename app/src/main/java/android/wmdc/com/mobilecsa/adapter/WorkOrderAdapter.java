@@ -22,10 +22,10 @@ import java.util.ArrayList;
 
 public class WorkOrderAdapter extends RecyclerView.Adapter<WorkOrderAdapter.WorkOrderViewHolder> {
 
-    private FragmentActivity activity;
-    private ArrayList<WorkOrderModel> workOrderList;
-    private QCJOInfoFragment fragment;
-    private SharedPreferences sPrefs;
+    private final FragmentActivity activity;
+    private final ArrayList<WorkOrderModel> workOrderList;
+    private final QCJOInfoFragment fragment;
+    private final SharedPreferences sPrefs;
 
     public WorkOrderAdapter(FragmentActivity activity, ArrayList<WorkOrderModel> workOrderList,
                             QCJOInfoFragment fragment) {
@@ -83,11 +83,11 @@ public class WorkOrderAdapter extends RecyclerView.Adapter<WorkOrderAdapter.Work
     }
 
     class WorkOrderViewHolder extends RecyclerView.ViewHolder {
-        private LinearLayout rootLayItemInfo;
-        private ImageView doneIcon;
-        private ImageView iconItemDC;
-        private ImageView ivWorkPM;
-        private TextView tvItemDC;
+        private final LinearLayout rootLayItemInfo;
+        private final ImageView doneIcon;
+        private final ImageView iconItemDC;
+        private final ImageView ivWorkPM;
+        private final TextView tvItemDC;
         private int index;
 
         //private MediaType JSON = MediaType.parse("application/json; charset=utf-8");

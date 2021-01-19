@@ -26,8 +26,8 @@ import java.util.ArrayList;
 public class InitialJoborderListAdapter extends
         RecyclerView.Adapter<InitialJoborderListAdapter.InitialJoborderListViewHolder> {
 
-    private WeakReference<FragmentActivity> weakReference;
-    private ArrayList<InitialJoborderRowModel> initJoList;
+    private final WeakReference<FragmentActivity> weakReference;
+    private final ArrayList<InitialJoborderRowModel> initJoList;
     private boolean heightSet = false;
 
     public InitialJoborderListAdapter(FragmentActivity activity,
@@ -90,11 +90,11 @@ public class InitialJoborderListAdapter extends
 
     class InitialJoborderListViewHolder extends RecyclerView.ViewHolder {
 
-        private LinearLayout initialJORowItem;
-        private TextView tvJoNumber;
-        private TextView tvCustomer;
-        private TextView tvSerial;
-        private ImageView ivStatusInitialJO;
+        private final LinearLayout initialJORowItem;
+        private final TextView tvJoNumber;
+        private final TextView tvCustomer;
+        private final TextView tvSerial;
+        private final ImageView ivStatusInitialJO;
 
         private int index;
 

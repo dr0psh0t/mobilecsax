@@ -23,9 +23,9 @@ import java.util.ArrayList;
 
 public class SearchJONumberQCTask extends AsyncTask<String, String, JSONObject> {
 
-    private WeakReference<FragmentActivity> weakReference;
+    private final WeakReference<FragmentActivity> weakReference;
 
-    private ProgressDialog progressDialog;
+    private final ProgressDialog progressDialog;
 
     public SearchJONumberQCTask(FragmentActivity activity) {
         this.weakReference = new WeakReference<>(activity);
@@ -92,12 +92,12 @@ public class SearchJONumberQCTask extends AsyncTask<String, String, JSONObject> 
                     finalObj.put("success", true);
                     finalObj.put("joborders", new JSONArray(joborders));
                     finalObj.put("reason", "Successful");
-                    return finalObj;
                 } else {
                     finalObj.put("success", false);
                     finalObj.put("reason", "No Job Order found.");
-                    return finalObj;
                 }
+
+                return finalObj;
             }
         } catch (JSONException je) {
             Util.displayStackTraceArray(je.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,

@@ -90,11 +90,11 @@ public class CreatePassword extends Fragment {
 
     private static class ActivateUserTask extends AsyncTask<String, Void, String> {
 
-        private WeakReference<FragmentActivity> activityWeakReference;
+        private final WeakReference<FragmentActivity> activityWeakReference;
 
-        private SharedPreferences taskPrefs;
+        private final SharedPreferences taskPrefs;
 
-        private ProgressDialog progressDialog;
+        private final ProgressDialog progressDialog;
 
         private HttpURLConnection conn = null;
 

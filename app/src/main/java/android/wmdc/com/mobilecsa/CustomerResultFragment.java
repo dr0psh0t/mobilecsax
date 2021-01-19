@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 public class CustomerResultFragment extends Fragment {
 
-    private ArrayList<Customer> customerPages = new ArrayList<>();
+    private final ArrayList<Customer> customerPages = new ArrayList<>();
     SharedPreferences sharedPreferences;
 
     @Nullable

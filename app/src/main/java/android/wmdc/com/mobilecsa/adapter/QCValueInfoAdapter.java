@@ -21,12 +21,12 @@ import java.util.ArrayList;
 
 /**Created by wmdcprog on 3/10/2018.*/
 
-public class QCValueInfoAdapter extends RecyclerView.Adapter {
+public class QCValueInfoAdapter extends RecyclerView.Adapter<QCValueInfoAdapter.QCInfoViewHolder> {
 
-    private WeakReference<FragmentActivity> weakReference;
-    private ArrayList<KeyValueInfo> customerInfo;
-    private int joId;
-    private SharedPreferences sharedPreferences;
+    private final WeakReference<FragmentActivity> weakReference;
+    private final ArrayList<KeyValueInfo> customerInfo;
+    private final int joId;
+    private final SharedPreferences sharedPreferences;
 
     public QCValueInfoAdapter(FragmentActivity activity, ArrayList<KeyValueInfo> customerInfo,
                               int joId) {
@@ -39,16 +39,14 @@ public class QCValueInfoAdapter extends RecyclerView.Adapter {
 
     @Override
     @NonNull
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public QCInfoViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(weakReference.get()).inflate(R.layout.qc_jo_info_fragment,
                 viewGroup, false);
         return new QCInfoViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        QCInfoViewHolder qcInfoViewHolder = (QCInfoViewHolder) viewHolder;
-
+    public void onBindViewHolder(@NonNull QCInfoViewHolder qcInfoViewHolder, int i) {
         String key = customerInfo.get(i).getKey();
 
         switch (key) {
@@ -93,11 +91,11 @@ public class QCValueInfoAdapter extends RecyclerView.Adapter {
         return customerInfo.size();
     }
 
-    private class QCInfoViewHolder extends RecyclerView.ViewHolder {
-        private ImageView icon;
-        private TextView tvKey;
-        private TextView tvValue;
-        private LinearLayout rootLinLay;
+    class QCInfoViewHolder extends RecyclerView.ViewHolder {
+        private final ImageView icon;
+        private final TextView tvKey;
+        private final TextView tvValue;
+        private final LinearLayout rootLinLay;
 
         private QCInfoViewHolder(View itemView) {
             super(itemView);

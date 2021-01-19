@@ -34,14 +34,14 @@ import java.util.HashMap;
 
 public class GetCountryTask extends AsyncTask<String, Void, String> {
 
-    private WeakReference<FragmentActivity> weakReference;
+    private final WeakReference<FragmentActivity> weakReference;
 
-    private ArrayList<String> countryCategory;
-    private HashMap<String, Integer> countryMap;
+    private final ArrayList<String> countryCategory;
+    private final HashMap<String, Integer> countryMap;
 
-    private WeakReference<Spinner> spinnerCountryWeakReference;
+    private final WeakReference<Spinner> spinnerCountryWeakReference;
 
-    private SharedPreferences sharedPreferences;
+    private final SharedPreferences sharedPreferences;
 
     private HttpURLConnection conn = null;
 

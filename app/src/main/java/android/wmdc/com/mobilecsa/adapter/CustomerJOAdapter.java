@@ -26,12 +26,12 @@ import java.util.ArrayList;
 public class CustomerJOAdapter extends
         RecyclerView.Adapter<CustomerJOAdapter.CustomerTestViewHolder> {
 
-    private ArrayList<CustomerJO> customerList;
-    private WeakReference<FragmentActivity> activityWeakReference;
-    private WeakReference<TextView> textViewCustomerIdWeakReference;
-    private WeakReference<TextView> textViewSourceWeakReference;
-    private EditText etCustomer;
-    private Dialog dialog;
+    private final ArrayList<CustomerJO> customerList;
+    private final WeakReference<FragmentActivity> activityWeakReference;
+    private final WeakReference<TextView> textViewCustomerIdWeakReference;
+    private final WeakReference<TextView> textViewSourceWeakReference;
+    private final EditText etCustomer;
+    private final Dialog dialog;
 
     public CustomerJOAdapter(ArrayList<CustomerJO> customerList, FragmentActivity activity,
                              EditText etCustomer, Dialog dialog, TextView textViewCustomerId,
@@ -69,9 +69,9 @@ public class CustomerJOAdapter extends
     }
 
     class CustomerTestViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvCustomerJO;
+        private final TextView tvCustomerJO;
         private int index;
-        private LinearLayout rowItemJOCustomerLinLay;
+        private final LinearLayout rowItemJOCustomerLinLay;
 
         private CustomerTestViewHolder(View itemView) {
             super(itemView);

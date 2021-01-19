@@ -36,11 +36,11 @@ import java.nio.charset.StandardCharsets;
 
 public class GetQCJOListTask extends AsyncTask<String, String, String> {
 
-    private WeakReference<FragmentActivity> weakReference;
+    private final WeakReference<FragmentActivity> weakReference;
 
-    private SharedPreferences sharedPreferences;
+    private final SharedPreferences sharedPreferences;
 
-    private ProgressDialog progressDialog;
+    private final ProgressDialog progressDialog;
 
     private HttpURLConnection conn = null;
 

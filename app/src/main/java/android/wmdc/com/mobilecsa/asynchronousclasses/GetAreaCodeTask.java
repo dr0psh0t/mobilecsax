@@ -32,15 +32,14 @@ import java.util.HashMap;
 
 public class GetAreaCodeTask extends AsyncTask<String, Void, String> {
 
-    private WeakReference<FragmentActivity> weakReference;
+    private final WeakReference<FragmentActivity> weakReference;
+    private final WeakReference<Spinner> spinnerAreaCodeWeakReference;
+    private final WeakReference<Spinner> spinnerFaxCodeWeakReference;
 
-    private WeakReference<Spinner> spinnerAreaCodeWeakReference;
-    private WeakReference<Spinner> spinnerFaxCodeWeakReference;
+    private final ArrayList<String> areaCodeCategory;
+    private final HashMap<String, Integer> areaCodeMap;
 
-    private ArrayList<String> areaCodeCategory;
-    private HashMap<String, Integer> areaCodeMap;
-
-    private SharedPreferences sharedPreferences;
+    private final SharedPreferences sharedPreferences;
     private HttpURLConnection conn = null;
 
     public GetAreaCodeTask(FragmentActivity activity, ArrayList<String> areaCodeCategory,

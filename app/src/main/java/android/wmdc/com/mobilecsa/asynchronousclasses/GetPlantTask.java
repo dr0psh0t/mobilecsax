@@ -32,14 +32,14 @@ import java.util.HashMap;
 
 public class GetPlantTask extends AsyncTask<String, Void, String> {
 
-    private WeakReference<FragmentActivity> weakReference;
+    private final WeakReference<FragmentActivity> weakReference;
 
-    private WeakReference<Spinner> spinnerPlantWeakReference;
+    private final WeakReference<Spinner> spinnerPlantWeakReference;
 
-    private ArrayList<String> plantCategory;
-    private HashMap<String, Integer> plantMap;
+    private final ArrayList<String> plantCategory;
+    private final HashMap<String, Integer> plantMap;
 
-    private SharedPreferences sharedPreferences;
+    private final SharedPreferences sharedPreferences;
     private HttpURLConnection conn = null;
 
     public GetPlantTask(FragmentActivity activity, ArrayList<String> plantCategory,

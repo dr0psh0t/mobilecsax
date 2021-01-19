@@ -32,14 +32,14 @@ import java.util.HashMap;
 
 public class GetIndustryTask extends AsyncTask<String, Void, String> {
 
-    private WeakReference<FragmentActivity> weakReference;
+    private final WeakReference<FragmentActivity> weakReference;
 
-    private WeakReference<Spinner> spinnerIndustryWeakReference;
+    private final WeakReference<Spinner> spinnerIndustryWeakReference;
 
-    private ArrayList<String> industryCategory;
-    private HashMap<String, Integer> industryMap;
+    private final ArrayList<String> industryCategory;
+    private final HashMap<String, Integer> industryMap;
 
-    private SharedPreferences sharedPreferences;
+    private final SharedPreferences sharedPreferences;
 
     private HttpURLConnection conn = null;
 

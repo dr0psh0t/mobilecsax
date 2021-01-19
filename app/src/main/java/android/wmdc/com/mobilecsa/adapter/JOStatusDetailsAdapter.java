@@ -21,8 +21,8 @@ import java.util.ArrayList;
 public class JOStatusDetailsAdapter extends
         RecyclerView.Adapter<JOStatusDetailsAdapter.DetailsViewHolder> {
 
-    private ArrayList<KeyValueInfo> joborderStatusDetails;
-    private Context context;
+    private final ArrayList<KeyValueInfo> joborderStatusDetails;
+    private final Context context;
 
     public JOStatusDetailsAdapter(ArrayList<KeyValueInfo> joborderStatusDetails, Context context) {
         this.joborderStatusDetails = joborderStatusDetails;
@@ -69,9 +69,9 @@ public class JOStatusDetailsAdapter extends
     }
 
     static class DetailsViewHolder extends RecyclerView.ViewHolder {
-        private ImageView joIcon;
-        private TextView tvKey;
-        private TextView tvValue;
+        private final ImageView joIcon;
+        private final TextView tvKey;
+        private final TextView tvValue;
 
         private DetailsViewHolder(View itemView) {
             super(itemView);

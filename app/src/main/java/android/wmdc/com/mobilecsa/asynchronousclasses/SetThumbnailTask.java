@@ -22,13 +22,13 @@ import java.net.URL;
  */
 public class SetThumbnailTask extends AsyncTask<String, String, Bitmap> {
 
-    private WeakReference<ImageView> imageViewWeakReference;
+    private final WeakReference<ImageView> imageViewWeakReference;
 
-    private String fileUrl;
+    private final String fileUrl;
 
     private HttpURLConnection conn = null;
 
-    private SharedPreferences sharedPreferences;
+    private final SharedPreferences sharedPreferences;
 
     public SetThumbnailTask(String fileUrl, ImageView imageView, Context context) {
         this.fileUrl = fileUrl;

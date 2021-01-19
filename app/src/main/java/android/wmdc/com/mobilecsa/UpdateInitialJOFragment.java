@@ -93,11 +93,11 @@ public class UpdateInitialJOFragment extends Fragment {
     private TextView textViewModelId;
     private TextView textViewSource;
 
-    private Calendar calendar = Calendar.getInstance();
+    private final Calendar calendar = Calendar.getInstance();
 
-    private int year = calendar.get(Calendar.YEAR);
-    private int month = calendar.get(Calendar.MONTH);
-    private int day = calendar.get(Calendar.DAY_OF_MONTH);
+    private final int year = calendar.get(Calendar.YEAR);
+    private final int month = calendar.get(Calendar.MONTH);
+    private final int day = calendar.get(Calendar.DAY_OF_MONTH);
 
     private EditText etCustomer;
     private EditText etPODate;
@@ -115,7 +115,7 @@ public class UpdateInitialJOFragment extends Fragment {
 
     private SharedPreferences sharedPreferences;
 
-    private View.OnClickListener datePOClickListener = new View.OnClickListener() {
+    private final View.OnClickListener datePOClickListener = new View.OnClickListener() {
         public void onClick(View view) {
             if (getActivity() != null) {
                 new DatePickerDialog(getActivity(), R.style.DialogTheme, datePOListener, year,
@@ -127,7 +127,7 @@ public class UpdateInitialJOFragment extends Fragment {
         }
     };
 
-    private View.OnClickListener dateDRClickListener = new View.OnClickListener() {
+    private final View.OnClickListener dateDRClickListener = new View.OnClickListener() {
         public void onClick(View view) {
             if (getActivity() != null) {
                 new DatePickerDialog(getActivity(), R.style.DialogTheme, dateDRListener, year,
@@ -196,7 +196,7 @@ public class UpdateInitialJOFragment extends Fragment {
     private RecyclerView recyclerViewEngine;
     private EngineJOAdapter engineJOAdapter;
 
-    private View.OnClickListener engineModelClickListener = new View.OnClickListener() {
+    private final View.OnClickListener engineModelClickListener = new View.OnClickListener() {
         public void onClick(View view) {
 
             if (getActivity() != null) {
@@ -285,7 +285,7 @@ public class UpdateInitialJOFragment extends Fragment {
     private RecyclerView recyclerViewCustomer;
     private CustomerJOAdapter customerJOAdapter;
 
-    private View.OnClickListener customerClickListener = new View.OnClickListener() {
+    private final View.OnClickListener customerClickListener = new View.OnClickListener() {
         public void onClick(View view) {
 
             if (getActivity() != null) {
@@ -487,7 +487,7 @@ public class UpdateInitialJOFragment extends Fragment {
         return v;
     }
 
-    private View.OnClickListener signPrevListener = new View.OnClickListener() {
+    private final View.OnClickListener signPrevListener = new View.OnClickListener() {
             public void onClick(View view) {
                 if (joborderSignature == null) {
                     Toast.makeText(getActivity(), "Include signature.", Toast.LENGTH_SHORT).show();
@@ -503,7 +503,7 @@ public class UpdateInitialJOFragment extends Fragment {
             }
         };
 
-    private View.OnClickListener photoPrevListener = new View.OnClickListener() {
+    private final View.OnClickListener photoPrevListener = new View.OnClickListener() {
             public void onClick(View view) {
                 if (displayName == null) {
                     Toast.makeText(getActivity(), "Include photo.", Toast.LENGTH_SHORT).show();
@@ -519,13 +519,13 @@ public class UpdateInitialJOFragment extends Fragment {
             }
         };
 
-    private View.OnClickListener signatureClickListner = new View.OnClickListener() {
+    private final View.OnClickListener signatureClickListner = new View.OnClickListener() {
             public void onClick(View view) {
                 displaySignatureDialog();
             }
         };
 
-    private View.OnClickListener submitListener = new View.OnClickListener() {
+    private final View.OnClickListener submitListener = new View.OnClickListener() {
             public void onClick(View view) {
                 if (fileInputStream != null) {
                     if (is_submitted) {
@@ -539,7 +539,7 @@ public class UpdateInitialJOFragment extends Fragment {
             }
         };
 
-    private DatePickerDialog.OnDateSetListener datePOListener = new DatePickerDialog.OnDateSetListener() {
+    private final DatePickerDialog.OnDateSetListener datePOListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 etPODate.setText(new StringBuilder().append(year).append("-").append(month+1)
@@ -547,7 +547,7 @@ public class UpdateInitialJOFragment extends Fragment {
             }
         };
 
-    private DatePickerDialog.OnDateSetListener dateDRListener =
+    private final DatePickerDialog.OnDateSetListener dateDRListener =
         new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -556,7 +556,7 @@ public class UpdateInitialJOFragment extends Fragment {
             }
         };
 
-    private View.OnClickListener photoListener = new View.OnClickListener(){
+    private final View.OnClickListener photoListener = new View.OnClickListener(){
         public void onClick(View view) {
             LayoutInflater inflater = getLayoutInflater();
             View selectionView = inflater.inflate(R.layout.photo_select_layout, containerViewGroup,
@@ -772,7 +772,7 @@ public class UpdateInitialJOFragment extends Fragment {
     }
 
     private String textPhoto;
-    private HashMap<String, String> params = new HashMap<>();
+    private final HashMap<String, String> params = new HashMap<>();
 
     private void updateInitialJoborder() {
         try {
@@ -915,17 +915,17 @@ public class UpdateInitialJOFragment extends Fragment {
 
     private static class UpdateInitialJoborderTask extends AsyncTask<String, String, String> {
 
-        private ProgressDialog progressDialog;
+        private final ProgressDialog progressDialog;
 
-        private WeakReference<FragmentActivity> activityWeakReference;
+        private final WeakReference<FragmentActivity> activityWeakReference;
 
-        private SharedPreferences taskPrefs;
+        private final SharedPreferences taskPrefs;
 
         private HttpURLConnection conn = null;
 
-        private InputStream fileStream;
+        private final InputStream fileStream;
 
-        private HashMap<String, String> parameters;
+        private final HashMap<String, String> parameters;
 
         private UpdateInitialJoborderTask(FragmentActivity activity, InputStream fileStream,
                                           HashMap<String, String> parameters) {

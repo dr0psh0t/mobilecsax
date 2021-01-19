@@ -41,17 +41,17 @@ import java.util.ArrayList;
 
 public class SearchEngineTaskFromJO extends AsyncTask<String, String, String> {
 
-    private WeakReference<FragmentActivity> weakReference;
+    private final WeakReference<FragmentActivity> weakReference;
 
-    private WeakReference<RecyclerView> recViewWeakReference;
+    private final WeakReference<RecyclerView> recViewWeakReference;
 
     private SharedPreferences sharedPreferences;
 
     private HttpURLConnection conn = null;
 
-    private ArrayList<Engine> engineList;
+    private final ArrayList<Engine> engineList;
 
-    private EngineJOAdapter engineJOAdapter;
+    private final EngineJOAdapter engineJOAdapter;
 
     public SearchEngineTaskFromJO(FragmentActivity activity, ArrayList<Engine> engineList,
                                   RecyclerView recyclerView, EngineJOAdapter engineJOAdapter) {

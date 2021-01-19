@@ -32,8 +32,8 @@ import java.util.ArrayList;
  */
 
 public class QCAdapter extends RecyclerView.Adapter<QCAdapter.QCViewHolder> {
-    private ArrayList<QCDataModel> qcData;
-    private FragmentActivity activity;
+    private final ArrayList<QCDataModel> qcData;
+    private final FragmentActivity activity;
     private boolean heightSet = false;
 
     public QCAdapter(ArrayList<QCDataModel> qcData, FragmentActivity act) {
@@ -81,10 +81,10 @@ public class QCAdapter extends RecyclerView.Adapter<QCAdapter.QCViewHolder> {
     }
 
     class QCViewHolder extends RecyclerView.ViewHolder {
-        private LinearLayout rowItemQCRelLay;
-        private TextView tvJONumberDC;
-        private TextView tvCustomerIDQC;
-        private TextView tvCustomerDC;
+        private final LinearLayout rowItemQCRelLay;
+        private final TextView tvJONumberDC;
+        private final TextView tvCustomerIDQC;
+        private final TextView tvCustomerDC;
 
         private int index;
 

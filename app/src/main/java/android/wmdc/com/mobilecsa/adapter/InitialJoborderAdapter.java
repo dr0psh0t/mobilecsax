@@ -26,10 +26,10 @@ import java.util.ArrayList;
 public class InitialJoborderAdapter extends
         RecyclerView.Adapter<InitialJoborderAdapter.InitialJoborderViewHolder> {
 
-    private WeakReference<FragmentActivity> weakReference;
-    private ArrayList<KeyValueInfo> initJoList;
-    private SharedPreferences sPrefs;
-    private int quotationId;
+    private final WeakReference<FragmentActivity> weakReference;
+    private final ArrayList<KeyValueInfo> initJoList;
+    private final SharedPreferences sPrefs;
+    private final int quotationId;
 
     public InitialJoborderAdapter(FragmentActivity activity, ArrayList<KeyValueInfo> initJoList,
                                   int quotationId) {

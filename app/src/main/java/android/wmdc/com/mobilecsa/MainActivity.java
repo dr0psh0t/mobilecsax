@@ -119,7 +119,6 @@ public class MainActivity extends AppCompatActivity
                 || currFrag instanceof CompanyInformationFragment
                 || currFrag instanceof JoSearchInfoFragment
                 || currFrag instanceof QCJOInfoFragment
-                || currFrag instanceof DCJOInfoFragment
                 || currFrag instanceof UpdateInitialJOFragment
                 || currFrag instanceof JOResultFragment
                 || currFrag instanceof WorkOrderFragment) {
@@ -163,14 +162,6 @@ public class MainActivity extends AppCompatActivity
                     } else if (currFrag instanceof SearchContactFragment ||
                             currFrag instanceof ContactsResultFragment) {
                         new SearchContactTask(MainActivity.this).execute(query);
-                    } else if (currFrag instanceof DateCommitFragment) {
-                        /*
-                        try {
-                            new SearchJONumberDCTask(MainActivity.this)
-                                    .execute(String.valueOf(Integer.parseInt(query)), "true");
-                        } catch (NumberFormatException e) {
-                            new SearchJONumberDCTask(MainActivity.this).execute(query, "false");
-                        }*/
                     } else if (currFrag instanceof QualityCheckFragment) {
                         try {
                             new SearchJONumberQCTask(MainActivity.this).

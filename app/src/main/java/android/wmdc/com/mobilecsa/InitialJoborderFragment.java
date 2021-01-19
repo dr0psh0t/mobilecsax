@@ -149,7 +149,7 @@ public class InitialJoborderFragment extends Fragment {
         }
     }
 
-    private JSONObject objects = new JSONObject();
+    private final JSONObject objects = new JSONObject();
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {

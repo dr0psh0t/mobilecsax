@@ -22,8 +22,8 @@ import java.util.ArrayList;
 
 public class JOResultAdapter extends RecyclerView.Adapter<JOResultAdapter.JOViewHolder> {
 
-    private WeakReference<FragmentActivity> weakReference;
-    private ArrayList<JobOrder> jobOrders;
+    private final WeakReference<FragmentActivity> weakReference;
+    private final ArrayList<JobOrder> jobOrders;
 
     public JOResultAdapter(FragmentActivity activity, ArrayList<JobOrder> jobOrders) {
         this.weakReference = new WeakReference<>(activity);
@@ -60,10 +60,10 @@ public class JOResultAdapter extends RecyclerView.Adapter<JOResultAdapter.JOView
     }
 
     class JOViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvJONumber;
-        private TextView tvCustomer;
-        private TextView tvSerial;
-        private LinearLayout rowItemJOLinLay;
+        private final TextView tvJONumber;
+        private final TextView tvCustomer;
+        private final TextView tvSerial;
+        private final LinearLayout rowItemJOLinLay;
         private int index;
 
         private JOViewHolder(View itemView) {

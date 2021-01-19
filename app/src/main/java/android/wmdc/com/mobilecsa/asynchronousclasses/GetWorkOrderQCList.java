@@ -38,19 +38,19 @@ import java.util.ArrayList;
 
 public class GetWorkOrderQCList extends AsyncTask<String, String, String> {
 
-    private WeakReference<FragmentActivity> weakReference;
+    private final WeakReference<FragmentActivity> weakReference;
 
-    private WeakReference<RecyclerView> woRecWeakReference;
+    private final WeakReference<RecyclerView> woRecWeakReference;
 
-    private SharedPreferences sharedPreferences;
+    private final SharedPreferences sharedPreferences;
 
-    private ProgressDialog progressDialog;
+    private final ProgressDialog progressDialog;
 
     private HttpURLConnection conn = null;
 
-    private ArrayList<WorkOrderModel> workOrderList;
+    private final ArrayList<WorkOrderModel> workOrderList;
 
-    private QCJOInfoFragment fragment;
+    private final QCJOInfoFragment fragment;
 
     public GetWorkOrderQCList(FragmentActivity activity, RecyclerView workOrderRecyclerView,
                               ArrayList<WorkOrderModel> workOrderList, QCJOInfoFragment fragment) {

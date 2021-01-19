@@ -89,12 +89,12 @@ public class InitialJobOrder extends Fragment {
     private TextView textViewModelId;
     private TextView textViewSource;
 
-    private Calendar calendar = Calendar.getInstance();
+    private final Calendar calendar = Calendar.getInstance();
     private SharedPreferences sharedPreferences;
 
-    private int year = calendar.get(Calendar.YEAR);
-    private int month = calendar.get(Calendar.MONTH);
-    private int day = calendar.get(Calendar.DAY_OF_MONTH);
+    private final int year = calendar.get(Calendar.YEAR);
+    private final int month = calendar.get(Calendar.MONTH);
+    private final int day = calendar.get(Calendar.DAY_OF_MONTH);
 
     private EditText etCustomer;
     private EditText etPODate;
@@ -119,7 +119,7 @@ public class InitialJobOrder extends Fragment {
     private EngineJOAdapter engineJOAdapter;
     private CustomerJOAdapter customerJOAdapter;
 
-    private View.OnClickListener engineModelClickListener = new View.OnClickListener() {
+    private final View.OnClickListener engineModelClickListener = new View.OnClickListener() {
         public void onClick(View view) {
 
             if (getActivity() != null) {
@@ -209,7 +209,7 @@ public class InitialJobOrder extends Fragment {
         }
     };
 
-    private View.OnClickListener customerClickListener = new View.OnClickListener() {
+    private final View.OnClickListener customerClickListener = new View.OnClickListener() {
         public void onClick(View view) {
 
             if (getActivity() != null) {
@@ -354,7 +354,7 @@ public class InitialJobOrder extends Fragment {
         return v;
     }
 
-    private View.OnClickListener signPrevListener = new View.OnClickListener() {
+    private final View.OnClickListener signPrevListener = new View.OnClickListener() {
         public void onClick(View view) {
             if (joborderSignature == null) {
                 Util.shortToast(getActivity(), "Include signature.");
@@ -370,7 +370,7 @@ public class InitialJobOrder extends Fragment {
         }
     };
 
-    private View.OnClickListener photoPrevListener = new View.OnClickListener() {
+    private final View.OnClickListener photoPrevListener = new View.OnClickListener() {
         public void onClick(View view) {
             if (displayName == null) {
                 Util.shortToast(getActivity(), "Include photo.");
@@ -386,13 +386,13 @@ public class InitialJobOrder extends Fragment {
         }
     };
 
-    private View.OnClickListener signatureClickListner = new View.OnClickListener() {
+    private final View.OnClickListener signatureClickListner = new View.OnClickListener() {
         public void onClick(View view) {
             displaySignatureDialog();
         }
     };
 
-    private View.OnClickListener submitListener = new View.OnClickListener() {
+    private final View.OnClickListener submitListener = new View.OnClickListener() {
         public void onClick(View view) {
             new CheckExpiryTask(getActivity()).execute();
 
@@ -404,7 +404,7 @@ public class InitialJobOrder extends Fragment {
         }
     };
 
-    private DatePickerDialog.OnDateSetListener datePOListener =
+    private final DatePickerDialog.OnDateSetListener datePOListener =
             new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -413,7 +413,7 @@ public class InitialJobOrder extends Fragment {
         }
     };
 
-    private DatePickerDialog.OnDateSetListener dateDRListener =
+    private final DatePickerDialog.OnDateSetListener dateDRListener =
             new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -422,7 +422,7 @@ public class InitialJobOrder extends Fragment {
         }
     };
 
-    private View.OnClickListener photoListener = new View.OnClickListener() {
+    private final View.OnClickListener photoListener = new View.OnClickListener() {
         public void onClick(View view) {
             LayoutInflater inflater = getLayoutInflater();
             View selectionView = inflater.inflate(R.layout.photo_select_layout, containerViewGroup,
@@ -831,17 +831,17 @@ public class InitialJobOrder extends Fragment {
 
     private static class InitialJoborderTask extends AsyncTask<String, String, String> {
 
-        private ProgressDialog progressDialog;
+        private final ProgressDialog progressDialog;
 
-        private WeakReference<FragmentActivity> activityWeakReference;
+        private final WeakReference<FragmentActivity> activityWeakReference;
 
-        private SharedPreferences taskPrefs;
+        private final SharedPreferences taskPrefs;
 
         private HttpURLConnection conn = null;
 
-        private InputStream fileStream;
+        private final InputStream fileStream;
 
-        private HashMap<String, String> parameters;
+        private final HashMap<String, String> parameters;
 
         private InitialJoborderTask(FragmentActivity activity, InputStream fileStream,
                                     HashMap<String, String> parameters) {
@@ -941,9 +941,7 @@ public class InitialJobOrder extends Fragment {
                 outputStream.flush();
                 outputStream.close();
 
-                if (fileStream != null) {
-                    fileStream.close();
-                }
+                fileStream.close();
 
                 is_submitted = true;
 
@@ -1037,7 +1035,7 @@ public class InitialJobOrder extends Fragment {
         }
     }
 
-    private View.OnClickListener datePOClickListener = new View.OnClickListener() {
+    private final View.OnClickListener datePOClickListener = new View.OnClickListener() {
         public void onClick(View view) {
 
             if (getActivity() != null) {
@@ -1050,7 +1048,7 @@ public class InitialJobOrder extends Fragment {
         }
     };
 
-    private View.OnClickListener dateDRClickListener = new View.OnClickListener() {
+    private final View.OnClickListener dateDRClickListener = new View.OnClickListener() {
         public void onClick(View view) {
 
             if (getActivity() != null) {

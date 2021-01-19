@@ -25,7 +25,7 @@ import java.lang.ref.WeakReference;
 
 public class DialogSignatureTask extends AsyncTask<String, String, Bitmap> {
 
-    private WeakReference<FragmentActivity> weakReference;
+    private final WeakReference<FragmentActivity> weakReference;
 
     public DialogSignatureTask(FragmentActivity activity) {
         this.weakReference = new WeakReference<>(activity);

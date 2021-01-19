@@ -272,7 +272,7 @@ public class AddCompanyFragment extends Fragment {
         return v;
     }
 
-    private View.OnClickListener submitListener = new View.OnClickListener() {
+    private final View.OnClickListener submitListener = new View.OnClickListener() {
         public void onClick(View view) {
             new CheckExpiryTask(getActivity()).execute();
 
@@ -284,7 +284,7 @@ public class AddCompanyFragment extends Fragment {
         }
     };
 
-    private View.OnClickListener signPrevListener = new View.OnClickListener() {
+    private final View.OnClickListener signPrevListener = new View.OnClickListener() {
         public void onClick(View view) {
             if (companySignature == null) {
                 Util.shortToast(getActivity(), "Include signature");
@@ -298,7 +298,7 @@ public class AddCompanyFragment extends Fragment {
         }
     };
 
-    private View.OnClickListener photoPrevListener = new View.OnClickListener() {
+    private final View.OnClickListener photoPrevListener = new View.OnClickListener() {
         public void onClick(View view) {
             if (displayName == null) {
                 Util.shortToast(getActivity(), "Include photo.");
@@ -314,7 +314,7 @@ public class AddCompanyFragment extends Fragment {
         }
     };
 
-    private View.OnClickListener signatureClickListner = new View.OnClickListener() {
+    private final View.OnClickListener signatureClickListner = new View.OnClickListener() {
         public void onClick(View view) {
             displaySignatureDialog();
         }
@@ -412,7 +412,7 @@ public class AddCompanyFragment extends Fragment {
         }
     }
 
-    private View.OnTouchListener touchListener = new View.OnTouchListener() {
+    private final View.OnTouchListener touchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent e) {
             hideSoftKey();
@@ -421,14 +421,14 @@ public class AddCompanyFragment extends Fragment {
         }
     };
 
-    private View.OnClickListener photoListener = new View.OnClickListener() {
+    private final View.OnClickListener photoListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             dispatchTakePictureIntent();
         }
     };
 
-    private AdapterView.OnItemSelectedListener spinnerIndustryListener =
+    private final AdapterView.OnItemSelectedListener spinnerIndustryListener =
         new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -438,7 +438,7 @@ public class AddCompanyFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) { }
         };
 
-    private AdapterView.OnItemSelectedListener spinnerPlantListener =
+    private final AdapterView.OnItemSelectedListener spinnerPlantListener =
         new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -448,7 +448,7 @@ public class AddCompanyFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) { }
         };
 
-    private AdapterView.OnItemSelectedListener spinnerCityListener =
+    private final AdapterView.OnItemSelectedListener spinnerCityListener =
         new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -463,7 +463,7 @@ public class AddCompanyFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) { }
         };
 
-    private AdapterView.OnItemSelectedListener spinnerProvinceListener =
+    private final AdapterView.OnItemSelectedListener spinnerProvinceListener =
         new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -473,7 +473,7 @@ public class AddCompanyFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) { }
         };
 
-    private AdapterView.OnItemSelectedListener spinnerCountryListener =
+    private final AdapterView.OnItemSelectedListener spinnerCountryListener =
         new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -483,7 +483,7 @@ public class AddCompanyFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) { }
         };
 
-    private AdapterView.OnItemSelectedListener spinnerAreaCodeListener =
+    private final AdapterView.OnItemSelectedListener spinnerAreaCodeListener =
         new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -493,7 +493,7 @@ public class AddCompanyFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) { }
         };
 
-    private AdapterView.OnItemSelectedListener spinnerFaxCodeListener =
+    private final AdapterView.OnItemSelectedListener spinnerFaxCodeListener =
         new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -503,7 +503,7 @@ public class AddCompanyFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) { }
         };
 
-    private AdapterView.OnItemSelectedListener spinnerERListener =
+    private final AdapterView.OnItemSelectedListener spinnerERListener =
         new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -514,7 +514,7 @@ public class AddCompanyFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) { }
         };
 
-    private AdapterView.OnItemSelectedListener spinnerMFListener =
+    private final AdapterView.OnItemSelectedListener spinnerMFListener =
         new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -524,7 +524,7 @@ public class AddCompanyFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {}
         };
 
-    private AdapterView.OnItemSelectedListener spinnerCalibrationListener =
+    private final AdapterView.OnItemSelectedListener spinnerCalibrationListener =
         new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -534,7 +534,7 @@ public class AddCompanyFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {}
         };
 
-    private AdapterView.OnItemSelectedListener spinnerSparePartsListener =
+    private final AdapterView.OnItemSelectedListener spinnerSparePartsListener =
         new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -545,7 +545,7 @@ public class AddCompanyFragment extends Fragment {
         };
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+    public final void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         if (requestCode == 0) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED &&
@@ -701,17 +701,17 @@ public class AddCompanyFragment extends Fragment {
 
     private static class AddCompanyTask extends AsyncTask<String, String, String> {
 
-        private ProgressDialog progressDialog;
+        private final ProgressDialog progressDialog;
 
-        private WeakReference<FragmentActivity> activityWeakReference;
+        private final WeakReference<FragmentActivity> activityWeakReference;
 
-        private SharedPreferences taskPrefs;
+        private final SharedPreferences taskPrefs;
 
         private HttpURLConnection conn = null;
 
-        private InputStream fileStream;
+        private final InputStream fileStream;
 
-        private HashMap<String, String> parameters;
+        private final HashMap<String, String> parameters;
 
         private AddCompanyTask(FragmentActivity activity, InputStream fileStream,
                                HashMap<String, String> parameters) {
@@ -811,9 +811,8 @@ public class AddCompanyFragment extends Fragment {
                 outputStream.flush();
                 outputStream.close();
 
-                if (fileStream != null) {
-                    fileStream.close();
-                }
+                //  filestream is always true
+                fileStream.close();
 
                 is_submitted = true;
 

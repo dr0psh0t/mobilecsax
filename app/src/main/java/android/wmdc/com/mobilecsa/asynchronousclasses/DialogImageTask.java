@@ -34,13 +34,13 @@ import java.net.URL;
  */
 public class DialogImageTask extends AsyncTask<String, String, Bitmap> {
 
-    private WeakReference<FragmentActivity> activityWeakReference;
+    private final WeakReference<FragmentActivity> activityWeakReference;
 
     private HttpURLConnection conn = null;
 
-    private SharedPreferences sPrefs;
+    private final SharedPreferences sPrefs;
 
-    private ProgressDialog progressDialog;
+    private final ProgressDialog progressDialog;
 
     public DialogImageTask(FragmentActivity activity) {
         activityWeakReference = new WeakReference<>(activity);

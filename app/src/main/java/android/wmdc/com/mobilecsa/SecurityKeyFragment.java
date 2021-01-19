@@ -73,13 +73,13 @@ public class SecurityKeyFragment extends Fragment {
 
     private static class SecurityKeyTask extends AsyncTask<String, String, String> {
 
-        private WeakReference<FragmentActivity> activityWeakReference;
+        private final WeakReference<FragmentActivity> activityWeakReference;
 
         private HttpURLConnection conn = null;
 
-        private SharedPreferences taskPrefs;
+        private final SharedPreferences taskPrefs;
 
-        private Dialog dialog;
+        private final Dialog dialog;
 
         private SecurityKeyTask(FragmentActivity activity, Dialog dialog) {
             activityWeakReference = new WeakReference<>(activity);

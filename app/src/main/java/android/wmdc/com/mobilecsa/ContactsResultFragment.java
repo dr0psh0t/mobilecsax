@@ -32,7 +32,7 @@ import java.util.ArrayList;
  */
 
 public class ContactsResultFragment extends Fragment {
-    private ArrayList<Contacts> contactPages = new ArrayList<>();
+    private final ArrayList<Contacts> contactPages = new ArrayList<>();
 
     @Nullable
     @Override

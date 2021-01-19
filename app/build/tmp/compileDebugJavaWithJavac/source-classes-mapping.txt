@@ -1,5 +1,56 @@
+android/wmdc/com/mobilecsa/model/JobOrder.java
+ android.wmdc.com.mobilecsa.model.JobOrder
+android/wmdc/com/mobilecsa/model/WorkOrders.java
+ android.wmdc.com.mobilecsa.model.WorkOrders
+android/wmdc/com/mobilecsa/MapsActivity.java
+ android.wmdc.com.mobilecsa.MapsActivity
+android/wmdc/com/mobilecsa/model/Contacts.java
+ android.wmdc.com.mobilecsa.model.Contacts
+android/wmdc/com/mobilecsa/CRMFragment.java
+ android.wmdc.com.mobilecsa.CRMFragment
+ android.wmdc.com.mobilecsa.CRMFragment$1
+ android.wmdc.com.mobilecsa.CRMFragment$2
+android/wmdc/com/mobilecsa/model/QCDataModel.java
+ android.wmdc.com.mobilecsa.model.QCDataModel
+android/wmdc/com/mobilecsa/model/Signature.java
+ android.wmdc.com.mobilecsa.model.Signature
+android/wmdc/com/mobilecsa/model/Customer.java
+ android.wmdc.com.mobilecsa.model.Customer
+android/wmdc/com/mobilecsa/model/ItemModel.java
+ android.wmdc.com.mobilecsa.model.ItemModel
+android/wmdc/com/mobilecsa/model/DateCommitModel.java
+ android.wmdc.com.mobilecsa.model.DateCommitModel
+android/wmdc/com/mobilecsa/model/WorkOrderModel.java
+ android.wmdc.com.mobilecsa.model.WorkOrderModel
+android/wmdc/com/mobilecsa/model/WorkOrderStatus.java
+ android.wmdc.com.mobilecsa.model.WorkOrderStatus
+android/wmdc/com/mobilecsa/model/KeyValueInfo.java
+ android.wmdc.com.mobilecsa.model.KeyValueInfo
+android/wmdc/com/mobilecsa/model/Engine.java
+ android.wmdc.com.mobilecsa.model.Engine
+android/wmdc/com/mobilecsa/model/CustomerJO.java
+ android.wmdc.com.mobilecsa.model.CustomerJO
+android/wmdc/com/mobilecsa/utils/Variables.java
+ android.wmdc.com.mobilecsa.utils.Variables
+android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageUriTask.java
+ android.wmdc.com.mobilecsa.asynchronousclasses.DialogImageUriTask
+ android.wmdc.com.mobilecsa.asynchronousclasses.DialogImageUriTask$1
+android/wmdc/com/mobilecsa/model/EmojiExcludeFilter.java
+ android.wmdc.com.mobilecsa.model.EmojiExcludeFilter
+android/wmdc/com/mobilecsa/model/InitialJoborderRowModel.java
+ android.wmdc.com.mobilecsa.model.InitialJoborderRowModel
+android/wmdc/com/mobilecsa/model/GPSTracker.java
+ android.wmdc.com.mobilecsa.model.GPSTracker
+ android.wmdc.com.mobilecsa.model.GPSTracker$1
+ android.wmdc.com.mobilecsa.model.GPSTracker$2
+android/wmdc/com/mobilecsa/model/InitialJoborderModel.java
+ android.wmdc.com.mobilecsa.model.InitialJoborderModel
+android/wmdc/com/mobilecsa/BuildConfig.java
+ android.wmdc.com.mobilecsa.BuildConfig
 android/wmdc/com/mobilecsa/asynchronousclasses/GetCountryCodeTask.java
  android.wmdc.com.mobilecsa.asynchronousclasses.GetCountryCodeTask
+android/wmdc/com/mobilecsa/CustomerResultFragment.java
+ android.wmdc.com.mobilecsa.CustomerResultFragment
 android/wmdc/com/mobilecsa/UpdateInitialJOFragment.java
  android.wmdc.com.mobilecsa.UpdateInitialJOFragment
  android.wmdc.com.mobilecsa.UpdateInitialJOFragment$1
@@ -29,6 +80,8 @@ android/wmdc/com/mobilecsa/UpdateInitialJOFragment.java
  android.wmdc.com.mobilecsa.UpdateInitialJOFragment$UpdateInitialJoborderTask$1
 android/wmdc/com/mobilecsa/WorkOrderFragment.java
  android.wmdc.com.mobilecsa.WorkOrderFragment
+android/wmdc/com/mobilecsa/asynchronousclasses/GetInitialJoborderListTask.java
+ android.wmdc.com.mobilecsa.asynchronousclasses.GetInitialJoborderListTask
 android/wmdc/com/mobilecsa/adapter/DCValueInfoAdapter.java
  android.wmdc.com.mobilecsa.adapter.DCValueInfoAdapter
  android.wmdc.com.mobilecsa.adapter.DCValueInfoAdapter$1
@@ -37,14 +90,23 @@ android/wmdc/com/mobilecsa/adapter/DCValueInfoAdapter.java
 android/wmdc/com/mobilecsa/asynchronousclasses/GetCountryTask.java
  android.wmdc.com.mobilecsa.asynchronousclasses.GetCountryTask
  android.wmdc.com.mobilecsa.asynchronousclasses.GetCountryTask$1
-android/wmdc/com/mobilecsa/model/QCDataModel.java
- android.wmdc.com.mobilecsa.model.QCDataModel
 android/wmdc/com/mobilecsa/HomeFragment.java
  android.wmdc.com.mobilecsa.HomeFragment
  android.wmdc.com.mobilecsa.HomeFragment$1
  android.wmdc.com.mobilecsa.HomeFragment$2
-android/wmdc/com/mobilecsa/model/Customer.java
- android.wmdc.com.mobilecsa.model.Customer
+android/wmdc/com/mobilecsa/model/SwipeButton.java
+ android.wmdc.com.mobilecsa.model.SwipeButton
+ android.wmdc.com.mobilecsa.model.SwipeButton$1
+ android.wmdc.com.mobilecsa.model.SwipeButton$2
+ android.wmdc.com.mobilecsa.model.SwipeButton$ApproveDCTask
+ android.wmdc.com.mobilecsa.model.SwipeButton$ApproveDCTask$1
+ android.wmdc.com.mobilecsa.model.SwipeButton$ApproveDCTask$2
+ android.wmdc.com.mobilecsa.model.SwipeButton$ApproveDCTask$3
+ android.wmdc.com.mobilecsa.model.SwipeButton$ApproveDCTask$4
+ android.wmdc.com.mobilecsa.model.SwipeButton$ApproveDCTask$5
+ android.wmdc.com.mobilecsa.model.SwipeButton$ApproveQCTask
+ android.wmdc.com.mobilecsa.model.SwipeButton$ApproveQCTask$1
+ android.wmdc.com.mobilecsa.model.SwipeButton$ApproveQCTask$1$1
 android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageTask.java
  android.wmdc.com.mobilecsa.asynchronousclasses.DialogImageTask
  android.wmdc.com.mobilecsa.asynchronousclasses.DialogImageTask$1
@@ -59,25 +121,45 @@ android/wmdc/com/mobilecsa/PhotoFragment.java
 android/wmdc/com/mobilecsa/SearchContactFragment.java
  android.wmdc.com.mobilecsa.SearchContactFragment
  android.wmdc.com.mobilecsa.SearchContactFragment$1
-android/wmdc/com/mobilecsa/model/KeyValueInfo.java
- android.wmdc.com.mobilecsa.model.KeyValueInfo
-android/wmdc/com/mobilecsa/model/Engine.java
- android.wmdc.com.mobilecsa.model.Engine
 android/wmdc/com/mobilecsa/asynchronousclasses/GetIndustryTask.java
  android.wmdc.com.mobilecsa.asynchronousclasses.GetIndustryTask
+android/wmdc/com/mobilecsa/asynchronousclasses/GetPlantTask.java
+ android.wmdc.com.mobilecsa.asynchronousclasses.GetPlantTask
+android/wmdc/com/mobilecsa/asynchronousclasses/GetWorkOrderQCList.java
+ android.wmdc.com.mobilecsa.asynchronousclasses.GetWorkOrderQCList
+android/wmdc/com/mobilecsa/adapter/WorkorderStatusAdapter.java
+ android.wmdc.com.mobilecsa.adapter.WorkorderStatusAdapter
+ android.wmdc.com.mobilecsa.adapter.WorkorderStatusAdapter$1
+ android.wmdc.com.mobilecsa.adapter.WorkorderStatusAdapter$WorkorderStatusViewHolder
 android/wmdc/com/mobilecsa/JoSearchInfoFragment.java
  android.wmdc.com.mobilecsa.JoSearchInfoFragment
-android/wmdc/com/mobilecsa/asynchronousclasses/DialogImageUriTask.java
- android.wmdc.com.mobilecsa.asynchronousclasses.DialogImageUriTask
- android.wmdc.com.mobilecsa.asynchronousclasses.DialogImageUriTask$1
 android/wmdc/com/mobilecsa/asynchronousclasses/GetDCJOListTask.java
  android.wmdc.com.mobilecsa.asynchronousclasses.GetDCJOListTask
-android/wmdc/com/mobilecsa/model/InitialJoborderRowModel.java
- android.wmdc.com.mobilecsa.model.InitialJoborderRowModel
+android/wmdc/com/mobilecsa/asynchronousclasses/DialogSignatureTask.java
+ android.wmdc.com.mobilecsa.asynchronousclasses.DialogSignatureTask
+ android.wmdc.com.mobilecsa.asynchronousclasses.DialogSignatureTask$1
 android/wmdc/com/mobilecsa/utils/Util.java
  android.wmdc.com.mobilecsa.utils.Util
  android.wmdc.com.mobilecsa.utils.Util$1
  android.wmdc.com.mobilecsa.utils.Util$2
+android/wmdc/com/mobilecsa/SettingsActivity.java
+ android.wmdc.com.mobilecsa.SettingsActivity
+android/wmdc/com/mobilecsa/adapter/WorkOrdersAdapter.java
+ android.wmdc.com.mobilecsa.adapter.WorkOrdersAdapter
+ android.wmdc.com.mobilecsa.adapter.WorkOrdersAdapter$1
+ android.wmdc.com.mobilecsa.adapter.WorkOrdersAdapter$2
+ android.wmdc.com.mobilecsa.adapter.WorkOrdersAdapter$2$1
+ android.wmdc.com.mobilecsa.adapter.WorkOrdersAdapter$2$2
+ android.wmdc.com.mobilecsa.adapter.WorkOrdersAdapter$3
+ android.wmdc.com.mobilecsa.adapter.WorkOrdersAdapter$4
+ android.wmdc.com.mobilecsa.adapter.WorkOrdersAdapter$ExtensionTask
+ android.wmdc.com.mobilecsa.adapter.WorkOrdersAdapter$WorkOrdersViewHolder
+android/wmdc/com/mobilecsa/ApprovalFragment.java
+ android.wmdc.com.mobilecsa.ApprovalFragment
+ android.wmdc.com.mobilecsa.ApprovalFragment$1
+ android.wmdc.com.mobilecsa.ApprovalFragment$2
+android/wmdc/com/mobilecsa/asynchronousclasses/SearchEngineTaskFromJO.java
+ android.wmdc.com.mobilecsa.asynchronousclasses.SearchEngineTaskFromJO
 android/wmdc/com/mobilecsa/InitialJoborderFragment.java
  android.wmdc.com.mobilecsa.InitialJoborderFragment
  android.wmdc.com.mobilecsa.InitialJoborderFragment$1
@@ -101,165 +183,10 @@ android/wmdc/com/mobilecsa/adapter/ContactsAdapter.java
  android.wmdc.com.mobilecsa.adapter.ContactsAdapter$ContactsViewHolder
  android.wmdc.com.mobilecsa.adapter.ContactsAdapter$ContactsViewHolder$1
  android.wmdc.com.mobilecsa.adapter.ContactsAdapter$GetContactsTask
-android/wmdc/com/mobilecsa/adapter/EngineJOAdapter.java
- android.wmdc.com.mobilecsa.adapter.EngineJOAdapter
- android.wmdc.com.mobilecsa.adapter.EngineJOAdapter$1
- android.wmdc.com.mobilecsa.adapter.EngineJOAdapter$EngineViewHolder
- android.wmdc.com.mobilecsa.adapter.EngineJOAdapter$EngineViewHolder$1
-android/wmdc/com/mobilecsa/InitialJoborderList.java
- android.wmdc.com.mobilecsa.InitialJoborderList
- android.wmdc.com.mobilecsa.InitialJoborderList$1
-android/wmdc/com/mobilecsa/SearchCustomerFragment.java
- android.wmdc.com.mobilecsa.SearchCustomerFragment
- android.wmdc.com.mobilecsa.SearchCustomerFragment$1
-android/wmdc/com/mobilecsa/SecurityKeyActivity.java
- android.wmdc.com.mobilecsa.SecurityKeyActivity
- android.wmdc.com.mobilecsa.SecurityKeyActivity$1
- android.wmdc.com.mobilecsa.SecurityKeyActivity$SecurityTask
-android/wmdc/com/mobilecsa/adapter/JOSearchResultInfoAdapter.java
- android.wmdc.com.mobilecsa.adapter.JOSearchResultInfoAdapter
- android.wmdc.com.mobilecsa.adapter.JOSearchResultInfoAdapter$1
- android.wmdc.com.mobilecsa.adapter.JOSearchResultInfoAdapter$JOSearchResViewHolder
- android.wmdc.com.mobilecsa.adapter.JOSearchResultInfoAdapter$JOSearchResViewHolder$1
-android/wmdc/com/mobilecsa/LoginActivity.java
- android.wmdc.com.mobilecsa.LoginActivity
- android.wmdc.com.mobilecsa.LoginActivity$1
- android.wmdc.com.mobilecsa.LoginActivity$SessionExpiryTask
-android/wmdc/com/mobilecsa/asynchronousclasses/GetProvinceTask.java
- android.wmdc.com.mobilecsa.asynchronousclasses.GetProvinceTask
-android/wmdc/com/mobilecsa/model/EmojiExcludeFilter.java
- android.wmdc.com.mobilecsa.model.EmojiExcludeFilter
-android/wmdc/com/mobilecsa/model/WorkOrders.java
- android.wmdc.com.mobilecsa.model.WorkOrders
-android/wmdc/com/mobilecsa/asynchronousclasses/SearchCustomerTaskFromJO.java
- android.wmdc.com.mobilecsa.asynchronousclasses.SearchCustomerTaskFromJO
-android/wmdc/com/mobilecsa/ContactFragment.java
- android.wmdc.com.mobilecsa.ContactFragment
- android.wmdc.com.mobilecsa.ContactFragment$1
- android.wmdc.com.mobilecsa.ContactFragment$1$1
- android.wmdc.com.mobilecsa.ContactFragment$2
-android/wmdc/com/mobilecsa/CreatePassword.java
- android.wmdc.com.mobilecsa.CreatePassword
- android.wmdc.com.mobilecsa.CreatePassword$1
- android.wmdc.com.mobilecsa.CreatePassword$ActivateUserTask
-android/wmdc/com/mobilecsa/asynchronousclasses/CheckValidDomainTask.java
- android.wmdc.com.mobilecsa.asynchronousclasses.CheckValidDomainTask
-android/wmdc/com/mobilecsa/adapter/QCAdapter.java
- android.wmdc.com.mobilecsa.adapter.QCAdapter
- android.wmdc.com.mobilecsa.adapter.QCAdapter$1
- android.wmdc.com.mobilecsa.adapter.QCAdapter$QCViewHolder
- android.wmdc.com.mobilecsa.adapter.QCAdapter$QCViewHolder$1
- android.wmdc.com.mobilecsa.adapter.QCAdapter$QCViewHolder$1$1
-android/wmdc/com/mobilecsa/adapter/CustomerJOAdapter.java
- android.wmdc.com.mobilecsa.adapter.CustomerJOAdapter
- android.wmdc.com.mobilecsa.adapter.CustomerJOAdapter$1
- android.wmdc.com.mobilecsa.adapter.CustomerJOAdapter$CustomerTestViewHolder
- android.wmdc.com.mobilecsa.adapter.CustomerJOAdapter$CustomerTestViewHolder$1
-android/wmdc/com/mobilecsa/asynchronousclasses/SearchJONumberQCTask.java
- android.wmdc.com.mobilecsa.asynchronousclasses.SearchJONumberQCTask
-android/wmdc/com/mobilecsa/adapter/InitialJoborderAdapter.java
- android.wmdc.com.mobilecsa.adapter.InitialJoborderAdapter
- android.wmdc.com.mobilecsa.adapter.InitialJoborderAdapter$1
- android.wmdc.com.mobilecsa.adapter.InitialJoborderAdapter$InitialJoborderViewHolder
- android.wmdc.com.mobilecsa.adapter.InitialJoborderAdapter$InitialJoborderViewHolder$1
-android/wmdc/com/mobilecsa/asynchronousclasses/SearchCustomerTask.java
- android.wmdc.com.mobilecsa.asynchronousclasses.SearchCustomerTask
-android/wmdc/com/mobilecsa/SecurityKeyFragment.java
- android.wmdc.com.mobilecsa.SecurityKeyFragment
- android.wmdc.com.mobilecsa.SecurityKeyFragment$1
- android.wmdc.com.mobilecsa.SecurityKeyFragment$SecurityKeyTask
-android/wmdc/com/mobilecsa/adapter/CustomerAdapter.java
- android.wmdc.com.mobilecsa.adapter.CustomerAdapter
- android.wmdc.com.mobilecsa.adapter.CustomerAdapter$1
- android.wmdc.com.mobilecsa.adapter.CustomerAdapter$CustomerViewHolder
- android.wmdc.com.mobilecsa.adapter.CustomerAdapter$CustomerViewHolder$1
- android.wmdc.com.mobilecsa.adapter.CustomerAdapter$GetCustomerTask
-android/wmdc/com/mobilecsa/model/WorkOrderStatus.java
- android.wmdc.com.mobilecsa.model.WorkOrderStatus
-android/wmdc/com/mobilecsa/model/CustomerJO.java
- android.wmdc.com.mobilecsa.model.CustomerJO
-android/wmdc/com/mobilecsa/QualityCheckFragment.java
- android.wmdc.com.mobilecsa.QualityCheckFragment
- android.wmdc.com.mobilecsa.QualityCheckFragment$1
- android.wmdc.com.mobilecsa.QualityCheckFragment$2
- android.wmdc.com.mobilecsa.QualityCheckFragment$3
- android.wmdc.com.mobilecsa.QualityCheckFragment$4
- android.wmdc.com.mobilecsa.QualityCheckFragment$5
- android.wmdc.com.mobilecsa.QualityCheckFragment$5$1
-android/wmdc/com/mobilecsa/asynchronousclasses/SwitchPlant.java
- android.wmdc.com.mobilecsa.asynchronousclasses.SwitchPlant
- android.wmdc.com.mobilecsa.asynchronousclasses.SwitchPlant$1
- android.wmdc.com.mobilecsa.asynchronousclasses.SwitchPlant$SimTask
- android.wmdc.com.mobilecsa.asynchronousclasses.SwitchPlant$WifiTask
-android/wmdc/com/mobilecsa/model/ItemModel.java
- android.wmdc.com.mobilecsa.model.ItemModel
-android/wmdc/com/mobilecsa/asynchronousclasses/UpdateInitialJoborderTransferredTask.java
- android.wmdc.com.mobilecsa.asynchronousclasses.UpdateInitialJoborderTransferredTask
- android.wmdc.com.mobilecsa.asynchronousclasses.UpdateInitialJoborderTransferredTask$1
-android/wmdc/com/mobilecsa/model/WorkOrderModel.java
- android.wmdc.com.mobilecsa.model.WorkOrderModel
-android/wmdc/com/mobilecsa/asynchronousclasses/SearchContactTask.java
- android.wmdc.com.mobilecsa.asynchronousclasses.SearchContactTask
-android/wmdc/com/mobilecsa/JOResultFragment.java
- android.wmdc.com.mobilecsa.JOResultFragment
-android/wmdc/com/mobilecsa/asynchronousclasses/DeleteInitialJoborderTask.java
- android.wmdc.com.mobilecsa.asynchronousclasses.DeleteInitialJoborderTask
- android.wmdc.com.mobilecsa.asynchronousclasses.DeleteInitialJoborderTask$1
- android.wmdc.com.mobilecsa.asynchronousclasses.DeleteInitialJoborderTask$2
-android/wmdc/com/mobilecsa/model/InitialJoborderModel.java
- android.wmdc.com.mobilecsa.model.InitialJoborderModel
-android/wmdc/com/mobilecsa/adapter/InitialJoborderListAdapter.java
- android.wmdc.com.mobilecsa.adapter.InitialJoborderListAdapter
- android.wmdc.com.mobilecsa.adapter.InitialJoborderListAdapter$1
- android.wmdc.com.mobilecsa.adapter.InitialJoborderListAdapter$InitialJoborderListViewHolder
- android.wmdc.com.mobilecsa.adapter.InitialJoborderListAdapter$InitialJoborderListViewHolder$1
-android/wmdc/com/mobilecsa/SearchJOFragment.java
- android.wmdc.com.mobilecsa.SearchJOFragment
- android.wmdc.com.mobilecsa.SearchJOFragment$1
- android.wmdc.com.mobilecsa.SearchJOFragment$2
-android/wmdc/com/mobilecsa/CRMFragment.java
- android.wmdc.com.mobilecsa.CRMFragment
- android.wmdc.com.mobilecsa.CRMFragment$1
- android.wmdc.com.mobilecsa.CRMFragment$2
-android/wmdc/com/mobilecsa/CustomerResultFragment.java
- android.wmdc.com.mobilecsa.CustomerResultFragment
-android/wmdc/com/mobilecsa/asynchronousclasses/GetInitialJoborderListTask.java
- android.wmdc.com.mobilecsa.asynchronousclasses.GetInitialJoborderListTask
-android/wmdc/com/mobilecsa/MapsActivity.java
- android.wmdc.com.mobilecsa.MapsActivity
-android/wmdc/com/mobilecsa/model/GPSTracker.java
- android.wmdc.com.mobilecsa.model.GPSTracker
- android.wmdc.com.mobilecsa.model.GPSTracker$1
- android.wmdc.com.mobilecsa.model.GPSTracker$2
-android/wmdc/com/mobilecsa/asynchronousclasses/GetPlantTask.java
- android.wmdc.com.mobilecsa.asynchronousclasses.GetPlantTask
-android/wmdc/com/mobilecsa/asynchronousclasses/GetWorkOrderQCList.java
- android.wmdc.com.mobilecsa.asynchronousclasses.GetWorkOrderQCList
-android/wmdc/com/mobilecsa/adapter/WorkorderStatusAdapter.java
- android.wmdc.com.mobilecsa.adapter.WorkorderStatusAdapter
- android.wmdc.com.mobilecsa.adapter.WorkorderStatusAdapter$1
- android.wmdc.com.mobilecsa.adapter.WorkorderStatusAdapter$WorkorderStatusViewHolder
-android/wmdc/com/mobilecsa/asynchronousclasses/DialogSignatureTask.java
- android.wmdc.com.mobilecsa.asynchronousclasses.DialogSignatureTask
- android.wmdc.com.mobilecsa.asynchronousclasses.DialogSignatureTask$1
-android/wmdc/com/mobilecsa/SettingsActivity.java
- android.wmdc.com.mobilecsa.SettingsActivity
-android/wmdc/com/mobilecsa/adapter/WorkOrdersAdapter.java
- android.wmdc.com.mobilecsa.adapter.WorkOrdersAdapter
- android.wmdc.com.mobilecsa.adapter.WorkOrdersAdapter$1
- android.wmdc.com.mobilecsa.adapter.WorkOrdersAdapter$2
- android.wmdc.com.mobilecsa.adapter.WorkOrdersAdapter$2$1
- android.wmdc.com.mobilecsa.adapter.WorkOrdersAdapter$2$2
- android.wmdc.com.mobilecsa.adapter.WorkOrdersAdapter$3
- android.wmdc.com.mobilecsa.adapter.WorkOrdersAdapter$4
- android.wmdc.com.mobilecsa.adapter.WorkOrdersAdapter$ExtensionTask
- android.wmdc.com.mobilecsa.adapter.WorkOrdersAdapter$WorkOrdersViewHolder
-android/wmdc/com/mobilecsa/ApprovalFragment.java
- android.wmdc.com.mobilecsa.ApprovalFragment
- android.wmdc.com.mobilecsa.ApprovalFragment$1
- android.wmdc.com.mobilecsa.ApprovalFragment$2
-android/wmdc/com/mobilecsa/asynchronousclasses/SearchEngineTaskFromJO.java
- android.wmdc.com.mobilecsa.asynchronousclasses.SearchEngineTaskFromJO
+android/wmdc/com/mobilecsa/QCJOInfoFragment.java
+ android.wmdc.com.mobilecsa.QCJOInfoFragment
+ android.wmdc.com.mobilecsa.QCJOInfoFragment$1
+ android.wmdc.com.mobilecsa.QCJOInfoFragment$2
 android/wmdc/com/mobilecsa/InitialJobOrder.java
  android.wmdc.com.mobilecsa.InitialJobOrder
  android.wmdc.com.mobilecsa.InitialJobOrder$1
@@ -286,12 +213,23 @@ android/wmdc/com/mobilecsa/InitialJobOrder.java
  android.wmdc.com.mobilecsa.InitialJobOrder$9$3
  android.wmdc.com.mobilecsa.InitialJobOrder$InitialJoborderTask
  android.wmdc.com.mobilecsa.InitialJobOrder$InitialJoborderTask$1
-android/wmdc/com/mobilecsa/model/DateCommitModel.java
- android.wmdc.com.mobilecsa.model.DateCommitModel
+android/wmdc/com/mobilecsa/InitialJoborderList.java
+ android.wmdc.com.mobilecsa.InitialJoborderList
+ android.wmdc.com.mobilecsa.InitialJoborderList$1
+android/wmdc/com/mobilecsa/SearchCustomerFragment.java
+ android.wmdc.com.mobilecsa.SearchCustomerFragment
+ android.wmdc.com.mobilecsa.SearchCustomerFragment$1
+android/wmdc/com/mobilecsa/SecurityKeyActivity.java
+ android.wmdc.com.mobilecsa.SecurityKeyActivity
+ android.wmdc.com.mobilecsa.SecurityKeyActivity$1
+ android.wmdc.com.mobilecsa.SecurityKeyActivity$SecurityTask
 android/wmdc/com/mobilecsa/asynchronousclasses/GetQCJOListTask.java
  android.wmdc.com.mobilecsa.asynchronousclasses.GetQCJOListTask
-android/wmdc/com/mobilecsa/BuildConfig.java
- android.wmdc.com.mobilecsa.BuildConfig
+android/wmdc/com/mobilecsa/adapter/JOSearchResultInfoAdapter.java
+ android.wmdc.com.mobilecsa.adapter.JOSearchResultInfoAdapter
+ android.wmdc.com.mobilecsa.adapter.JOSearchResultInfoAdapter$1
+ android.wmdc.com.mobilecsa.adapter.JOSearchResultInfoAdapter$JOSearchResViewHolder
+ android.wmdc.com.mobilecsa.adapter.JOSearchResultInfoAdapter$JOSearchResViewHolder$1
 android/wmdc/com/mobilecsa/adapter/WorkOrderAdapter.java
  android.wmdc.com.mobilecsa.adapter.WorkOrderAdapter
  android.wmdc.com.mobilecsa.adapter.WorkOrderAdapter$1
@@ -299,12 +237,19 @@ android/wmdc/com/mobilecsa/adapter/WorkOrderAdapter.java
  android.wmdc.com.mobilecsa.adapter.WorkOrderAdapter$WorkOrderViewHolder$1
 android/wmdc/com/mobilecsa/asynchronousclasses/GetInitialJoborderTask.java
  android.wmdc.com.mobilecsa.asynchronousclasses.GetInitialJoborderTask
+android/wmdc/com/mobilecsa/LoginActivity.java
+ android.wmdc.com.mobilecsa.LoginActivity
+ android.wmdc.com.mobilecsa.LoginActivity$1
+ android.wmdc.com.mobilecsa.LoginActivity$SessionExpiryTask
 android/wmdc/com/mobilecsa/adapter/JOStatusDetailsAdapter.java
  android.wmdc.com.mobilecsa.adapter.JOStatusDetailsAdapter
  android.wmdc.com.mobilecsa.adapter.JOStatusDetailsAdapter$1
  android.wmdc.com.mobilecsa.adapter.JOStatusDetailsAdapter$DetailsViewHolder
-android/wmdc/com/mobilecsa/asynchronousclasses/GetAreaCodeTask.java
- android.wmdc.com.mobilecsa.asynchronousclasses.GetAreaCodeTask
+android/wmdc/com/mobilecsa/adapter/DateCommitAdapter.java
+ android.wmdc.com.mobilecsa.adapter.DateCommitAdapter
+ android.wmdc.com.mobilecsa.adapter.DateCommitAdapter$1
+ android.wmdc.com.mobilecsa.adapter.DateCommitAdapter$DCViewHolder
+ android.wmdc.com.mobilecsa.adapter.DateCommitAdapter$DCViewHolder$1
 android/wmdc/com/mobilecsa/AddCustomerFragment.java
  android.wmdc.com.mobilecsa.AddCustomerFragment
  android.wmdc.com.mobilecsa.AddCustomerFragment$1
@@ -337,6 +282,19 @@ android/wmdc/com/mobilecsa/AddCustomerFragment.java
  android.wmdc.com.mobilecsa.AddCustomerFragment$9
  android.wmdc.com.mobilecsa.AddCustomerFragment$AddCustomerTask
  android.wmdc.com.mobilecsa.AddCustomerFragment$AddCustomerTask$1
+android/wmdc/com/mobilecsa/asynchronousclasses/GetProvinceTask.java
+ android.wmdc.com.mobilecsa.asynchronousclasses.GetProvinceTask
+android/wmdc/com/mobilecsa/asynchronousclasses/SearchCustomerTaskFromJO.java
+ android.wmdc.com.mobilecsa.asynchronousclasses.SearchCustomerTaskFromJO
+android/wmdc/com/mobilecsa/ContactFragment.java
+ android.wmdc.com.mobilecsa.ContactFragment
+ android.wmdc.com.mobilecsa.ContactFragment$1
+ android.wmdc.com.mobilecsa.ContactFragment$1$1
+ android.wmdc.com.mobilecsa.ContactFragment$2
+android/wmdc/com/mobilecsa/CreatePassword.java
+ android.wmdc.com.mobilecsa.CreatePassword
+ android.wmdc.com.mobilecsa.CreatePassword$1
+ android.wmdc.com.mobilecsa.CreatePassword$ActivateUserTask
 android/wmdc/com/mobilecsa/AddCompanyFragment.java
  android.wmdc.com.mobilecsa.AddCompanyFragment
  android.wmdc.com.mobilecsa.AddCompanyFragment$1
@@ -365,6 +323,8 @@ android/wmdc/com/mobilecsa/AddCompanyFragment.java
  android.wmdc.com.mobilecsa.AddCompanyFragment$9
  android.wmdc.com.mobilecsa.AddCompanyFragment$AddCompanyTask
  android.wmdc.com.mobilecsa.AddCompanyFragment$AddCompanyTask$1
+android/wmdc/com/mobilecsa/asynchronousclasses/CheckValidDomainTask.java
+ android.wmdc.com.mobilecsa.asynchronousclasses.CheckValidDomainTask
 android/wmdc/com/mobilecsa/adapter/KeyValueInfoAdapter.java
  android.wmdc.com.mobilecsa.adapter.KeyValueInfoAdapter
  android.wmdc.com.mobilecsa.adapter.KeyValueInfoAdapter$1
@@ -374,8 +334,17 @@ android/wmdc/com/mobilecsa/adapter/KeyValueInfoAdapter.java
  android.wmdc.com.mobilecsa.adapter.KeyValueInfoAdapter$LocationTask
 android/wmdc/com/mobilecsa/ContactsResultFragment.java
  android.wmdc.com.mobilecsa.ContactsResultFragment
-android/wmdc/com/mobilecsa/model/JobOrder.java
- android.wmdc.com.mobilecsa.model.JobOrder
+android/wmdc/com/mobilecsa/adapter/QCAdapter.java
+ android.wmdc.com.mobilecsa.adapter.QCAdapter
+ android.wmdc.com.mobilecsa.adapter.QCAdapter$1
+ android.wmdc.com.mobilecsa.adapter.QCAdapter$QCViewHolder
+ android.wmdc.com.mobilecsa.adapter.QCAdapter$QCViewHolder$1
+ android.wmdc.com.mobilecsa.adapter.QCAdapter$QCViewHolder$1$1
+android/wmdc/com/mobilecsa/adapter/CustomerJOAdapter.java
+ android.wmdc.com.mobilecsa.adapter.CustomerJOAdapter
+ android.wmdc.com.mobilecsa.adapter.CustomerJOAdapter$1
+ android.wmdc.com.mobilecsa.adapter.CustomerJOAdapter$CustomerTestViewHolder
+ android.wmdc.com.mobilecsa.adapter.CustomerJOAdapter$CustomerTestViewHolder$1
 android/wmdc/com/mobilecsa/asynchronousclasses/GetJoWoStatusListTask.java
  android.wmdc.com.mobilecsa.asynchronousclasses.GetJoWoStatusListTask
 android/wmdc/com/mobilecsa/JOFragment.java
@@ -384,17 +353,119 @@ android/wmdc/com/mobilecsa/JOFragment.java
  android.wmdc.com.mobilecsa.JOFragment$2
  android.wmdc.com.mobilecsa.JOFragment$3
  android.wmdc.com.mobilecsa.JOFragment$4
-android/wmdc/com/mobilecsa/model/Contacts.java
- android.wmdc.com.mobilecsa.model.Contacts
 android/wmdc/com/mobilecsa/asynchronousclasses/CheckExpiryTask.java
  android.wmdc.com.mobilecsa.asynchronousclasses.CheckExpiryTask
+android/wmdc/com/mobilecsa/asynchronousclasses/SearchJONumberQCTask.java
+ android.wmdc.com.mobilecsa.asynchronousclasses.SearchJONumberQCTask
+android/wmdc/com/mobilecsa/adapter/InitialJoborderAdapter.java
+ android.wmdc.com.mobilecsa.adapter.InitialJoborderAdapter
+ android.wmdc.com.mobilecsa.adapter.InitialJoborderAdapter$1
+ android.wmdc.com.mobilecsa.adapter.InitialJoborderAdapter$InitialJoborderViewHolder
+ android.wmdc.com.mobilecsa.adapter.InitialJoborderAdapter$InitialJoborderViewHolder$1
 android/wmdc/com/mobilecsa/asynchronousclasses/SetThumbnailTask.java
  android.wmdc.com.mobilecsa.asynchronousclasses.SetThumbnailTask
-android/wmdc/com/mobilecsa/utils/Variables.java
- android.wmdc.com.mobilecsa.utils.Variables
 android/wmdc/com/mobilecsa/DateCommitFragment.java
  android.wmdc.com.mobilecsa.DateCommitFragment
  android.wmdc.com.mobilecsa.DateCommitFragment$1
+android/wmdc/com/mobilecsa/DCJOInfoFragment.java
+ android.wmdc.com.mobilecsa.DCJOInfoFragment
+ android.wmdc.com.mobilecsa.DCJOInfoFragment$1
+android/wmdc/com/mobilecsa/asynchronousclasses/GetCityTask.java
+ android.wmdc.com.mobilecsa.asynchronousclasses.GetCityTask
+ android.wmdc.com.mobilecsa.asynchronousclasses.GetCityTask$1
+android/wmdc/com/mobilecsa/ContactsInformationFragment.java
+ android.wmdc.com.mobilecsa.ContactsInformationFragment
+ android.wmdc.com.mobilecsa.ContactsInformationFragment$1
+android/wmdc/com/mobilecsa/adapter/QCValueInfoAdapter.java
+ android.wmdc.com.mobilecsa.adapter.QCValueInfoAdapter
+ android.wmdc.com.mobilecsa.adapter.QCValueInfoAdapter$1
+ android.wmdc.com.mobilecsa.adapter.QCValueInfoAdapter$QCInfoViewHolder
+ android.wmdc.com.mobilecsa.adapter.QCValueInfoAdapter$QCInfoViewHolder$1
+android/wmdc/com/mobilecsa/adapter/SettingsAdapter.java
+ android.wmdc.com.mobilecsa.adapter.SettingsAdapter
+ android.wmdc.com.mobilecsa.adapter.SettingsAdapter$1
+ android.wmdc.com.mobilecsa.adapter.SettingsAdapter$SettingsViewHolder
+ android.wmdc.com.mobilecsa.adapter.SettingsAdapter$SettingsViewHolder$1
+ android.wmdc.com.mobilecsa.adapter.SettingsAdapter$SettingsViewHolder$1$1
+ android.wmdc.com.mobilecsa.adapter.SettingsAdapter$SettingsViewHolder$1$10
+ android.wmdc.com.mobilecsa.adapter.SettingsAdapter$SettingsViewHolder$1$2
+ android.wmdc.com.mobilecsa.adapter.SettingsAdapter$SettingsViewHolder$1$3
+ android.wmdc.com.mobilecsa.adapter.SettingsAdapter$SettingsViewHolder$1$4
+ android.wmdc.com.mobilecsa.adapter.SettingsAdapter$SettingsViewHolder$1$5
+ android.wmdc.com.mobilecsa.adapter.SettingsAdapter$SettingsViewHolder$1$6
+ android.wmdc.com.mobilecsa.adapter.SettingsAdapter$SettingsViewHolder$1$7
+ android.wmdc.com.mobilecsa.adapter.SettingsAdapter$SettingsViewHolder$1$8
+ android.wmdc.com.mobilecsa.adapter.SettingsAdapter$SettingsViewHolder$1$9
+android/wmdc/com/mobilecsa/asynchronousclasses/SearchCustomerTask.java
+ android.wmdc.com.mobilecsa.asynchronousclasses.SearchCustomerTask
+android/wmdc/com/mobilecsa/asynchronousclasses/SearchJOTask.java
+ android.wmdc.com.mobilecsa.asynchronousclasses.SearchJOTask
+android/wmdc/com/mobilecsa/SecurityKeyFragment.java
+ android.wmdc.com.mobilecsa.SecurityKeyFragment
+ android.wmdc.com.mobilecsa.SecurityKeyFragment$1
+ android.wmdc.com.mobilecsa.SecurityKeyFragment$SecurityKeyTask
+android/wmdc/com/mobilecsa/adapter/CustomerAdapter.java
+ android.wmdc.com.mobilecsa.adapter.CustomerAdapter
+ android.wmdc.com.mobilecsa.adapter.CustomerAdapter$1
+ android.wmdc.com.mobilecsa.adapter.CustomerAdapter$CustomerViewHolder
+ android.wmdc.com.mobilecsa.adapter.CustomerAdapter$CustomerViewHolder$1
+ android.wmdc.com.mobilecsa.adapter.CustomerAdapter$GetCustomerTask
+android/wmdc/com/mobilecsa/CustomerFragment.java
+ android.wmdc.com.mobilecsa.CustomerFragment
+ android.wmdc.com.mobilecsa.CustomerFragment$1
+ android.wmdc.com.mobilecsa.CustomerFragment$1$1
+ android.wmdc.com.mobilecsa.CustomerFragment$2
+ android.wmdc.com.mobilecsa.CustomerFragment$2$1
+ android.wmdc.com.mobilecsa.CustomerFragment$3
+android/wmdc/com/mobilecsa/CustomerInformationFragment.java
+ android.wmdc.com.mobilecsa.CustomerInformationFragment
+ android.wmdc.com.mobilecsa.CustomerInformationFragment$1
+android/wmdc/com/mobilecsa/JoborderStatusFragment.java
+ android.wmdc.com.mobilecsa.JoborderStatusFragment
+android/wmdc/com/mobilecsa/LoginFragment.java
+ android.wmdc.com.mobilecsa.LoginFragment
+ android.wmdc.com.mobilecsa.LoginFragment$1
+ android.wmdc.com.mobilecsa.LoginFragment$2
+ android.wmdc.com.mobilecsa.LoginFragment$3
+ android.wmdc.com.mobilecsa.LoginFragment$4
+ android.wmdc.com.mobilecsa.LoginFragment$LoginTask
+ android.wmdc.com.mobilecsa.LoginFragment$LoginTask$1
+android/wmdc/com/mobilecsa/QualityCheckFragment.java
+ android.wmdc.com.mobilecsa.QualityCheckFragment
+ android.wmdc.com.mobilecsa.QualityCheckFragment$1
+ android.wmdc.com.mobilecsa.QualityCheckFragment$2
+ android.wmdc.com.mobilecsa.QualityCheckFragment$3
+ android.wmdc.com.mobilecsa.QualityCheckFragment$4
+ android.wmdc.com.mobilecsa.QualityCheckFragment$5
+ android.wmdc.com.mobilecsa.QualityCheckFragment$5$1
+android/wmdc/com/mobilecsa/adapter/JOResultAdapter.java
+ android.wmdc.com.mobilecsa.adapter.JOResultAdapter
+ android.wmdc.com.mobilecsa.adapter.JOResultAdapter$1
+ android.wmdc.com.mobilecsa.adapter.JOResultAdapter$JOViewHolder
+ android.wmdc.com.mobilecsa.adapter.JOResultAdapter$JOViewHolder$1
+android/wmdc/com/mobilecsa/asynchronousclasses/SwitchPlant.java
+ android.wmdc.com.mobilecsa.asynchronousclasses.SwitchPlant
+ android.wmdc.com.mobilecsa.asynchronousclasses.SwitchPlant$1
+ android.wmdc.com.mobilecsa.asynchronousclasses.SwitchPlant$SimTask
+ android.wmdc.com.mobilecsa.asynchronousclasses.SwitchPlant$WifiTask
+android/wmdc/com/mobilecsa/asynchronousclasses/GetAreaCodeTask.java
+ android.wmdc.com.mobilecsa.asynchronousclasses.GetAreaCodeTask
+android/wmdc/com/mobilecsa/asynchronousclasses/UpdateInitialJoborderTransferredTask.java
+ android.wmdc.com.mobilecsa.asynchronousclasses.UpdateInitialJoborderTransferredTask
+ android.wmdc.com.mobilecsa.asynchronousclasses.UpdateInitialJoborderTransferredTask$1
+android/wmdc/com/mobilecsa/asynchronousclasses/SearchContactTask.java
+ android.wmdc.com.mobilecsa.asynchronousclasses.SearchContactTask
+android/wmdc/com/mobilecsa/adapter/EngineJOAdapter.java
+ android.wmdc.com.mobilecsa.adapter.EngineJOAdapter
+ android.wmdc.com.mobilecsa.adapter.EngineJOAdapter$1
+ android.wmdc.com.mobilecsa.adapter.EngineJOAdapter$EngineViewHolder
+ android.wmdc.com.mobilecsa.adapter.EngineJOAdapter$EngineViewHolder$1
+android/wmdc/com/mobilecsa/JOResultFragment.java
+ android.wmdc.com.mobilecsa.JOResultFragment
+android/wmdc/com/mobilecsa/asynchronousclasses/DeleteInitialJoborderTask.java
+ android.wmdc.com.mobilecsa.asynchronousclasses.DeleteInitialJoborderTask
+ android.wmdc.com.mobilecsa.asynchronousclasses.DeleteInitialJoborderTask$1
+ android.wmdc.com.mobilecsa.asynchronousclasses.DeleteInitialJoborderTask$2
 android/wmdc/com/mobilecsa/AddContactFragment.java
  android.wmdc.com.mobilecsa.AddContactFragment
  android.wmdc.com.mobilecsa.AddContactFragment$1
@@ -425,83 +496,12 @@ android/wmdc/com/mobilecsa/AddContactFragment.java
  android.wmdc.com.mobilecsa.AddContactFragment$9
  android.wmdc.com.mobilecsa.AddContactFragment$AddContactTask
  android.wmdc.com.mobilecsa.AddContactFragment$AddContactTask$1
-android/wmdc/com/mobilecsa/asynchronousclasses/GetCityTask.java
- android.wmdc.com.mobilecsa.asynchronousclasses.GetCityTask
- android.wmdc.com.mobilecsa.asynchronousclasses.GetCityTask$1
-android/wmdc/com/mobilecsa/ContactsInformationFragment.java
- android.wmdc.com.mobilecsa.ContactsInformationFragment
- android.wmdc.com.mobilecsa.ContactsInformationFragment$1
-android/wmdc/com/mobilecsa/adapter/QCValueInfoAdapter.java
- android.wmdc.com.mobilecsa.adapter.QCValueInfoAdapter
- android.wmdc.com.mobilecsa.adapter.QCValueInfoAdapter$1
- android.wmdc.com.mobilecsa.adapter.QCValueInfoAdapter$QCInfoViewHolder
- android.wmdc.com.mobilecsa.adapter.QCValueInfoAdapter$QCInfoViewHolder$1
-android/wmdc/com/mobilecsa/adapter/SettingsAdapter.java
- android.wmdc.com.mobilecsa.adapter.SettingsAdapter
- android.wmdc.com.mobilecsa.adapter.SettingsAdapter$1
- android.wmdc.com.mobilecsa.adapter.SettingsAdapter$SettingsViewHolder
- android.wmdc.com.mobilecsa.adapter.SettingsAdapter$SettingsViewHolder$1
- android.wmdc.com.mobilecsa.adapter.SettingsAdapter$SettingsViewHolder$1$1
- android.wmdc.com.mobilecsa.adapter.SettingsAdapter$SettingsViewHolder$1$10
- android.wmdc.com.mobilecsa.adapter.SettingsAdapter$SettingsViewHolder$1$2
- android.wmdc.com.mobilecsa.adapter.SettingsAdapter$SettingsViewHolder$1$3
- android.wmdc.com.mobilecsa.adapter.SettingsAdapter$SettingsViewHolder$1$4
- android.wmdc.com.mobilecsa.adapter.SettingsAdapter$SettingsViewHolder$1$5
- android.wmdc.com.mobilecsa.adapter.SettingsAdapter$SettingsViewHolder$1$6
- android.wmdc.com.mobilecsa.adapter.SettingsAdapter$SettingsViewHolder$1$7
- android.wmdc.com.mobilecsa.adapter.SettingsAdapter$SettingsViewHolder$1$8
- android.wmdc.com.mobilecsa.adapter.SettingsAdapter$SettingsViewHolder$1$9
-android/wmdc/com/mobilecsa/asynchronousclasses/SearchJOTask.java
- android.wmdc.com.mobilecsa.asynchronousclasses.SearchJOTask
-android/wmdc/com/mobilecsa/CustomerFragment.java
- android.wmdc.com.mobilecsa.CustomerFragment
- android.wmdc.com.mobilecsa.CustomerFragment$1
- android.wmdc.com.mobilecsa.CustomerFragment$1$1
- android.wmdc.com.mobilecsa.CustomerFragment$2
- android.wmdc.com.mobilecsa.CustomerFragment$2$1
- android.wmdc.com.mobilecsa.CustomerFragment$3
-android/wmdc/com/mobilecsa/CustomerInformationFragment.java
- android.wmdc.com.mobilecsa.CustomerInformationFragment
- android.wmdc.com.mobilecsa.CustomerInformationFragment$1
-android/wmdc/com/mobilecsa/JoborderStatusFragment.java
- android.wmdc.com.mobilecsa.JoborderStatusFragment
-android/wmdc/com/mobilecsa/model/Signature.java
- android.wmdc.com.mobilecsa.model.Signature
-android/wmdc/com/mobilecsa/LoginFragment.java
- android.wmdc.com.mobilecsa.LoginFragment
- android.wmdc.com.mobilecsa.LoginFragment$1
- android.wmdc.com.mobilecsa.LoginFragment$2
- android.wmdc.com.mobilecsa.LoginFragment$3
- android.wmdc.com.mobilecsa.LoginFragment$4
- android.wmdc.com.mobilecsa.LoginFragment$LoginTask
- android.wmdc.com.mobilecsa.LoginFragment$LoginTask$1
-android/wmdc/com/mobilecsa/adapter/JOResultAdapter.java
- android.wmdc.com.mobilecsa.adapter.JOResultAdapter
- android.wmdc.com.mobilecsa.adapter.JOResultAdapter$1
- android.wmdc.com.mobilecsa.adapter.JOResultAdapter$JOViewHolder
- android.wmdc.com.mobilecsa.adapter.JOResultAdapter$JOViewHolder$1
-android/wmdc/com/mobilecsa/DCJOInfoFragment.java
- android.wmdc.com.mobilecsa.DCJOInfoFragment
- android.wmdc.com.mobilecsa.DCJOInfoFragment$1
-android/wmdc/com/mobilecsa/QCJOInfoFragment.java
- android.wmdc.com.mobilecsa.QCJOInfoFragment
- android.wmdc.com.mobilecsa.QCJOInfoFragment$1
- android.wmdc.com.mobilecsa.QCJOInfoFragment$2
-android/wmdc/com/mobilecsa/model/SwipeButton.java
- android.wmdc.com.mobilecsa.model.SwipeButton
- android.wmdc.com.mobilecsa.model.SwipeButton$1
- android.wmdc.com.mobilecsa.model.SwipeButton$2
- android.wmdc.com.mobilecsa.model.SwipeButton$ApproveDCTask
- android.wmdc.com.mobilecsa.model.SwipeButton$ApproveDCTask$1
- android.wmdc.com.mobilecsa.model.SwipeButton$ApproveDCTask$2
- android.wmdc.com.mobilecsa.model.SwipeButton$ApproveDCTask$3
- android.wmdc.com.mobilecsa.model.SwipeButton$ApproveDCTask$4
- android.wmdc.com.mobilecsa.model.SwipeButton$ApproveDCTask$5
- android.wmdc.com.mobilecsa.model.SwipeButton$ApproveQCTask
- android.wmdc.com.mobilecsa.model.SwipeButton$ApproveQCTask$1
- android.wmdc.com.mobilecsa.model.SwipeButton$ApproveQCTask$1$1
-android/wmdc/com/mobilecsa/adapter/DateCommitAdapter.java
- android.wmdc.com.mobilecsa.adapter.DateCommitAdapter
- android.wmdc.com.mobilecsa.adapter.DateCommitAdapter$1
- android.wmdc.com.mobilecsa.adapter.DateCommitAdapter$DCViewHolder
- android.wmdc.com.mobilecsa.adapter.DateCommitAdapter$DCViewHolder$1
+android/wmdc/com/mobilecsa/adapter/InitialJoborderListAdapter.java
+ android.wmdc.com.mobilecsa.adapter.InitialJoborderListAdapter
+ android.wmdc.com.mobilecsa.adapter.InitialJoborderListAdapter$1
+ android.wmdc.com.mobilecsa.adapter.InitialJoborderListAdapter$InitialJoborderListViewHolder
+ android.wmdc.com.mobilecsa.adapter.InitialJoborderListAdapter$InitialJoborderListViewHolder$1
+android/wmdc/com/mobilecsa/SearchJOFragment.java
+ android.wmdc.com.mobilecsa.SearchJOFragment
+ android.wmdc.com.mobilecsa.SearchJOFragment$1
+ android.wmdc.com.mobilecsa.SearchJOFragment$2

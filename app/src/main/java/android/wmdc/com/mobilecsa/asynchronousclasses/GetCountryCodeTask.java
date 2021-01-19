@@ -33,17 +33,17 @@ import java.util.HashMap;
 
 public class GetCountryCodeTask extends AsyncTask<String, Void, String> {
 
-    private WeakReference<FragmentActivity> weakReference;
+    private final WeakReference<FragmentActivity> weakReference;
 
-    private WeakReference<Spinner> spinnerCountryCodeWeakReference;
+    private final WeakReference<Spinner> spinnerCountryCodeWeakReference;
 
-    private WeakReference<Spinner> spinnerFaxCountryCodeWeakReference;
+    private final WeakReference<Spinner> spinnerFaxCountryCodeWeakReference;
 
-    private ArrayList<String> countryCodeCategory;
+    private final ArrayList<String> countryCodeCategory;
 
-    private HashMap<String, Integer> countryCodeMap;
+    private final HashMap<String, Integer> countryCodeMap;
 
-    private SharedPreferences sharedPreferences;
+    private final SharedPreferences sharedPreferences;
 
     private HttpURLConnection conn = null;
 

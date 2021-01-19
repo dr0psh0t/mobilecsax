@@ -34,16 +34,16 @@ import java.util.HashMap;
 
 public class GetCityTask extends AsyncTask<String, Void, String> {
 
-    private WeakReference<FragmentActivity> weakReference;
+    private final WeakReference<FragmentActivity> weakReference;
 
-    private WeakReference<Spinner> spinnerCityWeakReference;
+    private final WeakReference<Spinner> spinnerCityWeakReference;
 
-    private ArrayList<String> cityCategory;
+    private final ArrayList<String> cityCategory;
 
-    private HashMap<String, Integer> cityMap;
-    private HashMap<String, Integer> zipCodeMap;
+    private final HashMap<String, Integer> cityMap;
+    private final HashMap<String, Integer> zipCodeMap;
 
-    private SharedPreferences sharedPreferences;
+    private final SharedPreferences sharedPreferences;
 
     private HttpURLConnection conn = null;
 

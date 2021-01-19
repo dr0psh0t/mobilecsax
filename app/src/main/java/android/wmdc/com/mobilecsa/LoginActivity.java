@@ -166,11 +166,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private static class SessionExpiryTask extends AsyncTask<String, String, String> {
 
-        private WeakReference<LoginActivity> activityWeakReference;
+        private final WeakReference<LoginActivity> activityWeakReference;
 
         private HttpURLConnection conn = null;
 
-        private SharedPreferences sPrefs;
+        private final SharedPreferences sPrefs;
 
         long startTime;
 

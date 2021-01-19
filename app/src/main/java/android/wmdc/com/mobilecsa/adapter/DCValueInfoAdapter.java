@@ -14,7 +14,6 @@ import android.wmdc.com.mobilecsa.asynchronousclasses.DialogImageTask;
 import android.wmdc.com.mobilecsa.model.KeyValueInfo;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,11 +26,11 @@ import java.util.ArrayList;
 
 public class DCValueInfoAdapter extends RecyclerView.Adapter<DCValueInfoAdapter.DCInfoViewHolder> {
 
-    private WeakReference<FragmentActivity> weakReference;
-    private ArrayList<KeyValueInfo> customerInfo;
-    private SharedPreferences sPrefs;
-    private int joId;
-    private boolean csaApproved;
+    private final WeakReference<FragmentActivity> weakReference;
+    private final ArrayList<KeyValueInfo> customerInfo;
+    private final SharedPreferences sPrefs;
+    private final int joId;
+    private final boolean csaApproved;
 
     public DCValueInfoAdapter(ArrayList<KeyValueInfo> customerInfo, FragmentActivity activity,
                               int joId, boolean csaApproved) {
@@ -136,11 +135,11 @@ public class DCValueInfoAdapter extends RecyclerView.Adapter<DCValueInfoAdapter.
     }
 
     class DCInfoViewHolder extends RecyclerView.ViewHolder {
-        private ImageView icon;
-        private TextView tvKey;
-        private TextView tvValue;
-        private ImageView dcIcon;
-        private LinearLayout rootLinLay;
+        private final ImageView icon;
+        private final TextView tvKey;
+        private final TextView tvValue;
+        private final ImageView dcIcon;
+        private final LinearLayout rootLinLay;
 
         private DCInfoViewHolder(View itemView) {
             super(itemView);

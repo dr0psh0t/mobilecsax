@@ -297,11 +297,11 @@ public class LoginFragment extends Fragment {
 
     private static class LoginTask extends AsyncTask<String, String, String> {
 
-        private WeakReference<FragmentActivity> activityWeakReference;
+        private final WeakReference<FragmentActivity> activityWeakReference;
 
-        private SharedPreferences taskPrefs;
+        private final SharedPreferences taskPrefs;
 
-        private Dialog dialog;
+        private final Dialog dialog;
 
         private HttpURLConnection conn = null;
 

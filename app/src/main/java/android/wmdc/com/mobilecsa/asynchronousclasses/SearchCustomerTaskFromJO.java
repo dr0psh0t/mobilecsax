@@ -40,19 +40,19 @@ import java.util.ArrayList;
 
 public class SearchCustomerTaskFromJO extends AsyncTask<String, String, String> {
 
-    private WeakReference<FragmentActivity> weakReference;
+    private final WeakReference<FragmentActivity> weakReference;
 
-    private WeakReference<RecyclerView> recViewWeakReference;
+    private final WeakReference<RecyclerView> recViewWeakReference;
 
     private SharedPreferences sharedPreferences;
 
     private HttpURLConnection conn = null;
 
-    private ArrayList<CustomerJO> customerJOList;
+    private final ArrayList<CustomerJO> customerJOList;
 
     //private RecyclerView recyclerView;
 
-    private CustomerJOAdapter customerJOAdapter;
+    private final CustomerJOAdapter customerJOAdapter;
 
     public SearchCustomerTaskFromJO(FragmentActivity activity, ArrayList<CustomerJO> customerJOList,
                                     RecyclerView recyclerView, CustomerJOAdapter customerJOAdapter)

@@ -28,7 +28,7 @@ import java.net.URL;
 
 public class CheckExpiryTask extends AsyncTask<String, Void, String> {
 
-    private WeakReference<FragmentActivity> activityWeakReference;
+    private final WeakReference<FragmentActivity> activityWeakReference;
 
     private HttpURLConnection conn = null;
 

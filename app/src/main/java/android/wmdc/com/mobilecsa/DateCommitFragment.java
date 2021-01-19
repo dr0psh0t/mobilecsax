@@ -52,39 +52,37 @@ public class DateCommitFragment extends Fragment {
             try {
                 JSONObject jsonObject = new JSONObject(Variables.dcRawResult);
 
-                if (jsonObject != null) {
-                    try {
-                        JSONArray jsonArray = jsonObject.getJSONArray("joborders");
+                try {
+                    JSONArray jsonArray = jsonObject.getJSONArray("joborders");
 
-                        int loopLen = Math.min(jsonArray.length(), 100);
-                        dcDataModels.clear();
+                    int loopLen = Math.min(jsonArray.length(), 100);
+                    dcDataModels.clear();
 
-                        for (int i = 0; i <= loopLen; ++i) {
-                            JSONObject itemObj = jsonArray.getJSONObject(i);
+                    for (int i = 0; i <= loopLen; ++i) {
+                        JSONObject itemObj = jsonArray.getJSONObject(i);
 
-                            dcDataModels.add(
-                                    new DateCommitModel(
-                                            itemObj.getInt("joId"),
-                                            itemObj.getString("joNum"),
-                                            itemObj.getString("customerId"),
-                                            itemObj.getString("customer"),
-                                            itemObj.getBoolean("isCsaApproved"),
-                                            itemObj.getBoolean("isPnmApproved"),
-                                            itemObj.getString("dateCommit"),
-                                            itemObj.getString("dateReceived"))
-                            );
-                        }
-
-                        Collections.sort(dcDataModels);
-
-                        RecyclerView recyclerView = v.findViewById(R.id.rvDCData);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                        recyclerView.setAdapter(new DateCommitAdapter(dcDataModels, getActivity()));
-
-                    } catch (JSONException je) {
-                        Util.alertBox(getActivity(), "Cannot build the list. " +
-                                "The server might be loading. Try again later.");
+                        dcDataModels.add(
+                                new DateCommitModel(
+                                        itemObj.getInt("joId"),
+                                        itemObj.getString("joNum"),
+                                        itemObj.getString("customerId"),
+                                        itemObj.getString("customer"),
+                                        itemObj.getBoolean("isCsaApproved"),
+                                        itemObj.getBoolean("isPnmApproved"),
+                                        itemObj.getString("dateCommit"),
+                                        itemObj.getString("dateReceived"))
+                        );
                     }
+
+                    Collections.sort(dcDataModels);
+
+                    RecyclerView recyclerView = v.findViewById(R.id.rvDCData);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    recyclerView.setAdapter(new DateCommitAdapter(dcDataModels, getActivity()));
+
+                } catch (JSONException je) {
+                    Util.alertBox(getActivity(), "Cannot build the list. " +
+                            "The server might be loading. Try again later.");
                 }
 
             } catch (JSONException je) {

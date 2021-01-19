@@ -48,13 +48,13 @@ import java.util.ArrayList;
 public class KeyValueInfoAdapter extends
         RecyclerView.Adapter<KeyValueInfoAdapter.CustomerInfoViewHolder> {
 
-    private FragmentActivity fragmentActivity;
-    private ArrayList<KeyValueInfo> customerInfos;
+    private final FragmentActivity fragmentActivity;
+    private final ArrayList<KeyValueInfo> customerInfos;
 
-    private int kvId;
-    private boolean isCustomer;
+    private final int kvId;
+    private final boolean isCustomer;
 
-    private SharedPreferences sharedPreferences;
+    private final SharedPreferences sharedPreferences;
 
     public KeyValueInfoAdapter(FragmentActivity activity, ArrayList<KeyValueInfo> customerInfos,
                                int kvId, boolean isCustomer) {
@@ -163,9 +163,9 @@ public class KeyValueInfoAdapter extends
     }
 
     class CustomerInfoViewHolder extends RecyclerView.ViewHolder {
-        private ImageView icon;
-        private TextView tvKey;
-        private TextView tvValue;
+        private final ImageView icon;
+        private final TextView tvKey;
+        private final TextView tvValue;
 
         private CustomerInfoViewHolder(View itemView) {
             super(itemView);
@@ -228,11 +228,11 @@ public class KeyValueInfoAdapter extends
 
     private static class LocationTask extends AsyncTask<String, String, String> {
 
-        private WeakReference<FragmentActivity> activityWeakReference;
+        private final WeakReference<FragmentActivity> activityWeakReference;
 
         private HttpURLConnection conn = null;
 
-        private SharedPreferences taskPrefs;
+        private final SharedPreferences taskPrefs;
 
         private LocationTask(FragmentActivity activity) {
             activityWeakReference = new WeakReference<>(activity);

@@ -35,11 +35,11 @@ import java.nio.charset.StandardCharsets;
 
 public class DeleteInitialJoborderTask extends AsyncTask<String, String, String> {
 
-    private WeakReference<FragmentActivity> activityWeakReference;
+    private final WeakReference<FragmentActivity> activityWeakReference;
 
-    private SharedPreferences sPrefs;
+    private final SharedPreferences sPrefs;
 
-    private ProgressDialog progressDialog;
+    private final ProgressDialog progressDialog;
 
     private HttpURLConnection conn = null;
 

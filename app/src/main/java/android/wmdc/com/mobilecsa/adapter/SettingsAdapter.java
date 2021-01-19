@@ -30,13 +30,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 /** Created by wmdcprog on 3/14/2018.*/
 
-public class SettingsAdapter extends RecyclerView.Adapter {
+public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.SettingsViewHolder> {
 
-    private ArrayList<KeyValueInfo> settingsData;
-    private FragmentActivity activity;
-    private SharedPreferences taskPrefs;
-    private SharedPreferences.Editor spEditor;
-    private WifiManager wifiManager;
+    private final ArrayList<KeyValueInfo> settingsData;
+    private final FragmentActivity activity;
+    private final SharedPreferences taskPrefs;
+    private final SharedPreferences.Editor spEditor;
+    private final WifiManager wifiManager;
 
     public SettingsAdapter(ArrayList<KeyValueInfo> settingsData, FragmentActivity activity) {
         this.settingsData = settingsData;
@@ -50,15 +50,14 @@ public class SettingsAdapter extends RecyclerView.Adapter {
 
     @Override
     @NonNull
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public SettingsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(activity).inflate(R.layout.settings_card_layout, viewGroup,
                 false);
         return new SettingsViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        SettingsViewHolder settingsViewHolder = (SettingsViewHolder) viewHolder;
+    public void onBindViewHolder(@NonNull SettingsViewHolder settingsViewHolder, int i) {
         settingsViewHolder.tvSettingsKey.setText(settingsData.get(i).getKey());
         settingsViewHolder.tvSettingsValue.setText(settingsData.get(i).getValue());
     }
@@ -68,9 +67,9 @@ public class SettingsAdapter extends RecyclerView.Adapter {
         return settingsData.size();
     }
 
-    private class SettingsViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvSettingsKey;
-        private TextView tvSettingsValue;
+    class SettingsViewHolder extends RecyclerView.ViewHolder {
+        private final TextView tvSettingsKey;
+        private final TextView tvSettingsValue;
 
         private SettingsViewHolder(View itemView) {
             super(itemView);

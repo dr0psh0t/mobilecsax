@@ -71,13 +71,13 @@ public class SecurityKeyActivity extends AppCompatActivity {
 
     private static class SecurityTask extends AsyncTask<String, String, String> {
 
-        private WeakReference<FragmentActivity> activityWeakReference;
+        private final WeakReference<FragmentActivity> activityWeakReference;
 
         private HttpURLConnection conn = null;
 
-        private SharedPreferences taskPrefs;
+        private final SharedPreferences taskPrefs;
 
-        private Dialog dialog;
+        private final Dialog dialog;
 
         private SecurityTask(FragmentActivity activity, Dialog dialog) {
             activityWeakReference = new WeakReference<>(activity);

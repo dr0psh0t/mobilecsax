@@ -38,13 +38,13 @@ import java.nio.charset.StandardCharsets;
 
 public class SearchJOTask extends AsyncTask<String, String, String> {
 
-    private WeakReference<FragmentActivity> weakReference;
+    private final WeakReference<FragmentActivity> weakReference;
 
-    private WeakReference<ProgressBar> progressBarWeakReference;
+    private final WeakReference<ProgressBar> progressBarWeakReference;
 
-    private WeakReference<Button> btnSearchJOWeakReference;
+    private final WeakReference<Button> btnSearchJOWeakReference;
 
-    private SharedPreferences sharedPreferences;
+    private final SharedPreferences sharedPreferences;
 
     private HttpURLConnection conn = null;
 

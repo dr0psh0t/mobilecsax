@@ -27,10 +27,10 @@ import java.util.ArrayList;
 public class JOSearchResultInfoAdapter extends
         RecyclerView.Adapter<JOSearchResultInfoAdapter.JOSearchResViewHolder> {
 
-    private WeakReference<FragmentActivity> weakReference;
-    private ArrayList<KeyValueInfo> joInfos;
-    private int initialJoborderId;
-    private SharedPreferences sharedPreferences;
+    private final WeakReference<FragmentActivity> weakReference;
+    private final ArrayList<KeyValueInfo> joInfos;
+    private final int initialJoborderId;
+    private final SharedPreferences sharedPreferences;
 
     public JOSearchResultInfoAdapter(FragmentActivity activity, ArrayList<KeyValueInfo> joInfos,
                                      int initialJoborderId) {
@@ -97,11 +97,10 @@ public class JOSearchResultInfoAdapter extends
     }
 
     class JOSearchResViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvKey;
-        private TextView tvValue;
-        private ImageView joIcon;
-        private ConstraintLayout joSearchInfoConLay;
-
+        private final TextView tvKey;
+        private final TextView tvValue;
+        private final ImageView joIcon;
+        private final ConstraintLayout joSearchInfoConLay;
         private int index;
 
         private JOSearchResViewHolder(View itemView) {

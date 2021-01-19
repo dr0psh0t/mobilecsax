@@ -48,12 +48,12 @@ public class WorkOrdersAdapter extends
         RecyclerView.Adapter<WorkOrdersAdapter.WorkOrdersViewHolder> {
 
     //private Context context;
-    private FragmentActivity fragmentActivity;
-    private ArrayList<WorkOrders> workOrders;
-    private FloatingActionButton fabOptions;
+    private final FragmentActivity fragmentActivity;
+    private final ArrayList<WorkOrders> workOrders;
+    private final FloatingActionButton fabOptions;
     private int selected_position;
 
-    private FloatingActionButton fabExtension;
+    private final FloatingActionButton fabExtension;
     private boolean isFabOpen = false;
 
     private void showFABMenu(){
@@ -163,11 +163,7 @@ public class WorkOrdersAdapter extends
             workOrdersViewHolder.rootLayWorkOrders.setSelected(false);
         }*/
 
-        if (selected_position == i) {
-            workOrdersViewHolder.rootLayWorkOrders.setSelected(true);
-        } else {
-            workOrdersViewHolder.rootLayWorkOrders.setSelected(false);
-        }
+        workOrdersViewHolder.rootLayWorkOrders.setSelected(selected_position == i);
 
         workOrdersViewHolder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -192,9 +188,9 @@ public class WorkOrdersAdapter extends
     }
 
     static class WorkOrdersViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvScope;
-        private TextView tvStatus;
-        private LinearLayout rootLayWorkOrders;
+        private final TextView tvScope;
+        private final TextView tvStatus;
+        private final LinearLayout rootLayWorkOrders;
 
         private WorkOrdersViewHolder(View itemView) {
             super(itemView);
@@ -206,13 +202,13 @@ public class WorkOrdersAdapter extends
 
     private static class ExtensionTask extends AsyncTask<String, String, String> {
 
-        private WeakReference<FragmentActivity> activityWeakReference;
+        private final WeakReference<FragmentActivity> activityWeakReference;
 
         private HttpURLConnection conn = null;
 
-        private ProgressDialog progressDialog;
+        private final ProgressDialog progressDialog;
 
-        private SharedPreferences prefs;
+        private final SharedPreferences prefs;
 
         private ExtensionTask(FragmentActivity activity) {
             activityWeakReference = new WeakReference<>(activity);

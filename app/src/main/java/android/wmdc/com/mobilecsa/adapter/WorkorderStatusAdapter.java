@@ -20,8 +20,8 @@ import java.util.ArrayList;
 public class WorkorderStatusAdapter extends
         RecyclerView.Adapter<WorkorderStatusAdapter.WorkorderStatusViewHolder> {
 
-    private ArrayList<WorkOrderStatus> workorderStatusList;
-    private Context context;
+    private final ArrayList<WorkOrderStatus> workorderStatusList;
+    private final Context context;
 
     public WorkorderStatusAdapter(ArrayList<WorkOrderStatus> workorderStatusList, Context context) {
         this.workorderStatusList = workorderStatusList;
@@ -63,9 +63,9 @@ public class WorkorderStatusAdapter extends
 
     static class WorkorderStatusViewHolder extends RecyclerView.ViewHolder {
 
-        private LinearLayout workorderStatusLinLay;
-        private TextView tvWorkItem;
-        private ImageView ivIsCompletedIcon;
+        private final LinearLayout workorderStatusLinLay;
+        private final TextView tvWorkItem;
+        private final ImageView ivIsCompletedIcon;
 
         private WorkorderStatusViewHolder(View itemView) {
 

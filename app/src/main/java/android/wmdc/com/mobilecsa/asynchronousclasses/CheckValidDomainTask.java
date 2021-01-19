@@ -24,15 +24,15 @@ import java.net.URL;
 
 public class CheckValidDomainTask extends AsyncTask<String, Void, String> {
 
-    private WeakReference<FragmentActivity> activityWeakReference;
+    private final WeakReference<FragmentActivity> activityWeakReference;
 
-    private WeakReference<TextView> textViewWeakReferenceDomain;
+    private final WeakReference<TextView> textViewWeakReferenceDomain;
 
-    private ProgressDialog pDialog;
+    private final ProgressDialog pDialog;
 
     private HttpURLConnection conn = null;
 
-    private String branch;
+    private final String branch;
 
     public CheckValidDomainTask(FragmentActivity activity, TextView domain, String branch) {
         this.textViewWeakReferenceDomain = new WeakReference<>(domain);

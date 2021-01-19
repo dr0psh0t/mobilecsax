@@ -51,9 +51,9 @@ import java.util.ArrayList;
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ContactsViewHolder> {
 
-    private FragmentActivity fragmentActivity;
-    private ArrayList<Contacts> contacts;
-    private SharedPreferences sharedPreferences;
+    private final FragmentActivity fragmentActivity;
+    private final ArrayList<Contacts> contacts;
+    private final SharedPreferences sharedPreferences;
     private boolean heightSet = false;
 
     public ContactsAdapter(FragmentActivity fragmentActivity, ArrayList<Contacts> contacts) {
@@ -108,11 +108,11 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
     }
 
     class ContactsViewHolder extends RecyclerView.ViewHolder {
-        private ImageView ivProfile;
-        private ImageView ivTransferred;
-        private TextView tvName;
-        private TextView tvCsa;
-        private TextView tvId;
+        private final ImageView ivProfile;
+        private final ImageView ivTransferred;
+        private final TextView tvName;
+        private final TextView tvCsa;
+        private final TextView tvId;
 
         private ContactsViewHolder(View itemView) {
             super(itemView);
@@ -139,13 +139,13 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
 
     private static class GetContactsTask extends AsyncTask<String, String, String> {
 
-        private ProgressDialog progressDialog;
+        private final ProgressDialog progressDialog;
 
         private HttpURLConnection conn = null;
 
-        private WeakReference<FragmentActivity> activityWeakReference;
+        private final WeakReference<FragmentActivity> activityWeakReference;
 
-        private SharedPreferences taskPrefs;
+        private final SharedPreferences taskPrefs;
 
         private GetContactsTask(FragmentActivity activity) {
             activityWeakReference = new WeakReference<>(activity);
