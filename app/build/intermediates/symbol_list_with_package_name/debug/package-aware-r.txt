@@ -1362,7 +1362,6 @@ id custom
 id customPanel
 id custom_dialog_layout_design_user_input
 id dark
-id dcHeaderLayout
 id dcTitleLL
 id decor_content_parent
 id default_activity_button
@@ -1412,6 +1411,7 @@ id etContPersComp
 id etCustomerJO
 id etDateCust
 id etDateReceive
+id etDomain
 id etEmailComp
 id etEmailCust
 id etEmergComp
@@ -1552,7 +1552,6 @@ id progressBarSearchJo
 id progress_circular
 id progress_horizontal
 id qcConReLay
-id qcHeaderLayout
 id qcTitleLL
 id radio
 id recyclerViewCustomer
@@ -1616,6 +1615,7 @@ id search_voice_btn
 id select_dialog_listview
 id selected
 id settingsAppBarLay
+id settings_domain_dialog
 id shortcut
 id showCustom
 id showHome
@@ -1932,7 +1932,6 @@ layout customer_fragment
 layout customer_information_layout
 layout date_commit_fragment
 layout dc_content
-layout dc_header_layout
 layout dc_jo_info_fragment
 layout dc_jo_info_viewholder_layout
 layout design_bottom_navigation_item
@@ -1989,7 +1988,6 @@ layout photo_layout
 layout photo_select_layout
 layout progressbar_layout
 layout qc_content
-layout qc_header_layout
 layout qc_jo_info_fragment
 layout qc_jo_info_viewholder_layout
 layout quality_check_fragment
@@ -2008,6 +2006,7 @@ layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout settings_card_layout
+layout settings_input_dialog
 layout settings_layout
 layout slide_layout
 layout support_simple_spinner_dropdown_item

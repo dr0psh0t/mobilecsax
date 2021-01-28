@@ -21,24 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\wmdcprog\\.gradle\\caches\\transforms-2\\files-2.1\\a3e42984e51e79c6f9e3af171abe24b0\\jetified-play-services-basement-11.8.0\\res\\values-az\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "283",
-                        "endColumns": "220",
-                        "endOffsets": "503"
-                    },
-                    "to": {
-                        "startLines": "37",
-                        "startColumns": "4",
-                        "startOffsets": "3992",
-                        "endColumns": "220",
-                        "endOffsets": "4208"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\wmdcprog\\.gradle\\caches\\transforms-2\\files-2.1\\b7aa075b846e859e7da9c78cee966a13\\jetified-play-services-base-11.8.0\\res\\values-az\\values.xml",
+                    "source": "C:\\Users\\wmdcprog\\.gradle\\caches\\transforms-2\\files-2.1\\74cd21ece47efd2218d53ea23c220b8f\\jetified-play-services-base-11.8.0\\res\\values-az\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -52,6 +35,23 @@
                         "startOffsets": "2820,2931,3118,3253,3365,3570,3705,3857,4213,4438,4550,4730,4869,5072,5258,5352,5447",
                         "endColumns": "110,186,134,111,204,134,151,134,224,111,179,138,202,185,93,94,109",
                         "endOffsets": "2926,3113,3248,3360,3565,3700,3852,3987,4433,4545,4725,4864,5067,5253,5347,5442,5552"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\wmdcprog\\.gradle\\caches\\transforms-2\\files-2.1\\2ac28d00104d94815ee5eb4c1b94c74f\\jetified-play-services-basement-11.8.0\\res\\values-az\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "283",
+                        "endColumns": "220",
+                        "endOffsets": "503"
+                    },
+                    "to": {
+                        "startLines": "37",
+                        "startColumns": "4",
+                        "startOffsets": "3992",
+                        "endColumns": "220",
+                        "endOffsets": "4208"
                     }
                 },
                 {

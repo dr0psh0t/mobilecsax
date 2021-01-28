@@ -4,7 +4,7 @@
             "outputFile": "D:\\wmdcdev_projects\\StudioProjects\\Mobilecsa\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-fr-rCA\\values-fr-rCA.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\wmdcprog\\.gradle\\caches\\transforms-2\\files-2.1\\b7aa075b846e859e7da9c78cee966a13\\jetified-play-services-base-11.8.0\\res\\values-fr-rCA\\values.xml",
+                    "source": "C:\\Users\\wmdcprog\\.gradle\\caches\\transforms-2\\files-2.1\\74cd21ece47efd2218d53ea23c220b8f\\jetified-play-services-base-11.8.0\\res\\values-fr-rCA\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -18,23 +18,6 @@
                         "startOffsets": "2879,2987,3199,3331,3442,3672,3807,3958,4320,4574,4688,4904,5042,5261,5470,5573,5667",
                         "endColumns": "107,211,131,110,229,134,150,141,253,113,215,137,218,208,102,93,112",
                         "endOffsets": "2982,3194,3326,3437,3667,3802,3953,4095,4569,4683,4899,5037,5256,5465,5568,5662,5775"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\wmdcprog\\.gradle\\caches\\transforms-2\\files-2.1\\a3e42984e51e79c6f9e3af171abe24b0\\jetified-play-services-basement-11.8.0\\res\\values-fr-rCA\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "287",
-                        "endColumns": "219",
-                        "endOffsets": "506"
-                    },
-                    "to": {
-                        "startLines": "37",
-                        "startColumns": "4",
-                        "startOffsets": "4100",
-                        "endColumns": "219",
-                        "endOffsets": "4315"
                     }
                 },
                 {
@@ -52,6 +35,23 @@
                         "startOffsets": "105,216,331,442,529,645,775,858,938,1029,1122,1221,1316,1417,1510,1603,1698,1789,1880,1976,2086,2198,2301,2412,2519,2621,2780,5780",
                         "endColumns": "110,114,110,86,115,129,82,79,90,92,98,94,100,92,92,94,90,90,95,109,111,102,110,106,101,158,98,85",
                         "endOffsets": "211,326,437,524,640,770,853,933,1024,1117,1216,1311,1412,1505,1598,1693,1784,1875,1971,2081,2193,2296,2407,2514,2616,2775,2874,5861"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\wmdcprog\\.gradle\\caches\\transforms-2\\files-2.1\\2ac28d00104d94815ee5eb4c1b94c74f\\jetified-play-services-basement-11.8.0\\res\\values-fr-rCA\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "287",
+                        "endColumns": "219",
+                        "endOffsets": "506"
+                    },
+                    "to": {
+                        "startLines": "37",
+                        "startColumns": "4",
+                        "startOffsets": "4100",
+                        "endColumns": "219",
+                        "endOffsets": "4315"
                     }
                 },
                 {

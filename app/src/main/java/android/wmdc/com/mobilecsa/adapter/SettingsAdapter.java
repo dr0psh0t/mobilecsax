@@ -71,7 +71,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
         private final TextView tvSettingsKey;
         private final TextView tvSettingsValue;
 
-        private SettingsViewHolder(View itemView) {
+        private SettingsViewHolder(final View itemView) {
             super(itemView);
             tvSettingsKey = itemView.findViewById(R.id.tvSettingsKey);
             tvSettingsValue = itemView.findViewById(R.id.tvSettingsValue);
@@ -81,153 +81,89 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
                     String key = tvSettingsKey.getText().toString();
                     String val = tvSettingsValue.getText().toString();
 
-                    final EditText editText = new EditText(activity);
-                    editText.setText(val);
+                    View settingsView = LayoutInflater.from(activity).inflate(
+                            R.layout.settings_input_dialog, (ViewGroup) itemView, false);
+
+                    final EditText editText = settingsView.findViewById(R.id.etDomain);
 
                     AlertDialog.Builder aBox = new AlertDialog.Builder(activity);
-                    aBox.setView(editText);
+                    aBox.setView(settingsView);
+                    aBox.setCancelable(false);
+                    aBox.setMessage("Update IP for "+key);
+                    aBox.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {}
+                    });
 
                     switch (key) {
                         case "North SIM":
-                            aBox.setMessage("Set north sim");
-                            aBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            aBox.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    String northSim = editText.getText().toString();
-
-                                    if (!northSim.isEmpty()) {
-                                        spEditor.remove("northSim");
-                                        spEditor.apply();
-                                        spEditor.putString("northSim", northSim);
-                                        spEditor.apply();
-                                        tvSettingsValue.setText(northSim);
-                                    }
+                                    updateAddress(editText.getText().toString(), "northSim");
                                 }
                             });
                             aBox.create().show();
                             break;
                         case "North Wifi":
-                            aBox.setMessage("Set north wifi");
-                            aBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            aBox.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    String northWifi = editText.getText().toString();
-
-                                    if (!northWifi.isEmpty()) {
-                                        spEditor.remove("northWifi");
-                                        spEditor.apply();
-                                        spEditor.putString("northWifi", northWifi);
-                                        spEditor.apply();
-                                        tvSettingsValue.setText(northWifi);
-                                    }
+                                    updateAddress(editText.getText().toString(), "northWifi");
                                 }
                             });
                             aBox.create().show();
                             break;
                         case "Central SIM":
-                            aBox.setMessage("Set central sim");
-                            aBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            aBox.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    String centralSim = editText.getText().toString();
-
-                                    if (!centralSim.isEmpty()) {
-                                        spEditor.remove("centralSim");
-                                        spEditor.apply();
-                                        spEditor.putString("centralSim", centralSim);
-                                        spEditor.apply();
-                                        tvSettingsValue.setText(centralSim);
-                                    }
+                                    updateAddress(editText.getText().toString(), "centralSim");
                                 }
                             });
                             aBox.create().show();
                             break;
                         case "Central Wifi":
-                            aBox.setMessage("Set central wifi");
-                            aBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            aBox.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    String centralWifi = editText.getText().toString();
-
-                                    if (!centralWifi.isEmpty()) {
-                                        spEditor.remove("centralWifi");
-                                        spEditor.apply();
-                                        spEditor.putString("centralWifi", centralWifi);
-                                        spEditor.apply();
-                                        tvSettingsValue.setText(centralWifi);
-                                    }
+                                    updateAddress(editText.getText().toString(), "centralWifi");
                                 }
                             });
                             aBox.create().show();
                             break;
                         case "South SIM":
-                            aBox.setMessage("Set south sim.");
-                            aBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            aBox.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    String southSim = editText.getText().toString();
-
-                                    if (!southSim.isEmpty()) {
-                                        spEditor.remove("southSim");
-                                        spEditor.apply();
-                                        spEditor.putString("southSim", southSim);
-                                        spEditor.apply();
-                                        tvSettingsValue.setText(southSim);
-                                    }
+                                    updateAddress(editText.getText().toString(), "southSim");
                                 }
                             });
                             aBox.create().show();
                             break;
                         case "South Wifi":
-                            aBox.setMessage("Set south wifi");
-                            aBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            aBox.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    String southWifi = editText.getText().toString();
-
-                                    if (!southWifi.isEmpty()) {
-                                        spEditor.remove("southWifi");
-                                        spEditor.apply();
-                                        spEditor.putString("southWifi", southWifi);
-                                        spEditor.apply();
-                                        tvSettingsValue.setText(southWifi);
-                                    }
+                                    updateAddress(editText.getText().toString(), "southWifi");
                                 }
                             });
                             aBox.create().show();
                             break;
                         case "Dumaguete SIM":
-                            aBox.setMessage("Set dumaguete sim");
-                            aBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            aBox.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    String dumagueteSim = editText.getText().toString();
-
-                                    if (!dumagueteSim.isEmpty()) {
-                                        spEditor.remove("dumagueteSim");
-                                        spEditor.apply();
-                                        spEditor.putString("dumagueteSim", dumagueteSim);
-                                        spEditor.apply();
-                                        tvSettingsValue.setText(dumagueteSim);
-                                    }
+                                    updateAddress(editText.getText().toString(), "dumagueteSim");
                                 }
                             });
                             aBox.create().show();
                             break;
                         case "Dumaguete Wifi":
-                            aBox.setMessage("Set dumaguete wifi");
-                            aBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            aBox.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    String dumagueteWifi = editText.getText().toString();
-
-                                    if (!dumagueteWifi.isEmpty()) {
-                                        spEditor.remove("dumagueteWifi");
-                                        spEditor.apply();
-                                        spEditor.putString("dumagueteWifi", dumagueteWifi);
-                                        spEditor.apply();
-                                        tvSettingsValue.setText(dumagueteWifi);
-                                    }
+                                    updateAddress(editText.getText().toString(), "dumagueteWifi");
                                 }
                             });
                             aBox.create().show();
@@ -312,6 +248,16 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
                     }
                 }
             });
+        }
+
+        private void updateAddress(String ip, String prefsName) {
+            if (!ip.isEmpty()) {
+                spEditor.remove(prefsName);
+                spEditor.apply();
+                spEditor.putString(prefsName, "http://"+ip+"/mcsa/");
+                spEditor.apply();
+                tvSettingsValue.setText(ip);
+            }
         }
     }
 

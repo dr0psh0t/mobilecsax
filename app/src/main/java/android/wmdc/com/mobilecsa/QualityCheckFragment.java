@@ -185,7 +185,7 @@ public class QualityCheckFragment extends Fragment {
                                 object = jsonArray.getJSONObject(x);
 
                                 if (object.getString("joNum").equals(joQuery)) {
-                                    System.out.println(object.getString("joNum")+"-"+(joQuery));
+                                    //System.out.println(object.getString("joNum")+"-"+(joQuery));
 
                                     qcDataModels2.add(new QCDataModel(
                                         object.getInt("joId"),
