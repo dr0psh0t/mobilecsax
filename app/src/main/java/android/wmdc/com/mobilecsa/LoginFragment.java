@@ -69,6 +69,32 @@ public class LoginFragment extends Fragment {
     private WifiManager wifiManager;
 
     private boolean isRemembered = false;
+    
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        switch (getActivity().getTitle().toString()) {
+            case "North-Sim":
+            case "North-Wifi":
+                switchPlant(0);
+                break;
+            case "Central-Sim":
+            case "Central-Wifi":
+                switchPlant(1);
+                break;
+            case "South-Sim":
+            case "South-Wifi":
+                switchPlant(2);
+                break;
+            case "Dumaguete-Sim":
+            case "Dumaguete-Wifi":
+                switchPlant(3);
+                break;
+            default:
+                switchPlantDialog();
+        }
+    }
 
     @Nullable
     @Override
@@ -152,28 +178,28 @@ public class LoginFragment extends Fragment {
 
             switch (domain) {
                 case "http://122.3.176.235:1959/mcsa/":
-                    fragmentActivity.setTitle("North-sim");
+                    fragmentActivity.setTitle("North-Sim");
                     break;
                 case "http://192.168.1.150:8080/mcsa/":
-                    fragmentActivity.setTitle("North-wifi");
+                    fragmentActivity.setTitle("North-Wifi");
                     break;
                 case "http://122.52.48.202:3316/mcsa/":
-                    fragmentActivity.setTitle("Central-sim");
+                    fragmentActivity.setTitle("Central-Sim");
                     break;
                 case "http://192.168.1.149:8080/mcsa/":
-                    fragmentActivity.setTitle("Central-wifi");
+                    fragmentActivity.setTitle("Central-Wifi");
                     break;
                 case "http://122.52.155.109:1116/mcsa/":
-                    fragmentActivity.setTitle("South-sim");
+                    fragmentActivity.setTitle("South-Sim");
                     break;
                 case "http://192.168.2.99:8080/mcsa/":
-                    fragmentActivity.setTitle("South-wifi");
+                    fragmentActivity.setTitle("South-Wifi");
                     break;
                 case "http://122.3.176.235:1188/mcsa/":
-                    fragmentActivity.setTitle("Dumaguete-sim");
+                    fragmentActivity.setTitle("Dumaguete-Sim");
                     break;
                 case "http://192.168.1.158:8080/mcsa/":
-                    fragmentActivity.setTitle("Dumaguete-wifi");
+                    fragmentActivity.setTitle("Dumaguete-Wifi");
                     break;
             }
 
@@ -190,88 +216,98 @@ public class LoginFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_settings:
-                final String mcsaPassword = sPrefs.getString("mcsaPasswordPrefs", null);
 
-                if (mcsaPassword != null && !mcsaPassword.isEmpty()) {
-                    if (getContext() != null) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                        builder.setTitle("Password");
+        if (item.getItemId() == R.id.action_settings) {
+            final String mcsaPassword = sPrefs.getString("mcsaPasswordPrefs", null);
 
-                        final EditText input = new EditText(getContext());
-                        input.setInputType(InputType.TYPE_CLASS_TEXT |
-                                InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                        builder.setView(input);
-
-                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                String password = input.getText().toString();
-
-                                if (!password.isEmpty()) {
-                                    if (password.equals(mcsaPassword)) {
-                                        startActivity(new Intent(getContext(),
-                                                SettingsActivity.class));
-                                    }
-                                }
-                            }
-                        });
-
-                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        });
-                        builder.show();
-                    } else {
-                        Util.alertBox(getActivity(), "Cannot go to settings");
-                        Log.e("Null", "Activity is null. Cannot go to settings");
-                    }
-                } else {
-                    startActivity(new Intent(getContext(), SettingsActivity.class));
-                }
-                return true;
-            case R.id.rememberCheckBox:
-                if (item.isChecked()) {
-                    item.setChecked(false);
-                    isRemembered = false;
-                } else {
-                    item.setChecked(true);
-                    isRemembered = true;
-                }
-                return true;
-            case R.id.plantSwitch:
+            if (mcsaPassword != null && !mcsaPassword.isEmpty()) {
                 if (getContext() != null) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setTitle("Password");
 
-                    String[] plants = {"North", "Central", "South", "Dumaguete"};
+                    final EditText input = new EditText(getContext());
+                    input.setInputType(InputType.TYPE_CLASS_TEXT |
+                            InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    builder.setView(input);
 
-                    builder.setItems(plants, new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            String password = input.getText().toString();
 
-                            if (isWifiEnabled() || isDataEnabled()) {
-                                if (isInternetAvailable() || isNetworkConnected()) {
-                                    switchPlant(which);
-                                } else {
-                                    Util.alertBox(getContext(), "No internet.");
+                            if (!password.isEmpty()) {
+                                if (password.equals(mcsaPassword)) {
+                                    startActivity(new Intent(getContext(),
+                                            SettingsActivity.class));
                                 }
-                            } else if (isInternetAvailable() || isNetworkConnected()) {
-                                switchPlant(which);
-                            } else {
-                                Util.alertBox(getContext(), "No internet. Turn on wifi or data.");
                             }
                         }
                     });
 
-                    builder.create().show();
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    builder.show();
+                } else {
+                    Util.alertBox(getActivity(), "Cannot go to settings");
+                    Log.e("Null", "Activity is null. Cannot go to settings");
                 }
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+            } else {
+                startActivity(new Intent(getContext(), SettingsActivity.class));
+            }
+
+            return true;
+
+        } else if (item.getItemId() == R.id.rememberCheckBox) {
+            if (item.isChecked()) {
+                item.setChecked(false);
+                isRemembered = false;
+            } else {
+                item.setChecked(true);
+                isRemembered = true;
+            }
+
+            return true;
+
+        } else if (item.getItemId() == R.id.plantSwitch) {
+            if (getContext() != null) {
+                switchPlantDialog();
+            }
+
+            return true;
+
+        } else {
+            return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void switchPlantDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        String[] plants = {"North", "Central", "South", "Dumaguete"};
+
+        builder.setItems(plants, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                if (isWifiEnabled() || isDataEnabled()) {
+                    if (isInternetAvailable() || isNetworkConnected()) {
+                        switchPlant(which);
+                    } else {
+                        Util.alertBox(getContext(), "No internet.");
+                    }
+                } else if (isInternetAvailable() || isNetworkConnected()) {
+                    switchPlant(which);
+                } else {
+                    Util.alertBox(getContext(), "No internet. Turn on wifi or data.");
+                }
+            }
+        });
+
+        builder.create().show();
     }
 
     private void switchPlant(int which) {

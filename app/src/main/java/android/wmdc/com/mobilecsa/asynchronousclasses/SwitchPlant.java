@@ -48,7 +48,7 @@ public class SwitchPlant {
 
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog.setMessage("Switching to "+branch+" (wifi)...");
+            pDialog.setMessage("Connecting to "+branch+" (wifi)...");
             pDialog.show();
         }
 
@@ -57,8 +57,8 @@ public class SwitchPlant {
                 URL url = new URL(params[0]);
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
-                conn.setReadTimeout(2500);
-                conn.setConnectTimeout(2500);
+                conn.setReadTimeout(3000);
+                conn.setConnectTimeout(3000);
                 conn.connect();
 
                 return "{\"success\": true, \"code\": "+conn.getResponseCode()+", \"domain\": \""+
@@ -67,6 +67,7 @@ public class SwitchPlant {
             } catch (MalformedURLException | ConnectException | SocketTimeoutException e) {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                         "NetworkException", e.toString());
+
                 if (e instanceof MalformedURLException) {
                     return "{\"success\": false, \"reason\": \"Malformed URL.\"}";
                 } else if (e instanceof ConnectException) {
@@ -117,6 +118,7 @@ public class SwitchPlant {
 
                 } else {
                     Util.alertBox(fragAct, resJson.getString("reason"));
+
                 }
             } catch (Exception je) {
                 Util.displayStackTraceArray(je.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
@@ -138,7 +140,7 @@ public class SwitchPlant {
 
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog.setMessage("Switching to "+branch+" (sim)...");
+            pDialog.setMessage("Connecting to "+branch+" (sim)...");
             pDialog.show();
         }
 
@@ -147,8 +149,8 @@ public class SwitchPlant {
                 URL url = new URL(params[0]);
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
-                conn.setReadTimeout(2500);
-                conn.setConnectTimeout(2500);
+                conn.setReadTimeout(3000);
+                conn.setConnectTimeout(3000);
                 conn.connect();
 
                 return "{\"success\": true, \"code\": "+conn.getResponseCode()+", \"domain\": \""+
@@ -157,6 +159,7 @@ public class SwitchPlant {
             } catch (MalformedURLException | ConnectException | SocketTimeoutException e) {
                 Util.displayStackTraceArray(e.getStackTrace(), Variables.ASYNCHRONOUS_PACKAGE,
                         "NetworkException", e.toString());
+
                 if (e instanceof MalformedURLException) {
                     return "{\"success\": false, \"reason\": \"Malformed URL.\"}";
                 } else if (e instanceof ConnectException) {

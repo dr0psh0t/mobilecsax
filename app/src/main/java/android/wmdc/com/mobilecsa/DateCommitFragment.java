@@ -54,11 +54,9 @@ public class DateCommitFragment extends Fragment {
 
                 try {
                     JSONArray jsonArray = jsonObject.getJSONArray("joborders");
-
-                    int loopLen = Math.min(jsonArray.length(), 100);
                     dcDataModels.clear();
 
-                    for (int i = 0; i <= loopLen; ++i) {
+                    for (int i = 0; i < Math.min(jsonArray.length(), 100); ++i) {
                         JSONObject itemObj = jsonArray.getJSONObject(i);
 
                         dcDataModels.add(
@@ -81,6 +79,8 @@ public class DateCommitFragment extends Fragment {
                     recyclerView.setAdapter(new DateCommitAdapter(dcDataModels, getActivity()));
 
                 } catch (JSONException je) {
+                    System.err.println(je.toString());
+
                     Util.alertBox(getActivity(), "Cannot build the list. " +
                             "The server might be loading. Try again later.");
                 }
